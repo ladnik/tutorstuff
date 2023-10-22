@@ -1,0 +1,218 @@
+% File: tumbook.sty Copyright (C) 2020 The LaTeX4EI Team
+% Provides commonly used macros for tumbook and tumcover classes.
+%
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version. The latest version
+% of this license is in the file
+%
+%    https://www.latex-project.org/lppl.txt
+%
+% This file is part of the "tum-templates bundle" (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+%
+%
+% ----------------------------------------------------------------------------
+%
+% The development version of the bundle can be found at
+%
+%    https://gitlab.lrz.de/latex4ei/tum-templates
+%
+% for those people who are interested.
+%
+% ----------------------------------------------------------------------------
+%
+% Version history:
+% v2.0 2021/04/19 Initial version.
+%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tumbook}[2021/04/19 v2.0]
+
+
+% .:: Load required packages
+% ----------------------------------------------------------------------------
+
+\RequirePackage{enumitem}
+\RequirePackage{etoolbox}
+\RequirePackage[breaklinks,hidelinks]{hyperref}
+
+% load package with KOMA-Script font and title features if no KOMA-Script
+% class is loaded
+\ifdef{\KOMAClassName}{}{\RequirePackage[extendedfeature=title]{scrextend}}
+
+
+% .:: Additional placeholders
+% ----------------------------------------------------------------------------
+
+% thesis degree
+\newcommand{\theDegree}{}
+\newcommand{\degree}[1]{\renewcommand{\theDegree}{#1}}
+
+% thesis examiner and supervisor (for student thesis)
+\newcommand*{\theExaminer}{}
+\newcommand*{\examiner}[1]{\renewcommand*{\theExaminer}{#1}}
+\newcommand*{\theSupervisor}{}
+\newcommand*{\supervisor}[1]{\renewcommand{\theSupervisor}{#1}}
+
+% thesis committee members (for phd thesis)
+\newcommand{\theCommitteeChair}{}
+\newcommand{\committeeChair}[1]{\renewcommand{\theCommitteeChair}{#1}}
+\newcommand{\theCommitteeFirst}{}
+\newcommand{\committeeFirst}[1]{\renewcommand{\theCommitteeFirst}{#1}}
+\newcommand{\theCommitteeSecond}{}
+\newcommand{\committeeSecond}[1]{\renewcommand{\theCommitteeSecond}{#1}}
+\newcommand{\theCommitteeThird}{}
+\newcommand{\committeeThird}[1]{\renewcommand{\theCommitteeThird}{#1}}
+
+% thesis submitted and accepted dates
+\newcommand{\theDateSubmitted}{--.--.----}
+\newcommand{\dateSubmitted}[1]{\renewcommand{\theDateSubmitted}{#1}}
+\newcommand{\theDateAccepted}{--.--.----}
+\newcommand{\dateAccepted}[1]{\renewcommand{\theDateAccepted}{#1}}
+
+% book edition (for lecture notes or actual books)
+\newcommand{\@edition}{}
+\newcommand{\edition}[1]{\renewcommand{\@edition}{#1}}
+
+
+% .:: Captions for title page elements
+% ----------------------------------------------------------------------------
+
+\provideName{\theUniversityNameDativ}{Technical University of
+  Munich}{Technischen Universität München}
+
+\provideName{\@tum@thesis@student@fineprint@pre@}{%
+  Thesis for the attainment of the academic degree%
+}{%
+  Wissenschaftliche Arbeit zur Erlangung des Grades%
+}
+
+\provideName{\@tum@thesis@student@fineprint@post@}{%
+  at the \theDepartmentName{} of the \theUniversityName.%
+}{%
+  an der \theDepartmentName{} der \theUniversityNameDativ.%
+}
+
+\provideName{\@tum@examiner@}{Examiner}{Prüfer(in)}
+\provideName{\@tum@supervisor@}{Supervisor}{Betreuer(in)}
+\provideName{\@tum@submission@}{Submitted}{Eingereicht}
+\provideName{\@tum@date@separator@}{,~}{,~den~}
+
+
+% .:: Elements for cover page
+% ----------------------------------------------------------------------------
+
+\newcommand{\theTUMTitleBlock}{{
+    \raggedright\noindent
+    \usekomafont{title}\@title\par
+    \ifdefempty{\@subtitle}{}{
+      \vspace{1.5ex}\usekomafont{subtitle}\@subtitle\par}
+    \ifdefempty{\@edition}{}{
+      \vspace{1.5ex}\usekomafont{edition}\@edition\par}
+    \vspace{5ex plus 1fil minus 2ex}
+    \usekomafont{author}\@author\par
+    \vspace{5ex plus 1fil minus 5ex}
+  }}
+
+
+\newlength{\TUMCoverImageHeight}
+\newlength{\TUMCoverImageWidth}
+
+\newcommand{\theTUMCoverImage}{\vfill\hfill
+  \includegraphics[width=.5\TUMCoverImageWidth]{resources/TUM_Tower.png}
+}
+
+
+% .:: Elements for student thesis page
+% ----------------------------------------------------------------------------
+
+\newcommand{\theTUMStudentFineprintBlock}{{
+    \usekomafont{TUM.thesispage}\raggedright\noindent
+    \@tum@thesis@student@fineprint@pre@\par
+    \vspace{\baselineskip}
+    \textbf{\theDegree}\par
+    \vspace{\baselineskip}
+    \@tum@thesis@student@fineprint@post@\par
+  }}
+
+\newcommand{\theTUMStudentCommitteeBlock}{{
+    \usekomafont{TUM.thesispage}\raggedright\noindent
+    \textbf{\@tum@examiner@:}\par
+    \theExaminer\par
+    \vspace{.5\baselineskip}
+    \textbf{\@tum@supervisor@:}\par
+    \theSupervisor\par
+    \vspace{.5\baselineskip}
+    \textbf{\@tum@submission@:}\par
+    \theAuthorCity\@tum@date@separator@\theDateSubmitted\par
+  }}
+
+
+% .:: Elements for phd thesis page
+% ----------------------------------------------------------------------------
+
+\newcommand{\theTUMPhDFineprintBlock}{{
+    \usekomafont{TUM.thesispage}\raggedright\noindent
+    Vollständiger Abdruck der von der \theDepartmentName{} der
+    \theUniversityNameDativ{} zur Erlangung des akademischen Grades eines\par
+    \vspace{\baselineskip}
+    \textbf{\theDegree}\par
+    \vspace{\baselineskip}
+    genehmigten Dissertation.\par
+  }}
+
+\newcommand{\theTUMPhDCommitteeBlock}{{
+    \usekomafont{TUM.thesispage}\raggedright\noindent
+    \textbf{Vorsitzende(r):}\par
+    \theCommitteeChair\par
+    \vspace{.5\baselineskip}
+    \textbf{Prüfer der Dissertation:}\par
+    \begin{enumerate}[nosep, leftmargin=*]
+      \item \theCommitteeFirst
+      \item \theCommitteeSecond
+        \ifdefempty{\theCommitteeThird}{}{\item \theCommitteeThird}
+    \end{enumerate}\par
+  }}
+
+\newcommand{\theTUMPhDSubmissionBlock}{{
+    \usekomafont{TUM.thesispage}\raggedright\noindent
+    Die Dissertation wurde am \theDateSubmitted{} bei der
+    \theUniversityNameDativ{} eingereicht und durch die \theDepartmentName{}
+    am \theDateAccepted{} angenommen.\par
+  }}
+
+
+% .:: Font setup
+% ----------------------------------------------------------------------------
+
+\setkomafont{title}{\sffamily\Huge\bfseries}
+\setkomafont{subtitle}{\sffamily\LARGE\mdseries}
+\setkomafont{author}{\sffamily\LARGE\bfseries\color{TUMBlue}}
+\newkomafont{edition}{\sffamily\Large\mdseries}
+\setkomafont{dedication}{\Large\itshape\mdseries}
+\newkomafont{TUM.thesispage}{\sffamily\normalsize\mdseries}
+
+
+% .:: Set default values of title elements according to tumuser.sty
+% ----------------------------------------------------------------------------
+
+\author{%
+  \ifdefempty{\theAuthorTitlePrefix}{}{\theAuthorTitlePrefix\ }%
+  \theAuthorName%
+  \ifdefempty{\theAuthorTitleSuffix}{}{\ \theAuthorTitleSuffix}%
+}
+
+
+% .:: Set default PDF metadata
+% ----------------------------------------------------------------------------
+
+\AtBeginDocument{
+  \def\@tum@pdftitle@{\@title\ifdefempty{\@subtitle}{}{~-~\@subtitle}}
+  \hypersetup{
+    pdftitle = {\@tum@pdftitle@},
+    pdfauthor = {\@author},
+    pdfsubject = {\@subject},
+    % pdfkeywords = {},
+    pdfcreator = {\theUniversityName}
+  }
+}
