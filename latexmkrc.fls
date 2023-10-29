@@ -1,0 +1,4 @@
+PWD C:\Users\Niklas Ladurner\OneDrive\Studium\3. Semester\ERA-Tutorium\materials
+INPUT C:\Users\Niklas Ladurner\AppData\Local\MiKTeX\miktex\data\le\pdftex\latex.fmt
+INPUT latexmkrc
+OUTPUT latexmkrc.log
