@@ -15,10 +15,10 @@
 % in our GitLab repository
 % https://gitlab.lrz.de/latex4ei/tum-templates/issues
 % and provide a description and minimal working example of your problem.
-%%
+%% asdf
 
 \makeatletter
-\def\input@path{{../beamer/}}
+\def\input@path{{../beamer/}{../beamer/resources/}}
 \makeatother
 
 \documentclass[
@@ -39,18 +39,15 @@
 \usepackage{hyperref}
 \usepackage{pmboxdraw}
 \usepackage{float}
-\usepackage{listings}
 
-% image path
-\graphicspath{ {./resources/} }
 
 % presentation metadata
-\title{Übung 03: Unterprogramme und \\ Speicherzugriffe}
+\title{Übung 02: RISC-V Assembly}
 \subtitle{Einführung in die Rechnerarchitektur}
 \author{Niklas Ladurner}
 
 \institute{\theChairName\\\theDepartmentName\\\theUniversityName}
-\date[\today]{\today}
+\date[\today]{\today} 
 
 \footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
 
@@ -99,58 +96,47 @@
   \end{center}
 \end{frame}
 
-\begin{frame}[c]{Sprünge und Unterprogramme}{}
+\begin{frame}[c]{Abstraktionsebenen}{}
   \begin{itemize}
-    \item if, while, for $\rightarrow$ umgesetzt durch Sprünge
-    \item jumps: unbedingt, branches: bedingt
-    \item in x86 über Flags-Register, in RISC-V direkt im Befehl eingebaut
-    \item Unterprogrammaufrufe: Sicherung, Parameter, Sprung + Rückkehr
+    \item Code in höheren Sprachen (C, Java, ...) ist lediglich eine Abstraktion 
+    \item Kompilierung in Assemblersprache, 1:1 Übersetzung in Binärcode
+    \item ISA: \glqq Bedienungsanleitung\grqq\;einer CPU
+    \item RISC vs. CISC
   \end{itemize}
 \end{frame}
 
-\begin{frame}[c]{Caller- und Callee-saved Register}{}
+\begin{frame}[c]{Abstraktionsebenen}{}
   \begin{figure}[h]
-  \includegraphics[height=0.75\textheight]{resources/w03_calling_conv_regs.png}
-  \caption{Übersicht über die RISC-V-Register}
+  \includegraphics[width=\textwidth]{w02_hexdump}
+  \caption{Ausschnitt Hexdump eines C-Programms}
   \end{figure}
 \end{frame}
 
-\begin{frame}[c]{Von-Neumann-Architektur}{}
-  \begin{figure}[h]
-    \includegraphics[height=0.75\textheight]{resources/w03_von_Neumann.png}
-    \caption{Schematische Darstellung der von-Neumann-Architektur}
-  \end{figure}
-\end{frame}
-
-\begin{frame}[fragile, c]{Hauptspeicher}{}
-  \begin{itemize}
-    \item Hauptspeicher = RAM, nicht Festplatten etc. 
-    \item Laden/speichern mittels lb/sb/lw/sw
-    \item Register als Basisadresse + Offset
-  \end{itemize}  
-\end{frame}
-
-\begin{frame}[fragile, c]{Speicherzugriffe in RISC-V}{}
-  lade 32 Bit an der Adresse a0 + 0 Bytes Offset in das Register t0: 
-  \begin{verbatim}lw t0, 0(a0)\end{verbatim}
-  lade 8 Bit an der Adresse a2 - 4 Bytes Offset in das Register t1: 
-  \begin{verbatim}lb t1, -4(a2)\end{verbatim}
-  speichere den gesamten Inhalt des Registers t2 an die Adresse a1 + 16 Bytes Offset:
-  \begin{verbatim}sw t2, 16(a1)\end{verbatim}
+\begin{frame}[c]{RISC-V}{}
+    \begin{itemize}
+      \item eine von vielen Assemblersprachen
+      \item Offener Ansatz, für Lehre daher interessant
+      \item 32 Register, einige davon mit spezieller Funktion
+      \item meisten Gurndbefehle auf 32 Bit begrenzt $\rightarrow$ Konstanten müssen zusammengebastelt werden
+    \end{itemize}
 \end{frame}
 
 \begin{frame}[c]{}{}
   \begin{center}
-    \LARGE Fragen?\\
-    \Large (Die ZÜ-Folien sind sehr gut, schaut euch die an)
+    \LARGE Fragen?
+  \end{center}
+\end{frame}
+
+\begin{frame}[c]{}{}
+  \begin{center}
+    \LARGE Quiz
   \end{center}
 \end{frame}
 
 \begin{frame}[c]{Artemis-Hausaufgaben}{}
   \begin{itemize}
-    \item H03 - Palindrom bis 12.11.2023 23:59 Uhr
-    \item Speicheroperationen
-    \item lasst euch nicht vom Label 'hard' abschrecken, das Prinzip ist sehr simpel
+    \item H02-Festkommarechnung bis 05.11.2023 23:59 Uhr
+    \item Vorüberlegungen zu Festkommarechnung
   \end{itemize}
 \end{frame}
 
@@ -158,9 +144,10 @@
   \begin{itemize}
     \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\glqq ERA Tutorium - Mi-1600-MI4\grqq}
     bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\glqq ERA Tutorium - Fr-1100-MW2\grqq}
+    \item \href{https://www.moodle.tum.de/course/view.php?id=90679}{ERA-Moodle-Kurs}
+    \item \href{https://artemis.in.tum.de/courses/288/exercises}{ERA-Artemis-Kurs}
+    \item \href{https://vanhunteradams.com/FixedPoint/FixedPoint.html}{Einführung Fixpunktarithmetik}, \href{https://specbranch.com/posts/fixed-point/}{Alternative}
     \item \href{https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf}{RISC-V-Spezifikation}
-    \item \href{https://www.geeksforgeeks.org/computer-organization-von-neumann-architecture/}{Von-Neumann-Architektur}
-    \item \href{https://msyksphinz-self.github.io/riscv-isadoc/html/rvi.html}{übersichtlichere Instruktionsliste}
   \end{itemize}
 \end{frame}
 
