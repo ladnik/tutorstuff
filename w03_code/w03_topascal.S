@@ -29,13 +29,14 @@ loop:
     # Stelle nach hinten gespeichert
     addi t2, t3, 0
     # Wir laden das nächste Element
-    lb t3, 0(t0)  ; get new element
+    lb t3, 0(t0)
      # j entspricht jal zero, label und überschreibt somit
      # ra nicht!
     j loop         
     
 end:
-    sb t1, 0(a0)  ; store length
+    # Wir speichern die Länge des Strings ins erste Byte
+    sb t1, 0(a0)
     # da es sich um ein Unterprogramm handelt, müssen wir
     # zurückspringen
     jalr zero, 0(ra)
