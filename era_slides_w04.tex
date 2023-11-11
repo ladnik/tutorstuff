@@ -40,12 +40,13 @@
 \usepackage{pmboxdraw}
 \usepackage{float}
 \usepackage{listings}
+%\usepackage{minted}
 
 % image path
 \graphicspath{ {./resources/} }
 
 % presentation metadata
-\title{Übung 03: Unterprogramme und \\ Speicherzugriffe}
+\title{Übung 04: Calling Convention \\und Rekursion}
 \subtitle{Einführung in die Rechnerarchitektur}
 \author{Niklas Ladurner}
 
@@ -94,18 +95,20 @@
 
 \begin{frame}[c]{}{}
   \begin{center}
+    \LARGE  Durchzählen!
+  \end{center}
+\end{frame}
+
+\begin{frame}[c]{}{}
+  \begin{center}
     \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten 
     haben VL/ZÜ-Folien Recht!
   \end{center}
 \end{frame}
 
-\begin{frame}[c]{Sprünge und Unterprogramme}{}
-  \begin{itemize}
-    \item if, while, for $\rightarrow$ umgesetzt durch Sprünge
-    \item jumps: unbedingt, branches: bedingt
-    \item in x86 über Flags-Register, in RISC-V direkt im Befehl eingebaut
-    \item Unterprogrammaufrufe: Sicherung, Parameter, Sprung + Rückkehr
-  \end{itemize}
+\begin{frame}[c]{Caller vs. Callee}{}
+  \includegraphics[height=0.75\textheight]{resources/w04_caller.png}
+  \includegraphics[width=0.5\textwidth]{resources/w04_callee.png}
 \end{frame}
 
 \begin{frame}[c]{Caller- und Callee-saved Register}{}
@@ -115,29 +118,27 @@
   \end{figure}
 \end{frame}
 
-\begin{frame}[c]{Von-Neumann-Architektur}{}
-  \begin{figure}[h]
-    \includegraphics[height=0.75\textheight]{resources/w03_von_Neumann.png}
-    \caption{Schematische Darstellung der von-Neumann-Architektur}
-  \end{figure}
+\begin{frame}[c]{Calling Convention}{}
+  \begin{itemize}
+    \item \glqq Aufrufkonvention\grqq $\rightarrow$ lediglich eine Vereinbarung
+    \item definiert Parameterüberabe, Rückgabe, Registersicherung, Stack etc.
+    \item Datentypen $\le$ 4 Byte in a-Registern, evtl. signextension
+    \item Datentypen = 8 Byte in 2 a-Registern, niedrigwertige Hälfte zuerst
+    \item Datentypen > 8 Byte als Pointer (Zeiger auf Speicher)
+    \item Falls zu wenige Register: Übergabe über Stack
+    \item Stackpointer 16 Byte aligned!
+  \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile, c]{Hauptspeicher}{}
+\begin{frame}[fragile, c]{Rekursion}{}
   \begin{itemize}
-    \item Hauptspeicher = RAM, nicht Festplatten etc. 
-    \item Laden/speichern mittels lb/sb/lw/sw
-    \item Register als Basisadresse + Offset
+    \item Funktion die sich selbst aufruft
+    \item Stacklayout sehr wichtig, ra sichern
+    \item $\exists$ äquivalente iterative Funktion für jede rekursive Funktion
+    \item Aufbau: Abbruchbedingung(en), Sicherung, rekursiver Aufruf, Wiederherstellung, Berechnung, Rücksprung
   \end{itemize}  
 \end{frame}
 
-\begin{frame}[fragile, c]{Speicherzugriffe in RISC-V}{}
-  lade 32 Bit an der Adresse a0 + 0 Bytes Offset in das Register t0: 
-  \begin{verbatim}lw t0, 0(a0)\end{verbatim}
-  lade 8 Bit an der Adresse a2 - 4 Bytes Offset in das Register t1: 
-  \begin{verbatim}lb t1, -4(a2)\end{verbatim}
-  speichere den gesamten Inhalt des Registers t2 an die Adresse a1 + 16 Bytes Offset:
-  \begin{verbatim}sw t2, 16(a1)\end{verbatim}
-\end{frame}
 
 \begin{frame}[c]{}{}
   \begin{center}
@@ -148,9 +149,10 @@
 
 \begin{frame}[c]{Artemis-Hausaufgaben}{}
   \begin{itemize}
-    \item H03 - Palindrom bis 12.11.2023 23:59 Uhr
-    \item Speicheroperationen
-    \item lasst euch nicht vom Label 'hard' abschrecken, das Prinzip ist sehr simpel
+    \item H04 - Tribonacci bis 19.11.2023 23:59 Uhr
+    \item Implementierung einer rekursiven Funktion
+    \item Aufbau von Folie \glqq Rekursion\grqq beachten
+    \item Einhaltung der CC verpflichtend $\rightarrow$ siehe Link
   \end{itemize}
 \end{frame}
 
@@ -158,8 +160,8 @@
   \begin{itemize}
     \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\glqq ERA Tutorium - Mi-1600-MI4\grqq}
     bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\glqq ERA Tutorium - Fr-1100-MW2\grqq}
-    \item \href{https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf}{RISC-V-Spezifikation}
-    \item \href{https://www.geeksforgeeks.org/computer-organization-von-neumann-architecture/}{Von-Neumann-Architektur}
+    \item \href{https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf}{RISC-V Spezifikation}
+    \item \href{https://www.moodle.tum.de/mod/url/view.php?id=2810277}{RISC-V ABI (Calling Convention)}
     \item \href{https://msyksphinz-self.github.io/riscv-isadoc/html/rvi.html}{übersichtlichere Instruktionsliste}
   \end{itemize}
 \end{frame}
