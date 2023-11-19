@@ -107,7 +107,7 @@
   \end{center}
 \end{frame}
 
-\begin{frame}[fragile, c]{Boolsche Funktionen}{}
+\begin{frame}[fragile, c]{Boolesche Funktionen}{}
   \centering
   \begin{columns}[T]
     \begin{column}{0.3\textwidth}
@@ -200,9 +200,9 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}[c]{Boolsche Funktionen}{}
+\begin{frame}[c]{Boolesche Funktionen}{}
   \begin{itemize}
-    \item Alternative Schreibweisen: $A+B$ für OR, $A\cdot B$ für AND, $\overline{A}$ für NOT
+    \item Alternative Schreibweisen: $x+y$ für OR, $x\cdot y$ für AND, $\overline{x}$ für NOT
     \item Gatter in europäischer Norm einfacher zu zeichnen und besser unterscheidbar $\rightarrow$\\ in Klausur einheitlich verwenden!
     \item weitere wichtige Funktionen (bekannt aus DS): $\oplus$ (XOR), $\rightarrow$ (Implikation), $\leftrightarrow$ (Bikonditional, Iff, XNOR)
     \item Funktionale Vollständigkeit: Menge $\mathcal{F}$ sodass alle boolschen Funktionen als Kombination von $f_i\in\mathcal{F}$ darstellbar sind. Beispiel: $\{\wedge, \neg\}$
@@ -211,14 +211,23 @@
 
 \begin{frame}[c]{Gesetze der Booleschen Algebra}{}
   \begin{itemize}
-    \item Identität: $A+0=A$, $A\cdot 1=A$
-    \item Idempotenz: $A+A=A$, $A\cdot A=A$
-    \item Komplementärgesetz: $A+\overline{A}=1$, $A\cdot\overline{A}=0$
-    \item Involution: $\overline{\overline{A}}=A$
-    \item De Morgan: $\overline{A+B}=\overline{A}\cdot\overline{B}$ und $\overline{A\cdot B}=\overline{A}+\overline{B}$
-    \item Absorption: $A+(A\cdot B)=A$, $A\cdot(A+B)=A$
-    \item Distributivität: $A\cdot(B+C)=(A\cdot B)+ (A\cdot C)$ und $A+(B\cdot C)=(A+B)\cdot (A+C)$
+    \item Identität: $x+0=x$, $x\cdot 1=x$
+    \item Idempotenz: $x+x=x$, $x\cdot x=x$
+    \item Komplementärgesetz: $x+\overline{x}=1$, $x\cdot\overline{x}=0$
+    \item Involution: $\overline{\overline{x}}=x$
+    \item De Morgan: $\overline{x+y}=\overline{x}\cdot\overline{y}$ und $\overline{x\cdot y}=\overline{x}+\overline{y}$
+    \item Absorption: $x+(x\cdot y)=x$, $x\cdot(x+y)=x$
+    \item Distributivität: $x\cdot(y+z)=(x\cdot y)+ (x\cdot z)$ und $x+(y\cdot z)=(x+y)\cdot (x+z)$
   \end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Normalformen}{}
+  \begin{itemize}
+    \item Konjunktive Normalform (OR in den Klammern, AND dazwischen): $(x+y) \cdot (x+\overline{y})$
+    \item Disjunktive Normalform (AND in den Klammern, OR dazwischen): $(x\cdot y) + (x\cdot\overline{y})$
+  \end{itemize}
+  \centering
+  \includegraphics[height=0.70\textheight]{resources/w05_knf_dnf}
 \end{frame}
 
 \begin{frame}[c]{}{}
