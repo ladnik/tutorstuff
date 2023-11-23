@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project source="3.8.0" version="1.0">
+  This file is intended to be loaded by Logisim-evolution v3.8.0(https://github.com/logisim-evolution/).
+
+  <lib desc="#Wiring" name="0">
+    <tool name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="south"/>
+    </tool>
+  </lib>
+  <lib desc="#Gates" name="1"/>
+  <lib desc="#Plexers" name="2"/>
+  <lib desc="#Arithmetic" name="3"/>
+  <lib desc="#Memory" name="4"/>
+  <lib desc="#I/O" name="5"/>
+  <lib desc="#TTL" name="6"/>
+  <lib desc="#TCL" name="7"/>
+  <lib desc="#Base" name="8"/>
+  <lib desc="#BFH-Praktika" name="9"/>
+  <lib desc="#Input/Output-Extra" name="10"/>
+  <lib desc="#Soc" name="11"/>
+  <main name="main"/>
+  <options>
+    <a name="gateUndefined" val="ignore"/>
+    <a name="simlimit" val="1000"/>
+    <a name="simrand" val="0"/>
+  </options>
+  <mappings>
+    <tool lib="8" map="Button2" name="Poke Tool"/>
+    <tool lib="8" map="Button3" name="Menu Tool"/>
+    <tool lib="8" map="Ctrl Button1" name="Menu Tool"/>
+  </mappings>
+  <toolbar>
+    <tool lib="8" name="Poke Tool"/>
+    <tool lib="8" name="Edit Tool"/>
+    <tool lib="8" name="Wiring Tool"/>
+    <tool lib="8" name="Text Tool"/>
+    <sep/>
+    <tool lib="0" name="Pin"/>
+    <tool lib="0" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+    </tool>
+    <sep/>
+    <tool lib="1" name="NOT Gate"/>
+    <tool lib="1" name="AND Gate"/>
+    <tool lib="1" name="OR Gate"/>
+    <tool lib="1" name="XOR Gate"/>
+    <tool lib="1" name="NAND Gate"/>
+    <tool lib="1" name="NOR Gate"/>
+    <sep/>
+    <tool lib="4" name="D Flip-Flop"/>
+    <tool lib="4" name="Register"/>
+  </toolbar>
+  <circuit name="main">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="main"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="0" loc="(1060,260)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(1130,180)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(130,120)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="south"/>
+    </comp>
+    <comp lib="0" loc="(170,120)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="south"/>
+    </comp>
+    <comp lib="0" loc="(290,120)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="south"/>
+    </comp>
+    <comp lib="0" loc="(330,120)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="south"/>
+    </comp>
+    <comp lib="0" loc="(420,340)" name="Constant"/>
+    <comp lib="0" loc="(420,360)" name="Constant">
+      <a name="value" val="0x0"/>
+    </comp>
+    <comp lib="0" loc="(460,150)" name="Constant"/>
+    <comp lib="0" loc="(530,330)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(570,250)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(620,170)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(850,170)" name="Constant">
+      <a name="value" val="0x0"/>
+    </comp>
+    <comp lib="0" loc="(850,250)" name="Constant">
+      <a name="value" val="0x0"/>
+    </comp>
+    <comp lib="1" loc="(410,200)" name="NOT Gate"/>
+    <comp lib="1" loc="(410,280)" name="NOT Gate"/>
+    <comp lib="1" loc="(800,210)" name="XOR Gate"/>
+    <comp lib="1" loc="(800,290)" name="XOR Gate"/>
+    <comp lib="3" loc="(490,190)" name="Adder">
+      <a name="width" val="1"/>
+    </comp>
+    <comp lib="3" loc="(490,270)" name="Adder">
+      <a name="width" val="1"/>
+    </comp>
+    <comp lib="3" loc="(490,350)" name="Adder">
+      <a name="width" val="1"/>
+    </comp>
+    <comp lib="3" loc="(910,180)" name="Adder">
+      <a name="width" val="1"/>
+    </comp>
+    <comp lib="3" loc="(910,260)" name="Adder">
+      <a name="width" val="1"/>
+    </comp>
+    <comp lib="8" loc="(1088,243)" name="Text">
+      <a name="font" val="SansSerif plain 10"/>
+      <a name="text" val="Endergebnis, Stelle 1"/>
+    </comp>
+    <comp lib="8" loc="(1157,165)" name="Text">
+      <a name="font" val="SansSerif plain 10"/>
+      <a name="text" val="Endergebnis, Stelle 0"/>
+    </comp>
+    <comp lib="8" loc="(1280,222)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="3. Wir erhalten unser"/>
+    </comp>
+    <comp lib="8" loc="(1285,239)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="erwünschtes Endergebnis"/>
+    </comp>
+    <comp lib="8" loc="(131,92)" name="Text">
+      <a name="text" val="a₁"/>
+    </comp>
+    <comp lib="8" loc="(172,92)" name="Text">
+      <a name="text" val="a₀"/>
+    </comp>
+    <comp lib="8" loc="(292,92)" name="Text">
+      <a name="text" val="b₁"/>
+    </comp>
+    <comp lib="8" loc="(332,92)" name="Text">
+      <a name="text" val="b₀"/>
+    </comp>
+    <comp lib="8" loc="(400,324)" name="Text">
+      <a name="font" val="SansSerif plain 10"/>
+      <a name="text" val="(implizite dritte Stelle)"/>
+    </comp>
+    <comp lib="8" loc="(473,431)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="Wir bringen also b ins"/>
+    </comp>
+    <comp lib="8" loc="(475,395)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="1. Wir berechnen zuerst a-b"/>
+    </comp>
+    <comp lib="8" loc="(475,498)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="implizit als signed 3-Bit-Zahlen"/>
+    </comp>
+    <comp lib="8" loc="(477,410)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="mit zwei Addierern:"/>
+    </comp>
+    <comp lib="8" loc="(479,481)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="Wir nehmen die Zahlen"/>
+    </comp>
+    <comp lib="8" loc="(480,513)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="an, d.h. um das richtige Vorzeichen"/>
+    </comp>
+    <comp lib="8" loc="(482,526)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="zu bekommen, müssen wir dies"/>
+    </comp>
+    <comp lib="8" loc="(482,541)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="bei der dritten Stelle beachten"/>
+    </comp>
+    <comp lib="8" loc="(485,446)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="Zweierkomplement (Invertieren + 1)"/>
+    </comp>
+    <comp lib="8" loc="(550,313)" name="Text">
+      <a name="font" val="SansSerif plain 10"/>
+      <a name="text" val="Vorzeichen"/>
+    </comp>
+    <comp lib="8" loc="(593,234)" name="Text">
+      <a name="font" val="SansSerif plain 10"/>
+      <a name="text" val="Zwischenergebnis, Stelle 1"/>
+    </comp>
+    <comp lib="8" loc="(639,153)" name="Text">
+      <a name="font" val="SansSerif plain 10"/>
+      <a name="text" val="Zwischenergebnis, Stelle 0"/>
+    </comp>
+    <comp lib="8" loc="(781,339)" name="Text">
+      <a name="font" val="SansSerif plain 10"/>
+      <a name="text" val="(die XORs negieren die Werte,"/>
+    </comp>
+    <comp lib="8" loc="(784,352)" name="Text">
+      <a name="font" val="SansSerif plain 10"/>
+      <a name="text" val="falls das Vorzeichen gesetzt ist)"/>
+    </comp>
+    <comp lib="8" loc="(888,42)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="2. Wir wollen aber den"/>
+    </comp>
+    <comp lib="8" loc="(889,105)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="das Ergebnis noch zu einer"/>
+    </comp>
+    <comp lib="8" loc="(890,73)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="d.h. falls ein Carry-Out produziert"/>
+    </comp>
+    <comp lib="8" loc="(893,131)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="(wieder mit Zweierkomplement)"/>
+    </comp>
+    <comp lib="8" loc="(893,58)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="Absolutbetrag von a-b"/>
+    </comp>
+    <comp lib="8" loc="(894,87)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="wurde (negative Zahl), müssen wir"/>
+    </comp>
+    <comp lib="8" loc="(895,118)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="positiven Zahl umwandeln"/>
+    </comp>
+    <wire from="(130,120)" to="(130,260)"/>
+    <wire from="(130,260)" to="(130,510)"/>
+    <wire from="(130,260)" to="(450,260)"/>
+    <wire from="(170,120)" to="(170,180)"/>
+    <wire from="(170,180)" to="(170,510)"/>
+    <wire from="(170,180)" to="(450,180)"/>
+    <wire from="(290,120)" to="(290,280)"/>
+    <wire from="(290,280)" to="(290,510)"/>
+    <wire from="(290,280)" to="(380,280)"/>
+    <wire from="(330,120)" to="(330,200)"/>
+    <wire from="(330,200)" to="(330,510)"/>
+    <wire from="(330,200)" to="(380,200)"/>
+    <wire from="(410,200)" to="(450,200)"/>
+    <wire from="(410,280)" to="(450,280)"/>
+    <wire from="(420,340)" to="(450,340)"/>
+    <wire from="(420,360)" to="(450,360)"/>
+    <wire from="(450,280)" to="(450,290)"/>
+    <wire from="(460,150)" to="(470,150)"/>
+    <wire from="(470,150)" to="(470,170)"/>
+    <wire from="(470,210)" to="(470,250)"/>
+    <wire from="(470,290)" to="(470,330)"/>
+    <wire from="(490,190)" to="(610,190)"/>
+    <wire from="(490,270)" to="(560,270)"/>
+    <wire from="(490,350)" to="(520,350)"/>
+    <wire from="(520,330)" to="(520,350)"/>
+    <wire from="(520,330)" to="(530,330)"/>
+    <wire from="(520,350)" to="(700,350)"/>
+    <wire from="(560,250)" to="(560,270)"/>
+    <wire from="(560,250)" to="(570,250)"/>
+    <wire from="(560,270)" to="(740,270)"/>
+    <wire from="(610,170)" to="(610,190)"/>
+    <wire from="(610,170)" to="(620,170)"/>
+    <wire from="(610,190)" to="(740,190)"/>
+    <wire from="(700,150)" to="(700,230)"/>
+    <wire from="(700,150)" to="(890,150)"/>
+    <wire from="(700,230)" to="(700,310)"/>
+    <wire from="(700,230)" to="(740,230)"/>
+    <wire from="(700,310)" to="(700,350)"/>
+    <wire from="(700,310)" to="(740,310)"/>
+    <wire from="(800,210)" to="(830,210)"/>
+    <wire from="(800,290)" to="(830,290)"/>
+    <wire from="(830,190)" to="(830,210)"/>
+    <wire from="(830,190)" to="(870,190)"/>
+    <wire from="(830,270)" to="(830,290)"/>
+    <wire from="(830,270)" to="(870,270)"/>
+    <wire from="(850,170)" to="(870,170)"/>
+    <wire from="(850,250)" to="(870,250)"/>
+    <wire from="(890,150)" to="(890,160)"/>
+    <wire from="(890,200)" to="(890,240)"/>
+    <wire from="(910,180)" to="(1130,180)"/>
+    <wire from="(910,260)" to="(1060,260)"/>
+  </circuit>
+</project>
