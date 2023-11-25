@@ -42,7 +42,9 @@
       <a name="output" val="true"/>
     </tool>
     <sep/>
-    <tool lib="1" name="NOT Gate"/>
+    <tool lib="1" name="NOT Gate">
+      <a name="facing" val="south"/>
+    </tool>
     <tool lib="1" name="AND Gate"/>
     <tool lib="1" name="OR Gate"/>
     <tool lib="1" name="XOR Gate"/>
@@ -83,10 +85,6 @@
       <a name="appearance" val="classic"/>
       <a name="facing" val="south"/>
     </comp>
-    <comp lib="0" loc="(420,340)" name="Constant"/>
-    <comp lib="0" loc="(420,360)" name="Constant">
-      <a name="value" val="0x0"/>
-    </comp>
     <comp lib="0" loc="(460,150)" name="Constant"/>
     <comp lib="0" loc="(530,330)" name="Pin">
       <a name="appearance" val="NewPins"/>
@@ -111,6 +109,9 @@
     </comp>
     <comp lib="1" loc="(410,200)" name="NOT Gate"/>
     <comp lib="1" loc="(410,280)" name="NOT Gate"/>
+    <comp lib="1" loc="(470,330)" name="NOT Gate">
+      <a name="facing" val="south"/>
+    </comp>
     <comp lib="1" loc="(800,210)" name="XOR Gate"/>
     <comp lib="1" loc="(800,290)" name="XOR Gate"/>
     <comp lib="3" loc="(490,190)" name="Adder">
@@ -119,48 +120,45 @@
     <comp lib="3" loc="(490,270)" name="Adder">
       <a name="width" val="1"/>
     </comp>
-    <comp lib="3" loc="(490,350)" name="Adder">
-      <a name="width" val="1"/>
-    </comp>
     <comp lib="3" loc="(910,180)" name="Adder">
       <a name="width" val="1"/>
     </comp>
     <comp lib="3" loc="(910,260)" name="Adder">
       <a name="width" val="1"/>
     </comp>
-    <comp lib="8" loc="(1088,243)" name="Text">
+    <comp lib="8" loc="(1085,240)" name="Text">
       <a name="font" val="SansSerif plain 10"/>
       <a name="text" val="Endergebnis, Stelle 1"/>
     </comp>
-    <comp lib="8" loc="(1157,165)" name="Text">
+    <comp lib="8" loc="(1155,165)" name="Text">
       <a name="font" val="SansSerif plain 10"/>
       <a name="text" val="Endergebnis, Stelle 0"/>
     </comp>
-    <comp lib="8" loc="(1280,222)" name="Text">
+    <comp lib="8" loc="(1280,220)" name="Text">
       <a name="font" val="SansSerif plain 14"/>
       <a name="text" val="3. Wir erhalten unser"/>
     </comp>
-    <comp lib="8" loc="(1285,239)" name="Text">
+    <comp lib="8" loc="(1285,235)" name="Text">
       <a name="font" val="SansSerif plain 14"/>
       <a name="text" val="erwünschtes Endergebnis"/>
     </comp>
-    <comp lib="8" loc="(131,92)" name="Text">
+    <comp lib="8" loc="(130,90)" name="Text">
       <a name="text" val="a₁"/>
     </comp>
-    <comp lib="8" loc="(172,92)" name="Text">
+    <comp lib="8" loc="(170,90)" name="Text">
       <a name="text" val="a₀"/>
     </comp>
-    <comp lib="8" loc="(292,92)" name="Text">
+    <comp lib="8" loc="(290,90)" name="Text">
       <a name="text" val="b₁"/>
     </comp>
-    <comp lib="8" loc="(332,92)" name="Text">
+    <comp lib="8" loc="(330,90)" name="Text">
       <a name="text" val="b₀"/>
     </comp>
-    <comp lib="8" loc="(400,324)" name="Text">
+    <comp lib="8" loc="(400,320)" name="Text">
       <a name="font" val="SansSerif plain 10"/>
       <a name="text" val="(implizite dritte Stelle)"/>
     </comp>
-    <comp lib="8" loc="(473,431)" name="Text">
+    <comp lib="8" loc="(470,430)" name="Text">
       <a name="font" val="SansSerif plain 14"/>
       <a name="text" val="Wir bringen also b ins"/>
     </comp>
@@ -168,79 +166,79 @@
       <a name="font" val="SansSerif plain 14"/>
       <a name="text" val="1. Wir berechnen zuerst a-b"/>
     </comp>
-    <comp lib="8" loc="(475,498)" name="Text">
-      <a name="font" val="SansSerif plain 14"/>
-      <a name="text" val="implizit als signed 3-Bit-Zahlen"/>
-    </comp>
-    <comp lib="8" loc="(477,410)" name="Text">
+    <comp lib="8" loc="(475,410)" name="Text">
       <a name="font" val="SansSerif plain 14"/>
       <a name="text" val="mit zwei Addierern:"/>
     </comp>
-    <comp lib="8" loc="(479,481)" name="Text">
+    <comp lib="8" loc="(475,480)" name="Text">
       <a name="font" val="SansSerif plain 14"/>
       <a name="text" val="Wir nehmen die Zahlen"/>
     </comp>
-    <comp lib="8" loc="(480,513)" name="Text">
+    <comp lib="8" loc="(475,495)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="implizit als signed 3-Bit-Zahlen"/>
+    </comp>
+    <comp lib="8" loc="(480,510)" name="Text">
       <a name="font" val="SansSerif plain 14"/>
       <a name="text" val="an, d.h. um das richtige Vorzeichen"/>
     </comp>
-    <comp lib="8" loc="(482,526)" name="Text">
+    <comp lib="8" loc="(480,525)" name="Text">
       <a name="font" val="SansSerif plain 14"/>
       <a name="text" val="zu bekommen, müssen wir dies"/>
     </comp>
-    <comp lib="8" loc="(482,541)" name="Text">
+    <comp lib="8" loc="(480,540)" name="Text">
       <a name="font" val="SansSerif plain 14"/>
       <a name="text" val="bei der dritten Stelle beachten"/>
     </comp>
-    <comp lib="8" loc="(485,446)" name="Text">
+    <comp lib="8" loc="(485,445)" name="Text">
       <a name="font" val="SansSerif plain 14"/>
       <a name="text" val="Zweierkomplement (Invertieren + 1)"/>
     </comp>
-    <comp lib="8" loc="(550,313)" name="Text">
+    <comp lib="8" loc="(550,310)" name="Text">
       <a name="font" val="SansSerif plain 10"/>
       <a name="text" val="Vorzeichen"/>
     </comp>
-    <comp lib="8" loc="(593,234)" name="Text">
+    <comp lib="8" loc="(590,230)" name="Text">
       <a name="font" val="SansSerif plain 10"/>
       <a name="text" val="Zwischenergebnis, Stelle 1"/>
     </comp>
-    <comp lib="8" loc="(639,153)" name="Text">
+    <comp lib="8" loc="(635,150)" name="Text">
       <a name="font" val="SansSerif plain 10"/>
       <a name="text" val="Zwischenergebnis, Stelle 0"/>
     </comp>
-    <comp lib="8" loc="(781,339)" name="Text">
+    <comp lib="8" loc="(780,335)" name="Text">
       <a name="font" val="SansSerif plain 10"/>
       <a name="text" val="(die XORs negieren die Werte,"/>
     </comp>
-    <comp lib="8" loc="(784,352)" name="Text">
+    <comp lib="8" loc="(780,350)" name="Text">
       <a name="font" val="SansSerif plain 10"/>
       <a name="text" val="falls das Vorzeichen gesetzt ist)"/>
     </comp>
-    <comp lib="8" loc="(888,42)" name="Text">
+    <comp lib="8" loc="(885,40)" name="Text">
       <a name="font" val="SansSerif plain 14"/>
       <a name="text" val="2. Wir wollen aber den"/>
     </comp>
-    <comp lib="8" loc="(889,105)" name="Text">
+    <comp lib="8" loc="(886,99)" name="Text">
       <a name="font" val="SansSerif plain 14"/>
       <a name="text" val="das Ergebnis noch zu einer"/>
     </comp>
-    <comp lib="8" loc="(890,73)" name="Text">
-      <a name="font" val="SansSerif plain 14"/>
-      <a name="text" val="d.h. falls ein Carry-Out produziert"/>
-    </comp>
-    <comp lib="8" loc="(893,131)" name="Text">
+    <comp lib="8" loc="(890,130)" name="Text">
       <a name="font" val="SansSerif plain 14"/>
       <a name="text" val="(wieder mit Zweierkomplement)"/>
     </comp>
-    <comp lib="8" loc="(893,58)" name="Text">
+    <comp lib="8" loc="(890,55)" name="Text">
       <a name="font" val="SansSerif plain 14"/>
       <a name="text" val="Absolutbetrag von a-b"/>
     </comp>
-    <comp lib="8" loc="(894,87)" name="Text">
+    <comp lib="8" loc="(890,70)" name="Text">
+      <a name="font" val="SansSerif plain 14"/>
+      <a name="text" val="d.h. falls das Vorzeichen gesetzt"/>
+    </comp>
+    <comp lib="8" loc="(890,85)" name="Text">
       <a name="font" val="SansSerif plain 14"/>
       <a name="text" val="wurde (negative Zahl), müssen wir"/>
     </comp>
-    <comp lib="8" loc="(895,118)" name="Text">
+    <comp lib="8" loc="(893,113)" name="Text">
       <a name="font" val="SansSerif plain 14"/>
       <a name="text" val="positiven Zahl umwandeln"/>
     </comp>
@@ -258,16 +256,15 @@
     <wire from="(330,200)" to="(380,200)"/>
     <wire from="(410,200)" to="(450,200)"/>
     <wire from="(410,280)" to="(450,280)"/>
-    <wire from="(420,340)" to="(450,340)"/>
-    <wire from="(420,360)" to="(450,360)"/>
     <wire from="(450,280)" to="(450,290)"/>
     <wire from="(460,150)" to="(470,150)"/>
     <wire from="(470,150)" to="(470,170)"/>
     <wire from="(470,210)" to="(470,250)"/>
-    <wire from="(470,290)" to="(470,330)"/>
+    <wire from="(470,290)" to="(470,300)"/>
+    <wire from="(470,330)" to="(470,350)"/>
+    <wire from="(470,350)" to="(520,350)"/>
     <wire from="(490,190)" to="(610,190)"/>
     <wire from="(490,270)" to="(560,270)"/>
-    <wire from="(490,350)" to="(520,350)"/>
     <wire from="(520,330)" to="(520,350)"/>
     <wire from="(520,330)" to="(530,330)"/>
     <wire from="(520,350)" to="(700,350)"/>
