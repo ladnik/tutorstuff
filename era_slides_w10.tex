@@ -157,10 +157,11 @@
 \end{frame}
 
 \begin{frame}[c, fragile]{Ein paar Formeln$\ldots$}
-  Für einen n-assoziativen Cache (n\ldots Anzahl Cachezeilen die in einem Set liegen können):
+  Für einen n-assoziativen Cache (jeweils n Cachezeilen in seinem Set):
   \vspace{0.25cm}
   \begin{itemize}
-    \item $\textrm{Anzahl Cache-Sets}=\lceil\frac{\frac{\textrm{Cachegröße}}{\textrm{Cachezeilengröße}}}{\textrm{n-assoziativ}}\rceil$
+    \item $\textrm{Anzahl Cache-Lines}=\frac{\textrm{Cachegröße}}{\textrm{Cachezeilengröße}}$
+    \item $\textrm{Anzahl Cache-Sets}=\frac{\textrm{Anzahl Cache-Lines}}{\textrm{n}}$
     \item $\textrm{Anzahl Index-Bits}=\lceil\log_2(\textrm{Anzahl Cache-Sets})\rceil$
     \item $\textrm{Anzahl Offset-Bits}=\lceil\log_2(\textrm{Cachezeilengröße})\rceil$
     \item $\textrm{Anzahl Tag-Bits}= \textrm{Anzahl Adressbits} - \textrm{Anzahl Index-Bits} - \textrm{Anzahl Offset-Bits}$
@@ -177,7 +178,8 @@
 \begin{frame}[c, fragile]{Artemis-Hausaufgaben}{}
   \begin{itemize}
     \item H10 - 4-Fach-Assoziativ bis 14.01.2024 23:59 Uhr
-    \item Werte in einem Cache einfügen, Abgabe im Textformat
+    \item Werte in einem Cache einfügen (+ Ersetzungen), Abgabe im Textformat
+    \item gut machbar, Tests geben wieder vor der Deadline volles Feedback
   \end{itemize}
 \end{frame}
 
