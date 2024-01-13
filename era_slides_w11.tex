@@ -1,0 +1,179 @@
+%%
+% This is an Overleaf template for presentations
+% using the TUM Corporate Desing https://www.tum.de/cd
+%
+% For further details on how to use the template, take a look at our
+% GitLab repository and browse through our test documents
+% https://gitlab.lrz.de/latex4ei/tum-templates.
+%
+% The tumbeamer class is based on the beamer class.
+% If you need further customization please consult the beamer class guide
+% https://ctan.org/pkg/beamer.
+% Additional class options are passed down to the base class.
+%
+% If you encounter any bugs or undesired behaviour, please raise an issue
+% in our GitLab repository
+% https://gitlab.lrz.de/latex4ei/tum-templates/issues
+% and provide a description and minimal working example of your problem.
+%%
+
+%\makeatletter
+%\def\input@path{{../beamer/}}
+%\makeatother
+
+\documentclass[
+  german,            % define the document language (english, german)
+  aspectratio=169,    % define the aspect ratio (169, 43)
+  % handout=2on1,       % create handout with multiple slides (2on1, 4on1)
+  % partpage=false,     % insert page at beginning of parts (true, false)
+  % sectionpage=true,   % insert page at beginning of sections (true, false)
+]{tumbeamer}
+
+
+% load additional packages
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{url}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{pmboxdraw}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{circuitikz}
+%\usepackage[european]{circuitikz}
+
+% image path
+\graphicspath{ {./resources/} }
+
+% presentation metadata
+\title{Übung 11: Logiksynthese und\\Optimierung}
+\subtitle{Einführung in die Rechnerarchitektur}
+\author{Niklas Ladurner}
+
+\institute{\theChairName\\\theDepartmentName\\\theUniversityName}
+\date[\today]{\today}
+
+\footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
+
+
+% macro to configure the style of the presentation
+\TUMbeamersetup{
+  title page = TUM tower,         % style of the title page
+  part page = TUM toc,            % style of part pages
+  section page = TUM toc,         % style of section pages
+  content page = TUM more space,  % style of normal content pages
+  tower scale = 1.0,              % scaling factor of TUM tower (if used)
+  headline = TUM threeliner,      % which variation of headline to use
+  footline = TUM default,         % which variation of footline to use
+  % configure on which pages headlines and footlines should be printed
+  headline on = {title page},
+  footline on = {every page, title page=false},
+}
+
+% available frame styles for title page, part page, and section page:
+% TUM default, TUM tower, TUM centered,
+% TUM blue default, TUM blue tower, TUM blue centered,
+% TUM shaded default, TUM shaded tower, TUM shaded centered,
+% TUM flags
+%
+% additional frame styles for part page and section page:
+% TUM toc
+%
+% available frame styles for content pages:
+% TUM default, TUM more space
+%
+% available headline options:
+% TUM empty, TUM oneliner, TUM twoliner, TUM threeliner, TUM logothreeliner
+%
+% available footline options:
+% TUM empty, TUM default, TUM infoline
+
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}[c]{}{}
+  \begin{center}
+    \LARGE  Durchzählen!
+  \end{center}
+\end{frame}
+
+\begin{frame}[c]{}{}
+  \begin{center}
+    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
+    haben VL/ZÜ-Folien Recht!
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile, c]{Synthese}{}
+  \begin{itemize}
+    \item boolsche Funktion $\rightarrow$ Schaltung
+    \item naive Synthese nicht skalierbar
+    \item verschiedene Verfahren zur Optimierung und Reduktion von Funktionen auf ihr Minimalpolynom
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile, c]{Karnaugh-Veitch-Diagramme}{}
+  \begin{itemize}
+    \item rechteckiges Schema, in dem alle Literalkombinationen (positiv und negativ) vorkommen
+    \item '1' (bzw. '-') können in $2^n$-Blöcken zusammengefasst werden, um boolsche Funktion zu vereinfachen
+    \item nebeneinander liegende Zeilen/Spalten dürfen sich immer nur in 1 Bit unterscheiden (Gray-Code)!
+  \end{itemize}
+  \begin{center}
+    \includegraphics[width=0.65\textwidth]{w11_kmap.png}
+  \end{center}
+\end{frame}
+
+
+\begin{frame}[c, fragile]{Binary Decision Diagrams (BDDs)}{}
+  \begin{itemize}
+    \item Gerichteter azyklischer Graph (DAG), Variablen als Knoten, 2 asugehende Kanten (0/1): Darstellung einer boolschen Funktion
+    \item Aufbau bspw. mittels Shannon-Zerlegung: $f(x_0, x_1) \rightarrow f_{x_0=0}(x_1), f_{x_0=1}(x_1)$
+    \item ROBDDs sind kanonisch (eindeutig)!
+    \item I-Reduktion (1): Zusammenführung isomorpher Knoten
+    \item S-Reduktion (2): \glqq Überflüssige\grqq\; Knoten entfernen (beide Kinder zeigen auf selben Nachfolger)
+  \end{itemize}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{w11_bdd_reduction.png}
+  \end{center}
+  \centering
+  \tiny{Quelle: Vorlesungsmaterialien ERA}
+\end{frame}
+
+\begin{frame}[c, fragile]{ITE}
+  \begin{itemize}
+    \item ITE(A, B, C): If A then B else C, äquivalent zu AB + $\neg$AC
+    \item Kann sukzessive auf BDDs angewendet werden, um bspw. $B_1 + B_2$ zu berechnen
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[c]{}{}
+  \begin{center}
+    \LARGE Fragen?
+  \end{center}
+\end{frame}
+
+\begin{frame}[c, fragile]{Artemis-Hausaufgaben}{}
+  \begin{itemize}
+    \item H11 - Binaere Entscheidungsdiagramme bis 21.01.2024 23:59 Uhr
+    \item ITE-Ausdrücke für bestimmte Operationen auf BDDs, Abgabe im Textformat
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile, c]{Links}{}
+  \begin{itemize}
+    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\glqq ERA Tutorium - Mi-1600-MI4\grqq}
+          bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\glqq ERA Tutorium - Fr-1100-MW2\grqq}
+    \item \href{https://en.wikipedia.org/wiki/Cache_placement_policies}{Wikipedia zu Caches}
+    \item \href{https://www.elektronik-kompendium.de/sites/com/0309291.htm}{Elektronik-Kompendium zu Caches}
+    \item \href{https://www.elektronik-kompendium.de/sites/com/0309191.htm}{Elektronik-Kompendium zu SRAM/DRAM}
+  \end{itemize}
+\end{frame}
+
+\maketitle
+
+\end{document}
