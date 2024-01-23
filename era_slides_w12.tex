@@ -47,7 +47,7 @@
 \graphicspath{ {./resources/} }
 
 % presentation metadata
-\title{Übung 11: Logiksynthese und\\Optimierung}
+\title{Übung 12: And-Inverter-Graphen\\und SAT-Solving}
 \subtitle{Einführung in die Rechnerarchitektur}
 \author{Niklas Ladurner}
 
@@ -107,49 +107,53 @@
   \end{center}
 \end{frame}
 
-\begin{frame}[fragile, c]{Synthese}{}
-  \begin{itemize}
-    \item boolsche Funktion $\rightarrow$ Schaltung
-    \item naive Synthese nicht skalierbar
-    \item verschiedene Verfahren zur Optimierung und Reduktion von Funktionen auf ihr Minimalpolynom
-  \end{itemize}
-
+\begin{frame}[fragile, c]{AIGs}{}
+  \begin{columns}[c]
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item $\{\wedge, \neg\}$ ist funktional vollständig $\rightarrow$ NAND-Logik
+        \item geringere Kosten für Darstellung einer boolschen Funktion
+        \item AIG: Knoten stehen für Verundung beider Inputs, Output-Linie gestrichelt/durchgezogen für Negation/keine Negation
+        \item $x_0$ ist reserviert für Konstante $0$
+        \item im Bild sind Inputs unten, Outputs oben
+        \item algebraische Redundanzen siehe VL
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{center}
+        \includegraphics[width=0.65\textwidth]{w12_aig.png}
+      \end{center}
+      \centering
+      \tiny{Quelle: Vorlesungsmaterialien ERA}
+    \end{column}
+  \end{columns}
 \end{frame}
 
-\begin{frame}[fragile, c]{Karnaugh-Veitch-Diagramme}{}
+\begin{frame}[fragile, c]{Satisfiability Solving}{}
   \begin{itemize}
-    \item rechteckiges Schema, in dem alle Literalkombinationen (positiv und negativ) vorkommen
-    \item '1' (bzw. '-') können in $2^n$-Blöcken zusammengefasst werden, um boolsche Funktion zu vereinfachen
-    \item nebeneinander liegende Zeilen/Spalten dürfen sich immer nur in 1 Bit unterscheiden (Gray-Code)!
+    \item Satisfiability $\rightarrow$ Erfüllbarkeit einer boolschen Funktion feststellen
+    \item Viele Probleme können durch Abbildung auf KNF in ein SAT-Problem überführt werden
+    \item DPLL-Algorithmus (bekannt aus DS) zur Lösung von KNF-SAT:
+          \begin{enumerate}
+            \item Wähle Variable $x_i$ und belege sie in allen Klauseln $\omega_i$
+            \item Kann die Belegung anderer Variablen dadurch abgeleitet werden? (Propagation)
+            \item Bei Konflikten aus Implikationsgraph \glqq gelernte Klausel\grqq\; ableiten, dann Backtracking
+            \item So lange fortführen bis erfüllende Belegung gefunden
+          \end{enumerate}
   \end{itemize}
+\end{frame}
+
+
+\begin{frame}[c, fragile]{Implikationsgraphen (Konfliktanalyse)}{}
+
   \begin{center}
-    \includegraphics[width=0.65\textwidth]{w11_kmap.png}
+    \includegraphics[width=0.8\textwidth]{w12_sat.png}
   \end{center}
-\end{frame}
-
-
-\begin{frame}[c, fragile]{Binary Decision Diagrams (BDDs)}{}
-  \begin{itemize}
-    \item Gerichteter azyklischer Graph (DAG), Variablen als Knoten, 2 asugehende Kanten (0/1): Darstellung einer boolschen Funktion
-    \item Aufbau bspw. mittels Shannon-Zerlegung: $f(x_0, x_1) \rightarrow f_{x_0=0}(x_1), f_{x_0=1}(x_1)$
-    \item ROBDDs sind kanonisch (eindeutig)!
-    \item I-Reduktion (1): Zusammenführung isomorpher Knoten
-    \item S-Reduktion (2): \glqq Überflüssige\grqq\; Knoten entfernen (beide Kinder zeigen auf selben Nachfolger)
-  \end{itemize}
   \begin{center}
-    \includegraphics[width=0.8\textwidth]{w11_bdd_reduction.png}
+    \tiny{Quelle: Conflict-Driven Clause Learning SAT Solvers, Joao Marques-Silva and In{\^e}s Lynce and Sharad Malik}
   \end{center}
-  \centering
-  \tiny{Quelle: Vorlesungsmaterialien ERA}
+  gelernte Klausel: $\omega_\kappa:=(x_{31} + x_1 + x_{21})$
 \end{frame}
-
-\begin{frame}[c, fragile]{ITE}
-  \begin{itemize}
-    \item ITE(A, B, C): If A then B else C, äquivalent zu AB + $\neg$AC
-    \item Kann sukzessive auf BDDs angewendet werden, um bspw. $B_1 + B_2$ zu berechnen
-  \end{itemize}
-\end{frame}
-
 
 \begin{frame}[c]{}{}
   \begin{center}
@@ -159,8 +163,8 @@
 
 \begin{frame}[c, fragile]{Artemis-Hausaufgaben}{}
   \begin{itemize}
-    \item H11 - Binaere Entscheidungsdiagramme bis 21.01.2024 23:59 Uhr
-    \item ITE-Ausdrücke für bestimmte Operationen auf BDDs, Abgabe im Textformat
+    \item H12 - Mastermind bis 28.01.2024 23:59 Uhr
+    \item Finden von KNFs für Mastermind-Regeln
   \end{itemize}
 \end{frame}
 
@@ -168,7 +172,7 @@
   \begin{itemize}
     \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\glqq ERA Tutorium - Mi-1600-MI4\grqq}
           bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\glqq ERA Tutorium - Fr-1100-MW2\grqq}
-    \item \href{https://en.wikipedia.org/wiki/Binary_decision_diagram}{Wikipedia zu BDDs}
+    \item \href{https://en.wikipedia.org/wiki/Boolean_satisfiability_problem}{Wikipedia zu SAT}
   \end{itemize}
 \end{frame}
 
