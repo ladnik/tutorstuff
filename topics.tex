@@ -1,0 +1,159 @@
+\documentclass{article}
+
+\usepackage[left=3cm]{geometry}
+\usepackage{enumerate}
+
+\title{\vspace{-4cm}Themenübersicht ERA}
+\date{}
+\author{}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5cm}
+
+\textbf{Disclaimer:} Die folgende Auflistung ist nur dazu da, einen
+groben Überblick über die behandelten Themenbereiche zu geben. Die explizit
+genannten Aufgaben sind Aufgaben, die ich (in eventuell leicht abgeänderter Form)
+auch gut in einer Klausur sehen würde.\\
+Insbesondere ist diese Auflistung weder vollständig, noch besteht die
+Klausur nur aus den hier empfohlenen Aufgabentypen.\\
+Es ist wie immer alles klausurrelevant, was nicht ausgeschlossen wurde
+und in der Vorlesung bzw. den Übungen behandelt wurde. D.h. also auch,
+dass einige Theorieinhalte und Aufgaben, die nicht in den Übungen drankamen, durchaus
+in der Klausur abgefragt werden können.\\
+Die mit * gekennzeichneten Aufgaben sind in ähnlicher Art schon mal in einer
+Klausur drangekommen.
+\begin{enumerate}
+    \item Zahlensysteme
+          \begin{enumerate}[i.]
+              \item Binärsystem und Hexadezimalsystem\footnote{Es kommt wahrscheinlich
+                        keine dedizierte Aufgabe dazu (außer vllt. Multiple Choice), aber der Umgang
+                        mit verschiedenen Zahlensystemen wird voraussgesetzt, besonders bspw. bei Caches}
+              \item Binärarithmetik, insbesondere Zweierkomplement
+              \item Gleit- und Festkommazahlen
+              \item Verständnis Overflow/Underflow
+          \end{enumerate}
+          Aufgaben: 1.1, 1.2
+    \item RISC-V Assembly I
+          \begin{enumerate}[i.]
+              \item ISA
+              \item RISC vs. CISC
+              \item Assemblierungsprozess
+              \item Befehlstypen, Register
+              \item Erzeugung von Konstanten
+              \item Little Endian vs. Big Endian, Speicherausrichtung
+              \item grundlegende RISC-V-Befehle (RV32IM)
+              \item Adressierungsarten
+          \end{enumerate}
+          Aufgaben: 2.2, 2.3*, 2.4, 2.5
+    \item RISC-V Assembly II
+          \begin{enumerate}[i.]
+              \item bedingte und unbedingte Sprünge
+              \item Unterprogramme
+              \item Calling Convention\footnote{Ich empfehle, die RISC-V-CC gut
+                        zu kennen, zumal sie nicht allzu komplex ist und leider bei den Artemis-Aufgaben
+                        immer wieder verletzt wurde}
+              \item Stack
+              \item Von-Neumann-Architektur
+          \end{enumerate}
+          Aufgaben: 3.1*, 3.2*, 3.3
+    \item RISC-V Assembly III
+          \begin{enumerate}[i.]
+              \item (End-)Rekursion
+              \item Stackframes
+              \item Mehrbenutzersysteme
+              \item Benutzermodus und Systemmodus\footnote{Mehr dazu kommt später
+              in Grundlagen Betriebssysteme und Systemsoftware (GBS), allerdings könnten
+              vereinzelnt Theoriefragen zu grundlegenden Inhalten gestellt werden}
+              \item Interrupts, Traps, Exceptions
+              \item virtuelle Speicherverwaltung
+          \end{enumerate}
+          Aufgaben: 4.1, 4.3, 4.4, eigene Problemstellungen ausdenken und in Assembly implementieren!
+    \item Boolesche Algebra und kombinatorische Schaltungen
+          \begin{enumerate}[i.]
+              \item Gesetze der booleschen Algebra
+              \item Gattersymbole
+              \item Addiererschaltungen
+          \end{enumerate}
+          Aufgaben: 5.1*, 5.2*
+    \item Arithmetische und sequentielle Schaltungen
+          \begin{enumerate}[i.]
+              \item Multiplizierer
+              \item Multiplexer
+              \item ALU 
+              \item Flipflops und Latches
+              \item Rückkopplungen
+          \end{enumerate}
+          Aufgaben: 6.1*, 6.3
+    \item Maschinensprache und Prozessorschaltbild
+          \begin{enumerate}[i.]
+              \item Instruktionskodierung
+              \item RISC-V-Befehlstypen
+              \item Single-Cycle-Prozessor, insbesondere Signalbelegungen
+          \end{enumerate}
+          Aufgaben: 7.2*, 7.3*, 7.4*
+    \item Automaten und Multi-Cycle-Prozessor
+          \begin{enumerate}[i.]
+              \item Automaten, Statuskodierungen (One-Hot, Binär)
+              \item Multi-Cycle-Prozessor, insbesondere Signalbelegungen
+          \end{enumerate}
+          Aufgaben: 8.1, 8.2, 8.3
+    \item Pipelining
+          \begin{enumerate}[i.]
+              \item Pipelined Prozessor
+              \item Datenabhängigkeiten, Steuerungs- und Datenkonflikte
+              \item Hazard Unit: Forwarding, Stalling
+              \item Branch prediction, Superskalarität, Out-of-Order-Execution, Register Renaming
+          \end{enumerate}
+          Aufgaben: 9.2, 9.3*
+    \item Caches
+          \begin{enumerate}[i.]
+              \item Speicherhierarchie
+              \item DRAM/SRAM
+              \item zeitliche und räumliche Lokalität
+              \item Ersetzungsstrategien
+              \item Terminologie: Hit/Miss/Hit Latency/\ldots
+              \item Voll-assoziative, Direct-mapped und Mengenassoziative Caches
+          \end{enumerate}
+          Aufgaben: 10.1*, 10.2*
+    \item Logiksynthese und Optimierung
+          \begin{enumerate}[i.]
+              \item K-Maps 
+              \item Binary Decision Diagrams (BDDs)
+              \item ITE
+              \item Konjunktive und Disjunktive Normalform
+          \end{enumerate}
+          Aufgaben: 11.1*, 11.2, 11.3*
+    \item AIGs und SAT-Solving
+          \begin{enumerate}[i.]
+              \item And-Inverter-Graphen (Konstruktion und Optimierung)
+              \item DPLL-Algorithmus
+              \item Konfliktgraphen und gelernte Klauseln
+              \item Tseitin-Transformation
+          \end{enumerate}
+          Aufgaben: 12.1, 12.2
+    \item Parallelisierung
+          \begin{enumerate}[i.]
+              \item Flynn's Classification
+              \item SIMD
+              \item Multithreading
+              \item Mehrkernsysteme
+              \item MSI/MESI 
+              \item Synchronisierung
+              \item Kategorisierung von Parallelismen
+              \item Speedup nach Amdahl und Gustafson
+              \item Roofline-Modell
+          \end{enumerate}
+          Aufgaben: 13.1*, 13.2*, 13.3
+    \item Ein- und Ausgabe
+    \begin{enumerate}[i.]
+        \item Netzwerktopologien
+        \item DMA
+    \end{enumerate}
+\end{enumerate}
+\vspace{3cm}
+\begin{center}
+\Large Viel Erfolg bei der Klausur!
+\end{center}
+\end{document}
