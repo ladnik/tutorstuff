@@ -16,4 +16,4 @@ jobs:
       uses: actions/checkout@v4
 
     - name: build files
-      run: make
+      run: cd era && make && cd ../gra && make
