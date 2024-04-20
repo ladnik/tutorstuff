@@ -1,0 +1,64 @@
+\documentclass{article}
+
+\usepackage[left=3cm]{geometry}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage[ngerman]{babel}
+\usepackage{array}
+\usepackage{longtable}
+
+\hypersetup{colorlinks=false, pdfborderstyle={/S/U/W 1}}
+
+\title{\vspace{-4cm}GRA Intro: Setup}
+\date{}
+\author{}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5cm}
+
+Da viele von euch jetzt in GRA das erste Mal mit 
+einer UNIX/Linux-Umgebung arbeiten werden, hier eine kleine Einführung.\\ Ich kann und werde keinen 1:1 Tech-Support für jeden von euch leisten
+können, schließlich bin ich selbst Vollzeistudent :) Bei Fragen könnt ihr aber jederzeit in den öffentlichen Zulip-Streams zu 
+GRA schreiben.
+
+\section{Betriebssystem}
+    \subsection{Windows}
+    Bitte installiere \href{https://learn.microsoft.com/de-de/windows/wsl/install}{Windows Subsystem for Linux (WSL)}.
+    Du kannst dann jederzeit WSL einfach vom Startmenü aus starten und erhälst ein voll funktionsfähiges Ubuntu.
+    Du kannst auf die in deiner WSL-Umgebung gespeicherten Daten über den Datei-Explorer zugreifen, dafür gibts den Befehl
+    \glqq\verb|explorer.exe .|\grqq{} (den letzten Punkt nicht vergessen).\\
+    Ich würde stark davon abraten, alles nativ in der Windows Command Line versuchen zum Laufen zu bringen.
+    \subsection{Linux}
+    Falls bereits irgendeine Linux-Distro auf deinem Rechner läuft, hast du alles
+    richtig gemacht.
+    \subsection{MacOS}
+    Ich habe selbst nie mit MacOS gearbeitet, aber afaik sollte dieses Betriebssystem
+    auf UNIX basieren, d.h. das meiste sollte ohne Probleme laufen.
+\section{IDE/Editor}
+\begin{itemize}
+    \item Lightweight und gute Integration, aber umständliches Debugging: VSCode
+    \item Sehr starke Debugging-Umgebung (ähnlich zu IntelliJ), aber manchmal ein bisschen kniffliges Setup mit Makefiles/WSL: CLion (Lizenz dafür gibt's als TUM-Studi kostenlos)
+    \item Für Masochisten: VIM/Emacs/\ldots
+\end{itemize}
+\section{Einige nützliche Befehle}
+    \begin{longtable}{p{4cm}p{12cm}}
+        \verb|cd <path>| & Wechselt das current working directory zu \verb|<path>| \\ 
+        \verb|ls -la| & Listet alle Dateien im CWD auf. (\verb|-l| für erweiterte Infos, \verb|-a| um auch versteckte Dateien anzuzeigen) \\  
+        \verb|rm <file>|& Entfernt die Datei \verb|file|\\
+        \verb|code .| & Startet VSCode im CWD\\
+        \verb|make| & Startet die in der Makefile vorgebene Routine, falls sich die Ausgangsdateien geändert haben\\
+        \verb|make clean| & Das selbe wie \verb|make|, nur unabhängig davon, ob sich die Ausgangsdateien geändert haben oder nicht\\
+        \verb|chmod u+x <file>| & Markiert die Datei \verb|file| als ausführbar\\
+        \verb|./<file>| & Führt eine Datei aus\\
+        \verb|nano <file>| & Simpler Texteditor\\
+        \verb|ssh <rbg-kennung>@| \verb|lxhalle.in.tum.de| & SSH-Login zur Rechnerhalle\\
+        \verb|git status| & Zeigt die aktuell getrackten Dateien an\\
+        \verb|git commit --allow-| \verb|empty| \verb|-m ""| & Erstellt einen leeren Commit, sodass nach einem Push auf Artemis neu gebuildet wird\\
+        \verb|git diff| & Zeigt Dateiänderungen im aktuellen Git-Repo an\\
+        \verb|ctrl + c| & Kein Befehl, sondern eine Tastenkombination: Unterbricht die Ausführung des aktuellen Prozesses\\
+        \verb|sl| & Überlebenswichtiger Befehl\\
+    \end{longtable}
+\end{document}
