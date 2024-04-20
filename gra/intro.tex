@@ -7,6 +7,7 @@
 \usepackage[ngerman]{babel}
 \usepackage{array}
 \usepackage{longtable}
+\usepackage{ulem}
 
 \hypersetup{colorlinks=false, pdfborderstyle={/S/U/W 1}}
 
@@ -36,12 +37,14 @@ GRA schreiben.
     richtig gemacht.
     \subsection{MacOS}
     Ich habe selbst nie mit MacOS gearbeitet, aber afaik sollte dieses Betriebssystem
-    auf UNIX basieren, d.h. das meiste sollte ohne Probleme laufen.
+    auf UNIX basieren, d.h. das meiste sollte ohne Probleme laufen. 
+    Wichtig für spätere teile des Kurses einige der Hardwarenahen Befehle e.g. Intel SIMD (SSE 1 - 4) Instuktionen sind auf den neuen M-Prozessoren nicht verfügbar
+    bearbeiten und debuggen dieser Aufgaben am besten auf der Rechnerhalle über SSH.
 \section{IDE/Editor}
 \begin{itemize}
     \item Lightweight und gute Integration, aber umständliches Debugging: VSCode
     \item Sehr starke Debugging-Umgebung (ähnlich zu IntelliJ), aber manchmal ein bisschen kniffliges Setup mit Makefiles/WSL: CLion (Lizenz dafür gibt's als TUM-Studi kostenlos)
-    \item Für Masochisten: VIM/Emacs/\ldots
+    \item Für \sout{Masochisten} Profis: VIM/Emacs/Helix\ldots
 \end{itemize}
 \section{Einige nützliche Befehle}
     \begin{longtable}{p{4cm}p{12cm}}
