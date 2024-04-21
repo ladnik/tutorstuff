@@ -90,7 +90,7 @@
 
 \begin{frame}[c]{}{}
   \begin{center}
-    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten 
+    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
     haben VL-Folien Recht!
   \end{center}
 \end{frame}
@@ -99,7 +99,7 @@
   \begin{itemize}
     \item Wer bin ich?
     \item Wo könnt ihr mich erreichen?
-    \item Mitschriften/Folien auf meiner \href{https://home.in.tum.de/~ladu/}{Homepage} 
+    \item Mitschriften/Folien auf meiner \href{https://home.in.tum.de/~ladu/}{Homepage}
     \item Anmerkungen zu den Hausaufgaben/Übungen
     \item Tutoriumszeiten
     \item Vertiefungen
@@ -110,25 +110,52 @@
 \begin{frame}[c]{Artemis-Hausaufgaben}{}
   \begin{itemize}
     \item Zulassung zur Projektphase nur nach Sammeln von $\ge$ 50\%
-    der Punkte in den ersten 3 Wochen!
+          der Punkte in den ersten 3 Wochen!
     \item Notenbonus von 0.3, falls $\ge$ 75\% der Punkte erreicht
     \item Bearbeitet ihr eine Aufgabe, werdet ihr automatisch zur Prüfung
-    angemeldet (nur relevant für 5.0X)
+          angemeldet (nur relevant für 5.0X)
     \item Bonuspunkte für besonders effiziente Implementierungen (Achtung: abhängig
-    vom Testserver können Ausführungszeiten abweichen)
+          vom Testserver können Ausführungszeiten abweichen)
   \end{itemize}
 \end{frame}
 
 \begin{frame}[c, fragile]{The C Programming Language}{}
   \begin{itemize}
-  \item C ist eine Hochsprache, aber immer noch sehr hardwarenah
-  \item Wird mittels eines Compilers (bspw. \verb|gcc|) zu Assemblercode kompiliert
-  \item Includes werden in den Programmcode hineinkopiert (vgl. \verb|#ifndef ...|)
-  \item Stack vs. Heap: Wo \verb|malloc|, wo \verb|alloca|?
-  \item Größen von Datentypen \underline{implementierungsabhängig}
-  \item \verb|stdint.h| für fixed-width Typen
-  \item Für eine ausführliche Einführung siehe C-Primer (Link ganz am Ende)
+    \item C ist eine Hochsprache, aber immer noch sehr hardwarenah
+    \item Wird mittels eines Compilers (bspw. \verb|gcc|) zu Assemblercode kompiliert
+    \item Includes werden in den Programmcode hineinkopiert (vgl. \verb|#ifndef ...|)
+    \item Stack vs. Heap: Wo \verb|malloc|, wo \verb|alloca|?
+    \item Größen von Datentypen \underline{implementierungsabhängig}
+    \item \verb|stdint.h| für fixed-width Typen
+    \item Für eine ausführliche Einführung siehe C-Primer (Link ganz am Ende)
   \end{itemize}
+\end{frame}
+
+\begin{frame}[c, fragile]{Pointer und Speicherobjekte}{}
+  \begin{columns}[c]
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item Pointer: Adresse zu einer Stelle im Speicher
+        \item structs vs. unions
+        \item Pointerarithmetik: Arrays
+        \item Dereferenzierung: \verb|*| vs. \verb|&|
+        \item Pointer zu Pointer: \verb|int **ptr|
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \includegraphics[width=1\textwidth]{w01_pointers.png}
+      \centering
+      \tiny{Quelle: \href{https://www.geeksforgeeks.org/c-pointers/}{GeeksforGeeks}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[c]{}{}
+  \begin{center}
+    \includegraphics[height=0.9\textheight]{w01_pointers_meme.png}
+  \end{center}
+  \centering
+  \tiny{Quelle: \href{https://programmerhumor.io/backend-memes/how-to-c-pointers/}{programmerhumor.io}}
 \end{frame}
 
 \begin{frame}[c]{}{}
@@ -140,7 +167,7 @@
 \begin{frame}[fragile, c]{Links}{}
   \begin{itemize}
     \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2267-GRA-Tutorium---Gruppe-20}{\glqq GRA Tutorium - Gruppe 20\grqq}
-    bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\glqq GRA Tutorium - Gruppe 22\grqq}
+          bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\glqq GRA Tutorium - Gruppe 22\grqq}
     \item \href{https://artemis.in.tum.de/courses/329}{GRA-Artemis-Kurs}
     \item \href{https://git-scm.com/docs/gittutorial}{Git-Tutorial}, \href{https://rogerdudler.github.io/git-guide/}{alternatives Tutorial}
     \item \href{https://www.sec.in.tum.de/i20/assets/vorlesung/c_primer.pdf}{C-Primer von Jonas Pfoh}
