@@ -11,4 +11,4 @@ all: $(patsubst %.tex,%.pdf,$(wildcard *.tex))
 
 # clean auxiliary files
 clean:
-	@rm -f *.aux *.log *.out *.toc *.nav *.snm *.vrb *.synctex.gz *.fls *.fdb_latexmk
+	@rm -f *.aux *.log *.out *.toc *.nav *.snm *.vrb *.synctex.gz *.fls *.fdb_latexmk *.dvi
