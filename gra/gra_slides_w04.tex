@@ -41,7 +41,7 @@
 \graphicspath{ {./resources/} }
 
 % presentation metadata
-\title{Übung 04: x86 Assembly}
+\title{Übung 04: x86-Assembly}
 \subtitle{Grundlagenpraktikum Rechnerarchitektur}
 \author{Niklas Ladurner}
 
@@ -125,7 +125,7 @@
     \item arithmetische Operationen setzen Flags, Sprünge/Branches überprüfen Flag-Register
     \item \verb|cmp| entspricht \verb|sub|, setzt aber nur Flags
     \item \verb|test| entspricht \verb|and|, setzt aber nur Flags
-    \item Speicherzugriff: \verb|add dword ptr [rax], 1| (Größe des Zugriffs muss angegeben werden, max 1 Speicheroperand)
+    \item Speicherzugriff (explizite Größenangabe): \verb|add dword ptr [rax], 1|
     \item Warum funktioniert \verb|mov eax, [edx]| ohne explizite Zugriffsgröße?
   \end{itemize}
 \end{frame}
@@ -152,6 +152,7 @@
           bzw. \href{https://gra.caps.in.tum.de}{\glqq Praktikumswebsite\grqq}
     \item \href{https://www.felixcloutier.com/x86/}{x86 instruction reference by Félix Cloutier}
     \item \href{https://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetParallel}{Bit Hacks}
+    \item \href{https://flint.cs.yale.edu/cs421/papers/x86-asm/asm.html}{x86 ASM Guide}
   \end{itemize}
 \end{frame}
 
