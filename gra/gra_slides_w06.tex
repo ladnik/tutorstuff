@@ -1,0 +1,144 @@
+%%
+% This is an Overleaf template for presentations
+% using the TUM Corporate Desing https://www.tum.de/cd
+%
+% For further details on how to use the template, take a look at our
+% GitLab repository and browse through our test documents
+% https://gitlab.lrz.de/latex4ei/tum-templates.
+%
+% The tumbeamer class is based on the beamer class.
+% If you need further customization please consult the beamer class guide
+% https://ctan.org/pkg/beamer.
+% Additional class options are passed down to the base class.
+%
+% If you encounter any bugs or undesired behaviour, please raise an issue
+% in our GitLab repository
+% https://gitlab.lrz.de/latex4ei/tum-templates/issues
+% and provide a description and minimal working example of your problem.
+%%
+
+
+\documentclass[
+  german,            % define the document language (english, german)
+  aspectratio=169,    % define the aspect ratio (169, 43)
+  % handout=2on1,       % create handout with multiple slides (2on1, 4on1)
+  % partpage=false,     % insert page at beginning of parts (true, false)
+  % sectionpage=true,   % insert page at beginning of sections (true, false)
+]{tumbeamer}
+
+
+% load additional packages
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{url}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{pmboxdraw}
+\usepackage{float}
+
+% image path
+\graphicspath{ {./resources/} }
+
+% presentation metadata
+\title{Übung 06: SIMD in x86 und C}
+\subtitle{Grundlagenpraktikum Rechnerarchitektur}
+\author{Niklas Ladurner}
+
+\institute{\theChairName\\\theDepartmentName\\\theUniversityName}
+\date[\today]{\today}
+
+\footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
+
+
+% macro to configure the style of the presentation
+\TUMbeamersetup{
+  title page = TUM tower,         % style of the title page
+  part page = TUM toc,            % style of part pages
+  section page = TUM toc,         % style of section pages
+  content page = TUM more space,  % style of normal content pages
+  tower scale = 1.0,              % scaling factor of TUM tower (if used)
+  headline = TUM threeliner,      % which variation of headline to use
+  footline = TUM default,         % which variation of footline to use
+  % configure on which pages headlines and footlines should be printed
+  headline on = {title page},
+  footline on = {every page, title page=false},
+}
+
+% available frame styles for title page, part page, and section page:
+% TUM default, TUM tower, TUM centered,
+% TUM blue default, TUM blue tower, TUM blue centered,
+% TUM shaded default, TUM shaded tower, TUM shaded centered,
+% TUM flags
+%
+% additional frame styles for part page and section page:
+% TUM toc
+%
+% available frame styles for content pages:
+% TUM default, TUM more space
+%
+% available headline options:
+% TUM empty, TUM oneliner, TUM twoliner, TUM threeliner, TUM logothreeliner
+%
+% available footline options:
+% TUM empty, TUM default, TUM infoline
+
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}[c]{}{}
+  \begin{center}
+    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
+    haben VL-Folien Recht!
+  \end{center}
+\end{frame}
+
+\begin{frame}[c, fragile]{SIMD}{}
+  \begin{itemize}
+    \item \textbf{S}ingle \textbf{I}nstruction, \textbf{M}ultiple \textbf{D}ata
+    \item Vektorisierung von Instruktionen, parallele Ausführung auf mehreren Datenströmen
+    \item Achtung: SIMD ist nicht immer sinnvoll / einfach zu implementieren!
+    \item XMM-Register mit 128 Bit (16 Byte), bspw.
+    \begin{itemize}
+      \item 16 chars (1 Byte)
+      \item 4 ints (4 Byte)
+      \item 4 floats (4 Byte)
+      \item 2 doubles (8 Byte)
+    \end{itemize}
+    \item Naming Convention: p für '\textbf{p}acked' (vgl. 'scalar')
+    \item Achtung: Bei SIMD-Instruktionen wird 16-Byte-Alignment gefordert! \\ $\rightarrow$ \verb|movaps| vs. \verb|movups|
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[c, fragile]{SIMD in C}{}
+  \begin{itemize}
+    \item Nutzung von sog. \textit{Intrinsics} (Liste siehe Intel Intrinsics Guide)
+    \item im Praktikum werden SSE/SSE2/AVX verwendet $\rightarrow$ muss von der Zielarchitektur unterstützt werden
+    \item neue Datentypen \verb|__m128i|, \verb|__m128d|, \ldots
+    \item Funktionen für einzelne SIMD-Operationen
+    \item \verb|#include <immintrin.h>| nicht vergessen!
+    \item Vergleiche in SIMD ergeben Bitmasken
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[c]{}{}
+  \begin{center}
+    \LARGE Fragen?
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile, c]{Links}{}
+  \begin{itemize}
+    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2267-GRA-Tutorium---Gruppe-20}{\glqq GRA Tutorium - Gruppe 20\grqq}
+          bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\glqq GRA Tutorium - Gruppe 22\grqq}
+          bzw. \href{https://gra.caps.in.tum.de}{\glqq Praktikumswebsite\grqq}
+    \item \href{https://www.felixcloutier.com/x86/}{x86 instruction reference by Félix Cloutier}
+    \item \href{https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#}{Intel Intrinsics Guide}
+  \end{itemize}
+\end{frame}
+
+\maketitle
+
+\end{document}
