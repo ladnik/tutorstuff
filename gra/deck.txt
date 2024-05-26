@@ -1,0 +1,5 @@
+1. get the deck on home.in.tum.de/~ladu/stuff/gra/gra_deck_enc.tgz.gpg
+2. decrypt the file with "gpg gra_deck_enc.tgz.gpg"
+3. unpack the tar archive with tar -xzf gra_deck gra_deck_enc.tgz
+4. import into anki (free for android, windows, mac, linux and web: apps.ankiweb.net/)
+5. enjoy!
