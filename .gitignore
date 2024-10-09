@@ -1,0 +1,18 @@
+*:Zone.Identifier
+*/:Zone.Identifier
+
+# LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.nav
+*.snm
+*.vrb
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.dvi
+
+# VSCode
+.vscode/*
