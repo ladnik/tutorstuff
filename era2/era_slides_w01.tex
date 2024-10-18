@@ -1,0 +1,186 @@
+%%
+% This is an Overleaf template for presentations
+% using the TUM Corporate Desing https://www.tum.de/cd
+%
+% For further details on how to use the template, take a look at our
+% GitLab repository and browse through our test documents
+% https://gitlab.lrz.de/latex4ei/tum-templates.
+%
+% The tumbeamer class is based on the beamer class.
+% If you need further customization please consult the beamer class guide
+% https://ctan.org/pkg/beamer.
+% Additional class options are passed down to the base class.
+%
+% If you encounter any bugs or undesired behaviour, please raise an issue
+% in our GitLab repository
+% https://gitlab.lrz.de/latex4ei/tum-templates/issues
+% and provide a description and minimal working example of your problem.
+%%
+
+
+\documentclass[
+  german,            % define the document language (english, german)
+  aspectratio=169,    % define the aspect ratio (169, 43)
+  % handout=2on1,       % create handout with multiple slides (2on1, 4on1)
+  % partpage=false,     % insert page at beginning of parts (true, false)
+  % sectionpage=true,   % insert page at beginning of sections (true, false)
+]{tumbeamer}
+
+
+% load additional packages
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{url}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{pmboxdraw}
+\usepackage{float}
+\usepackage{babel}[ngerman]
+\usepackage{csquotes}[autostyle]
+
+% image path
+\graphicspath{ {./resources/} }
+
+% presentation metadata
+\title{Übung 01: Zahlensysteme}
+\subtitle{Einführung in die Rechnerarchitektur}
+\author{Niklas Ladurner}
+
+\institute{\theChairName\\\theDepartmentName\\\theUniversityName}
+\date[\today]{\today}
+
+\footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
+
+
+% macro to configure the style of the presentation
+\TUMbeamersetup{
+  title page = TUM tower,         % style of the title page
+  part page = TUM toc,            % style of part pages
+  section page = TUM toc,         % style of section pages
+  content page = TUM more space,  % style of normal content pages
+  tower scale = 1.0,              % scaling factor of TUM tower (if used)
+  headline = TUM threeliner,      % which variation of headline to use
+  footline = TUM default,         % which variation of footline to use
+  % configure on which pages headlines and footlines should be printed
+  headline on = {title page},
+  footline on = {every page, title page=false},
+}
+
+% available frame styles for title page, part page, and section page:
+% TUM default, TUM tower, TUM centered,
+% TUM blue default, TUM blue tower, TUM blue centered,
+% TUM shaded default, TUM shaded tower, TUM shaded centered,
+% TUM flags
+%
+% additional frame styles for part page and section page:
+% TUM toc
+%
+% available frame styles for content pages:
+% TUM default, TUM more space
+%
+% available headline options:
+% TUM empty, TUM oneliner, TUM twoliner, TUM threeliner, TUM logothreeliner
+%
+% available footline options:
+% TUM empty, TUM default, TUM infoline
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}[c]{}{}
+  \begin{center}
+    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien.
+
+    \Large Bei Unklarheiten/Unstimmigkeiten haben VL/ZÜ-Folien recht!
+  \end{center}
+\end{frame}
+
+\begin{frame}[c]{Organisatorisches}{}
+  \begin{itemize}
+    \item Wer bin ich?
+    \item Kommunikation:
+          \begin{itemize}
+            \item Zulip: ERA-Streams vs. Tutoriumsstream vs. DM
+            \item E-Mail
+            \item Fax (??)
+          \end{itemize}
+    \item Mitschriften/Folien auf meiner Homepage: \url{https://home.in.tum.de/~ladu/}
+    \item Anmerkungen zu den Hausaufgaben/Übungen
+    \item Tutoriumszeiten
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Was macht so ein Rechner eigentlich?}{}
+  \begin{itemize}
+    \item Rechner arbeiten mit Zahlen: Bilder, Strings, ...
+    \item Dezimalsystem ungeeignet: zu viele Zustände (Ziffern)
+    \item Strom an bzw. aus mittels Transistoren
+    \item zwei Zustände $\rightarrow$ Binärsystem
+    \item Oktalsystem und Hexadezimalsystem passen gut dazu! \\ $\rightarrow$ Warum?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Wie funktioniert denn so ein Zahlensystem?}{}
+
+  \begin{equation}
+    W=\sum_{i=0}^{n-1}a_i\cdot B^i
+  \end{equation}
+  \begin{block}{Beispiel.}
+    \begin{enumerate}
+      \item $(1010)_2 = 0\cdot 2^0+1\cdot 2^1+0\cdot 2^2+1\cdot 2^3=2+8=10$
+      \item $(763)_8 = 3\cdot 8^0+6\cdot 8^1+7\cdot 8^2=3+48+448=499$
+      \item $(123)_{16} = 3\cdot 16^0+2\cdot 16^1+1\cdot 16^2=3+32+256=291$
+    \end{enumerate}
+  \end{block}
+  \hspace{1cm}
+  \begin{itemize}
+    \item Was passiert bei einem Verschieben der Stellen nach links/rechts?
+    \item Wie kann man Binärzahlen in Hexadezimal/Oktal umwandeln?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Rechnen im Binärsystem}{}
+  \begin{itemize}
+    \item schriftliches Rechnen grundsätzlich gleich wie im Dezimalsystem
+    \item Subtraktion: Addition mit negativer Zahl
+    \item Einerkomplement vs. Zweierkomplement. Datenwortbreite ausschlaggebend!
+  \end{itemize}
+  \vfill{}
+  \begin{block}{Beispiel.}
+    \begin{enumerate}
+      \item $(1100.0110)_2 = -2^7+(2^1+2^2+2^6)=-58$ bei Breite von 8 Bit
+      \item $(1010)_2 = -2^3 + (2^1) = -6$ bei Breite von 4 Bit
+    \end{enumerate}
+  \end{block}
+
+\end{frame}
+
+\begin{frame}[c]{}{}
+  \begin{center}
+    \LARGE Fragen?
+  \end{center}
+\end{frame}
+
+\begin{frame}[c]{Artemis-Hausaufgaben}{}
+  \begin{itemize}
+    \item \enquote{H01 --- Arithmetik und negative Zahlen} bis 27.10.2024 23:59 Uhr
+    \item 100\% bedeuten 100\%, keine \emph{hidden tests} nach der Deadline
+    \item kurze Einführung in Artemis/Git
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile, c]{Links}{}
+  \begin{itemize}
+    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2661-ERA-Tutorium---Do-1600-1}{\enquote{ERA Tutorium - Do-1600-1}}
+          bzw. \href{https://zulip.in.tum.de/#narrow/stream/2675-ERA-Tutorium---Fr-1500-2 }{\enquote{ERA Tutorium - Fr-1500-2}}
+    \item \href{https://www.moodle.tum.de/course/view.php?id=100633}{ERA-Moodle-Kurs}
+    \item \href{https://artemis.in.tum.de/courses/401}{ERA-Artemis-Kurs}
+    \item \href{https://git-scm.com/docs/gittutorial}{Git-Tutorial}, \href{https://rogerdudler.github.io/git-guide/}{alternatives Tutorial}
+  \end{itemize}
+\end{frame}
+
+\maketitle
+
+\end{document}

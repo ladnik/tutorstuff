@@ -1,7 +1,7 @@
 # compile a specific .tex file to PDF and clean auxiliary files
 # call with: make filename.pdf
 %.pdf: %.tex
-	TEXINPUTS=./beamer//: pdflatex -interaction=nonstopmode $<
+	TEXINPUTS=../beamer//: pdflatex -interaction=nonstopmode $<
 	@$(MAKE) clean
 
 # compile all .tex files
