@@ -1,0 +1,5 @@
+1. get the deck with "wget home.in.tum.de/~ladu/stuff/gra/bn_gra_deck.apkg.gpg"
+2. decrypt the file with "gpg bn_gra_deck.apkg.gpg"
+3. enter the provided password
+4. import into anki (free for android, windows, mac, linux and web: apps.ankiweb.net/)
+5. enjoy!
