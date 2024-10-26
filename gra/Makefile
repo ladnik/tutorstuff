@@ -1,14 +1,18 @@
+TEXS := $(wildcard *.tex)
+
+.PHONY: all clean distclean
+
 # compile a specific .tex file to PDF and clean auxiliary files
-# call with: make filename.pdf
 %.pdf: %.tex
 	TEXINPUTS=../beamer//: pdflatex -interaction=nonstopmode $<
-	@$(MAKE) clean
 
 # compile all .tex files
-# call with: make
-all: $(patsubst %.tex,%.pdf,$(wildcard *.tex))
-	@$(MAKE) clean
+all: $(TEXS:.tex=.pdf)
 
 # clean auxiliary files
 clean:
-	@rm -f *.aux *.log *.out *.toc *.nav *.snm *.vrb *.synctex.gz *.fls *.fdb_latexmk *.dvi
+	rm -f *.aux *.log *.out *.toc *.nav *.snm *.vrb *.synctex.gz *.fls *.fdb_latexmk
+
+# clean all output files
+distclean: clean
+	rm -f $(TEXS:.tex=.pdf)
