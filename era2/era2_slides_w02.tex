@@ -94,8 +94,9 @@
 
 \begin{frame}[c]{}{}
   \begin{center}
-    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
-    haben VL/ZÜ-Folien recht!
+    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien.
+
+    \Large Bei Unklarheiten/Unstimmigkeiten haben VL/ZÜ-Folien recht!
   \end{center}
 \end{frame}
 
@@ -123,10 +124,10 @@
         \node[block, yshift=-1cm] (machine) at (assembler.south) {Maschinensprache};
         \node[block, yshift=-1cm] (cpu) at (machine.south) {CPU};
 
-        \draw[arrow, ->] (source) -- (compiler) node[midway, right] {};
-        \draw[arrow, ->] (compiler) -- (assembler) node[midway, right] {};
-        \draw[arrow, ->] (assembler) -- (machine) node[midway, right] {};
-        \draw[arrow, ->] (machine) -- (cpu) node[midway, right] {};
+        \draw[->] (source) -- (compiler) node[midway, right] {};
+        \draw[->] (compiler) -- (assembler) node[midway, right] {};
+        \draw[->] (assembler) -- (machine) node[midway, right] {};
+        \draw[->] (machine) -- (cpu) node[midway, right] {};
 
         \node[draw, dashed, thick, inner sep=0.3cm, fit=(compiler) (assembler)] {};
       \end{tikzpicture}
