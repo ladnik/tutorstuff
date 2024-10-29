@@ -37,6 +37,7 @@
 \usepackage{float}
 \usepackage{babel}[ngerman]
 \usepackage{csquotes}[autostyle]
+\usepackage[useregional]{datetime2}
 
 % tikz  
 \usetikzlibrary{fit}
@@ -50,7 +51,7 @@
 \author{Niklas Ladurner}
 
 \institute{\theChairName\\\theDepartmentName\\\theUniversityName}
-\date[\today]{\today}
+\date{\DTMdisplaydate{2024}{10}{25}{-1}}
 
 \footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
 
@@ -113,6 +114,7 @@
       \end{itemize}
     \end{column}
     \begin{column}{0.3\textwidth}
+      \begin{figure}
       \begin{tikzpicture}[
           block/.style = {draw, rectangle, minimum width=3cm, minimum height=0.75cm, align=center},
           node distance=1.2cm
@@ -131,6 +133,8 @@
 
         \node[draw, dashed, thick, inner sep=0.3cm, fit=(compiler) (assembler)] {};
       \end{tikzpicture}
+      \footnotesize  (Abbildung stark vereinfacht)
+    \end{figure}
     \end{column}
   \end{columns}
 \end{frame}
