@@ -42,6 +42,9 @@
 \usepackage{listings}
 \usepackage{circuitikz}
 %\usepackage[european]{circuitikz}
+\usepackage{babel}[ngerman]
+\usepackage{csquotes}[autostyle]
+\usepackage[useregional]{datetime2}
 
 % image path
 \graphicspath{ {./resources/} }
@@ -52,7 +55,7 @@
 \author{Niklas Ladurner}
 
 \institute{\theChairName\\\theDepartmentName\\\theUniversityName}
-\date[\today]{\today}
+\date{\DTMdisplaydate{2024}{1}{5}{-1}}
 
 \footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
 
@@ -118,7 +121,7 @@
 
 \begin{frame}[fragile, c]{Caches}{}
   \begin{itemize}
-    \item \glqq Zwischenstation\grqq $\;$zwischen Registern (sehr schnell, sehr klein) und Hauptspeicher (sehr langsam, sehr groß)
+    \item \enquote{Zwischenstation} $\;$zwischen Registern (sehr schnell, sehr klein) und Hauptspeicher (sehr langsam, sehr groß)
     \item Idee: Häufig genutzte Daten im Cache zwischenspeichern
     \item heutzutage meist L1/L2/L3-Caches: Caches aufsteigender Größe, aber absteigender Zugriffszeit 
   \end{itemize}
@@ -185,8 +188,8 @@
 
 \begin{frame}[fragile, c]{Links}{}
   \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\glqq ERA Tutorium - Mi-1600-MI4\grqq}
-          bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\glqq ERA Tutorium - Fr-1100-MW2\grqq}
+    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\enquote{ERA Tutorium - Mi-1600-MI4}}
+    bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\enquote{ERA Tutorium - Fr-1100-MW2}}
     \item \href{https://en.wikipedia.org/wiki/Cache_placement_policies}{Wikipedia zu Caches}
     \item \href{https://www.elektronik-kompendium.de/sites/com/0309291.htm}{Elektronik-Kompendium zu Caches}
     \item \href{https://www.elektronik-kompendium.de/sites/com/0309191.htm}{Elektronik-Kompendium zu SRAM/DRAM}

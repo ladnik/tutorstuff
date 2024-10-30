@@ -36,6 +36,9 @@
 \usepackage{hyperref}
 \usepackage{pmboxdraw}
 \usepackage{float}
+\usepackage{babel}[ngerman]
+\usepackage{csquotes}[autostyle]
+\usepackage[useregional]{datetime2}
 
 % image path
 \graphicspath{ {./resources/} }
@@ -46,7 +49,7 @@
 \author{Niklas Ladurner}
 
 \institute{\theChairName\\\theDepartmentName\\\theUniversityName}
-\date[\today]{\today}
+\date{\DTMdisplaydate{2024}{5}{10}{-1}}
 
 \footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
 
@@ -147,9 +150,9 @@
 
 \begin{frame}[fragile, c]{Links}{}
   \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2267-GRA-Tutorium---Gruppe-20}{\glqq GRA Tutorium - Gruppe 20\grqq}
-          bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\glqq GRA Tutorium - Gruppe 22\grqq}
-          bzw. \href{https://gra.caps.in.tum.de}{\glqq Praktikumswebsite\grqq}
+    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2267-GRA-Tutorium---Gruppe-20}{\enquote{GRA Tutorium - Gruppe 20}}
+          bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\enquote{GRA Tutorium - Gruppe 22}}
+    \item \href{https://gra.caps.in.tum.de}{\enquote{Praktikumswebsite}}
     \item \href{https://www.felixcloutier.com/x86/}{x86 instruction reference by Félix Cloutier}
     \item \href{https://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetParallel}{Bit Hacks}
     \item \href{https://flint.cs.yale.edu/cs421/papers/x86-asm/asm.html}{x86 ASM Guide}

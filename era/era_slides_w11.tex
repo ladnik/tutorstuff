@@ -42,6 +42,9 @@
 \usepackage{listings}
 \usepackage{circuitikz}
 %\usepackage[european]{circuitikz}
+\usepackage{babel}[ngerman]
+\usepackage{csquotes}[autostyle]
+\usepackage[useregional]{datetime2}
 
 % image path
 \graphicspath{ {./resources/} }
@@ -52,7 +55,7 @@
 \author{Niklas Ladurner}
 
 \institute{\theChairName\\\theDepartmentName\\\theUniversityName}
-\date[\today]{\today}
+\date{\DTMdisplaydate{2024}{1}{12}{-1}}
 
 \footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
 
@@ -134,7 +137,7 @@
     \item Aufbau bspw. mittels Shannon-Zerlegung: $f(x_0, x_1) \rightarrow f_{x_0=0}(x_1), f_{x_0=1}(x_1)$
     \item ROBDDs sind kanonisch (eindeutig)!
     \item I-Reduktion (1): Zusammenführung isomorpher Knoten
-    \item S-Reduktion (2): \glqq Überflüssige\grqq\; Knoten entfernen (beide Kinder zeigen auf selben Nachfolger)
+    \item S-Reduktion (2): \enqutote{Überflüssige} Knoten entfernen (beide Kinder zeigen auf selben Nachfolger)
   \end{itemize}
   \begin{center}
     \includegraphics[width=0.8\textwidth]{w11_bdd_reduction.png}
@@ -166,8 +169,8 @@
 
 \begin{frame}[fragile, c]{Links}{}
   \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\glqq ERA Tutorium - Mi-1600-MI4\grqq}
-          bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\glqq ERA Tutorium - Fr-1100-MW2\grqq}
+    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\enquote{ERA Tutorium - Mi-1600-MI4}}
+    bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\enquote{ERA Tutorium - Fr-1100-MW2}}
     \item \href{https://en.wikipedia.org/wiki/Binary_decision_diagram}{Wikipedia zu BDDs}
   \end{itemize}
 \end{frame}

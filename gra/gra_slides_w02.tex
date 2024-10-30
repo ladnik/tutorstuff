@@ -36,6 +36,9 @@
 \usepackage{hyperref}
 \usepackage{pmboxdraw}
 \usepackage{float}
+\usepackage{babel}[ngerman]
+\usepackage{csquotes}[autostyle]
+\usepackage[useregional]{datetime2}
 
 % image path
 \graphicspath{ {./resources/} }
@@ -46,7 +49,7 @@
 \author{Niklas Ladurner}
 
 \institute{\theChairName\\\theDepartmentName\\\theUniversityName}
-\date[\today]{\today}
+\date{\DTMdisplaydate{2024}{4}{26}{-1}}
 
 \footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
 
@@ -144,8 +147,8 @@
 
 \begin{frame}[fragile, c]{Links}{}
   \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2267-GRA-Tutorium---Gruppe-20}{\glqq GRA Tutorium - Gruppe 20\grqq}
-          bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\glqq GRA Tutorium - Gruppe 22\grqq}
+    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2267-GRA-Tutorium---Gruppe-20}{\enquote{GRA Tutorium - Gruppe 20}}
+          bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\enquote{GRA Tutorium - Gruppe 22}}
     \item \href{https://artemis.in.tum.de/courses/329}{GRA-Artemis-Kurs}
     \item \href{https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html}{gcc Program Instrumentation Options}
   \end{itemize}

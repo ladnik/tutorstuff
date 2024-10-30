@@ -41,6 +41,9 @@
 \usepackage{float}
 \usepackage{listings}
 %\usepackage{minted}
+\usepackage{babel}[ngerman]
+\usepackage{csquotes}[autostyle]
+\usepackage[useregional]{datetime2}
 
 % image path
 \graphicspath{ {./resources/} }
@@ -51,8 +54,7 @@
 \author{Niklas Ladurner}
 
 \institute{\theChairName\\\theDepartmentName\\\theUniversityName}
-\date[\today]{\today}
-
+\date{\DTMdisplaydate{2023}{11}{10}{-1}}
 \footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
 
 
@@ -120,7 +122,7 @@
 
 \begin{frame}[c]{Calling Convention}{}
   \begin{itemize}
-    \item \glqq Aufrufkonvention\grqq $\rightarrow$ lediglich eine Vereinbarung
+    \item \enquote{Aufrufkonvention} $\rightarrow$ lediglich eine Vereinbarung
     \item definiert Parameterüberabe, Rückgabe, Registersicherung, Stack etc.
     \item Datentypen $\le$ 4 Byte in a-Registern, evtl. signextension
     \item Datentypen = 8 Byte in 2 a-Registern, niedrigwertige Hälfte zuerst
@@ -151,15 +153,15 @@
   \begin{itemize}
     \item H04 - Tribonacci bis 19.11.2023 23:59 Uhr
     \item Implementierung einer rekursiven Funktion
-    \item Aufbau von Folie \glqq Rekursion\grqq beachten
+    \item Aufbau von Folie \enqutote{Rekursion}beachten
     \item Einhaltung der CC verpflichtend $\rightarrow$ siehe Link
   \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile, c]{Links}{}
   \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\glqq ERA Tutorium - Mi-1600-MI4\grqq}
-    bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\glqq ERA Tutorium - Fr-1100-MW2\grqq}
+    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\enquote{ERA Tutorium - Mi-1600-MI4}}
+    bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\enquote{ERA Tutorium - Fr-1100-MW2}}
     \item \href{https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf}{RISC-V Spezifikation}
     \item \href{https://www.moodle.tum.de/mod/url/view.php?id=2810277}{RISC-V ABI (Calling Convention)}
     \item \href{https://msyksphinz-self.github.io/riscv-isadoc/html/rvi.html}{übersichtlichere Instruktionsliste}

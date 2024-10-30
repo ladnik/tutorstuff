@@ -36,6 +36,9 @@
 \usepackage{hyperref}
 \usepackage{pmboxdraw}
 \usepackage{float}
+\usepackage{babel}[ngerman]
+\usepackage{csquotes}[autostyle]
+\usepackage[useregional]{datetime2}
 
 % image path
 \graphicspath{ {./resources/} }
@@ -46,7 +49,7 @@
 \author{Niklas Ladurner}
 
 \institute{\theChairName\\\theDepartmentName\\\theUniversityName}
-\date[\today]{\today}
+\date{\DTMdisplaydate{2024}{5}{3}{-1}}
 
 \footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
 
@@ -138,8 +141,8 @@
 
 \begin{frame}[fragile, c]{Links}{}
   \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2267-GRA-Tutorium---Gruppe-20}{\glqq GRA Tutorium - Gruppe 20\grqq}
-          bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\glqq GRA Tutorium - Gruppe 22\grqq}
+    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2267-GRA-Tutorium---Gruppe-20}{\enquote{GRA Tutorium - Gruppe 20}}
+          bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\enquote{GRA Tutorium - Gruppe 22}}
     \item \href{https://github.com/pwndbg/pwndbg}{pwndbg}
     \item \href{https://valgrind.org/docs/manual/manual.html}{Dokumentation zu Valgrind}
     \item \href{https://www.gnu.org/software/make/manual/html_node/index.html}{Dokumentation zu GNU Make}

@@ -35,6 +35,9 @@
 \usepackage{hyperref}
 \usepackage{pmboxdraw}
 \usepackage{float}
+\usepackage{babel}[ngerman]
+\usepackage{csquotes}[autostyle]
+\usepackage[useregional]{datetime2}
 
 % image path
 \graphicspath{ {./resources/} }
@@ -45,7 +48,7 @@
 \author{Niklas Ladurner}
 
 \institute{\theChairName\\\theDepartmentName\\\theUniversityName}
-\date[\today]{\today}
+\date{\DTMdisplaydate{2023}{10}{27}{-1}}
 
 \footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
 
@@ -98,7 +101,7 @@
   \begin{itemize}
     \item Code in höheren Sprachen (C, Java, ...) ist lediglich eine Abstraktion 
     \item Kompilierung in Assemblersprache, 1:1 Übersetzung in Binärcode
-    \item ISA: \glqq Bedienungsanleitung\grqq\;einer CPU
+    \item ISA: \enquote{Bedienungsanleitung} einer CPU
     \item RISC vs. CISC
   \end{itemize}
 \end{frame}
@@ -115,7 +118,7 @@
       \item eine von vielen Assemblersprachen
       \item Offener Ansatz, für Lehre daher interessant
       \item 32 Register, einige davon mit spezieller Funktion
-      \item meisten Gurndbefehle auf 32 Bit begrenzt $\rightarrow$ Konstanten müssen zusammengebastelt werden
+      \item meisten Grundbefehle auf 32 Bit begrenzt $\rightarrow$ Konstanten müssen zusammengebastelt werden
     \end{itemize}
 \end{frame}
 
@@ -140,8 +143,8 @@
 
 \begin{frame}[fragile, c]{Links}{}
   \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\glqq ERA Tutorium - Mi-1600-MI4\grqq}
-    bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\glqq ERA Tutorium - Fr-1100-MW2\grqq}
+    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\enquote{ERA Tutorium - Mi-1600-MI4}}
+    bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\enquote{ERA Tutorium - Fr-1100-MW2}}
     \item \href{https://www.moodle.tum.de/course/view.php?id=90679}{ERA-Moodle-Kurs}
     \item \href{https://artemis.in.tum.de/courses/288/exercises}{ERA-Artemis-Kurs}
     \item \href{https://vanhunteradams.com/FixedPoint/FixedPoint.html}{Einführung Fixpunktarithmetik}, \href{https://specbranch.com/posts/fixed-point/}{Alternative}
