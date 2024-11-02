@@ -155,7 +155,7 @@
 .rodata
   f: .word 2
 
-# r/w + init. Daten
+# rw + init. Daten
 .org 0x400
 .data
   arr: .byte 4, 3, 2, 1
@@ -166,14 +166,14 @@
     \end{column}
     \begin{column}{0.5\textwidth}
       \begin{minted}{gas}
-# r/w + uninit. Daten
+# rw + uninit. Daten
 .bss
   a: .space 16
 
 # definiere globales Einstiegslabel
 .globl _start
 
-.org 0x200 # section startet an Adresse 0x200
+.org 0x200 # section beginnt an Adresse 0x200
 .text
 _start:
    la a0, arr
@@ -182,7 +182,7 @@ _start:
     \end{column}
   \end{columns}
   \begin{center}
-  \small{\textbf{ro}: read-only, \textbf{r/w}: les- und schreibbar}
+  \small{\textbf{ro}: read-only, \textbf{rw}: les- und schreibbar}
   \end{center}
 \end{frame}
 
@@ -194,10 +194,11 @@ _start:
   \end{center}
 \end{frame}
 
-\begin{frame}[c]{Artemis-Hausaufgaben}{}
+\begin{frame}[c, fragile]{Artemis-Hausaufgaben}{}
   \begin{itemize}
     \item \enquote{H03 --- Palindromerkennung} bis 10.11.2024 23:59 Uhr
     \item Verwendung von Speicheroperationen, Unterprogrammaufrufe
+    \item Pseudoinstruktion \verb|tail| für tailcalls, verwendet aktuellen Stackframe wieder
   \end{itemize}
 \end{frame}
 
