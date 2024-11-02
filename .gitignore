@@ -14,5 +14,7 @@
 *.fdb_latexmk
 *.dvi
 
+_minted-*/
+
 # VSCode
 .vscode/*
