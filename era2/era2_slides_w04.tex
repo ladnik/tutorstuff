@@ -116,19 +116,17 @@
 
 \begin{frame}[c, fragile]{Caller vs. Callee}{}
   \begin{columns}[c]
-    \begin{column}{0.4\textwidth}
-      \begin{minted}[fontsize=\tiny]{gas}
+    \begin{column}{0.5\textwidth}
+      \begin{minted}[fontsize=\scriptsize]{gas}
 caller:
-# hier befinden wir uns in der aufrufenden
-# Funktion (Caller)
+# aufrufende Funktion (Caller)
 
 # Wir speichern die Rücksprungadresse auf 
 # den Stack -> ra ist Caller-saved!
 addi sp, sp, -16
 sw ra, 0(sp)
 
-# ... irgendwas, das t0 verwendet, bspw.
-addi t0, zero, 2
+# ... irgendwas, was t0 verwendet
 
 # da t0 caller-saved ist, müssen wir uns
 # t0 absichern, wenn wir den Inhalt später
@@ -140,15 +138,15 @@ jal ra, callee  # Sprung zur Unterfunktion
 lw t0, 4(sp)
 # ... wieder irgendwas mit t0
 lw ra, 0(sp)
-addi sp, sp, 16
-jalr zero, 0(ra)
         \end{minted}
     \end{column}
-    \begin{column}{0.4\textwidth}
-      \begin{minted}[fontsize=\tiny]{gas}
+    \begin{column}{0.5\textwidth}
+      \begin{minted}[fontsize=\scriptsize]{gas}
+addi sp, sp, 16
+jalr zero, 0(ra)
+
 callee:
-# hier befinden wir uns in der aufgerufenen
-# Funktion (Callee)
+# aufgerufene Funktion (Callee)
 
 # hier dürfen wir t0-t6 bspw. verändern
 # falls wir s0-s6 verändern wollen würden,
@@ -158,7 +156,6 @@ sw s2, 0(sp)
 sw s3, 4(sp)
 
 # s2, s3 können jetzt verwendet werden!
-# ...
 
 lw s2, 0(sp)
 lw s3, 4(sp)
@@ -236,8 +233,16 @@ fun:
       \small \textbf{Achtung}: 8 Byte nicht CC-konform, nur zur besseren Darstellung
     \end{column}
     \begin{column}{0.5\textwidth}
-      Aufruf mit {\ttfamily a0 = 3}:
-      \vspace{2cm}
+      \begin{enumerate}
+        \item Abbruchbedingung(en)
+        \item Sicherung von \verb|ra| und evtl. Parametern
+        \item Vorbereitung der Parameter für den rekursiven Aufruf
+        \item Rekursiver Aufruf
+        \item Ergebnis des Aufrufs verwerten
+        \item Wiederherstellung von \verb|ra|, \verb|sp|
+        \item Rücksprung
+      \end{enumerate}
+      \vspace{1cm}
     \end{column}
   \end{columns}
 \end{frame}
@@ -289,7 +294,7 @@ fun:
               }
             }
 
-          \foreach \x/\vala/\valb in {1/ffff/fffb, 2/fff7/fff3, 3/ffef/ffeb, 4/ffe7/ffe3} {
+          \foreach \x/\vala/\valb in {1/fffc/fff8, 2/fff4/fff0, 3/ffec/ffe8, 4/ffe4/ffe0} {
             \only<\x->{
               \node[anchor=east] at (-0.2, -\x*2*\stackheight+\stackheight - \cellheight/2) {\texttt{0x\vala}};
               \node[anchor=east] at (-0.2, -\x*2*\stackheight - \cellheight/2) {\texttt{0x\valb}};
