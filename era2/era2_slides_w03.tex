@@ -1,0 +1,219 @@
+%%
+% This is an Overleaf template for presentations
+% using the TUM Corporate Desing https://www.tum.de/cd
+%
+% For further details on how to use the template, take a look at our
+% GitLab repository and browse through our test documents
+% https://gitlab.lrz.de/latex4ei/tum-templates.
+%
+% The tumbeamer class is based on the beamer class.
+% If you need further customization please consult the beamer class guide
+% https://ctan.org/pkg/beamer.
+% Additional class options are passed down to the base class.
+%
+% If you encounter any bugs or undesired behaviour, please raise an issue
+% in our GitLab repository
+% https://gitlab.lrz.de/latex4ei/tum-templates/issues
+% and provide a description and minimal working example of your problem.
+%%
+
+\documentclass[
+  german,            % define the document language (english, german)
+  aspectratio=169,    % define the aspect ratio (169, 43)
+  % handout=2on1,       % create handout with multiple slides (2on1, 4on1)
+  % partpage=false,     % insert page at beginning of parts (true, false)
+  % sectionpage=true,   % insert page at beginning of sections (true, false)
+]{tumbeamer}
+
+
+% load additional packages
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{url}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{pmboxdraw}
+\usepackage{float}
+\usepackage{babel}[ngerman]
+\usepackage{csquotes}[autostyle]
+\usepackage[useregional]{datetime2}
+\usepackage[cache=true]{minted}
+
+% tikz
+
+% minted
+\setminted{
+    fontsize=\small, 
+    frame=single,
+    breaklines=true,
+}
+
+% image path
+\graphicspath{ {./resources/} }
+
+% presentation metadata
+\title{Übung 03: Sprünge und Pointer}
+\subtitle{Einführung in die Rechnerarchitektur}
+\author{Niklas Ladurner}
+
+\institute{\theChairName\\\theDepartmentName\\\theUniversityName}
+\date{\DTMdisplaydate{2024}{11}{1}{-1}}
+
+\footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
+
+
+% macro to configure the style of the presentation
+\TUMbeamersetup{
+  title page = TUM tower,         % style of the title page
+  part page = TUM toc,            % style of part pages
+  section page = TUM toc,         % style of section pages
+  content page = TUM more space,  % style of normal content pages
+  tower scale = 1.0,              % scaling factor of TUM tower (if used)
+  headline = TUM threeliner,      % which variation of headline to use
+  footline = TUM default,         % which variation of footline to use
+  % configure on which pages headlines and footlines should be printed
+  headline on = {title page},
+  footline on = {every page, title page=false},
+}
+
+% available frame styles for title page, part page, and section page:
+% TUM default, TUM tower, TUM centered,
+% TUM blue default, TUM blue tower, TUM blue centered,
+% TUM shaded default, TUM shaded tower, TUM shaded centered,
+% TUM flags
+%
+% additional frame styles for part page and section page:
+% TUM toc
+%
+% available frame styles for content pages:
+% TUM default, TUM more space
+%
+% available headline options:
+% TUM empty, TUM oneliner, TUM twoliner, TUM threeliner, TUM logothreeliner
+%
+% available footline options:
+% TUM empty, TUM default, TUM infoline
+
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}[c]{}{}
+  \begin{center}
+    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien.
+
+    \Large Bei Unklarheiten/Unstimmigkeiten haben VL/ZÜ-Folien recht!
+  \end{center}
+\end{frame}
+
+\begin{frame}[c, fragile]{Sprungbefehle}{}
+  \vspace{-1cm}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{center}\textbf{Branch-Befehle}\end{center}
+      Rücksprungadresse wird nicht gesichert, \textbf{Sprungbedingung}
+      muss erfüllt sein
+      \begin{itemize}
+        \item \verb|beq|: $rs1 = rs2$
+        \item \verb|bne|: $rs1 \ne rs2$
+        \item \verb|blt(u)|: $rs1 < rs2$
+        \item \verb|bgt(u)|: $rs1 > rs2$
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{center}\textbf{Jump-Befehle}\end{center}
+      Schreiben Rücksprungadresse in ra oder angegebenes Register,
+      springen immer
+      \begin{itemize}
+        \item \verb|jal label|
+        \item \verb|jalr rd, offset(rs)|
+        \item \verb|j label| Achtung, überschreibt ra nicht!
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[c, fragile]{Speicherzugriffe}{}
+  lade 32 Bit an der Adresse a0 + 0 Bytes Offset in das Register t0:
+  \begin{verbatim}lw t0, 0(a0)\end{verbatim}
+  lade 8 Bit an der Adresse a2 - 4 Bytes Offset in das Register t1:
+  \begin{verbatim}lb t1, -4(a2)\end{verbatim}
+  speichere den gesamten Inhalt des Registers t2 an die Adresse a1 + 16 Bytes Offset:
+  \begin{verbatim}sw t2, 16(a1)\end{verbatim}
+\end{frame}
+
+\begin{frame}[c, fragile]{Sections und Direktiven}
+  \begin{columns}[c]
+    \begin{column}{0.5\textwidth}
+      \begin{minted}{gas}
+# compile-time Konstante
+.equ NUM, 2748 
+
+# ro + init. Daten
+.rodata
+  f: .word 2
+
+# rw + init. Daten
+.org 0x400
+.data
+  arr: .byte 4, 3, 2, 1
+  string1: .ascii "asdf"
+  string2: .asciz "asdf"
+
+        \end{minted}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{minted}{gas}
+# rw + uninit. Daten
+.bss
+  a: .space 16
+
+# definiere globales Einstiegslabel
+.globl _start
+
+.org 0x200 # section beginnt an Adresse 0x200
+.text
+_start:
+   la a0, arr
+   lbu a1, 0(a0)
+      \end{minted}
+    \end{column}
+  \end{columns}
+  \begin{center}
+  \small{\textbf{ro}: read-only, \textbf{rw}: les- und schreibbar}
+  \end{center}
+\end{frame}
+
+
+\begin{frame}[c]{}{}
+  \begin{center}
+    \LARGE Fragen?\\
+    \Large (Die ZÜ-Folien sind sehr gut, schaut euch die an)
+  \end{center}
+\end{frame}
+
+\begin{frame}[c, fragile]{Artemis-Hausaufgaben}{}
+  \begin{itemize}
+    \item \enquote{H03 --- Palindromerkennung} bis 10.11.2024 23:59 Uhr
+    \item Verwendung von Speicheroperationen, Unterprogrammaufrufe
+    \item Pseudoinstruktion \verb|tail| für tailcalls, verwendet aktuellen Stackframe wieder
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[c, fragile]{Links}{}
+  \begin{itemize}
+    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2661-ERA-Tutorium---Do-1600-1}{\enquote{ERA Tutorium - Do-1600-1}}
+          bzw. \href{https://zulip.in.tum.de/#narrow/stream/2675-ERA-Tutorium---Fr-1500-2 }{\enquote{ERA Tutorium - Fr-1500-2}}
+    \item \href{https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf}{RISC-V-Spezifikation}
+    \item \href{https://www.moodle.tum.de/course/view.php?id=100633}{ERA-Moodle-Kurs}
+    \item \href{https://artemis.in.tum.de/courses/401}{ERA-Artemis-Kurs}
+    \item \href{https://msyksphinz-self.github.io/riscv-isadoc/html/index.html}{Übersicht an RISC-V-Instruktionen}
+    \item \href{https://ftp.gnu.org/old-gnu/Manuals/gas/html_chapter/as_7.html}{GNU as directives}
+  \end{itemize}
+\end{frame}
+
+\maketitle
+
+\end{document}
