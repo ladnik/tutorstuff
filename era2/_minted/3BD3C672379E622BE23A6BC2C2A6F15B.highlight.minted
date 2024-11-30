@@ -1,0 +1,14 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} rw + uninit. Daten}
+\PYG{n+na}{.bss}
+\PYG{+w}{  }\PYG{n+nl}{a:}\PYG{+w}{ }\PYG{n+na}{.space}\PYG{+w}{ }\PYG{l+m+mi}{16}
+
+\PYG{c+c1}{\PYGZsh{} definiere globales Einstiegslabel}
+\PYG{n+na}{.globl}\PYG{+w}{ }\PYG{n+no}{\PYGZus{}start}
+
+\PYG{n+na}{.org}\PYG{+w}{ }\PYG{l+m+mi}{0x200}\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{} section beginnt an Adresse 0x200}
+\PYG{n+na}{.text}
+\PYG{n+nl}{\PYGZus{}start:}
+\PYG{+w}{   }\PYG{n+nf}{la}\PYG{+w}{ }\PYG{n+no}{a0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{arr}
+\PYG{+w}{   }\PYG{n+nf}{lbu}\PYG{+w}{ }\PYG{n+no}{a1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{(}\PYG{n+no}{a0}\PYG{p}{)}
+\end{MintedVerbatim}

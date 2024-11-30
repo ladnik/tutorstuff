@@ -1,0 +1,22 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{n+nl}{caller:}
+\PYG{c+c1}{\PYGZsh{} aufrufende Funktion (Caller)}
+
+\PYG{c+c1}{\PYGZsh{} Wir speichern die Rücksprungadresse auf}
+\PYG{c+c1}{\PYGZsh{} den Stack \PYGZhy{}\PYGZgt{} ra ist Caller\PYGZhy{}saved!}
+\PYG{n+nf}{addi}\PYG{+w}{ }\PYG{n+no}{sp}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{sp}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{\PYGZhy{}16}
+\PYG{n+nf}{sw}\PYG{+w}{ }\PYG{n+no}{ra}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{(}\PYG{n+no}{sp}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} ... irgendwas, was t0 verwendet}
+
+\PYG{c+c1}{\PYGZsh{} da t0 caller\PYGZhy{}saved ist, müssen wir uns}
+\PYG{c+c1}{\PYGZsh{} t0 absichern, wenn wir den Inhalt später}
+\PYG{c+c1}{\PYGZsh{} noch brauchen}
+\PYG{n+nf}{sw}\PYG{+w}{ }\PYG{n+no}{t0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{p}{(}\PYG{n+no}{sp}\PYG{p}{)}
+\PYG{c+c1}{\PYGZsh{} ...}
+\PYG{n+nf}{jal}\PYG{+w}{ }\PYG{n+no}{ra}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{callee}\PYG{+w}{  }\PYG{c+c1}{\PYGZsh{} Sprung zur Unterfunktion}
+\PYG{c+c1}{\PYGZsh{} ...}
+\PYG{n+nf}{lw}\PYG{+w}{ }\PYG{n+no}{t0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{p}{(}\PYG{n+no}{sp}\PYG{p}{)}
+\PYG{c+c1}{\PYGZsh{} ... wieder irgendwas mit t0}
+\PYG{n+nf}{lw}\PYG{+w}{ }\PYG{n+no}{ra}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{(}\PYG{n+no}{sp}\PYG{p}{)}
+\end{MintedVerbatim}
