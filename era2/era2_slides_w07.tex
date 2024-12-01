@@ -131,14 +131,8 @@
 	\begin{columns}[c]
 		\begin{column}{0.6\textwidth}
 			\begin{itemize}
-				\item \textbf{kombinatorische} Schaltungen: zustandsfrei, Ausgänge nur abhängig von Eingängen. \\ $\rightarrow$ z.B.: HA letzte Woche, Addierer, XOR, $\ldots$
-				\item \textbf{sequentielle} Schaltungen: zustandsbehaftet, Ausgänge wirken über Rückkopplung auf Schaltung ein! (Zyklus im Graphen)\\ $\rightarrow$ z.B.: Zähler, Speicher, Statusautomaten, %$\ldots$
-				      %\item sequentielle Schaltungen ermöglichen es erst, komplexe Dinge wie Prozessoren zu %bauen!
-				      %\item Multiplexer: Leitet Eingang abhängig von Steuersignal durch
-				      %\item ALU (arithmetic logic unit): Recheneinheit eines Prozessors
-				      %\item Latches: Speichereinheit für 1 Bit
-				      %\item Flip-Flops: Taktflankengesteuertes Latch
-				      %\item D-Latch: Data-Eingang und Enable-Eingang
+				\item \textbf{kombinatorische} Schaltungen: zustandsfrei, Ausgänge nur abhängig von Eingängen. \\ $\rightarrow$ z.B.: HA letzte Woche, Addierer, XOR
+				\item \textbf{sequentielle} Schaltungen: zustandsbehaftet, Ausgänge wirken über Rückkopplung auf Schaltung ein! (Zyklus im Graphen)\\ $\rightarrow$ z.B.: Zähler, Speicher, Statusautomaten
 			\end{itemize}
 		\end{column}
 		\begin{column}{0.4\textwidth}
@@ -168,17 +162,16 @@
 	\end{columns}
 \end{frame}
 
-\begin{frame}[c]{Latches und Flipflops}{}
+\begin{frame}[c]{Latches und Flipflops\footnote{Die Definition ist hier tatsächlich ein wenig ungenau: Es gibt taktflanken- und pegelgesteuerte Flipflops, letztere werden aber im englischsprachigen Raum meist Latches genannt.}}{}
 	\begin{columns}[c]
 		\begin{column}{0.5\textwidth}
 			\centering  \textbf{SR-Latch}\\
-			\vspace{0.3cm}
 			\begin{itemize}
 				\item  pegelgesteuert
 				\item \textbf{S}et, \textbf{R}eset
 				\item \enquote{verbotener} Zustand $(1,1)$, Ausgang abhängig von Implementierung
 			\end{itemize}
-			\vspace{0.3cm}
+			\vspace{0.1cm}
 			\begin{center}
 				\begin{circuitikz}
 					\node[flipflop SR] (sr) {};
@@ -200,13 +193,12 @@
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\centering \textbf{D-Flipflop}\\
-			\vspace{0.3cm}
 			\begin{itemize}
-				\item  taktflankengesteuert
+				\item (positiv) taktflankengesteuert
 				\item Bei fallender Flanke bleibt Zustand gespeichert, bei steigender
 				      Flanke wird $D$ übernommen.
 			\end{itemize}
-			\vspace{0.5cm}
+			\vspace{0.2cm}
 			\begin{center}
 				\begin{circuitikz}
 					\node[flipflop D] (dff) {};
@@ -214,12 +206,12 @@
 						$\displaystyle
 							\begin{array}{|c|c|c|}
 								\hline
-								CLK             & D & Q                 \\
+								CLK                            & D & Q                 \\
 								\hline
-								\texttiming{HL} & 0 & Q_{\textrm{prev}} \\
-								\texttiming{HL} & 1 & Q_{\textrm{prev}} \\
-								\texttiming{LH} & 0 & 0                 \\
-								\texttiming{LH} & 1 & 1                 \\
+								\footnotesize{\texttiming{HL}} & 0 & Q_{\textrm{prev}} \\
+								\footnotesize{\texttiming{HL}} & 1 & Q_{\textrm{prev}} \\
+								\footnotesize{\texttiming{LH}} & 0 & 0                 \\
+								\footnotesize{\texttiming{LH}} & 1 & 1                 \\
 								\hline
 							\end{array}
 						$};
