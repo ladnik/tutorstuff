@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="70mm"
+   height="10mm"
+   viewBox="0 0 70 10"
+   version="1.1"
+   id="svg31053"
+   sodipodi:docname="risc_v_r_type.svg"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview31055"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="2.9647587"
+     inkscape:cx="93.262228"
+     inkscape:cy="8.9383328"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g7132" />
+  <defs
+     id="defs31050" />
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g7132"
+       transform="matrix(0.35277777,0,0,-0.35277777,-40.679884,256.15326)">
+      <g
+         id="g914"
+         transform="matrix(0.9476567,0,0,0.9470971,51.38566,128.4625)">
+        <text
+           transform="matrix(1,0,0,-1,89.6442,610.8721)"
+           style="font-variant:normal;font-weight:normal;font-size:6.9385px;font-family:Helvetica;-inkscape-font-specification:Helvetica;writing-mode:lr-tb;fill:#1673c3;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text918"><tspan
+             x="0 1.928903 5.7867088 9.644515 13.113765 15.042668"
+             y="0"
+             sodipodi:role="line"
+             id="tspan916">funct7</tspan></text>
+      </g>
+      <g
+         id="g920"
+         transform="matrix(0.9476567,0,0,0.9470971,51.38566,128.4625)">
+        <path
+           d="m 75.678,607.104 h 163.923 v 11.709 H 75.678 Z m 46.834,11.708 v -11.709 m 19.515,11.709 v -11.709 m 19.515,11.709 v -11.709 m 23.418,11.709 v -11.709 m 27.32,11.709 v -11.709"
+           style="fill:none;stroke:#100f0d;stroke-width:0.208;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+           id="path922" />
+      </g>
+      <g
+         id="g924"
+         transform="matrix(0.9476567,0,0,0.9470971,51.38566,128.4625)">
+        <text
+           transform="matrix(1,0,0,-1,127.6884,610.8721)"
+           style="font-variant:normal;font-weight:normal;font-size:6.9385px;font-family:Helvetica;-inkscape-font-specification:Helvetica;writing-mode:lr-tb;fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text928"><tspan
+             x="0 2.3105204"
+             y="0"
+             sodipodi:role="line"
+             id="tspan926">rs</tspan></text>
+      </g>
+      <g
+         id="g930"
+         transform="matrix(0.9476567,0,0,0.9470971,51.38566,128.4625)">
+        <text
+           transform="matrix(1,0,0,-1,133.4751,610.8721)"
+           style="font-variant:normal;font-weight:normal;font-size:6.9385px;font-family:Helvetica;-inkscape-font-specification:Helvetica;writing-mode:lr-tb;fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text934"><tspan
+             x="0 13.488444"
+             y="0"
+             sodipodi:role="line"
+             id="tspan932">2r</tspan></text>
+      </g>
+      <g
+         id="g936"
+         transform="matrix(0.9476567,0,0,0.9470971,51.38566,128.4625)">
+        <text
+           transform="matrix(1,0,0,-1,149.2741,610.8721)"
+           style="font-variant:normal;font-weight:normal;font-size:6.9385px;font-family:Helvetica;-inkscape-font-specification:Helvetica;writing-mode:lr-tb;fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text940"><tspan
+             x="0 3.46925"
+             y="0"
+             sodipodi:role="line"
+             id="tspan938">s1</tspan></text>
+      </g>
+      <g
+         id="g942"
+         transform="matrix(0.9476567,0,0,0.9470971,51.38566,128.4625)">
+        <text
+           transform="matrix(1,0,0,-1,195.5331,610.8721)"
+           style="font-variant:normal;font-weight:normal;font-size:6.9385px;font-family:Helvetica;-inkscape-font-specification:Helvetica;writing-mode:lr-tb;fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text946"><tspan
+             x="0 2.3105204"
+             y="0"
+             sodipodi:role="line"
+             id="tspan944">rd</tspan></text>
+      </g>
+      <g
+         id="g948"
+         transform="matrix(0.9476567,0,0,0.9470971,51.38566,128.4625)">
+        <text
+           transform="matrix(1,0,0,-1,222.0798,610.9137)"
+           style="font-variant:normal;font-weight:normal;font-size:6.9385px;font-family:Helvetica;-inkscape-font-specification:Helvetica;writing-mode:lr-tb;fill:#1673c3;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text952"><tspan
+             x="0 3.857806"
+             y="0"
+             sodipodi:role="line"
+             id="tspan950">op</tspan></text>
+      </g>
+      <g
+         id="g954"
+         transform="matrix(0.9476567,0,0,0.9470971,51.38566,128.4625)">
+        <text
+           transform="matrix(1,0,0,-1,243.0641,610.395)"
+           style="font-variant:normal;font-weight:bold;font-size:6.936px;font-family:Helvetica;-inkscape-font-specification:Helvetica-Bold;writing-mode:lr-tb;fill:#1673c3;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text958"><tspan
+             x="0 5.007792 7.3174801 11.555376 15.411792 19.649689"
+             y="0"
+             sodipodi:role="line"
+             id="tspan956">R-Type</tspan></text>
+      </g>
+      <g
+         id="g960"
+         transform="matrix(0.9476567,0,0,0.9470971,51.38566,128.4625)">
+        <text
+           transform="matrix(1,0,0,-1,162.8207,610.8721)"
+           style="font-variant:normal;font-weight:normal;font-size:6.9385px;font-family:Helvetica;-inkscape-font-specification:Helvetica;writing-mode:lr-tb;fill:#1673c3;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text964"><tspan
+             x="0 1.928903 5.7867088 9.644515 13.113765 15.042668"
+             y="0"
+             sodipodi:role="line"
+             id="tspan962">funct3</tspan></text>
+      </g>
+      <g
+         id="g1256"
+         transform="matrix(0.9476567,0,0,0.9470971,51.38566,128.4625)">
+        <text
+           transform="matrix(1,0,0,-1,91.2841,621.1101)"
+           style="font-variant:normal;font-weight:bold;font-size:5.2038px;font-family:'Courier New';-inkscape-font-specification:CourierNewPS-BoldMT;writing-mode:lr-tb;fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text1260"><tspan
+             x="0 3.1222799 6.2445598 9.3668404"
+             y="0"
+             sodipodi:role="line"
+             id="tspan1258">31:2</tspan></text>
+      </g>
+      <g
+         id="g1262"
+         transform="matrix(0.9476567,0,0,0.9470971,51.38566,128.4625)">
+        <text
+           transform="matrix(1,0,0,-1,103.7732,621.1101)"
+           style="font-variant:normal;font-weight:bold;font-size:5.2038px;font-family:'Courier New';-inkscape-font-specification:CourierNewPS-BoldMT;writing-mode:lr-tb;fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text1266"><tspan
+             x="0"
+             y="0"
+             id="tspan1264">5</tspan></text>
+      </g>
+      <g
+         id="g1268"
+         transform="matrix(0.9476567,0,0,0.9470971,51.38566,128.4625)">
+        <text
+           transform="matrix(1,0,0,-1,124.4583,621.1673)"
+           style="font-variant:normal;font-weight:bold;font-size:5.2038px;font-family:'Courier New';-inkscape-font-specification:CourierNewPS-BoldMT;writing-mode:lr-tb;fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text1272"><tspan
+             x="0 3.1222799 6.2445598 9.3668404 12.48912"
+             y="0"
+             sodipodi:role="line"
+             id="tspan1270">24:20</tspan></text>
+      </g>
+      <g
+         id="g1274"
+         transform="matrix(0.9476567,0,0,0.9470971,51.38566,128.4625)">
+        <text
+           transform="matrix(1,0,0,-1,143.9778,621.1673)"
+           style="font-variant:normal;font-weight:bold;font-size:5.2038px;font-family:'Courier New';-inkscape-font-specification:CourierNewPS-BoldMT;writing-mode:lr-tb;fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text1278"><tspan
+             x="0 3.1222799 6.2445598 9.3668404"
+             y="0"
+             sodipodi:role="line"
+             id="tspan1276">19:1</tspan></text>
+      </g>
+      <g
+         id="g1280"
+         transform="matrix(0.9476567,0,0,0.9470971,51.38566,128.4625)">
+        <text
+           transform="matrix(1,0,0,-1,156.4617,621.1673)"
+           style="font-variant:normal;font-weight:bold;font-size:5.2038px;font-family:'Courier New';-inkscape-font-specification:CourierNewPS-BoldMT;writing-mode:lr-tb;fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text1284"><tspan
+             x="0 8.9765549"
+             y="0"
+             sodipodi:role="line"
+             id="tspan1282">51</tspan></text>
+      </g>
+      <g
+         id="g1286"
+         transform="matrix(0.9476567,0,0,0.9470971,51.38566,128.4625)">
+        <text
+           transform="matrix(1,0,0,-1,168.5605,621.1673)"
+           style="font-variant:normal;font-weight:bold;font-size:5.2038px;font-family:'Courier New';-inkscape-font-specification:CourierNewPS-BoldMT;writing-mode:lr-tb;fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text1290"><tspan
+             x="0 3.1222799 6.2445598 9.3668404"
+             y="0"
+             sodipodi:role="line"
+             id="tspan1288">4:12</tspan></text>
+      </g>
+      <g
+         id="g1292"
+         transform="matrix(0.9476567,0,0,0.9470971,51.38566,128.4625)">
+        <text
+           transform="matrix(1,0,0,-1,192.3679,621.1673)"
+           style="font-variant:normal;font-weight:bold;font-size:5.2038px;font-family:'Courier New';-inkscape-font-specification:CourierNewPS-BoldMT;writing-mode:lr-tb;fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text1296"><tspan
+             x="0 3.1274838 6.2549677 9.3824511"
+             y="0"
+             sodipodi:role="line"
+             id="tspan1294">11:7</tspan></text>
+      </g>
+      <g
+         id="g1298"
+         transform="matrix(0.9476567,0,0,0.9470971,51.38566,128.4625)">
+        <text
+           transform="matrix(1,0,0,-1,221.249,621.1673)"
+           style="font-variant:normal;font-weight:bold;font-size:5.2038px;font-family:'Courier New';-inkscape-font-specification:CourierNewPS-BoldMT;writing-mode:lr-tb;fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text1302"><tspan
+             x="0 3.1222799"
+             y="0"
+             sodipodi:role="line"
+             id="tspan1300">6:</tspan></text>
+      </g>
+      <g
+         id="g1304"
+         transform="matrix(0.9476567,0,0,0.9470971,51.38566,128.4625)">
+        <text
+           transform="matrix(1,0,0,-1,227.4936,621.1673)"
+           style="font-variant:normal;font-weight:bold;font-size:5.2038px;font-family:'Courier New';-inkscape-font-specification:CourierNewPS-BoldMT;writing-mode:lr-tb;fill:#100f0d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text1308"><tspan
+             x="0"
+             y="0"
+             id="tspan1306">0</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

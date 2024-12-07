@@ -11,7 +11,7 @@ all: $(TEXS:.tex=.pdf)
 
 # clean auxiliary files
 clean:
-	rm -f *.aux *.log *.out *.toc *.nav *.snm *.vrb *.synctex.gz *.fls *.fdb_latexmk
+	rm -f *.aux *.log *.out *.toc *.nav *.snm *.vrb *.synctex.gz *.fls *.fdb_latexmk *.bak*
 
 # clean all output files
 distclean: clean
