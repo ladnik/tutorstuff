@@ -128,25 +128,6 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile, c]{Endliche Automaten: Realisierung}{}
-	\begin{itemize}
-		\item One-Hot-Kodierung: Genau 1 FF ist auf 1 $\rightarrow$ aktueller Zustand, einfach aber verschwenderisch
-		\item Binärkodierung: FFs zusammen bilden Binärzahl des aktuellen Zustands, spart FFs aber komplexer
-		\item Mikroprogrammierte Steuerwerke: Nur ein Speicherbaustein, enthält vollständigen Automaten. Eingaben werden als Adressen interpretiert, sehr flexibel.
-	\end{itemize}
-	\begin{table}[]
-		\begin{tabular}{c|c|c}
-			Zustand & One-Hot-Enkodierung & Binärenkodierung \\ \hline
-			$S_0$   & $0001$              & $00$             \\
-			$S_1$   & $0010$              & $01$             \\
-			$S_2$   & $0100$              & $10$             \\
-			$S_3$   & $1000$              & $11$
-		\end{tabular}
-	\end{table}
-\end{frame}
-
-
-
 \begin{frame}[fragile, c]{Endliche Automaten: Beispiele}{}
 	\begin{columns}[c]
 		\begin{column}{0.5\textwidth}
@@ -201,6 +182,23 @@
 	\begin{center}
 		{\scriptsize $I=\{0, 1\}$, $O=\{00, 01, 10, 11\}$, $S=\{q_0, q_1, q_2, q_3\}, \delta, \lambda$ (abh. vom Typen)}
 	\end{center}
+\end{frame}
+
+\begin{frame}[fragile, c]{Endliche Automaten: Realisierung}{}
+	\begin{itemize}
+		\item One-Hot-Kodierung: Genau 1 FF ist auf 1 $\rightarrow$ aktueller Zustand, einfach aber verschwenderisch
+		\item Binärkodierung: FFs zusammen bilden Binärzahl des aktuellen Zustands, spart FFs aber komplexer
+		\item Mikroprogrammierte Steuerwerke: Nur ein Speicherbaustein, enthält vollständigen Automaten. Eingaben werden als Adressen interpretiert, sehr flexibel.
+	\end{itemize}
+	\begin{table}[]
+		\begin{tabular}{c|c|c}
+			Zustand & One-Hot-Enkodierung & Binärenkodierung \\ \hline
+			$S_0$   & $0001$              & $00$             \\
+			$S_1$   & $0010$              & $01$             \\
+			$S_2$   & $0100$              & $10$             \\
+			$S_3$   & $1000$              & $11$
+		\end{tabular}
+	\end{table}
 \end{frame}
 
 
