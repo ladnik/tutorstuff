@@ -115,8 +115,8 @@
 \begin{frame}[fragile, c]{Endliche Automaten}{}
 	\begin{itemize}
 		\item Repräsentiert Funktion einer sequentiellen Schaltung (sequentiell: zustandsabhängig)
-		\item Mathematische Beschreibung als 6-Tupel $(I, O, S, s_0, \delta, \lambda)$
-		\item Als Diagramm: Zustände $\rightarrow$ Kreise, Übergänge $\rightarrow$ Kanten, Bedingungen $\rightarrow$ Kantenbeschriftungen
+		\item als Diagramm: Zustände $\rightarrow$ Kreise, Übergänge $\rightarrow$ Kanten, Bedingungen $\rightarrow$ Kantenbeschriftungen
+		\item als 6-Tupel $(I, O, S, s_0, \delta, \lambda)$:
 		      \begin{itemize}
 			      \item $I$: Menge möglicher Eingaben
 			      \item $O$: Menge möglicher Ausgaben
@@ -164,7 +164,7 @@
 						\node[state] (q1) [above right=of q0] {$q_1$};
 						\node[state] (q2) [below right=of q0] {$q_2$};
 						\node[state] (q3)  [below right=of q1] {$q_3$};
-						
+
 						\path[->, every node/.style={execute at begin node=$, execute at end node=$}]
 						(q0) edge node [above left]  {0/00} (q1)
 						edge node [below left]  {1/10} (q2)
@@ -185,20 +185,84 @@
 \end{frame}
 
 \begin{frame}[fragile, c]{Endliche Automaten: Realisierung}{}
-	\begin{itemize}
-		\item One-Hot-Kodierung: Genau 1 FF ist auf 1 $\rightarrow$ aktueller Zustand, einfach aber verschwenderisch
-		\item Binärkodierung: FFs zusammen bilden Binärzahl des aktuellen Zustands, spart FFs aber komplexer
-		\item Mikroprogrammierte Steuerwerke: Nur ein Speicherbaustein, enthält vollständigen Automaten. Eingaben werden als Adressen interpretiert, sehr flexibel.
-	\end{itemize}
-	\begin{table}[]
-		\begin{tabular}{c|c|c}
-			Zustand & One-Hot-Enkodierung & Binärenkodierung \\ \hline
-			$S_0$   & $0001$              & $00$             \\
-			$S_1$   & $0010$              & $01$             \\
-			$S_2$   & $0100$              & $10$             \\
-			$S_3$   & $1000$              & $11$
-		\end{tabular}
-	\end{table}
+	\begin{columns}[c]
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item One-Hot-Kodierung: Genau 1 FF ist auf 1 (aktueller Zustand), einfach aber verschwenderisch
+				\item Binärkodierung: FFs zusammen bilden Binärzahl des aktuellen Zustands, spart FFs aber komplexer
+				\item Mikroprogrammierte Steuerwerke: Nur ein Speicherbaustein, enthält vollständigen Automaten. Eingaben werden als Adressen interpretiert, sehr flexibel.
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{table}[]
+				\begin{tabular}{c|c|c}
+					Zustand & One-Hot & Binär \\ \hline
+					$S_0$   & $0001$              & $00$             \\
+					$S_1$   & $0010$              & $01$             \\
+					$S_2$   & $0100$              & $10$             \\
+					$S_3$   & $1000$              & $11$
+				\end{tabular}
+			\end{table}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c]{Adressmodifizierendes \\\vspace{-0.75cm}mikroprogrammiertes Steuerwerk}{}
+	\resizebox{\textwidth}{!}{
+	\begin{circuitikz}
+		\tikzset{
+			every node/.style={minimum width=2.5cm, minimum height=0.7cm, text height=1.5ex, text depth=0ex},
+			mat/.style={ampersand replacement=\&, row sep=-\pgflinewidth, column sep=0.25cm, nodes={draw}},
+			wide/.style={minimum width=8cm},
+			addr/.style={draw=none, align=right, minimum width=0.5cm, text width=0.25cm},
+			code/.style={anchor=west, draw=none, align=left, font=\ttfamily, text width=7.6cm, xshift=1cm},
+			mux1/.style={muxdemux, muxdemux def={NL=4, NR=1, NT=1, NB=0}, anchor=center, xscale=-0.5, yscale=0.4},
+			%mux2/.style={muxdemux, muxdemux def={NL=2, NR=1, NT=1, NB=0}, anchor=center, xscale=-0.4, yscale=0.5, rotate=90},
+			iopt/.style={draw=none, anchor=center, minimum width=1cm}
+		}
+	
+		\matrix[matrix of nodes, mat] (romContent){
+			\node[addr] {}; \& Folgeadresse \& Bedingung \& Steuersignale \\
+			\node[addr] {$00$:}; \& $10$ \& $01$ \& $0$\\
+			\node[addr] {$01$:}; \& $01$ \& $10$ \& $0$\\
+			\node[addr] {$10$:}; \& $00$ \& $11$ \& $0$\\
+			\node[addr] {$11$:}; \& $00$ \& $00$ \& $0$\\
+		};
+	
+		\node[wide, code] at (romContent-2-4.east) {if a then goto 10 else goto 01};
+		\node[wide, code] at (romContent-3-4.east) {while b};
+		\node[wide, code] at (romContent-4-4.east) {if c then goto 00 else goto 11};
+		\node[wide, code] at (romContent-5-4.east) {goto 00};
+	
+		\node[anchor=south] at (romContent.north) (romHeader) {\textbf{ROM}};
+		\node[draw, fit=(romContent) (romHeader)] (romContainer) {};
+		
+		
+		\node[iopt, yshift=4cm, xshift=5.5cm]  at (romContent-1-4.east) (condIopt) {Bedingung};
+		\node[mux1, below=of condIopt] (condMux) {};
+		
+		\draw (condIopt.south) to[bmultiwire] (condMux.tpin 1);
+		\draw (condMux.lpin 1) -- ++(1,0) node[iopt, right] {1};
+		\draw (condMux.lpin 2) -- ++(1,0) node[iopt, right] {a};
+		\draw (condMux.lpin 3) -- ++(1,0) node[iopt, right] {b};
+		\draw (condMux.lpin 4) -- ++(1,0) node[iopt, right] {c};
+		
+		\draw (condMux.rpin 1) -- ++(-1, 0) node[left, text width=3cm, text depth=2cm, text height=2cm, anchor=east, align=center] {Adresse + 1 oder Folgeadresse?};
+		
+		%\node[mux2, left=of condMux, anchor=tpin 1, yshift=-3cm] (addrMux) {};
+		%\draw (condMux.rpin 1) -- (addrMux.tpin 1);
+		
+		%\node[iopt, yshift=1cm]  at (addrMux.rpin 1) (nextAddrIopt) {nächste Adresse};
+		%\draw (nextAddrIopt.south) to[bmultiwire=2] (addrMux.rpin 1);
+		%\node[iopt, yshift=-1cm]  at (addrMux.lpin 1) (addrP1Iopt) {Adresse + 1};
+		%\draw (addrP1Iopt.north) to[bmultiwire=2] (addrMux.lpin 1);
+		%\node[iopt, yshift=-2cm]  at (addrMux.lpin 2) (addrP2Iopt) {Folgeadresse};
+		%\draw (addrP2Iopt.north) to[bmultiwire=2] (addrMux.lpin 2);
+		
+		
+		
+	\end{circuitikz}
+}
 \end{frame}
 
 
@@ -209,9 +273,9 @@
 		\item allerdings benötigt eine Instruktion jetzt auch mehrere Taktzyklen!
 		\item komplexeres Steuerwerk, da Zustandsautomat umgesetzt werden muss
 	\end{itemize}
-\begin{center}
-			in der Praxis haben sich Multi-Cycle-Prozessoren nicht durchgesetzt!
-\end{center}
+	\begin{center}
+		in der Praxis haben sich Multi-Cycle-Prozessoren nicht durchgesetzt!
+	\end{center}
 \end{frame}
 
 \begin{frame}[c]{RISC-V Multi-Cycle-Prozessor: Schaltbild}{}
