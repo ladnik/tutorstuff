@@ -213,26 +213,24 @@
 		\tikzset{
 			every node/.style={minimum width=2.5cm, minimum height=0.7cm, text height=1.5ex, text depth=0ex},
 			mat/.style={ampersand replacement=\&, row sep=-\pgflinewidth, column sep=0.25cm, nodes={draw}},
-			wide/.style={minimum width=8cm},
 			addr/.style={draw=none, align=right, minimum width=0.5cm, text width=0.25cm},
 			code/.style={anchor=west, draw=none, align=left, font=\ttfamily, text width=7.6cm, xshift=1cm},
 			mux1/.style={muxdemux, muxdemux def={NL=4, NR=1, NT=1, NB=0}, anchor=center, xscale=-0.5, yscale=0.4},
-			%mux2/.style={muxdemux, muxdemux def={NL=2, NR=1, NT=1, NB=0}, anchor=center, xscale=-0.4, yscale=0.5, rotate=90},
-			iopt/.style={draw=none, anchor=center, minimum width=1cm}
+			iopt/.style={anchor=center, minimum width=1cm}
 		}
 	
 		\matrix[matrix of nodes, mat] (romContent){
 			\node[addr] {}; \& Folgeadresse \& Bedingung \& Steuersignale \\
 			\node[addr] {$00$:}; \& $10$ \& $01$ \& $0$\\
-			\node[addr] {$01$:}; \& $01$ \& $10$ \& $0$\\
+			\node[addr] {$01$:}; \& $01$ \& $10$ \& $1$\\
 			\node[addr] {$10$:}; \& $00$ \& $11$ \& $0$\\
-			\node[addr] {$11$:}; \& $00$ \& $00$ \& $0$\\
+			\node[addr] {$11$:}; \& $00$ \& $00$ \& $1$\\
 		};
 	
-		\node[wide, code] at (romContent-2-4.east) {if a then goto 10 else goto 01};
-		\node[wide, code] at (romContent-3-4.east) {while b};
-		\node[wide, code] at (romContent-4-4.east) {if c then goto 00 else goto 11};
-		\node[wide, code] at (romContent-5-4.east) {goto 00};
+		\node[wide, code] at (romContent-2-4.east) {if a then goto 10 else goto 01;};
+		\node[wide, code] at (romContent-3-4.east) {while b;};
+		\node[wide, code] at (romContent-4-4.east) {if c then goto 00 else goto 11;};
+		\node[wide, code] at (romContent-5-4.east) {goto 00;};
 	
 		\node[anchor=south] at (romContent.north) (romHeader) {\textbf{ROM}};
 		\node[draw, fit=(romContent) (romHeader)] (romContainer) {};
@@ -248,19 +246,6 @@
 		\draw (condMux.lpin 4) -- ++(1,0) node[iopt, right] {c};
 		
 		\draw (condMux.rpin 1) -- ++(-1, 0) node[left, text width=3cm, text depth=2cm, text height=2cm, anchor=east, align=center] {Adresse + 1 oder Folgeadresse?};
-		
-		%\node[mux2, left=of condMux, anchor=tpin 1, yshift=-3cm] (addrMux) {};
-		%\draw (condMux.rpin 1) -- (addrMux.tpin 1);
-		
-		%\node[iopt, yshift=1cm]  at (addrMux.rpin 1) (nextAddrIopt) {nächste Adresse};
-		%\draw (nextAddrIopt.south) to[bmultiwire=2] (addrMux.rpin 1);
-		%\node[iopt, yshift=-1cm]  at (addrMux.lpin 1) (addrP1Iopt) {Adresse + 1};
-		%\draw (addrP1Iopt.north) to[bmultiwire=2] (addrMux.lpin 1);
-		%\node[iopt, yshift=-2cm]  at (addrMux.lpin 2) (addrP2Iopt) {Folgeadresse};
-		%\draw (addrP2Iopt.north) to[bmultiwire=2] (addrMux.lpin 2);
-		
-		
-		
 	\end{circuitikz}
 }
 \end{frame}
