@@ -124,26 +124,26 @@
 		\begin{column}{0.5\textwidth}
 			\begin{center}
 				\resizebox{0.9\textwidth}{!}{
-				\begin{tikzpicture}[font=\rmfamily]	
-					\draw[thick] (0,0) rectangle (6,4);
+					\begin{tikzpicture}[font=\rmfamily]
+						\draw[thick] (0,0) rectangle (6,4);
 
-					\draw[thick] (3,0) -- (3,4);
-					\draw[thick] (0,2) -- (6,2);
-					
-					\node at (1.5,3) {SISD};
-					\node at (4.5,3) {MISD};
-					\node at (1.5,1) {SIMD};
-					\node at (4.5,1) {MIMD};
-					
-					\node[rotate=90] at (-0.5,3) {Single};
-					\node[rotate=90] at (-0.5,1) {Multiple};
-					\node[rotate=90] at (-1,2) {Data stream};
-					
-					\node at (1.5,4.5) {Single};
-					\node at (4.5,4.5) {Multiple};
-					\node at (3,5) {Instruction stream};
-				\end{tikzpicture}
-			}
+						\draw[thick] (3,0) -- (3,4);
+						\draw[thick] (0,2) -- (6,2);
+
+						\node at (1.5,3) {SISD};
+						\node at (4.5,3) {MISD};
+						\node at (1.5,1) {SIMD};
+						\node at (4.5,1) {MIMD};
+
+						\node[rotate=90] at (-0.5,3) {Single};
+						\node[rotate=90] at (-0.5,1) {Multiple};
+						\node[rotate=90] at (-1,2) {Data stream};
+
+						\node at (1.5,4.5) {Single};
+						\node at (4.5,4.5) {Multiple};
+						\node at (3,5) {Instruction stream};
+					\end{tikzpicture}
+				}
 			\end{center}
 			\centering
 			\tiny{Quelle: \href{https://www.researchgate.net/publication/26639095_A_Taxonomy_of_Reconfigurable_Single-Multiprocessor_Systems-on-Chip}{A Taxonomy of Reconfigurable Single-/Multiprocessor\\Systems-on-Chip}}
@@ -157,70 +157,72 @@
 			\begin{itemize}
 				\item Mehrkernsysteme: Was wenn CPU1 und CPU2 beide ein Datum gecached haben und es modifizieren?\\$\rightarrow$ Cache-Inkonsistenzen
 				\item Einführung von Zuständen für Cachezeilen
+				\item CPUs hören jeweils die Zugriffe der anderen Kerne ab (\enquote{Bus Snooping})
 				\item \textbf{M}odified, (\textbf{E}xclusive), \textbf{S}hared, \textbf{I}nvalid
+				\item Exclusive-Bit ermöglicht kleineren Overhead wenn CPUs auf verschiedenen Cache-Blöcken arbeiten
 			\end{itemize}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{center}
 				\resizebox{!}{0.8\textheight}{
-				\begin{tikzpicture}
-					\tikzset{every node/.style={visible on=<1->},
-						label/.style={draw=none},
-						local/.style={},
-						remote/.style={blue},
-						read/.style={dashed,->},
-						write/.style={->}
-					}
-					
-					\def\spacing{2.5cm}
-					\def\legSpacing{1cm}
-					
-					\node[state] (m) {$M$};
-					\node[state] (e) [right=\spacing of m] {$E$};
-					\node[state] (s) [below=\spacing of m] {$S$};
-					\node[state] (i)  [below=\spacing of e] {$I$};
-					
-					% local read
-					\path[local, read, visible on=<2->, every node/.style={visible on=<2->, execute at begin node=$, execute at end node=$}]
-					(m) edge [loop above] node {r} ()
-					(e) edge [loop above] node {r} ()
-					(s) edge [loop below] node {r} ()
-					(i) edge [bend left, below] node {r} (s)
-					(i) edge [bend right, right] node {r} (e);
-					
-					% local write
-					\path[local, write, visible on=<3->, every node/.style={visible on=<2->, execute at begin node=$, execute at end node=$}]
-					(m) edge [loop left] node {w} ()
-					(e) edge [bend right, above] node {w} (m)
-					(s) edge [bend left, left] node {w} (m)
-					(i) edge [bend right, above] node {w} (m);
-					
-					% remote read
-					\path[remote, read, visible on=<4->, every node/.style={execute at begin node=$, execute at end node=$}]
-					(m) edge [bend left, right] node {r} (s)
-					(e) edge [right] node {r} (s)
-					(s) edge [loop left] node {r} ()
-					(i) edge [loop below] node {r} ();
-					
-					% remote write
-					\path[remote, write, visible on=<5->, every node/.style={execute at begin node=$, execute at end node=$}]
-					(m) edge [left] node {w} (i)
-					(e) edge [bend right, left] node {w} (i)
-					(s) edge [bend left, above] node {w} (i)
-					(i) edge [loop right] node {w} ();
-					
-					\node[draw=none, minimum width=2cm, below=\legSpacing of s] (leg) {lokal};
-					\node[draw=none, minimum width=2cm, below=\legSpacing of i] (leg2) {entfernt};
-					\node[draw=none, minimum width=2cm, below=0.25*\legSpacing of leg] (leg3) {lesen};
-					\node[draw=none, minimum width=2cm, below=0.25*\legSpacing of leg2] (leg4) {schreiben};
-					
-					
-					\draw[very thick, local] (leg.west) -- ++(-0.5,0);
-					\draw[very thick, remote](leg2.west) -- ++(-0.5,0);
-					\draw[read, <-](leg3.west) -- ++(-0.5,0);
-					\draw[, <-](leg4.west) -- ++(-0.5,0);
-				\end{tikzpicture}
-			}
+					\begin{tikzpicture}
+						\tikzset{every node/.style={visible on=<1->},
+							label/.style={draw=none},
+							local/.style={},
+							remote/.style={blue},
+							read/.style={dashed,->},
+							write/.style={->}
+						}
+
+						\def\spacing{2.5cm}
+						\def\legSpacing{1cm}
+
+						\node[state] (m) {$M$};
+						\node[state] (e) [right=\spacing of m] {$E$};
+						\node[state] (s) [below=\spacing of m] {$S$};
+						\node[state] (i)  [below=\spacing of e] {$I$};
+
+						% local read
+						\path[local, read, visible on=<2->, every node/.style={visible on=<2->, execute at begin node=$, execute at end node=$}]
+						(m) edge [loop above] node {r} ()
+						(e) edge [loop above] node {r} ()
+						(s) edge [loop below] node {r} ()
+						(i) edge [bend left, below] node {r} (s)
+						(i) edge [bend right, right] node {r} (e);
+
+						% local write
+						\path[local, write, visible on=<3->, every node/.style={visible on=<2->, execute at begin node=$, execute at end node=$}]
+						(m) edge [loop left] node {w} ()
+						(e) edge [bend right, above] node {w} (m)
+						(s) edge [bend left, left] node {w} (m)
+						(i) edge [bend right, above] node {w} (m);
+
+						% remote read
+						\path[remote, read, visible on=<4->, every node/.style={execute at begin node=$, execute at end node=$}]
+						(m) edge [bend left, right] node {r} (s)
+						(e) edge [right] node {r} (s)
+						(s) edge [loop left] node {r} ()
+						(i) edge [loop below] node {r} ();
+
+						% remote write
+						\path[remote, write, visible on=<5->, every node/.style={execute at begin node=$, execute at end node=$}]
+						(m) edge [left] node {w} (i)
+						(e) edge [bend right, left] node {w} (i)
+						(s) edge [bend left, above] node {w} (i)
+						(i) edge [loop right] node {w} ();
+
+						\node[draw=none, minimum width=2cm, below=\legSpacing of s] (leg) {lokal};
+						\node[draw=none, minimum width=2cm, below=\legSpacing of i] (leg2) {entfernt};
+						\node[draw=none, minimum width=2cm, below=0.25*\legSpacing of leg] (leg3) {lesen};
+						\node[draw=none, minimum width=2cm, below=0.25*\legSpacing of leg2] (leg4) {schreiben};
+
+
+						\draw[very thick, local] (leg.west) -- ++(-0.5,0);
+						\draw[very thick, remote](leg2.west) -- ++(-0.5,0);
+						\draw[read, <-](leg3.west) -- ++(-0.5,0);
+						\draw[, <-](leg4.west) -- ++(-0.5,0);
+					\end{tikzpicture}
+				}
 			\end{center}
 		\end{column}
 	\end{columns}
@@ -230,12 +232,12 @@
 \begin{frame}[c, fragile]{Speedup durch Parallelisierung}{}
 	Mit $t_s$ sequentieller Programmteil, $t_p$ paralleler Programmteil, $n$ Anzahl CPU-Kerne,\\$T$ Ausführungszeit mit $n=1$:
 	\begin{itemize}
-		\item Amdahl's Law:
+		\item Amdahlsches Gesetz:
 		      Gleiche Problemgröße, aufgeteilt auf mehrere Kerne $\rightarrow$ begrenzt durch sequentiellen Anteil
 		      \[S_{\textrm{Amdahl}}(n)=\frac{T}{t_s+\frac{t_p}{n}}\]
-		\item Gustafson's Law:
+		\item Gustafsons Gesetz:
 		      Mehr Kerne können mehr berechnen: Größeres Problem$\rightarrow$ paralleler Anteil wächst mit Problemgröße, $t_s$ proportional kleiner
-		      \[S_{\textrm{Gustavson}}(n)=\frac{t_s+n\cdot t_p}{T}\]
+		      \[S_{\textrm{Gustafson}}(n)=\frac{t_s+n\cdot t_p}{T}\]
 		\item Zwei verschiedene Perspektiven, abhängig von Problemszenario verschieden geeignet
 	\end{itemize}
 \end{frame}
@@ -247,35 +249,50 @@
 				label/.style={draw=none},
 				mapping/.style={dotted}
 			}
+
 			\def\seqWidth{2cm}
 			\def\parWidth{2.5cm}
 			\def\gap{-\pgflinewidth}
 			\def\measSpacing{0.25cm}
 			\def\compSpacing{1.5cm}
 
-			\node[minimum width=\seqWidth] (seq1) {t_{\textrm{sequential}}};
-			\node[minimum width=3*\parWidth, right=\gap of seq1] (par_comb) {t_{\textrm{parallel}}};
-			\draw[{Bar}-{Bar}] ([yshift=\measSpacing]seq1.north west) -- ([yshift=\measSpacing]par_comb.north east) node [label, above, midway] {T_{p=1}};
+			\onslide<1->{
+				\node[minimum width=\seqWidth] (seq1) {t_{\textrm{sequential}}};
+				\node[minimum width=3*\parWidth, right=\gap of seq1] (par_comb) {t_{\textrm{parallel}}};
+			}
 
-			\node[minimum width=\parWidth, right=\gap+\parWidth of seq1, dotted] (par_shadow) {};
-			%\node[minimum width=\parWidth, right=\gap of par_shadow_2, dotted] (par_shadow_3) {};	
+			\onslide<3->{
+				\node[minimum width=\parWidth, right=\gap+\parWidth of seq1, dotted] (par_shadow) {};
+				%\node[minimum width=\parWidth, right=\gap of par_shadow_2, dotted] (par_shadow_3) {};	
+			}
 
-			\node[minimum width=\seqWidth, below=\compSpacing of seq1] (seq2) {t_{\textrm{sequential}}};
-			\node[minimum width=\parWidth, right=\gap of seq2] (par1) {t_{\textrm{parallel}}\over 3};
-			\node[minimum width=\parWidth, below=\gap of par1] (par2) {t_{\textrm{parallel}}\over 3};
-			\node[minimum width=\parWidth, below=\gap of par2] (par3) {t_{\textrm{parallel}}\over 3};
+			\onslide<2->{
+				\node[minimum width=\seqWidth, below=\compSpacing of seq1] (seq2) {t_{\textrm{sequential}}};
+				\draw[mapping] (seq1.south west) -- (seq2.north west);
+				\draw[mapping] (seq1.south east) -- (seq2.north east);
+			}
+			\onslide<4->{
+				\node[minimum width=\parWidth, right=\gap of seq2] (par1) {t_{\textrm{parallel}}\over 3};
+				\node[minimum width=\parWidth, below=\gap of par1] (par2) {t_{\textrm{parallel}}\over 3};
+				\node[minimum width=\parWidth, below=\gap of par2] (par3) {t_{\textrm{parallel}}\over 3};
+
+
+				%\draw[mapping] (par_shadow.south west) -- (par1.north east);
+				%\draw[mapping] (par_shadow.south east) -- (par1.north east);
+				\draw[mapping] (par_comb.south east) -- (par1.north east);
+			}
+
+			\onslide<5->{
 			\draw[{Bar}-{Bar}] ([yshift=-\measSpacing, xshift=-\seqWidth]par3.south west) -- ([yshift=-\measSpacing]par3.south east) node [label, below, midway] {T_{p=3}};
-
-			\draw[mapping] (seq1.south west) -- (seq2.north west);
-			\draw[mapping] (seq1.south east) -- (seq2.north east);
-			\draw[mapping] (par_shadow.south west) -- (par1.north east);
-			\draw[mapping] (par_shadow.south east) -- (par1.north east);
-			\draw[mapping] (par_comb.south east) -- (par1.north east);
+			\draw[{Bar}-{Bar}] ([yshift=\measSpacing]seq1.north west) -- ([yshift=\measSpacing]par_comb.north east) node [label, above, midway] {T_{p=1}};
+			}
 
 			\node[label, left=1cm of seq1] {p=1};
 			\node[label, left=1cm of par2, xshift=-\seqWidth] {p=3};
 
-			\node[label, right=of par2] (formula) {\displaystyle S_A(3)=\frac{T_{p=1}}{T_{p=3}} = \frac{T_{p=1}}{t_{\textrm{sequential}}+\frac{t_{\textrm{parallel}}}{3}}};
+			\onslide<6->{
+				\node[label, right=of par2] (formula) {\displaystyle S_A(3)=\frac{T_{p=1}}{T_{p=3}} = \frac{T_{p=1}}{t_{\textrm{sequential}}+\frac{t_{\textrm{parallel}}}{3}}};
+			}
 		\end{tikzpicture}
 	}
 	\begin{center}
@@ -296,32 +313,50 @@
 			\def\measSpacing{0.25cm}
 			\def\compSpacing{1.5cm}
 
-			\node[minimum width=\seqWidth] (seq1) {t_{\textrm{sequential}}};
-			\node[minimum width=\parWidth, right=\gap of seq1] (par_comb) {t_{\textrm{parallel}}};
-			\draw[{Bar}-{Bar}] ([yshift=\measSpacing]seq1.north west) -- ([yshift=\measSpacing]par_comb.north east) node [label, above, midway] {T};
+			\onslide<1->{
+				\node[minimum width=\seqWidth] (seq1) {t_{\textrm{sequential}}};
+				\node[minimum width=\parWidth, right=\gap of seq1] (par_comb)
+				{t_{\textrm{parallel}}};
+			}
 
-			\node[minimum width=\parWidth, right=\gap+\parWidth of seq2, dashed] (par_shadow_2) {};
-			\node[minimum width=\parWidth, right=\gap of par_shadow_2, dashed] (par_shadow_3) {};
+			\onslide<2->{
+				\node[minimum width=\seqWidth, below=\compSpacing of seq1] (seq2) {t_{\textrm{sequential}}};
 
-			\node[minimum width=\seqWidth, below=\compSpacing of seq1] (seq2) {t_{\textrm{sequential}}};
-			\node[minimum width=\parWidth, right=\gap of seq2] (par1) {t_{\textrm{parallel}}};
-			\node[minimum width=\parWidth, below=\gap of par1] (par2) {t_{\textrm{parallel}}};
-			\node[minimum width=\parWidth, below=\gap of par2] (par3) {t_{\textrm{parallel}}};
+				\node[minimum width=\parWidth, right=\gap of seq2] (par1) {t_{\textrm{parallel}}};
+
+				\draw[mapping] (seq1.south west) -- (seq2.north west);
+				\draw[mapping] (seq1.south east) -- (seq2.north east);
+				\draw[mapping] (par_comb.south west) -- (par1.north west);
+				\draw[mapping] (par_comb.south east) -- (par1.north east);
+			}
+
+			\onslide<3->{
+				\node[minimum width=\parWidth, below=\gap of par1] (par2) {t_{\textrm{parallel}}};
+				\node[minimum width=\parWidth, below=\gap of par2] (par3) {t_{\textrm{parallel}}};
+			}
+
+			\onslide<4->{
 			\draw[{Bar}-{Bar}] ([yshift=-\measSpacing, xshift=-\seqWidth]par3.south west) -- ([yshift=-\measSpacing]par3.south east) node [label, below, midway] {T};
+			\draw[{Bar}-{Bar}] ([yshift=\measSpacing]seq1.north west) -- ([yshift=\measSpacing]par_comb.north east) node [label, above, midway] {T};
+			}
 
-			\draw[mapping] (seq1.south west) -- (seq2.north west);
-			\draw[mapping] (seq1.south east) -- (seq2.north east);
-			\draw[mapping] (par_comb.south west) -- (par1.north west);
-			\draw[mapping] (par_comb.south east) -- (par1.north east);
 
 			%\draw[mapping] (par2.south east) -- (par_shadow_2.south east);
 			%\draw[mapping] (par3.south east) -- (par_shadow_3.south east);
+
+			\onslide<5->{
+			\node[minimum width=\parWidth, right=\gap+\parWidth of seq2, dashed] (par_shadow_2) {};
+			\node[minimum width=\parWidth, right=\gap of par_shadow_2, dashed] (par_shadow_3) {};
+
 			\draw[{Bar}-{Bar}] ([yshift=-\measSpacing]par3.south east) -- ([yshift=-\measSpacing, xshift=2*\parWidth]par3.south east) node [label, below, midway] {\scriptsize\textrm{zus. verrichtete Rechenleistung}};
+			}
 
 			\node[label, left=1cm of seq1] {p=1};
 			\node[label, left=1cm of par2, xshift=-\seqWidth] {p=3};
 
-			\node[label, right=of par_comb] (formula) {\displaystyle S_G(3)= \frac{t_{\textrm{sequential}}+3\cdot t_{\textrm{parallel}}}{T}};
+			\onslide<6->{
+				\node[label, right=of par_comb] (formula) {\displaystyle S_G(3)= \frac{t_{\textrm{sequential}}+3\cdot t_{\textrm{parallel}}}{T}};
+			}
 		\end{tikzpicture}
 	}
 	\begin{center}
