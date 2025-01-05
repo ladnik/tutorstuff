@@ -47,6 +47,7 @@
 \usemintedstyle{borland}
 \usepackage{listings}
 \usepackage{tikz-timing}
+\usepackage{ifthen}
 
 % tikz
 \usetikzlibrary{overlay-beamer-styles}
@@ -151,6 +152,78 @@
 	\end{columns}
 \end{frame}
 
+\newcommand\mesipic[1][5]{
+	\begin{tikzpicture}
+		\tikzset{every node/.style={},
+			label/.style={draw=none},
+			local/.style={},
+			remote/.style={blue},
+			read/.style={dashed,->},
+			write/.style={->}
+		}
+
+		\def\spacing{2.5cm}
+		\def\legSpacing{1cm}
+
+		\node[state] (m) {$M$};
+		\node[state] (e) [right=\spacing of m] {$E$};
+		\node[state] (s) [below=\spacing of m] {$S$};
+		\node[state] (i)  [below=\spacing of e] {$I$};
+
+		% local read
+		\ifthenelse{#1 = 1 \or #1 = 5}{
+			\path[local, read, every node/.style={execute at begin node=$, execute at end node=$}]
+			(m) edge [loop above] node {r} ()
+			(e) edge [loop above] node {r} ()
+			(s) edge [loop below] node {r} ()
+			(i) edge [bend left, below] node {r} (s)
+			(i) edge [bend right, right] node {r} (e);
+			test
+		}{}
+
+		% local write
+		\ifthenelse{#1 = 2 \or #1 = 5}{
+			\path[local, write, every node/.style={execute at begin node=$, execute at end node=$}]
+			(m) edge [loop left] node {w} ()
+			(e) edge [bend right, above] node {w} (m)
+			(s) edge [bend left, left] node {w} (m)
+			(i) edge [bend right, above] node {w} (m);
+		}{}
+
+		% remote read
+		\ifthenelse{#1 = 3 \or #1 = 5}{
+			\path[remote, read, every node/.style={execute at begin node=$, execute at end node=$}]
+			(m) edge [bend left, right] node {r} (s)
+			(e) edge [right] node {r} (s)
+			(s) edge [loop left] node {r} ()
+			(i) edge [loop below] node {r} ();
+		}{}
+
+		% remote write
+		\ifthenelse{#1 = 4 \or #1 = 5}{
+			\path[remote, write, every node/.style={execute at begin node=$, execute at end node=$}]
+			(m) edge [left] node {w} (i)
+			(e) edge [bend right, left] node {w} (i)
+			(s) edge [bend left, above] node {w} (i)
+			(i) edge [loop right] node {w} ();
+		}{}
+
+		\ifthenelse{#1 = 5}{
+			\node[draw=none, minimum width=2cm, below=\legSpacing of s] (leg) {lokal};
+			\node[draw=none, minimum width=2cm, below=\legSpacing of i] (leg2) {entfernt};
+			\node[draw=none, minimum width=2cm, below=0.25*\legSpacing of leg] (leg3) {lesen};
+			\node[draw=none, minimum width=2cm, below=0.25*\legSpacing of leg2] (leg4) {schreiben};
+
+			\draw[very thick, local] (leg.west) -- ++(-0.5,0);
+			\draw[very thick, remote](leg2.west) -- ++(-0.5,0);
+			\draw[read, <-](leg3.west) -- ++(-0.5,0);
+			\draw[, <-](leg4.west) -- ++(-0.5,0);
+		}{}
+	
+	\node[draw=none, fit= (m) (e) (s) (i), inner sep=28pt] {};
+	\end{tikzpicture}
+}
+
 \begin{frame}[c, fragile]{MSI/MESI}{}
 	\begin{columns}[c]
 		\begin{column}{0.5\textwidth}
@@ -165,64 +238,24 @@
 		\begin{column}{0.5\textwidth}
 			\begin{center}
 				\resizebox{!}{0.8\textheight}{
-					\begin{tikzpicture}
-						\tikzset{every node/.style={visible on=<1->},
-							label/.style={draw=none},
-							local/.style={},
-							remote/.style={blue},
-							read/.style={dashed,->},
-							write/.style={->}
-						}
-
-						\def\spacing{2.5cm}
-						\def\legSpacing{1cm}
-
-						\node[state] (m) {$M$};
-						\node[state] (e) [right=\spacing of m] {$E$};
-						\node[state] (s) [below=\spacing of m] {$S$};
-						\node[state] (i)  [below=\spacing of e] {$I$};
-
-						% local read
-						\path[local, read, visible on=<2->, every node/.style={visible on=<2->, execute at begin node=$, execute at end node=$}]
-						(m) edge [loop above] node {r} ()
-						(e) edge [loop above] node {r} ()
-						(s) edge [loop below] node {r} ()
-						(i) edge [bend left, below] node {r} (s)
-						(i) edge [bend right, right] node {r} (e);
-
-						% local write
-						\path[local, write, visible on=<3->, every node/.style={visible on=<2->, execute at begin node=$, execute at end node=$}]
-						(m) edge [loop left] node {w} ()
-						(e) edge [bend right, above] node {w} (m)
-						(s) edge [bend left, left] node {w} (m)
-						(i) edge [bend right, above] node {w} (m);
-
-						% remote read
-						\path[remote, read, visible on=<4->, every node/.style={execute at begin node=$, execute at end node=$}]
-						(m) edge [bend left, right] node {r} (s)
-						(e) edge [right] node {r} (s)
-						(s) edge [loop left] node {r} ()
-						(i) edge [loop below] node {r} ();
-
-						% remote write
-						\path[remote, write, visible on=<5->, every node/.style={execute at begin node=$, execute at end node=$}]
-						(m) edge [left] node {w} (i)
-						(e) edge [bend right, left] node {w} (i)
-						(s) edge [bend left, above] node {w} (i)
-						(i) edge [loop right] node {w} ();
-
-						\node[draw=none, minimum width=2cm, below=\legSpacing of s] (leg) {lokal};
-						\node[draw=none, minimum width=2cm, below=\legSpacing of i] (leg2) {entfernt};
-						\node[draw=none, minimum width=2cm, below=0.25*\legSpacing of leg] (leg3) {lesen};
-						\node[draw=none, minimum width=2cm, below=0.25*\legSpacing of leg2] (leg4) {schreiben};
-
-
-						\draw[very thick, local] (leg.west) -- ++(-0.5,0);
-						\draw[very thick, remote](leg2.west) -- ++(-0.5,0);
-						\draw[read, <-](leg3.west) -- ++(-0.5,0);
-						\draw[, <-](leg4.west) -- ++(-0.5,0);
-					\end{tikzpicture}
+					\mesipic[5]
 				}
+			\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c, fragile]{MESI: Übersicht}{}
+	\begin{columns}[c]
+		\begin{column}{0.5\textwidth}
+			\begin{tabular}{cc}
+				\resizebox{!}{0.45\textheight}{\mesipic[1]} & \resizebox{!}{0.45\textheight}{\mesipic[2]} \\
+				\resizebox{!}{0.45\textheight}{\mesipic[3]} & \resizebox{!}{0.45\textheight}{\mesipic[4]}
+			\end{tabular}
+		\end{column}
+		\begin{column}{0.4\textwidth}
+			\begin{center}
+				\resizebox{!}{0.8\textheight}{\mesipic[5]}
 			\end{center}
 		\end{column}
 	\end{columns}
