@@ -172,8 +172,8 @@
 			\only<1,2>{Read after Write (RAW):
 			{\ttfamily
 			\begin{enumerate}[i.]
-				\item s3, s1, t0*
-				\item s4, s3, t2*
+				\item {\only<1>{\color{red}}{s3, s1, t0}}*
+				\item {\only<1>{\color{blue}}{s4, s3, t2}}*
 				\item s5, s2, t1
 				\item s6, s1, t0
 			\end{enumerate}
@@ -185,9 +185,9 @@
 			\begin{enumerate}[i.]
 				\setcounter{enumi}{4}
 				\item s4, s1, a1
-				\item s4, s2, a0*
+				\item {\only<2>{\color{red}}{s4, s2, a0}}
 				\item s5, s2, a0
-				\item s6, s4, t2*
+				\item {\only<2>{\color{blue}}{s6, s4, t2}}
 
 			\end{enumerate}
 			}
@@ -197,7 +197,7 @@
 			{\ttfamily
 			\begin{enumerate}[i.]
 				\setcounter{enumi}{8}
-				\item s5, s4, a0*
+				\item {\only<3>{\color{red}}{s5, s4, a0}}
 				\item s6, s3, t2
 			\end{enumerate}
 			}
