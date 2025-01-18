@@ -18,3 +18,6 @@ _minted-*/
 
 # VSCode
 .vscode/*
+
+# other
+*.log
