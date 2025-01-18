@@ -182,7 +182,7 @@ $f=\textcolor{red}{\bar a\bar c}+\textcolor{blue}{\bar b\bar d}+\textcolor{lime}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
 				\item Darstellung einer boolschen Funktion als gerichteter azyklischer Graph (DAG)
-				\item Variablen als Knoten, 2 ausgehende Kanten: $0, 1$
+				\item Knoten repräsentieren Teilfunktionen, 2 ausgehende Kanten: $0, 1$
 				\item Aufbau bspw. mittels Shannon-Zerlegung: $f(x_0, x_1) \rightarrow f_{x_0=0}(x_1), f_{x_0=1}(x_1)$
 				\item ROBDDs sind kanonisch (eindeutig)!
 			\end{itemize}
@@ -202,7 +202,7 @@ $f=\textcolor{red}{\bar a\bar c}+\textcolor{blue}{\bar b\bar d}+\textcolor{lime}
 					\node[r] (zero) [below=of x3r, xshift=-0.5cm] {0};
 					\node[r] (one) [below=of x3l, xshift=0.5cm] {1};
 
-					\draw[zeroarrow] (x1) -- (x2l) node [near end, fill=none, above left] {$x_2\n{x}_3$};
+					\draw[zeroarrow] (x1) -- (x2l) node [midway, fill=none, above left] {$x_2\n{x}_3$};
 					\draw[onearrow] (x1) -- (x2r)  node [near end, fill=none, above right, align=center] {$\n{x}_2\n{x}_3+$\\$x_2x_3$};
 					
 					\draw[zeroarrow] (x2l) to [out=0,in=180] (zero);
