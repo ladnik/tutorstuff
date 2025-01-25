@@ -42,7 +42,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{xcolor}
+%\usepackage{xcolor}
 \usepackage[cache=true]{minted}
 \usemintedstyle{borland}
 %\usepackage{listings}
@@ -85,6 +85,9 @@
 % https://tex.stackexchange.com/a/7045
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
 		\node[shape=circle,draw,inner sep=2pt, font=\scriptsize] (char) {#1};}}
+	
+\newcommand*\colorcirc[1]{\tikz[baseline=(char.base)]{
+			\node[shape=circle,fill=#1,inner sep=2pt] {};}}
 
 % beamer
 \setbeamercolor{footnote}{fg=black}
@@ -139,7 +142,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[c]{SAT: Schaltkreisäquivalenz}{}
+\begin{frame}[c, fragile]{SAT: Schaltkreisäquivalenz}{}
 	\begin{columns}[c]
 		\begin{column}{0.5\textwidth}
 			\begin{center}
@@ -197,7 +200,7 @@
 
 \end{frame}
 
-\begin{frame}[c]{Einschub: Tseitin-Transformation}{}
+\begin{frame}[c, fragile]{Einschub: Tseitin-Transformation}{}
 	\begin{columns}[c]
 		\begin{column}{0.5\textwidth}
 			\begin{center}
@@ -253,9 +256,15 @@
 
 
 
+						\newcommand{\registerpath}[3]{
+	\draw[regpath] (#2, -#1) node[circle, draw, fill, scale=0.4] {} -- (#3, -#1) node[shape=diamond, draw, fill, scale=0.4] {};
+}
 
+\newcommand{\actregisterpath}[3]{
+	\draw[act_regpath] (#2, -#1) node[circle, draw, fill, scale=0.4] {} -- (#3, -#1) node[shape=diamond, draw, fill, scale=0.4] {};
+}
 
-\begin{frame}[c]{SAT: Registerallokation}
+\begin{frame}[c, fragile]{SAT: Registerallokation}
 	\begin{columns}[c]
 		\begin{column}{0.1\textwidth}
 		\end{column}
@@ -274,94 +283,104 @@
 			}
 			\only<3->{
 				\resizebox{0.7\textwidth}{!}{
-				\begin{tikzpicture}[
-						active/.style={red, very thick},
-						default/.style={blue, very thick}]
-					\node[regular polygon,regular polygon sides=5,minimum size=3cm] (p) {};
-					\foreach \i in {1, ..., 5} {
-							\node[shape=circle,draw=black] (t\i) at (p.corner \i) {$t\i$};
+					\begin{tikzpicture}[
+							active/.style={red, very thick},
+							default/.style={black, very thick}]
+						\node[regular polygon,regular polygon sides=5,minimum size=3cm] (p) {};
+						\foreach \i in {1, ..., 5} {
+								\node[shape=circle,draw=black] (t\i) at (p.corner \i) {$t\i$};
+							}
+						\visible<4>{
+							\draw[active] (t1) -- (t2);
+							\draw[active] (t1) -- (t3);
+							\draw[active] (t2) -- (t3);
 						}
-					\visible<4>{
-						\draw[active] (t1) -- (t2);
-						\draw[active] (t1) -- (t3);
-						\draw[active] (t2) -- (t3);
-					}
-					\visible<5->{
-						\draw[default] (t1) -- (t2);
-						\draw[default] (t1) -- (t3);
-						\draw[default] (t2) -- (t3);
-					}
-					\visible<5>{
-						\draw[active] (t3) -- (t4);
-						\draw[active] (t3) -- (t5);
-						\draw[active] (t4) -- (t5);
-					}
-					\visible<6->{
-						\draw[default] (t3) -- (t4);
-						\draw[default] (t3) -- (t5);
-						\draw[default] (t4) -- (t5);
-					}
-					\visible<6>{
-						\draw[active] (t1) -- (t3);
-					}
-					\visible<7>{
-						\draw[default] (t1) -- (t3);
+						\visible<5->{
+							\draw[default] (t1) -- (t2);
+							\draw[default] (t1) -- (t3);
+							\draw[default] (t2) -- (t3);
+						}
+						\visible<5>{
+							\draw[active] (t3) -- (t4);
+							\draw[active] (t3) -- (t5);
+							\draw[active] (t4) -- (t5);
+						}
+						\visible<6->{
+							\draw[default] (t3) -- (t4);
+							\draw[default] (t3) -- (t5);
+							\draw[default] (t4) -- (t5);
+						}
+						\visible<6>{
+							\draw[active] (t1) -- (t3);
+						}
+						\visible<7>{
+							\draw[default] (t1) -- (t3);
+						}
+					
+					\only<8>{
+								\node[shape=circle,fill=orange] (t1) at (p.corner 1) {$t1$};
+								\node[shape=circle,fill=yellow] (t2) at (p.corner 2) {$t2$};
+								\node[shape=circle,fill=red] (t3) at (p.corner 3) {$t3$};
+								\node[shape=circle,fill=yellow] (t4) at (p.corner 4) {$t4$};
+								\node[shape=circle,fill=orange] (t5) at (p.corner 5) {$t5$};
+
 					}
 
-				\end{tikzpicture}
-			}
+					\end{tikzpicture}
+				}
 			}
 		\end{column}
 		\begin{column}{0.5\textwidth}
-			\resizebox{0.85\textwidth}{!}{
-				\begin{tikzpicture}[
-						regpath/.style={blue, ultra thick},
-						act_regpath/.style={red, ultra thick},
-					]
-					\newcommand*{\numtimesteps}{7}
-					\newcommand*{\numregisters}{5}
-					\foreach \i in {1, ..., \numregisters}{
-							\draw (0.5, -\i) node[left] {$t\i$} -- ++(\numtimesteps, 0);
+						\only<-7>{
+				\resizebox{0.85\textwidth}{!}{
+					\begin{tikzpicture}[
+							regpath/.style={blue, ultra thick},
+							act_regpath/.style={red, ultra thick},
+						]
+						\def\numtimesteps{7}
+						\def\numregisters{5}
+						\foreach \i in {1, ..., \numregisters}{
+								\draw (0.5, -\i) node[left] {$t\i$} -- ++(\numtimesteps, 0);
+							}
+						\foreach \i in {1, ..., \numtimesteps}{
+								\draw[gray] (\i, -0.5) node[black, above] {$s\i$} -- ++(0, -\numregisters);
+							}
+
+
+						\only<2->{
+							\registerpath{1}{1}{4}
+							\registerpath{1}{6}{7}
+							\registerpath{2}{2}{4}
+							\registerpath{3}{3}{7}
+							\registerpath{4}{5}{6}
+							\registerpath{5}{4}{6}
+							\draw[regpath] (7, -2) node[circle, draw, fill, scale=0.4] {} -- (7.5, -2);
 						}
-					\foreach \i in {1, ..., \numtimesteps}{
-							\draw[gray] (\i, -0.5) node[black, above] {$s\i$} -- ++(0, -\numregisters);
+
+						\only<4>{
+							\actregisterpath{1}{1}{4}
+							\actregisterpath{2}{2}{4}
+							\actregisterpath{3}{3}{7}
 						}
-					\newcommand{\registerpath}[3]{
-						\draw[regpath] (#2, -#1) node[circle, draw, fill, scale=0.4] {} -- (#3, -#1) node[shape=diamond, draw, fill, scale=0.4] {};
-					}
+						\only<5>{
+							\actregisterpath{3}{3}{7}
+							\actregisterpath{4}{5}{6}
+							\actregisterpath{5}{4}{6}
+						}
 
-					\newcommand{\actregisterpath}[3]{
-						\draw[act_regpath] (#2, -#1) node[circle, draw, fill, scale=0.4] {} -- (#3, -#1) node[shape=diamond, draw, fill, scale=0.4] {};
-					}
+						\only<6>{
+							\actregisterpath{1}{6}{7}
+							\actregisterpath{3}{3}{7}
+						}
 
-
-					\visible<2->{
-						\registerpath{1}{1}{4}
-						\registerpath{1}{6}{7}
-						\registerpath{2}{2}{4}
-						\registerpath{3}{3}{7}
-						\registerpath{4}{5}{6}
-						\registerpath{5}{4}{6}
-						\draw[regpath] (7, -2) node[circle, draw, fill, scale=0.4] {} -- (7.5, -2);
-					}
-
-					\visible<4>{
-						\actregisterpath{1}{1}{4}
-						\actregisterpath{2}{2}{4}
-						\actregisterpath{3}{3}{7}
-					}
-					\visible<5>{
-						\actregisterpath{3}{3}{7}
-						\actregisterpath{4}{5}{6}
-						\actregisterpath{5}{4}{6}
-					}
-
-					\visible<6>{
-						\actregisterpath{1}{6}{7}
-						\actregisterpath{3}{3}{7}
-					}
-
-				\end{tikzpicture}
+					\end{tikzpicture}
+				}}
+			\only<8>{
+				\begin{itemize}
+					\item In Register \colorcirc{yellow} $a0$: $t2, t4$
+					\item In Register \colorcirc{orange} $a1$: $t1, t5$
+					\item In Register \colorcirc{red} $a2$: $t3$\\
+				\end{itemize}
 			}
 		\end{column}
 	\end{columns}
@@ -370,6 +389,7 @@
 \begin{frame}[c]{Single-Net Routing}{}
 	\begin{columns}[t]
 		\begin{column}{0.5\textwidth}
+			%			\only<-7>{
 			\begin{center}
 				\resizebox{0.8\textwidth}{!}{
 					\begin{tikzpicture}
@@ -493,6 +513,15 @@
 					\end{tikzpicture}
 				}
 			\end{center}
+
+			%	}
+			%\only<8>{
+			%	\begin{itemize}
+			%		\item In Register \colorbox{cyan}{$a0$}: $t3$
+			%		\item In Register \colorbox{yellow}{$a1$}: $t2, t4$
+			%		\item In Register \colorbox{magenta}{$a2$}: $t1, t5$
+			%	\end{itemize}
+			%}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\only<1>{
