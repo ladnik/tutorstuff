@@ -254,7 +254,117 @@
 
 
 
-\begin{frame}[c]{SAT: Registerallokation}{}
+
+\begin{frame}[c]{SAT: Registerallokation}
+	\begin{columns}[c]
+		\begin{column}{0.1\textwidth}
+		\end{column}
+		\begin{column}{0.4\textwidth}
+			\only<1,2>{
+			\quad\\
+			{\ttfamily
+			s1: t1 = 1\\
+			s2: t2 = 5\\
+			s3: t3 = 7\\
+			s4: t5 = t1 + t2\\
+			s5: t4 = t3 + t5\\
+			s6: t1 = t4 + t5\\
+			s7: t2 = t1 + t3
+			}
+			}
+			\only<3->{
+				\resizebox{0.7\textwidth}{!}{
+				\begin{tikzpicture}[
+						active/.style={red, very thick},
+						default/.style={blue, very thick}]
+					\node[regular polygon,regular polygon sides=5,minimum size=3cm] (p) {};
+					\foreach \i in {1, ..., 5} {
+							\node[shape=circle,draw=black] (t\i) at (p.corner \i) {$t\i$};
+						}
+					\visible<4>{
+						\draw[active] (t1) -- (t2);
+						\draw[active] (t1) -- (t3);
+						\draw[active] (t2) -- (t3);
+					}
+					\visible<5->{
+						\draw[default] (t1) -- (t2);
+						\draw[default] (t1) -- (t3);
+						\draw[default] (t2) -- (t3);
+					}
+					\visible<5>{
+						\draw[active] (t3) -- (t4);
+						\draw[active] (t3) -- (t5);
+						\draw[active] (t4) -- (t5);
+					}
+					\visible<6->{
+						\draw[default] (t3) -- (t4);
+						\draw[default] (t3) -- (t5);
+						\draw[default] (t4) -- (t5);
+					}
+					\visible<6>{
+						\draw[active] (t1) -- (t3);
+					}
+					\visible<7>{
+						\draw[default] (t1) -- (t3);
+					}
+
+				\end{tikzpicture}
+			}
+			}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\resizebox{0.85\textwidth}{!}{
+				\begin{tikzpicture}[
+						regpath/.style={blue, ultra thick},
+						act_regpath/.style={red, ultra thick},
+					]
+					\newcommand*{\numtimesteps}{7}
+					\newcommand*{\numregisters}{5}
+					\foreach \i in {1, ..., \numregisters}{
+							\draw (0.5, -\i) node[left] {$t\i$} -- ++(\numtimesteps, 0);
+						}
+					\foreach \i in {1, ..., \numtimesteps}{
+							\draw[gray] (\i, -0.5) node[black, above] {$s\i$} -- ++(0, -\numregisters);
+						}
+					\newcommand{\registerpath}[3]{
+						\draw[regpath] (#2, -#1) node[circle, draw, fill, scale=0.4] {} -- (#3, -#1) node[shape=diamond, draw, fill, scale=0.4] {};
+					}
+
+					\newcommand{\actregisterpath}[3]{
+						\draw[act_regpath] (#2, -#1) node[circle, draw, fill, scale=0.4] {} -- (#3, -#1) node[shape=diamond, draw, fill, scale=0.4] {};
+					}
+
+
+					\visible<2->{
+						\registerpath{1}{1}{4}
+						\registerpath{1}{6}{7}
+						\registerpath{2}{2}{4}
+						\registerpath{3}{3}{7}
+						\registerpath{4}{5}{6}
+						\registerpath{5}{4}{6}
+						\draw[regpath] (7, -2) node[circle, draw, fill, scale=0.4] {} -- (7.5, -2);
+					}
+
+					\visible<4>{
+						\actregisterpath{1}{1}{4}
+						\actregisterpath{2}{2}{4}
+						\actregisterpath{3}{3}{7}
+					}
+					\visible<5>{
+						\actregisterpath{3}{3}{7}
+						\actregisterpath{4}{5}{6}
+						\actregisterpath{5}{4}{6}
+					}
+
+					\visible<6>{
+						\actregisterpath{1}{6}{7}
+						\actregisterpath{3}{3}{7}
+					}
+
+				\end{tikzpicture}
+			}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[c]{Single-Net Routing}{}
@@ -316,45 +426,45 @@
 							\draw[bboxline] (5,2) -- (5,4);
 							\draw[bboxline] (5,4) -- (3,4);
 						}
-					
-					\only<14, 15>{
-						\draw[steinerbranch] (5,2) -- (3,2);
-						\draw[steinerbranch] (3,2) -- (3,4);
-					}
-				
-				\only<2>{
-					% horizontal
-					\draw[hananline] (0, 0) -- (5, 0);
-					\draw[hananline] (0, 1) -- (5, 1);
-					\draw[hananline] (0, 2) -- (5, 2);
-					\draw[hananline] (0, 3) -- (5, 3);
-					\draw[hananline] (0, 4) -- (5, 4);
-					
-					% vertical
-					\draw[hananline] (0, 0) -- (0, 5);
-					\draw[hananline] (1, 0) -- (1, 5);
-					\draw[hananline] (3, 0) -- (3, 5);
-					\draw[hananline] (5, 0) -- (5, 5);
-					
-					\node[hanan] at (0, 0) {};
-					\node[hanan] at (0, 2) {};
-					\node[hanan] at (0, 3) {};
-					\node[hanan] at (0, 4) {};
-					
-					\node[hanan] at (1, 0) {};
-					\node[hanan] at (1, 1) {};
-					\node[hanan] at (1, 2) {};
-					\node[hanan] at (1, 4) {};
-					
-					\node[hanan] at (3, 1) {};
-					\node[hanan] at (3, 2) {};
-					\node[hanan] at (3, 3) {};
-					
-					\node[hanan] at (5, 0) {};
-					\node[hanan] at (5, 1) {};
-					\node[hanan] at (5, 3) {};
-					\node[hanan] at (5, 4) {};
-				}
+
+						\only<14, 15>{
+							\draw[steinerbranch] (5,2) -- (3,2);
+							\draw[steinerbranch] (3,2) -- (3,4);
+						}
+
+						\only<2>{
+							% horizontal
+							\draw[hananline] (0, 0) -- (5, 0);
+							\draw[hananline] (0, 1) -- (5, 1);
+							\draw[hananline] (0, 2) -- (5, 2);
+							\draw[hananline] (0, 3) -- (5, 3);
+							\draw[hananline] (0, 4) -- (5, 4);
+
+							% vertical
+							\draw[hananline] (0, 0) -- (0, 5);
+							\draw[hananline] (1, 0) -- (1, 5);
+							\draw[hananline] (3, 0) -- (3, 5);
+							\draw[hananline] (5, 0) -- (5, 5);
+
+							\node[hanan] at (0, 0) {};
+							\node[hanan] at (0, 2) {};
+							\node[hanan] at (0, 3) {};
+							\node[hanan] at (0, 4) {};
+
+							\node[hanan] at (1, 0) {};
+							\node[hanan] at (1, 1) {};
+							\node[hanan] at (1, 2) {};
+							\node[hanan] at (1, 4) {};
+
+							\node[hanan] at (3, 1) {};
+							\node[hanan] at (3, 2) {};
+							\node[hanan] at (3, 3) {};
+
+							\node[hanan] at (5, 0) {};
+							\node[hanan] at (5, 1) {};
+							\node[hanan] at (5, 3) {};
+							\node[hanan] at (5, 4) {};
+						}
 
 						\node[terminal] at (3, 0) {};
 						\node[terminal] at (0, 1) {};
@@ -362,7 +472,7 @@
 						\node[terminal] at (1, 3) {};
 						\node[terminal] at (3, 4) {};
 
-						
+
 
 						\only<3,4, 5>{
 							\node[marker] at (0, 1) {};
@@ -427,7 +537,9 @@
 
 \begin{frame}[c]{}{}
 	\begin{center}
-		\LARGE Fragen?
+		\LARGE Fragen?\\
+		\vspace{\baselineskip}
+		\normalsize Die Slides zur Registerallokation wurden von \href{https://home.cit.tum.de/~hbj/}{Bjarne Hansen} übernommen
 	\end{center}
 \end{frame}
 
@@ -435,7 +547,7 @@
 	\begin{itemize}
 		\item \enquote{H13 -- Verifikation mit SAT} bis 02.02.2025 23:59 Uhr
 		\item Finden der KNFs für zwei Miter-Schaltungen
-		\item letzte Hausaufgabe - Notenbonus ab 80\% (exklusive Bonuspunkte)
+		\item letzte Hausaufgabe -- Notenbonus ab 80\% (exklusive Bonuspunkte)
 	\end{itemize}
 \end{frame}
 
