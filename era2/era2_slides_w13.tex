@@ -318,11 +318,11 @@
 						}
 					
 					\only<8>{
-								\node[shape=circle,fill=orange] (t1) at (p.corner 1) {$t1$};
-								\node[shape=circle,fill=yellow] (t2) at (p.corner 2) {$t2$};
+								\node[shape=circle,fill=yellow] (t1) at (p.corner 1) {$t1$};
+								\node[shape=circle,fill=orange] (t2) at (p.corner 2) {$t2$};
 								\node[shape=circle,fill=red] (t3) at (p.corner 3) {$t3$};
-								\node[shape=circle,fill=yellow] (t4) at (p.corner 4) {$t4$};
-								\node[shape=circle,fill=orange] (t5) at (p.corner 5) {$t5$};
+								\node[shape=circle,fill=orange] (t4) at (p.corner 4) {$t4$};
+								\node[shape=circle,fill=yellow] (t5) at (p.corner 5) {$t5$};
 
 					}
 
@@ -377,8 +377,8 @@
 				}}
 			\only<8>{
 				\begin{itemize}
-					\item In Register \colorcirc{yellow} $a0$: $t2, t4$
-					\item In Register \colorcirc{orange} $a1$: $t1, t5$
+					\item In Register \colorcirc{yellow} $a0$: $t1, t5$
+					\item In Register \colorcirc{orange} $a1$: $t2, t4$
 					\item In Register \colorcirc{red} $a2$: $t3$\\
 				\end{itemize}
 			}
@@ -393,10 +393,10 @@
 				\resizebox{0.8\textwidth}{!}{
 					\begin{tikzpicture}
 						\tikzset{
-							terminal/.style={draw, shape=circle, fill=TUMExtRed, inner sep=3pt},
-							hanan/.style={draw, shape=circle, fill=TUMExtRed!30, inner sep=3pt},
-							hananline/.style={color=TUMExtRed, dashed, very thick},
-							marker/.style={draw, shape=circle, dashed, color=TUMExtRed, thick, inner sep=5pt},
+							terminal/.style={draw, shape=circle, fill=red, inner sep=3pt},
+							hanan/.style={draw, shape=circle, fill=red!30, inner sep=3pt},
+							hananline/.style={color=red, dashed, very thick},
+							marker/.style={draw, shape=circle, dashed, color=red, thick, inner sep=5pt},
 							bboxline/.style={color=black, dashed, very thick, line cap=round},
 							steinerbranch/.style={color=black, ultra thick, line cap=round}}
 
