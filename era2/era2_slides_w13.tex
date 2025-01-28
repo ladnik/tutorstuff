@@ -387,9 +387,8 @@
 \end{frame}
 
 \begin{frame}[c]{Single-Net Routing}{}
-	\begin{columns}[t]
+	\begin{columns}[c]
 		\begin{column}{0.5\textwidth}
-			%			\only<-7>{
 			\begin{center}
 				\resizebox{0.8\textwidth}{!}{
 					\begin{tikzpicture}
@@ -513,19 +512,9 @@
 					\end{tikzpicture}
 				}
 			\end{center}
-
-			%	}
-			%\only<8>{
-			%	\begin{itemize}
-			%		\item In Register \colorbox{cyan}{$a0$}: $t3$
-			%		\item In Register \colorbox{yellow}{$a1$}: $t2, t4$
-			%		\item In Register \colorbox{magenta}{$a2$}: $t1, t5$
-			%	\end{itemize}
-			%}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\only<1>{
-				\vspace{1.5cm}
 				\begin{itemize}
 					\item Ziel: Verbindung von Terminalen mit kürzesten Pfaden
 					\item rektilinear (geradlinig): nur horizontale/vertikale Verbindungen
@@ -533,7 +522,6 @@
 
 			}
 			\only<2>{
-				\vspace{1cm}
 				\begin{itemize}
 					\item Hanan-Punkte:	mögliche Steinerknoten (Abzweigungen im Steinerbaum)
 					\item Schnittpunkte von Geraden durch Terminalknoten
@@ -544,16 +532,12 @@
 			\only<3->{
 				\textbf{Konstruktion des Steinerbaums:}
 				\begin{enumerate}
-					\item Finde Terminale mit minimaler Manhatten-Distanz
-					      \only<4->{
-					\item Konstruiere die kürzesten Verbindungen (bounding box)}
-					      \only<5->{
-					\item Wähle die Verbindung, welche den geringsten Abstand zu einem der anderen Terminalknoten hat
-					      }
-					      \only<6->{
-					\item	Finde Terminale mit minimaler Manhatten-Distanz zur konstruierten Verbindung und fahre mit Schritt 2 fort
-					      }
+					\item Finde Terminale mit minimaler Manhattan-Distanz $\delta = \Delta x + \Delta y$
+					\item<4-> Konstruiere die kürzesten Verbindungen (bounding box)
+					\item<5-> Wähle die Verbindung, welche den geringsten Abstand zu einem der anderen Terminalknoten hat
+					\item<6-> Finde Terminale mit minimaler Manhatten-Distanz zur konstruierten Verbindung und fahre mit Schritt 2 fort		 
 				\end{enumerate}
+				
 			}
 
 
