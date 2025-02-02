@@ -204,49 +204,133 @@
 	\begin{itemize}
 		\item Übungsblätter rechnen
 		\item Probeklausur rechnen, um Gefühl für Klausurformat zu bekommen. Am besten ohne Hilfsmittel/Lösung + Stoppuhr
-		\item Assembly üben! Aufgaben oft sehr einfach
+		\item Assembly üben	! Aufgaben oft sehr einfach
 		\item zusätzliche Assembly-Aufgaben: \href{https://github.com/ladnik/RISC-V-Assembly-Introductory-Exercises}{github.com/ladnik}
 		\item meist ist ERA eine Überhangsklausur: zuerst Aufgaben machen, die ihr gut könnt
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}[fragile, c]{Statistik zur Endterm WS 22/23}{}
-	\begin{tikzpicture}[remember picture,overlay]
-		\node[inner sep=0pt, outer sep=40pt, anchor=north west] at ([xshift=-1cm]current page.north west) {\includegraphics[height=0.85\textheight]{w14_endterm.png}};
-	\end{tikzpicture}
-
+\begin{frame}[fragile, c]{Statistik zur Endterm WS 23/24}{}
 	\begin{columns}[c]
-		\begin{column}{0.5\textwidth}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{itemize}
-				\item Angetreten: 1012
-				\item Antritt zählt: 858
-				\item Anteil negativer Beurteilungen: 42.31\%
-				\item Durchschnitt gesamt: 3.65
-				\item Durchschnitt bestanden: 2.77
-			\end{itemize}
+		\begin{column}{\textwidth}
+			\begin{tikzpicture}
+				\definecolor{col10}{RGB}{0, 255, 0}
+				\definecolor{col13}{RGB}{51, 255, 0}
+				\definecolor{col17}{RGB}{102, 255, 0}
+				\definecolor{col20}{RGB}{154, 255, 0}
+				\definecolor{col23}{RGB}{205, 255, 0}
+				\definecolor{col27}{RGB}{255, 255, 0}
+				\definecolor{col30}{RGB}{255, 205, 0}
+				\definecolor{col33}{RGB}{255, 154, 0}
+				\definecolor{col37}{RGB}{255, 102, 0}
+				\definecolor{col40}{RGB}{255, 51, 0}
+				\definecolor{col43}{RGB}{255, 0, 0}
+				\definecolor{col47}{RGB}{170, 0, 0}
+				\definecolor{col50}{RGB}{85, 0, 0}
+
+				\begin{axis}[
+						scale only axis,
+						axis line style={draw=none},
+						tick style={draw=none},
+						width=\textwidth,
+						height=0.75\textheight,
+						yticklabel=\empty,
+						xtick={1.0, 1.3, 1.7, 2.0, 2.3, 2.7, 3.0, 3.3, 3.7, 4.0, 4.3, 4.7, 5.0},
+						x tick label style={
+							/pgf/number format/.cd,
+							fixed,
+							fixed zerofill,
+							precision=1,
+							/tikz/.cd
+						},
+						nodes near coords,
+						bar width=0.8cm,
+					]
+					\addplot[ybar, fill=col10] coordinates {(1.0, 37)};
+					\addplot[ybar, fill=col13] coordinates {(1.3, 34)};
+					\addplot[ybar, fill=col17] coordinates {(1.7, 37)};
+					\addplot[ybar, fill=col20] coordinates {(2.0, 42)};
+					\addplot[ybar, fill=col23] coordinates {(2.3, 59)};
+					\addplot[ybar, fill=col27] coordinates {(2.7, 59)};
+					\addplot[ybar, fill=col30] coordinates {(3.0, 62)};
+					\addplot[ybar, fill=col33] coordinates {(3.3, 46)};
+					\addplot[ybar, fill=col37] coordinates {(3.7, 73)};
+					\addplot[ybar, fill=col40] coordinates {(4.0, 33)};
+					\addplot[ybar, fill=col43] coordinates {(4.3, 51)};
+					\addplot[ybar, fill=col47] coordinates {(4.7, 90)};
+					\addplot[ybar, fill=col50] coordinates {(5.0, 195)};
+					
+					\node [align=left, anchor=west] at (axis cs:0.8,150) {
+						\fontfamily{cmr}\selectfont Angetreten:  818\\
+						\fontfamily{cmr}\selectfont Anteil negativer Beurteilungen: 41\% \\
+						\fontfamily{cmr}\selectfont Durchschnitt gesamt: 3.52\\
+						\fontfamily{cmr}\selectfont Durchschnitt bestanden:  2.62\\
+					};    
+				\end{axis}
+			\end{tikzpicture}
 		\end{column}
 	\end{columns}
 \end{frame}
 
-\begin{frame}[fragile, c]{Statistik zur Retake WS 22/23}{}
-	\begin{tikzpicture}[remember picture,overlay]
-		\node[inner sep=0pt, outer sep=40pt, anchor=north west] at ([xshift=-1cm]current page.north west) {\includegraphics[height=0.85\textheight]{w14_retake.png}};
-	\end{tikzpicture}
-
+\begin{frame}[fragile, c]{Statistik zur Retake WS 23/24}{}
 	\begin{columns}[c]
-		\begin{column}{0.5\textwidth}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{itemize}
-				\item Angetreten: 429
-				\item Antritt zählt: 318
-				\item Anteil negativer Beurteilungen: 38.36\%
-				\item Durchschnitt gesamt: 3.84
-				\item Durchschnitt bestanden: 3.26
-			\end{itemize}
+		\begin{column}{\textwidth}
+			\begin{tikzpicture}
+				\definecolor{col10}{RGB}{0, 255, 0}
+				\definecolor{col13}{RGB}{51, 255, 0}
+				\definecolor{col17}{RGB}{102, 255, 0}
+				\definecolor{col20}{RGB}{154, 255, 0}
+				\definecolor{col23}{RGB}{205, 255, 0}
+				\definecolor{col27}{RGB}{255, 255, 0}
+				\definecolor{col30}{RGB}{255, 205, 0}
+				\definecolor{col33}{RGB}{255, 154, 0}
+				\definecolor{col37}{RGB}{255, 102, 0}
+				\definecolor{col40}{RGB}{255, 51, 0}
+				\definecolor{col43}{RGB}{255, 0, 0}
+				\definecolor{col47}{RGB}{170, 0, 0}
+				\definecolor{col50}{RGB}{85, 0, 0}
+				
+				\begin{axis}[
+					scale only axis,
+					axis line style={draw=none},
+					tick style={draw=none},
+					width=\textwidth,
+					height=0.75\textheight,
+					yticklabel=\empty,
+					xtick={1.0, 1.3, 1.7, 2.0, 2.3, 2.7, 3.0, 3.3, 3.7, 4.0, 4.3, 4.7, 5.0},
+					x tick label style={
+						/pgf/number format/.cd,
+						fixed,
+						fixed zerofill,
+						precision=1,
+						/tikz/.cd
+					},
+					nodes near coords,
+					bar width=0.8cm,
+					]
+					\addplot[ybar, fill=col10] coordinates {(1.0, 2)};
+					\addplot[ybar, fill=col13] coordinates {(1.3, 4)};
+					\addplot[ybar, fill=col17] coordinates {(1.7, 9)};
+					\addplot[ybar, fill=col20] coordinates {(2.0, 6)};
+					\addplot[ybar, fill=col23] coordinates {(2.3, 7)};
+					\addplot[ybar, fill=col27] coordinates {(2.7, 16)};
+					\addplot[ybar, fill=col30] coordinates {(3.0, 23)};
+					\addplot[ybar, fill=col33] coordinates {(3.3, 25)};
+					\addplot[ybar, fill=col37] coordinates {(3.7, 33)};
+					\addplot[ybar, fill=col40] coordinates {(4.0, 44)};
+					\addplot[ybar, fill=col43] coordinates {(4.3, 32)};
+					\addplot[ybar, fill=col47] coordinates {(4.7, 20)};
+					\addplot[ybar, fill=col50] coordinates {(5.0, 72)};
+					
+					\node [align=left, anchor=west] at (axis cs:0.8,52.5) {
+						\fontfamily{cmr}\selectfont Angetreten:  293\\
+						\fontfamily{cmr}\selectfont Anteil negativer Beurteilungen: 42\% \\
+						\fontfamily{cmr}\selectfont Durchschnitt gesamt: 3.87\\
+						\fontfamily{cmr}\selectfont Durchschnitt bestanden:  3.22\\
+					};    
+				\end{axis}
+			\end{tikzpicture}
 		\end{column}
 	\end{columns}
 \end{frame}
