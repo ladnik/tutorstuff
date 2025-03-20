@@ -145,17 +145,17 @@
 					\draw (n1.east) -- (n1r);
 
 					\node[comp] (n2) [below of=n1, yshift=-2cm] {$g(x, y)$};
-					\node[left of=n2, xshift=-1cm] (n2l) {$x$};
+					\node[left of=n2, xshift=-1cm, yshift=-0.25cm] (n2l) {$x$};
+					\node[left of=n2, xshift=-1cm, yshift=0.25cm] (n2lu) {$y$};
 					\node[right of=n2, xshift=1cm] (n2r) {$y$};
 
-					\draw (n2l) -- (n2.west) node[midway, fill=black, circle, inner sep=1pt] (n2ml) {};
+					\draw (n2l) -- (n2l -| n2.west) (n2ml) {};
+					\draw (n2lu) -- (n2lu -| n2.west) node[midway, fill=black, circle, inner sep=1pt] (n2mlu) {};
 					\draw (n2.east) -- (n2r) node[midway, fill=black, circle, inner sep=1pt] (n2mr) {};
 
-					\node[above of=n2ml] (n2lu) {};
 					\node[above of=n2mr] (n2ru) {};
-					\draw (n2ml.center) -| (n2lu.center);
+					\draw (n2mlu.center) |-  (n2ru.center);
 					\draw (n2mr.center) -- (n2ru.center);
-					\draw (n2lu.center) -- (n2ru.center);
 				\end{tikzpicture}
 			\end{center}
 		\end{column}
