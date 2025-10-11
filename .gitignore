@@ -15,6 +15,7 @@
 *.dvi
 *.bak*
 _minted-*/
+**/*.minted
 
 # VSCode
 .vscode/*

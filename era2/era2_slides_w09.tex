@@ -227,10 +227,10 @@
 			\node[addr] {$11$:}; \& $00$ \& $00$ \& $1$\\
 		};
 	
-		\node[wide, code] at (romContent-2-4.east) {if a then goto 10 else goto 01;};
-		\node[wide, code] at (romContent-3-4.east) {while b;};
-		\node[wide, code] at (romContent-4-4.east) {if c then goto 00 else goto 11;};
-		\node[wide, code] at (romContent-5-4.east) {goto 00;};
+		\node[code] at (romContent-2-4.east) {if a then goto 10 else goto 01;};
+		\node[code] at (romContent-3-4.east) {while b;};
+		\node[code] at (romContent-4-4.east) {if c then goto 00 else goto 11;};
+		\node[code] at (romContent-5-4.east) {goto 00;};
 	
 		\node[anchor=south] at (romContent.north) (romHeader) {\textbf{ROM}};
 		\node[draw, fit=(romContent) (romHeader)] (romContainer) {};
