@@ -1,0 +1,235 @@
+% !TeX spellcheck = de_DE
+%%
+% This is an Overleaf template for presentations
+% using the TUM Corporate Desing https://www.tum.de/cd
+%
+% For further details on how to use the template, take a look at our
+% GitLab repository and browse through our test documents
+% https://gitlab.lrz.de/latex4ei/tum-templates.
+%
+% The tumbeamer class is based on the beamer class.
+% If you need further customization please consult the beamer class guide
+% https://ctan.org/pkg/beamer.
+% Additional class options are passed down to the base class.
+%
+% If you encounter any bugs or undesired behaviour, please raise an issue
+% in our GitLab repository
+% https://gitlab.lrz.de/latex4ei/tum-templates/issues
+% and provide a description and minimal working example of your problem.
+%%
+
+\PassOptionsToClass{onlytextwidth}{beamer}
+
+\documentclass[
+  german,            % define the document language (english, german)
+  aspectratio=169,    % define the aspect ratio (169, 43)
+  % handout=2on1,       % create handout with multiple slides (2on1, 4on1)
+  % partpage=false,     % insert page at beginning of parts (true, false)
+  % sectionpage=true,   % insert page at beginning of sections (true, false)
+]{tumbeamer}
+
+
+% load additional packages
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{url}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{pmboxdraw}
+\usepackage{float}
+\usepackage{babel}[ngerman]
+\usepackage{csquotes}[autostyle]
+\usepackage[useregional]{datetime2}
+
+\captionsetup{labelformat=empty}
+
+% image path
+\graphicspath{ {./resources/} }
+
+% presentation metadata
+\title{Übung 01: Zahlensysteme}
+\subtitle{Einführung in die Rechnerarchitektur}
+\author{Niklas Ladurner}
+
+\institute{\theChairName\\\theDepartmentName\\\theUniversityName}
+\date{\DTMdisplaydate{2025}{10}{17}{-1}}
+
+\footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
+
+
+% macro to configure the style of the presentation
+\TUMbeamersetup{
+  title page = TUM tower,         % style of the title page
+  part page = TUM toc,            % style of part pages
+  section page = TUM toc,         % style of section pages
+  content page = TUM more space,  % style of normal content pages
+  tower scale = 1.0,              % scaling factor of TUM tower (if used)
+  headline = TUM threeliner,      % which variation of headline to use
+  footline = TUM default,         % which variation of footline to use
+  % configure on which pages headlines and footlines should be printed
+  headline on = {title page},
+  footline on = {every page, title page=false},
+}
+
+% available frame styles for title page, part page, and section page:
+% TUM default, TUM tower, TUM centered,
+% TUM blue default, TUM blue tower, TUM blue centered,
+% TUM shaded default, TUM shaded tower, TUM shaded centered,
+% TUM flags
+%
+% additional frame styles for part page and section page:
+% TUM toc
+%
+% available frame styles for content pages:
+% TUM default, TUM more space
+%
+% available headline options:
+% TUM empty, TUM oneliner, TUM twoliner, TUM threeliner, TUM logothreeliner
+%
+% available footline options:
+% TUM empty, TUM default, TUM infoline
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}[c]{}{}
+  \begin{center}
+    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien.
+
+    \Large Bei Unklarheiten/Unstimmigkeiten haben VL/ZÜ-Folien recht!
+  \end{center}
+\end{frame}
+
+\begin{frame}[c]{Organisatorisches}{}
+  \begin{itemize}
+    \item Wer bin ich?
+    \item Kommunikation:
+          \begin{itemize}
+            \item Zulip: ERA-Streams vs. Tutoriumsstream vs. DM
+            \item E-Mail
+            \item Fax (??)
+          \end{itemize}
+    \item Mitschriften/Folien auf meiner Homepage: \url{home.in.tum.de/~ladu/}
+    \item Tutoriumszeiten
+    \item Artemis-Hausaufgaben: 100\% bedeuten 100\%, keine \emph{hidden tests} nach der Deadline
+    \item Laptops mitbringen!
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Motivation}{}
+  \begin{itemize}
+    \item Rechner arbeiten mit Zahlen: Bilder, Strings, ...
+    \item Dezimalsystem ungeeignet: zu viele Zustände (Ziffern)
+    \item Strom an und aus mittels Transistoren
+    \item zwei Zustände, d.h. Binärsystem
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Definition}{}
+	\begin{itemize}
+		\item Zahlensystem: Bestimmt die Darstellung einer Zahl zu einer gegebenen Basis $B$
+		\item Gleiche \emph{Werte} können in unterschiedlichen Systemen unterschiedliche \emph{Darstellungen} haben, bspw. $12_{10}=1100_2=C_{16}$
+	\end{itemize}
+	
+	\begin{equation}
+		W=\sum_{i=0}^{n-1}a_i\cdot B^i
+	\end{equation}
+	
+	\hspace{1cm}
+	
+	\begin{block}{Beispiele}
+		\begin{enumerate}
+			\item $(1010)_2 = 0\cdot 2^0+1\cdot 2^1+0\cdot 2^2+1\cdot 2^3=2+8=10$
+			\item $(763)_8 = 3\cdot 8^0+6\cdot 8^1+7\cdot 8^2=3+48+448=499$
+			\item $(123)_{16} = 3\cdot 16^0+2\cdot 16^1+1\cdot 16^2=3+32+256=291$
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+\begin{frame}[c]{Umwandlungen}{}
+	\begin{itemize}
+		\item Für ERA hauptsächlich interessant:\\Binär ($B=2$), Oktal ($B=8=2^3$) und Hexadezimal ($B=16=2^4$)
+		\item Was passiert bei einem Verschieben der Stellen nach links/rechts?\pause\\
+		$\rightarrow$ nach links: $n\cdot B$, nach rechts: $\left\lfloor{\frac{n}{B}}\right\rfloor$
+		\item Wie kann man Binärzahlen in Hexadezimal/Oktal umwandeln?\pause\\
+		$\rightarrow$ 4 Binärziffern ergeben eine Hexadezimalziffer, 3 Binärziffern ergeben eine Oktalziffer
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Negative Zahlen}{}
+	\begin{columns}[c]
+		\begin{column}{0.3\textwidth}
+			\begin{figure}
+				\begin{tabular}{crr}
+					&$0100\;1110_2$ & $=\phantom{-}78$ \\
+					&\textcolor{TUMBlue}{$1$}$100\;1110_2$ & $=-78$
+				\end{tabular}
+				\caption{Vorzeichenbit}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\begin{figure}
+				\begin{tabular}{crr}
+					&$0100\;1110_2$ & $=\phantom{-}78$ \\
+					&$1011\;0001_2$ &$=-78$
+				\end{tabular}
+				\caption{Einerkomplement}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\begin{figure}
+				\begin{tabular}{rrl}
+					&$0100\;1110_2$ & $=\phantom{-}78$ \\\hline
+					&$1011\;0001_2$ &\\
+					+ & $1_2$& \\\hline
+					&$1011\;0010_2$ &$=-78$
+				\end{tabular}
+				\caption{Zweierkomplement}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c]{Rechnen im Binärsystem}{}
+	\begin{itemize}
+		\item schriftliches Rechnen grundsätzlich gleich wie im Dezimalsystem
+		\item Subtraktion: Addition mit negativer Zahl (Zweierkomplement)
+		\item Datenwortbreite bei negativen Zahlen ausschlaggebend!
+		\item Ablesen von Zahlen im Zweierkomplement: Höchste Wertigkeit subtrahieren, Rest addieren
+	\end{itemize}
+	\vfill{}
+	\begin{block}{Beispiel}
+		\begin{enumerate}
+			\item $(1100.0110)_2 = -2^7+(2^1+2^2+2^6)=-58$ bei Breite von 8 Bit
+			\item $(1010)_2 = -2^3 + (2^1) = -6$ bei Breite von 4 Bit
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+\begin{frame}[c]{}{}
+  \begin{center}
+    \LARGE Fragen?
+  \end{center}
+\end{frame}
+
+\begin{frame}[c]{Artemis-Hausaufgaben}{}
+  \begin{center}
+  	\LARGE kurze Einführung in Artemis/Git
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile, c]{Links}{}
+  \begin{itemize}
+    \item Zulip: \href{https://zulip.in.tum.de/#narrow/channel/3255-ERA-Tutorium-.E2.80.93-Mi-1600-3}{\enquote{ERA Tutorium -- Mi-1600-3}}
+          bzw. \href{https://zulip.in.tum.de/#narrow/channel/3264-ERA-Tutorium-.E2.80.93-Fr-1500-1}{\enquote{ERA Tutorium -- Fr-1500-1}}
+    \item \href{https://www.moodle.tum.de/course/view.php?id=111440}{ERA-Moodle-Kurs}
+    \item \href{https://artemis.in.tum.de/courses/516}{ERA-Artemis-Kurs}
+    \item \href{https://git-scm.com/docs/gittutorial}{Git-Tutorial}, \href{https://rogerdudler.github.io/git-guide/}{alternatives Tutorial}
+  \end{itemize}
+\end{frame}
+
+\maketitle
+
+\end{document}

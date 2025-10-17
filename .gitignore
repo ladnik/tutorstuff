@@ -1,24 +1,23 @@
-*:Zone.Identifier
-*/:Zone.Identifier
+**/*:Zone.Identifier
 
 # LaTeX
-*.aux
-*.log
-*.out
-*.toc
-*.nav
-*.snm
-*.vrb
-*.synctex.gz
-*.fls
-*.fdb_latexmk
-*.dvi
-*.bak*
-_minted-*/
+**/*.aux
+**/*.log
+**/*.out
+**/*.toc
+**/*.nav
+**/*.snm
+**/*.vrb
+**/*.synctex.gz
+**/*.fls
+**/*.fdb_latexmk
+**/*.dvi
+**/*.bak*
+**/_minted-*/
 **/*.minted
 
 # VSCode
-.vscode/*
+**/.vscode/*
 
 # other
-*.log
+**/*.log
