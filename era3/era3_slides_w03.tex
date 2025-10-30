@@ -348,7 +348,7 @@
 	\end{columns}
 \end{frame}
 
-\begin{frame}[c, fragile]{Speicherzugriffe\footnote{\textbf{b}yte: 1 Byte, \textbf{h}alf-word: 2 Byte, \textbf{w}ord: 4 Byte}}{}
+\begin{frame}[c, fragile]{Speicherzugriffe\footnote{\textbf{b}yte: 1 Byte, \textbf{h}alf-word: 2 Byte, \textbf{w}ord: 4 Byte, Suffix \textbf{u}nsigned}}{}
 	\begin{columns}[c]
 		\begin{column}{0.5\textwidth}
 			\begin{center}
@@ -389,22 +389,22 @@
 
 						\only<1-8>{
 							\matrix[matstyle] (mat) {
-								0x01%
+								0xaa%
+								\\0x01%
 								\\0x02%
 								\\0x03%
 								\\0x04%
 								\\0x05%
-								\\0x06%
 								\\
 							};
 						}
 
 						\only<9>{
 							\matrix[matstyle] (mat) {
-								0x01%
+								0xaa%
+								\\0x01%
 								\\0x02%
 								\\0x03%
-								\\0x04%
 								\\0xdd%
 								\\0xcc%
 								\\
@@ -425,7 +425,7 @@
 							\pause
 
 							\node[bbox, fit=(mat-2-1.north west) (mat-5-1.south east)] {};
-							\node[biglabel, below=1cm of mat] {t0 = 0x05040302};
+							\node[biglabel, below=1cm of mat] {t0 = 0x04030201};
 						}
 
 						\only<4-6>{
@@ -441,7 +441,7 @@
 							\pause
 
 							\node[bbox, fit=(mat-1-1.north west) (mat-1-1.south east)] {};
-							\node[biglabel, below=1cm of mat] {t1 = 0x00000001};
+							\node[biglabel, below=1cm of mat] {t1 = 0xffffffaa};
 						}
 
 						\only<7-9>{
