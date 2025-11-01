@@ -128,13 +128,13 @@
 			muss erfüllt sein
 			\vspace{0.5\baselineskip}
 			\begin{itemize}
-				\item \verb|beq|: $rs1 = rs2$
-				\item \verb|bne|: $rs1 \ne rs2$
-				\item \verb|blt(u)|: $rs1 < rs2$
-				\item \verb|bgt(u)|: $rs1 > rs2$
+				\item \verb|beq|: $\texttt{rs1} = \texttt{rs2}$
+				\item \verb|bne|: $\texttt{rs1} \ne \texttt{rs2}$
+				\item \verb|blt(u)|: $\texttt{rs1} < \texttt{rs2}$
+				\item \verb|bgt(u)|: $\texttt{rs1} > \texttt{rs2}$
 			\end{itemize}
 			\begin{center}
-				\underline{für Schleifen und Bedingungen (if's)}
+				\underline{für Schleifen und Bedingungen (ifs)}
 			\end{center}
 		\end{column}
 		\begin{column}{0.5\textwidth}
@@ -363,7 +363,7 @@
 					{\Large\ttfamily lb t1, -4(a2)}
 
 					\vspace{\baselineskip}
-					lade 1 Byte (sign-extended) an der Adresse \texttt{a2} - 4 Bytes Offset in das Register \texttt{t1}
+					lade 1 Byte (sign-extended) an der Adresse \texttt{a2} \textminus{} 4 Bytes Offset in das Register \texttt{t1}
 				}
 
 				\only<7-9>{
@@ -475,7 +475,7 @@
 		\item Zulip: \href{https://zulip.in.tum.de/#narrow/channel/3255-ERA-Tutorium-.E2.80.93-Mi-1600-3}{\enquote{ERA Tutorium -- Mi-1600-3}}
 		      bzw. \href{https://zulip.in.tum.de/#narrow/channel/3264-ERA-Tutorium-.E2.80.93-Fr-1500-1}{\enquote{ERA Tutorium -- Fr-1500-1}}
 		\item \href{https://www.moodle.tum.de/course/view.php?id=111440}{ERA-Moodle-Kurs}
-		\item \href{https://artemis.in.tum.de/courses/516}{ERA-Artemis-Kurs}
+		\item \href{https://artemis.tum.de/courses/516}{ERA-Artemis-Kurs}
 		\item \href{https://msyksphinz-self.github.io/riscv-isadoc/html/index.html}{Übersicht an RISC-V-Instruktionen}
 		\item \href{https://ftp.gnu.org/old-gnu/Manuals/gas/html_chapter/as_7.html}{GNU as directives}
 	\end{itemize}
