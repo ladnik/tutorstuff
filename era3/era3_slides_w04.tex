@@ -209,7 +209,7 @@
 				arrow/.style={-Latex, thick},
 			}
 
-			\node[codebox, anchor=north] (caller) {\begin{minipage}{0.25\textwidth}
+			\node[codebox, anchor=north, visible on=<1->] (caller) {\begin{minipage}{0.25\textwidth}
 					\begin{minted}{gas}
 					main:
 						li a0, 3
@@ -220,7 +220,7 @@
 				\end{minted}
 				\end{minipage}};
 
-			\node[codebox, right=\spc of caller.north east, anchor=north] (callee) {\begin{minipage}{0.3\textwidth}
+			\node[codebox, right=\spc of caller.north east, anchor=north, visible on=<1->] (callee) {\begin{minipage}{0.3\textwidth}
 					\begin{minted}{gas}
 					multiply:
 						mul a0, a0, a1
@@ -228,25 +228,20 @@
 				\end{minted}
 				\end{minipage}};
 
-			\node[label, below=of caller] (lbl1) {\textbf{Caller}\\(aufrufende Funktion)};
-			\node[label, right=\spc of lbl1.north east, anchor=north] {\textbf{Callee}\\(aufgerufene Funktion)};
+			\node[label, below=of caller, visible on=<1->] (lbl1) {\textbf{Caller}\\(aufrufende Funktion)};
+			\node[label, right=\spc of lbl1.north east, anchor=north, visible on=<1->] {\textbf{Callee}\\(aufgerufene Funktion)};
 
-			\pause
 
 			\coordinate (jexit) at ($(caller.north east) +(-0.8cm, -1.1cm)$) {};
 			\coordinate (jentry) at ($(jexit) +(2*\arc, \arc)$) {};
-			\draw[arrow] (jexit) to[bend left] (jentry);
+			\draw[arrow, visible on=<2->] (jexit) to[bend left] (jentry);
 
-			\node[draw=none] (ra)  at ($(caller.north west) +(-0.3cm, -1.89cm)$) {\texttt{ra}};
-			\draw[arrow](ra) -- ++ (1cm, 0);
-
-			\pause
+			\node[draw=none, visible on=<2->] (ra)  at ($(caller.north west) +(-0.3cm, -1.89cm)$) {\texttt{ra}};
+			\draw[arrow, visible on=<2->](ra) -- ++ (1cm, 0);
 
 			\coordinate (rexit) at ($(callee.north west) +(0.75cm, -1.05cm)$) {};
 			\coordinate (rentry) at ($(rexit) +(-2*\arc, -\arc)$) {};
-			\draw[arrow] (rexit) to[bend left] (rentry);
-
-
+			\draw[arrow, visible on=<3->] (rexit) to[bend left] (rentry);
 		\end{tikzpicture}
 	\end{center}
 \end{frame}
@@ -479,16 +474,16 @@ end:
 		\begin{column}{0.4\textwidth}
 			\begin{lstlisting}
 fun:
-	addi sp, sp, -8
-	sw ra, 0(sp)
-	sw a0, 4(sp)
-	beq a0, zero, end
-	addi a0, a0, -1
-	jal fun
+  addi sp, sp, -8
+  sw ra, 0(sp)
+  sw a0, 4(sp)
+  beq a0, zero, end
+  addi a0, a0, -1
+  jal fun
 end:
-	lw ra, 0(sp)
-	addi sp, sp, 8
-	jalr zero, 0(ra)
+  lw ra, 0(sp)
+  addi sp, sp, 8
+  jalr zero, 0(ra)
 			\end{lstlisting}
 			\small \textbf{Achtung}: 8 Byte nicht CC-konform, nur zur besseren Darstellung
 		\end{column}
