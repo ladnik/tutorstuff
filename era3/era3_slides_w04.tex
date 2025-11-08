@@ -48,7 +48,7 @@
 
 
 % tikz  
-\usetikzlibrary{fit, matrix, calc, arrows, arrows.meta, positioning, patterns, bending}
+\usetikzlibrary{fit, matrix, calc, arrows, arrows.meta, positioning, patterns, bending, overlay-beamer-styles}
 
 % minted
 \setminted{
@@ -227,24 +227,26 @@
 						ret
 				\end{minted}
 				\end{minipage}};
-			
-					\pause
-
-					\coordinate (jexit) at ($(caller.north east) +(-0.8cm, -1.1cm)$) {};
-					\coordinate (jentry) at ($(jexit) +(2*\arc, \arc)$) {};
-					\draw[arrow] (jexit) to[bend left] (jentry);
-					
-					\node[draw=none] (ra)  at ($(caller.north west) +(-0.3cm, -1.89cm)$) {\texttt{ra}};
-					\draw[arrow](ra) -- ++ (1cm, 0);
-					
-					\pause
-					
-					\coordinate (rexit) at ($(callee.north west) +(0.75cm, -1.05cm)$) {};
-					\coordinate (rentry) at ($(rexit) +(-2*\arc, -\arc)$) {};
-					\draw[arrow] (rexit) to[bend left] (rentry);
 
 			\node[label, below=of caller] (lbl1) {\textbf{Caller}\\(aufrufende Funktion)};
 			\node[label, right=\spc of lbl1.north east, anchor=north] {\textbf{Callee}\\(aufgerufene Funktion)};
+
+			\pause
+
+			\coordinate (jexit) at ($(caller.north east) +(-0.8cm, -1.1cm)$) {};
+			\coordinate (jentry) at ($(jexit) +(2*\arc, \arc)$) {};
+			\draw[arrow] (jexit) to[bend left] (jentry);
+
+			\node[draw=none] (ra)  at ($(caller.north west) +(-0.3cm, -1.89cm)$) {\texttt{ra}};
+			\draw[arrow](ra) -- ++ (1cm, 0);
+
+			\pause
+
+			\coordinate (rexit) at ($(callee.north west) +(0.75cm, -1.05cm)$) {};
+			\coordinate (rentry) at ($(rexit) +(-2*\arc, -\arc)$) {};
+			\draw[arrow] (rexit) to[bend left] (rentry);
+
+
 		\end{tikzpicture}
 	\end{center}
 \end{frame}
@@ -257,7 +259,7 @@
 caller:
 # aufrufende Funktion (Caller)
 
-# Wir speichern die Rücksprungadresse auf 
+# wir speichern die Rücksprungadresse auf 
 # den Stack -> ra ist Caller-saved!
 addi sp, sp, -16
 sw ra, 0(sp)
@@ -265,7 +267,7 @@ sw ra, 0(sp)
 # ... irgendwas, was t0 verwendet
 
 # da t0 caller-saved ist, müssen wir uns
-# t0 absichern, wenn wir den Inhalt später
+# t0 absichern, falls wir den Inhalt später
 # noch brauchen
 sw t0, 4(sp)
 # ...
@@ -285,8 +287,8 @@ callee:
 # aufgerufene Funktion (Callee)
 
 # hier dürfen wir t0-t6 bspw. verändern
-# falls wir s0-s6 verändern wollen würden,
-# würden wir das so machen:
+# falls wir s0-s6 verändern wollen,
+# müssen sie gesichert werden:
 addi sp, sp, -16
 sw s2, 0(sp)
 sw s3, 4(sp)
@@ -311,7 +313,7 @@ jalr zero, 0(ra)
 		\item definiert Parameterüberabe, Rückgabe, Registersicherung, Stack etc.
 		      \begin{enumerate}
 			      \item Datentypen $\le$ 4 Byte in \texttt{a}-Register, sign-extension falls vorzeichenbehafteter Datentyp
-			      \item Datentypen $=$ 8 Byte in zwei \texttt{a}-Register, niedrigwertige Hälfte zuerst
+			      \item Datentypen $=$ 8 Byte in zwei \texttt{a}-Registern, niedrigwertige Hälfte zuerst
 			      \item Datentypen $>$ 8 Byte als Pointer auf Caller-Stack
 			      \item Falls zu wenige Register: Übergabe über Stack
 		      \end{enumerate}
@@ -346,7 +348,95 @@ jalr zero, 0(ra)
 	\end{center}
 \end{frame}
 
-\begin{frame}[c, fragile]{Rekursion}{}
+\begin{frame}[c, fragile]{Rekursion (1)}{}
+	\begin{columns}
+		\begin{column}[c]{0.5\textwidth}
+			\begin{itemize}
+				\item Funktion die sich selbst aufruft
+				\item Konzept: Berechnung aufteilen bis Basisfall erreicht
+				\item jede rekursive Funktion kann auch iterativ implementiert werden ($\rightarrow$ Schleife)
+				\item Beispiel Fibonacci-Folge: $f_n=f_{n-1}+f_{n-2}$,\\$f_1=1$, $f_0=0$
+
+			\end{itemize}
+		\end{column}%
+		\begin{column}[c]{0.45\textwidth}
+			\centering
+			\resizebox{\textwidth}{!}{
+			\begin{tikzpicture}
+				\def\smallspace{0.9cm}
+				\def\spread{1.1}
+
+
+				\tikzset{
+					arrow/.style={-Latex, shorten >=0.1cm, shorten <=0.1cm},
+					matstyle/.style={matrix of nodes, inner sep=1pt, ampersand replacement=\&, nodes={draw=none, minimum width=1.5em, minimum height=1.5em}, column sep=-\pgflinewidth},
+					c/.style = {circle,draw,solid,minimum width=1.75em,
+							minimum height=1.75em},
+					r/.style = {rectangle,draw,solid,minimum width=1.75em,
+							minimum height=1.75em},
+				}
+
+				\matrix[matstyle, visible on=<2-13>] (top) {
+				|[c]|$f_4$ \\
+				};
+
+				\matrix[matstyle, below=\smallspace of top, visible on=<3-12>] (f4) {
+				|[c]|$f_3$\&$+$\&|[c]|$f_2$ \\
+				};
+				\draw[arrow, visible on=<3-13>](top.south) -- (f4.north);
+
+				\matrix[matstyle, below=\smallspace of f4-1-1, xshift=-\spread*\smallspace, visible on=<4-8>] (f3) {
+				|[c]|$f_2$\&$+$\&|[c]|$f_1$ \\
+				};
+				\draw[arrow, visible on=<4-12>](f4-1-1.south) -- (f3.north);
+
+				\matrix[matstyle, below=\smallspace of f3-1-1, xshift=-\spread*\smallspace, visible on=<5-6>] (f22) {
+				|[c]|$f_1$\&$+$\&|[c]|$f_0$ \\
+				};
+				\draw[arrow, visible on=<5-8>](f3-1-1.south) -- (f22.north);
+
+				\visible<6>{
+					\node[r, below=\smallspace of f22-1-1] (f221) {$1$};
+					\node[r, below=\smallspace of f22-1-3] (f220) {$0$};
+					\draw[arrow](f22-1-1.south) -- (f221.north);
+					\draw[arrow](f22-1-3.south) -- (f220.north);
+				}
+
+				\node[r, below=\smallspace of f3-1-1, xshift=-\spread*\smallspace, visible on=<7-8>] (f22) {$1$};
+
+
+				\node[r, below=\smallspace of f3-1-3, visible on=<8>] (f31) {$1$};
+				\draw[arrow, visible on=<8>](f3-1-3.south) -- (f31.north);
+
+				\node[r, below=\smallspace of f4-1-1, xshift=-\spread*\smallspace, visible on=<9-12>] (f22) {$2$};
+
+
+				\matrix[matstyle, below=\smallspace of f4-1-3, xshift=\spread*\smallspace, visible on=<10-11>] (f2) {
+				|[c]|$f_1$\&$+$\&|[c]|$f_0$ \\
+				};
+				\draw[arrow, visible on=<10-12>](f4-1-3.south) -- (f2.north);
+
+
+				\node[r, below=\smallspace of f2-1-1, visible on=<11>] (f21) {$1$};
+				\node[r, below=\smallspace of f2-1-3, visible on=<11>] (f20) {$0$};
+
+				\draw[arrow, visible on=<11>](f2-1-1.south) -- (f21.north);
+				\draw[arrow, visible on=<11>](f2-1-3.south) -- (f20.north);
+				
+				\node[r, below=\smallspace of f4-1-3, xshift=\spread*\smallspace, visible on=<12>] (f22) {$1$};
+				
+				\node[r, below=\smallspace of top, visible on=<13>] (f4) {$3$};
+				
+				
+				\node[draw=none, visible on=<14>, font={\Large}] at (0,-3) {$f_4=3$};
+			\end{tikzpicture}
+		}
+	\end{column}
+	\end{columns}
+
+\end{frame}
+
+\begin{frame}[c, fragile]{Rekursion (2)}{}
 	\begin{columns}[c]
 		\begin{column}{0.4\linewidth}
 			\begin{lstlisting}
@@ -365,9 +455,7 @@ end:
 			\small \textbf{Achtung}: 8 Byte nicht CC-konform, nur zur besseren Darstellung
 		\end{column}%
 		\begin{column}{0.5\linewidth}
-			\begin{itemize}
-				\item Funktion die \textbf{sich selbst aufruft}
-			\item Aufbau:
+
 			\begin{enumerate}
 				\item Abbruchbedingung(en)
 				\item Sicherung von \verb|ra| und evtl. Parametern
@@ -377,15 +465,16 @@ end:
 				\item Wiederherstellung von \verb|ra|, \verb|sp|
 				\item Rücksprung
 			\end{enumerate}
-		\item Schritte 3-5 können mehrmals vorkommen (vgl. Fibonacci)
-		\end{itemize}
-			\vspace{0.5cm}
+		\vspace*{\baselineskip}
+			Schritte 3--5 können mehrmals vorkommen!
+
+			\vspace{0.85cm}
 		\end{column}
 	\end{columns}
 \end{frame}
 
 
-\begin{frame}[c, fragile]{Rekursion}{}
+\begin{frame}[c, fragile]{Rekursion (2)}{}
 	\begin{columns}[c]
 		\begin{column}{0.4\textwidth}
 			\begin{lstlisting}
