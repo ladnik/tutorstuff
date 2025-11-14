@@ -133,7 +133,7 @@
 	\pause
 	\begin{itemize}
 		\item \textbf{zeitliche} Lokalität\only<2>{\footnote{Definition der Lokalitätsprinzipien ist eine beliebte Klausuraufgabe!}}: Zugriff auf $x$ $\rightarrow$ Zugriff auf $x$ in Zukunft wahrscheinlicher
-		\item \textbf{räumliche} Lokalität: Zugriff auf $x$ $\rightarrow$ Zugriff auf Daten in der Nähe wahrscheinlicher\\$\rightarrow$ Konsequenz: Cachen von ganzer Cacheline
+		\item \textbf{räumliche} Lokalität: Zugriff auf $x$ $\rightarrow$ Zugriff auf Daten in der Nähe wahrscheinlicher\\$\rightarrow$ Konsequenz: Cachen von ganzer Cachezeile
 	\end{itemize}
 \end{frame}
 
@@ -143,7 +143,7 @@
 			\only<1-3>{
 				\begin{itemize}
 					\item direkte (surjektive) Abbildung von\\Hauptspeicheradresse $\mapsto$ Cacheadresse
-					\item jedes Datum aus dem Hauptspeicher kann nur an \textit{einer} bestimmten Stelle im Cache gecached werden
+					\item jedes Datum aus dem Hauptspeicher kann nur in \textit{eine} bestimmte Cachezeile gecached werden
 					\item <2->Beispiel: 16-Bit-Architektur, 8 Cachezeilen zu je 4 Byte
 					      \begin{enumerate}
 						      \item Anzahl Offset-Bits:  \visible<3->{$\log_2(4)=2$}
@@ -187,7 +187,7 @@
 							}
 						\end{tikzpicture}
 					}
-					\scriptsize Es wird immer die gesamte Cacheline ausgetauscht!
+					\scriptsize Es wird immer die gesamte Cachezeile ausgetauscht!
 				\end{center}
 			}
 		\end{column}%
@@ -254,12 +254,12 @@
 			\only<1-3>{
 				\begin{itemize}
 					\item Daten werden \enquote{wo gerade Platz ist} gecached
-					\item jedes Datum aus dem Hauptspeicher kann an einer \textit{beliebigen} Stelle im Cache gecached werden
+					\item jedes Datum aus dem Hauptspeicher kann in eine \textit{beliebige} Cachezeile gecached werden
 					\item <2->Beispiel: 16-Bit-Architektur, 8 Cachezeilen zu je 4 Byte
 					      \begin{enumerate}
 						      \item Anzahl Offset-Bits:  \visible<3->{$\log_2(4)=2$}
 						      \item Anzahl Index-Bits: \visible<3->{$0$}
-						      \item Anzahl Tag-Bits: \visible<3->{$16-3-0=13$}
+						      \item Anzahl Tag-Bits: \visible<3->{$16-2-0=14$}
 					      \end{enumerate}
 				\end{itemize}
 			}
@@ -276,7 +276,7 @@
 							\node[above=0.3cm of mat-1-1.north, anchor=center] {\textrm{Tag}};
 							\node[above=0.3cm of mat-1-2.north, anchor=center] {\textrm{Offset}};
 
-							\node[below=0cm of mat-1-1.south, anchor=north] {\textrm{13 bit}};
+							\node[below=0cm of mat-1-1.south, anchor=north] {\textrm{14 bit}};
 							\node[below=0cm of mat-1-2.south, anchor=north] {\textrm{2 bit}};
 
 							\visible<5->{
@@ -289,12 +289,12 @@
 								\node[above=0.3cm of mat2-1-1.north, anchor=center] {\textrm{Tag}};
 								\node[above=0.3cm of mat2-1-2.north, anchor=center] {\textrm{Offset}};
 
-								\node[below=0cm of mat2-1-1.south, anchor=north] {\textrm{13 bit}};
+								\node[below=0cm of mat2-1-1.south, anchor=north] {\textrm{14 bit}};
 								\node[below=0cm of mat2-1-2.south, anchor=north] {\textrm{2 bit}};
 							}
 						\end{tikzpicture}
 					}
-					\scriptsize Es wird immer die gesamte Cacheline ausgetauscht!
+					\scriptsize Es wird immer die gesamte Cachezeile ausgetauscht!
 				\end{center}
 			}
 		\end{column}%
@@ -355,7 +355,7 @@
 			\only<1-3>{
 				\begin{itemize}
 					\item Aufteilung des Cache in Sets zu je $n$ Cachezeilen
-					\item jedes Datum aus dem Hauptspeicher kann nur in \textit{einem} bestimmtem Set gecached werden, innerhalb des Sets aber an \textit{beliebiger} Stelle stehen
+					\item jedes Datum aus dem Hauptspeicher kann nur in \textit{einem} bestimmtem Set gecached werden, im Set aber in einer \textit{beliebigen} Cachezeile stehen
 					\item <2->Beispiel: 16-Bit-Architektur, 8 Cachezeilen zu je 4 Byte, 2-fach assoziativ
 					      \begin{enumerate}
 						      \item Anzahl Cache-Sets:  \visible<3->{$\frac{8}{2}=4$}
@@ -400,7 +400,7 @@
 							}
 						\end{tikzpicture}
 					}
-					\scriptsize Es wird immer die gesamte Cacheline ausgetauscht!
+					\scriptsize Es wird immer die gesamte Cachezeile ausgetauscht!
 				\end{center}
 			}
 		\end{column}%
