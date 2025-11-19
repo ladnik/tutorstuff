@@ -1,0 +1,380 @@
+%%
+% This is an Overleaf template for presentations
+% using the TUM Corporate Desing https://www.tum.de/cd
+%
+% For further details on how to use the template, take a look at our
+% GitLab repository and browse through our test documents
+% https://gitlab.lrz.de/latex4ei/tum-templates.
+%
+% The tumbeamer class is based on the beamer class.
+% If you need further customization please consult the beamer class guide
+% https://ctan.org/pkg/beamer.
+% Additional class options are passed down to the base class.
+%
+% If you encounter any bugs or undesired behaviour, please raise an issue
+% in our GitLab repository
+% https://gitlab.lrz.de/latex4ei/tum-templates/issues
+% and provide a description and minimal working example of your problem.
+%%
+
+\PassOptionsToClass{onlytextwidth}{beamer}
+
+\documentclass[
+  german,            % define the document language (english, german)
+  aspectratio=169,    % define the aspect ratio (169, 43)
+  % handout=2on1,       % create handout with multiple slides (2on1, 4on1)
+  % partpage=false,     % insert page at beginning of parts (true, false)
+  % sectionpage=true,   % insert page at beginning of sections (true, false)
+]{tumbeamer}
+
+
+% load additional packages
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{pgf}
+\usepackage{pgfplots}
+\usepackage{babel}[ngerman]
+\usepackage{csquotes}[autostyle]
+\usepackage[useregional]{datetime2}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage[cache=true]{minted}
+\usemintedstyle{borland}
+\usepackage{listings}
+
+
+
+% tikz  
+\usetikzlibrary{fit, matrix, calc, arrows, arrows.meta, positioning, patterns, patterns.meta, bending, overlay-beamer-styles, shapes, shapes.geometric, shapes.misc, backgrounds}
+
+% https://tex.stackexchange.com/a/7045
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt, font=\scriptsize] (char) {#1};}}
+
+\newcommand*\colorcirc[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,fill=#1,inner sep=2pt] {};}}
+	
+\newcommand\n[1]{\mkern1mu\overline{\mkern-1mu#1}}
+
+% requires circuitikz >= 1.1.0
+% for distros with older distributions, install TeX Live manually
+% instead of using your package manager
+% see: https://tug.org/texlive/quickinstall.html
+\ctikzset{logic ports=ieee}
+
+% minted
+\setminted{
+	fontsize=\small, 
+	frame=none,
+	breaklines=true,
+}
+
+\captionsetup{labelformat=empty}
+
+% image path
+\graphicspath{ {./resources/} }
+
+% beamer
+\setbeamercolor{footnote}{fg=black}
+\setbeamercolor{footnote mark}{fg=black}
+\renewcommand{\thempfootnote}{\arabic{mpfootnote}}
+
+% presentation metadata
+\title{Übung 06: Kombinatorische \\Schaltungen}
+\subtitle{Einführung in die Rechnerarchitektur}
+\author{Niklas Ladurner}
+
+\institute{\theChairName\\\theDepartmentName\\\theUniversityName}
+\date{\DTMdisplaydate{2025}{11}{21}{-1}}
+
+\footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
+
+
+% macro to configure the style of the presentation
+\TUMbeamersetup{
+  title page = TUM tower,         % style of the title page
+  part page = TUM toc,            % style of part pages
+  section page = TUM toc,         % style of section pages
+  content page = TUM more space,  % style of normal content pages
+  tower scale = 1.0,              % scaling factor of TUM tower (if used)
+  headline = TUM threeliner,      % which variation of headline to use
+  footline = TUM default,         % which variation of footline to use
+  % configure on which pages headlines and footlines should be printed
+  headline on = {title page},
+  footline on = {every page, title page=false},
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}[c, fragile]{}{}
+  \begin{center}
+    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien.
+
+    \Large Bei Unklarheiten/Unstimmigkeiten haben VL/ZÜ-Folien recht!
+  \end{center}
+\end{frame}
+
+\begin{frame}[c, fragile]{Boolesche Funktionen}{}
+  \centering
+  \begin{columns}[T]
+    \begin{column}{0.3\textwidth}
+      \centering
+      OR-Gatter
+
+      \vspace{0.2cm}
+
+      \begin{circuitikz}
+        \draw (0,0) node[or port] (or) {};
+        \draw (or.in 1) node[left] {$A$};
+        \draw (or.in 2) node[left] {$B$};
+        \draw (or.out) -- ++(0.5,0) node[right] {$A \lor B$};
+      \end{circuitikz}
+
+      \vspace{-0.3cm}
+
+      \[
+        \begin{array}{|c|c|c|}
+          \hline
+          A & B & A \lor B \\
+          \hline
+          0 & 0 & 0        \\
+          0 & 1 & 1        \\
+          1 & 0 & 1        \\
+          1 & 1 & 1        \\
+          \hline
+        \end{array}
+      \]
+
+    \end{column}
+
+    \begin{column}{0.3\textwidth}
+      \centering
+      AND-Gatter
+
+      \vspace{0.2cm}
+
+      \begin{circuitikz}
+        \draw (0,0) node[and port] (and) {};
+        \draw (and.in 1) node[left] {$A$};
+        \draw (and.in 2) node[left] {$B$};
+        \draw (and.out) -- ++(0.5,0) node[right] {$A \land B$};
+      \end{circuitikz}
+
+      \vspace{-0.3cm}
+
+      \[
+        \begin{array}{|c|c|c|}
+          \hline
+          A & B & A \land B \\
+          \hline
+          0 & 0 & 0         \\
+          0 & 1 & 0         \\
+          1 & 0 & 0         \\
+          1 & 1 & 1         \\
+          \hline
+        \end{array}
+      \]
+
+    \end{column}
+
+    \begin{column}{0.3\textwidth}
+      \centering
+      NOT-Gatter
+
+      \vspace{0.2cm}
+
+      \begin{circuitikz}
+        \draw (0,0) node[not port] (not) {};
+        \draw (not.in) -- ++(-0.5,0) node[left] {$A$};
+        \draw (not.out) -- ++(0.5,0) node[right] {$\lnot A$};
+      \end{circuitikz}
+
+      \vspace{-0.3cm}
+
+      \[
+        \begin{array}{|c|c|}
+          \hline
+          A & \lnot A \\
+          \hline
+          0 & 1       \\
+          1 & 0       \\
+          \hline
+        \end{array}
+      \]
+
+    \end{column}
+
+  \end{columns}
+\end{frame}
+
+\begin{frame}[c, fragile]{Boolesche Funktionen}{}
+  \centering
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \centering
+      XOR-Gatter
+
+      \vspace{0.2cm}
+
+      \begin{circuitikz}
+        \draw (0,0) node[xor port] (or) {};
+        \draw (or.in 1) node[left] {$A$};
+        \draw (or.in 2) node[left] {$B$};
+        \draw (or.out) -- ++(0.5,0) node[right] {$A \oplus B$};
+      \end{circuitikz}
+
+      \vspace{-0.3cm}
+
+      \[
+        \begin{array}{|c|c|c|}
+          \hline
+          A & B & A \oplus B \\
+          \hline
+          0 & 0 & 0        \\
+          0 & 1 & 1        \\
+          1 & 0 & 1        \\
+          1 & 1 & 0        \\
+          \hline
+        \end{array}
+      \]
+
+    \end{column}
+
+    \begin{column}{0.5\textwidth}
+      \centering
+      XNOR-Gatter
+
+      \vspace{0.2cm}
+
+      \begin{circuitikz}
+        \draw (0,0) node[xnor port] (or) {};
+        \draw (or.in 1) node[left] {$A$};
+        \draw (or.in 2) node[left] {$B$};
+        \draw (or.out) -- ++(0.5,0) node[right] {$A\leftrightarrow B$};
+      \end{circuitikz}
+
+      \vspace{-0.3cm}
+
+      \[
+        \begin{array}{|c|c|c|}
+          \hline
+          A & B & A\leftrightarrow B\\
+          \hline
+          0 & 0 & 1        \\
+          0 & 1 & 0        \\
+          1 & 0 & 0        \\
+          1 & 1 & 1        \\
+          \hline
+        \end{array}
+      \]
+    \end{column}
+
+
+  \end{columns}
+\end{frame}
+
+\begin{frame}[c, fragile]{Definitionen (1)}{}
+	\begin{block}{Funktionale Vollständigkeit}
+		Eine Menge $M$ boolescher Operatoren heißt funktional vollständig, falls alle booleschen Funktionen $f_i\in\mathcal{F}$ als Kombination von Operatoren aus $M$ darstellbar sind. Die Menge $\{\wedge, \neg\}$ ist funktional vollständig.
+	\end{block}
+	\vfill{}
+	\begin{itemize}
+		\item Struktur zum Beweis, dass eine Menge $M$ funktional vollständig ist:
+		\begin{itemize}
+			\item Zeige, dass $\neg x$ durch Operatoren aus $M$ dargestellt werden kann
+			\item Zeige, dass $x\wedge y$ durch Operatoren aus $M$ dargestellt werden kann
+		\end{itemize}
+		\item Gegenbeweis deutlich schwieriger: Finden einer booleschen Funktion  mit $n\ge1$ Variablen, die nicht dargestellt werden kann (bspw. $\n{x}$)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[c, fragile]{Definitionen  (2)}{}
+	\begin{block}{Dualität}
+		Zu einer gegebenen boolesche Formel $f$ in Negationsnormalform erhält man den dazugehörigen dualen Ausdruck $f^D$ durch Ersetzung: $\{0\mapsto 1; 1\mapsto 0; \wedge\mapsto\vee; \vee\mapsto\wedge\}$. Negationen bleiben davon unberührt!
+	\end{block}
+	\vfill{}
+	\begin{block}{Beispiele}
+		\begin{enumerate}
+			\item $f=(x \vee y) \wedge 1\leadsto f^D=(x\wedge y)\vee 0$
+			\item $g=(a \wedge b\wedge c) \vee (\n{a} \wedge (0\vee \n{b}))\leadsto g^D=(a \vee b\vee c) \wedge (\n{a} \vee (1\wedge \n{b}))$
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+\begin{frame}[c, fragile]{Definitionen (3)}{}
+	\begin{block}{Negationstheorem}
+		Es gilt, dass $\n{f(x_1, x_2, \ldots, x_n, 0, 1, \wedge, \vee)} \equiv f(\n{x_1}, \n{x_2}, \ldots, \n{x_n}, 1, 0, \vee, \wedge)$.
+		
+		Achtung: Anders als bei der Dualität werden hier auch die Variablen negiert!
+	\end{block}
+	\vfill{}
+	\begin{block}{Beispiele}
+		\begin{enumerate}
+			\item $\n{x\vee y} \equiv (\n{x} \wedge \n{y})$ (klassischer De Morgan)
+			\item $\n{a \vee (b\wedge 1) \vee (c \vee 0)} \equiv \n{a} \wedge (\n{b}\vee 0) \wedge (\n{c} \wedge 1)$
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+\begin{frame}[c, fragile]{Gesetze der booleschen Algebra\footnote{In ERA werden sowohl die Schreibweisen $\wedge/\vee$ als auch $\cdot / +$ akzeptiert, solange sie einheitlich verwendet werden.}}{}
+	\begin{center}
+		\begin{tabular}{lcc}
+			Bezeichnung & Gesetz & duales Gesetz  \\\hline
+			Involution & $\n{\n{x}}\equiv x$ & --\\
+			Idempotenz & $x+x\equiv x$ & $x\cdot x\equiv x$ \\
+			Neutralität & $x+0\equiv x$ & $x\cdot 1\equiv x$  \\
+			Extremalgesetz & $x+1\equiv 1$ & $x\cdot 0\equiv 0$  \\
+			Komplementärgesetz & $x+\n{x}\equiv 1$ & $x\cdot\n{x}\equiv 0$  \\\pause
+			Assoziativität &$x + (y+z)\equiv (x + y)+z$ & $x\cdot(y\cdot z)\equiv (x\cdot y)\cdot z$ \\
+			Kommutativität &$x + y\equiv y+x$ & $x\cdot y\equiv y\cdot x$ \\
+			Distributivität & $x+(y\cdot z)\equiv (x+y)\cdot (x+z)$  & $x\cdot(y+z)\equiv (x\cdot y)+ (x\cdot z)$ \\
+			De Morgan &$\n{x+ y} \equiv (\n{x} \cdot \n{y})$ & $\n{x\cdot y} \equiv (\n{x} + \n{y})$ \\
+			Absorption & $x + (x\cdot y) \equiv x$ &$x \cdot (x+y) \equiv x$  \\
+		\end{tabular}
+	\end{center}
+\end{frame}
+
+\begin{frame}[c, fragile]{Normalformen}{}
+	\begin{columns}[c]
+		\begin{column}{0.5\textwidth}
+			\vspace*{-1cm}
+			\begin{itemize}
+				\item Konjunktive Normalform (OR in den Klammern, AND dazwischen): $(x+y) \cdot (x+\n{y})$
+				\item Disjunktive Normalform (AND in den Klammern, OR dazwischen): $(x\cdot y) + (x\cdot\n{y})$
+				\item KNF bei wenigen Nullen im Ergebnis, DNF bei wenigen Einsen im Ergebnis 
+			\end{itemize}
+		\end{column}%
+		\begin{column}{0.5\textwidth}
+			\vspace*{0.5cm}
+			\includegraphics[width=\textwidth]{w06_knf_dnf.pdf}
+			\centering\scriptsize{Quelle: \href{https://de.wikipedia.org/wiki/Konjunktive_Normalform}{Wikipedia}}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c, fragile]{}{}
+  \begin{center}
+    \LARGE Fragen?
+  \end{center}
+\end{frame}
+
+\begin{frame}[c, fragile]{Links}{}
+  \begin{itemize}
+    \item Zulip: \href{https://zulip.in.tum.de/#narrow/channel/3255-ERA-Tutorium-.E2.80.93-Mi-1600-3}{\enquote{ERA Tutorium -- Mi-1600-3}}
+    bzw. \href{https://zulip.in.tum.de/#narrow/channel/3264-ERA-Tutorium-.E2.80.93-Fr-1500-1}{\enquote{ERA Tutorium -- Fr-1500-1}}
+    \item \href{https://www.moodle.tum.de/course/view.php?id=111440}{ERA-Moodle-Kurs}
+    \item \href{https://artemis.tum.de/courses/516}{ERA-Artemis-Kurs}
+    \item \href{https://www.elektronik-kompendium.de/sites/dig/2609191.htm}{Elektronik-Kompendium zu logischen Grundschaltungen}
+    \item \href{https://github.com/hneemann/Digital}{GitHub: Digital}
+  \end{itemize}
+\end{frame}
+
+\maketitle
+
+\end{document}
