@@ -305,11 +305,11 @@ jalr zero, 0(ra)
 \begin{frame}[c, fragile]{Calling Convention}{}
 	\begin{itemize}
 		\item \enquote{Aufrufkonvention} $\rightarrow$ lediglich eine Vereinbarung
-		\item definiert Parameterüberabe, Rückgabe, Registersicherung, Stack etc.
+		\item definiert Parameterübergabe, Rückgabe, Registersicherung, Stack etc.
 		      \begin{enumerate}
 			      \item Datentypen $\le$ 4 Byte in \texttt{a}-Register, sign-extension falls vorzeichenbehafteter Datentyp
 			      \item Datentypen $=$ 8 Byte in zwei \texttt{a}-Registern, niedrigwertige Hälfte zuerst
-			      \item Datentypen $>$ 8 Byte als Pointer auf Caller-Stack
+			      \item Datentypen $>$ 8 Byte als Pointer auf Speicher (meist Caller-Stack)
 			      \item Falls zu wenige Register: Übergabe über Stack
 		      \end{enumerate}
 		\item Stackpointer muss immer ein Vielfaches von 16 Byte sein!
