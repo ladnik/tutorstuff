@@ -1,0 +1,3 @@
+[submodule "riscv-circuitikz"]
+	path = riscv-circuitikz
+	url = https://github.com/ladnik/riscv-circuitikz
