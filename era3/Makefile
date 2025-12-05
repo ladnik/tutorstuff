@@ -6,7 +6,7 @@ LATEXMKFLAGS+=-pdf -halt-on-error -interaction=nonstopmode -shell-escape
 
 # compile a specific .tex file to PDF and clean auxiliary files
 %.pdf: %.tex
-	TEXINPUTS=../beamer//: latexmk $(LATEXMKFLAGS) $<
+	TEXINPUTS=../riscv-circuitikz//:../beamer//: latexmk $(LATEXMKFLAGS) $<
 
 # compile all .tex files
 all: $(TEXS:.tex=.pdf)
