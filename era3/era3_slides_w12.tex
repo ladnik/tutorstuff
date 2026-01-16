@@ -1,0 +1,508 @@
+%%
+% This is an Overleaf template for presentations
+% using the TUM Corporate Desing https://www.tum.de/cd
+%
+% For further details on how to use the template, take a look at our
+% GitLab repository and browse through our test documents
+% https://gitlab.lrz.de/latex4ei/tum-templates.
+%
+% The tumbeamer class is based on the beamer class.
+% If you need further customization please consult the beamer class guide
+% https://ctan.org/pkg/beamer.
+% Additional class options are passed down to the base class.
+%
+% If you encounter any bugs or undesired behaviour, please raise an issue
+% in our GitLab repository
+% https://gitlab.lrz.de/latex4ei/tum-templates/issues
+% and provide a description and minimal working example of your problem.
+%%
+
+\PassOptionsToClass{onlytextwidth}{beamer}
+
+\documentclass[
+  german,            % define the document language (english, german)
+  aspectratio=169,    % define the aspect ratio (169, 43)
+  % handout=2on1,       % create handout with multiple slides (2on1, 4on1)
+  % partpage=false,     % insert page at beginning of parts (true, false)
+  % sectionpage=true,   % insert page at beginning of sections (true, false)
+]{tumbeamer}
+
+
+% load additional packages
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{pgf}
+\usepackage{pgfplots}
+\usepackage{babel}[ngerman]
+\usepackage{csquotes}[autostyle]
+\usepackage[useregional]{datetime2}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage[cache=true]{minted}
+\usemintedstyle{borland}
+\usepackage{listings}
+\usepackage{lstautogobble}
+\usepackage{tikz-timing}
+\usepackage{ifthen}
+\usepackage{ulem}
+\usepackage{enumerate}
+\usepackage{minted}
+\usepackage[dvipsnames]{xcolor}
+
+% tikz  
+\usetikzlibrary{fit, matrix, calc, arrows, arrows.meta, positioning, patterns, patterns.meta, overlay-beamer-styles, riscvproc, automata}
+\def\TikZ{Ti\emph{k}Z}
+\def\Circuitikz{Circui\TikZ}
+
+% processor
+\ctikzset{processor/font=\fontsize{10}{12}\fontfamily{lmss}\selectfont}
+\tikzset{font=\fontsize{10}{12}\fontfamily{lmss}\selectfont}
+\definecolor{modblue}{HTML}{288DCC}
+
+% https://tex.stackexchange.com/a/7045
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt, font=\scriptsize] (char) {#1};}}
+
+\newcommand*\colorcirc[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,fill=#1,inner sep=2pt] {};}}
+
+\newcommand\n[1]{\mkern1mu\overline{\mkern-1mu#1}}
+
+% requires circuitikz >= 1.1.0
+% for distros with older distributions, install TeX Live manually
+% instead of using your package manager
+% see: https://tug.org/texlive/quickinstall.html
+\ctikzset{logic ports=ieee}
+
+% minted
+\setminted{
+	fontsize=\small, 
+	frame=none,
+	breaklines=true,
+}
+
+\captionsetup{labelformat=empty}
+
+% image path
+\graphicspath{ {./resources/}, {../riscv-circuitikz/figures/} }
+
+% beamer
+\setbeamercolor{footnote}{fg=black}
+\setbeamercolor{footnote mark}{fg=black}
+\renewcommand{\thempfootnote}{\arabic{mpfootnote}}
+
+% presentation metadata
+\title{Übung 12: Pipelining}
+\subtitle{Einführung in die Rechnerarchitektur}
+\author{Niklas Ladurner}
+
+\institute{\theChairName\\\theDepartmentName\\\theUniversityName}
+\date{\DTMdisplaydate{2026}{01}{16}{-1}}
+
+\footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
+
+
+% macro to configure the style of the presentation
+\TUMbeamersetup{
+  title page = TUM tower,         % style of the title page
+  part page = TUM toc,            % style of part pages
+  section page = TUM toc,         % style of section pages
+  content page = TUM more space,  % style of normal content pages
+  tower scale = 1.0,              % scaling factor of TUM tower (if used)
+  headline = TUM threeliner,      % which variation of headline to use
+  footline = TUM default,         % which variation of footline to use
+  % configure on which pages headlines and footlines should be printed
+  headline on = {title page},
+  footline on = {every page, title page=false},
+}
+
+\setbeamercolor{enumerate item}{fg=black}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}[c, fragile]{}{}
+	\begin{center}
+		\LARGE  Keine Garantie für die Richtigkeit der Tutorfolien.
+
+		\Large Bei Unklarheiten/Unstimmigkeiten haben VL/ZÜ-Folien recht!
+	\end{center}
+\end{frame}
+
+\def\cellwt{1.1cm}
+\def\cellht{0.7cm}
+\def\cellspc{1.25}
+\tikzset{cell/.style={draw, minimum width=\cellwt, minimum height=\cellht, align=center, rounded corners=0.1cm},
+	label/.style={draw=none, minimum width=\cellwt, minimum height=\cellht,text width=\cellwt, text depth=0pt, align=center},
+	A/.style={fill=red!70},
+	B/.style={fill=orange!70!},
+	C/.style={fill=yellow!70},
+	D/.style={fill=RoyalBlue!60},
+	E/.style={fill=Orchid!70},
+	F/.style={fill=ForestGreen!70},
+	G/.style={fill=TealBlue!70},
+	empty/.style={fill=gray!15}}
+
+\begin{frame}[fragile, c]{Pipelining}{}
+	\begin{columns}
+		\begin{column}[c]{0.45\textwidth}
+			\begin{itemize}
+				\item Parallele Verarbeitung von mehreren Instruktionen
+				\item Aufteilung in 5 Teilschritte: Fetch, Decode, Execute, Memory, Writeback
+				\item Daten- und Kontrollpfad des Prozessors wird aufgetrennt: Register zur Zwischenspeicherung
+				\item maximaler Speedup: Anzahl $n$ der Pipelinestufen
+			\end{itemize}.
+		\end{column}
+		\begin{column}[c]{0.5\textwidth}
+			\resizebox{\textwidth}{!}{
+				\begin{tikzpicture}
+					% row labels
+					\node[rotate=90] at (0,2) {Zeitschritt};
+					\foreach \r in {1,...,5}
+					\node[label] at (0.4,5-\r) {\r};
+
+					% column labels
+					\foreach \c/\name in {1/Fetch,2/Decode,3/Execute,4/Memory,5/Writeb.}
+					\node[label] at (\cellspc*\c,4.75) {\name};
+
+					% grid
+					\foreach \r in {1,...,5}
+					\foreach \c in {1,...,5}
+					\node[cell,empty] at (\cellspc*\c,5-\r) {};
+
+					% i1
+					\foreach \r/\c in {1/1,2/2,3/3,4/4,5/5}
+					\node[cell,A] at (\cellspc*\c,5-\r) {\texttt{i1}};
+
+					% i2
+					\foreach \r/\c in {2/1,3/2,4/3,5/4}
+					\node[cell,B] at (\cellspc*\c,5-\r) {\texttt{i2}};
+
+					% i3
+					\foreach \r/\c in {3/1,4/2,5/3}
+					\node[cell,C] at (\cellspc*\c,5-\r) {\texttt{i3}};
+
+					% i4
+					\foreach \r/\c in {4/1,5/2}
+					\node[cell,D] at (\cellspc*\c,5-\r) {\texttt{i4}};
+
+					% i5
+					\foreach \r/\c in {5/1}
+					\node[cell,E] at (\cellspc*\c,5-\r) {\texttt{i5}};
+
+				\end{tikzpicture}}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile, c]{Pipelined Prozessor: Schaltbild}{}
+	\begin{center}
+		\resizebox{0.8\textwidth}{!}{
+			\input{riscv_pl.tikz}
+		}
+	\end{center}
+\end{frame}
+
+\begin{frame}[fragile, c]{Datenabhängigkeiten}{}
+	\begin{columns}
+		\begin{column}[c]{0.5\textwidth}
+			\begin{itemize}
+				\item<1-> \textbf{RAW} (Read-After-Write): potentiell ein Problem, falls schreibende Instruktion noch nicht zurückgeschrieben hat
+				\item<2-> \textbf{WAR} (Write-After-Read): Reihenfolge der betroffenen Instruktionen darf nicht vertauscht werden
+				\item<3-> \textbf{WAW} (Write-After-Write): Reihenfolge der betroffenen Instruktionen darf nicht vertauscht werden
+			\end{itemize}
+		\end{column}%
+		\begin{column}[c]{0.5\textwidth}
+			\begin{listing}[H]
+				\centering
+				\begin{minipage}{\widthof{\texttt{add t2, t0, s5}}}
+					\begin{minted}[escapeinside=||, autogobble=true, frame=none]{text}
+				lw |\color{red}{|t0|}|, 0(a1)
+				add t2, |\color{red}{|t0|}|, s5
+			\end{minted}
+				\end{minipage}
+				\caption{RAW-Abhängigkeit bzgl. \texttt{t0}}
+			\end{listing}
+			\pause
+			\begin{listing}[H]
+				\centering
+				\begin{minipage}{\widthof{\texttt{add t2, t0, s5}}}
+					\begin{minted}[escapeinside=||, autogobble=true, frame=none]{text}
+						xor a0, |\color{blue}{|a2|}|, a1
+						sub |\color{blue}{|a2|}|, a4, a5
+					\end{minted}
+				\end{minipage}
+				\caption{WAR-Abhängigkeit bzgl. \texttt{a2}}
+			\end{listing}
+			\pause
+			\begin{listing}[H]
+				\centering
+				\begin{minipage}{\widthof{\texttt{add t2, t0, s5}}}
+					\begin{minted}[escapeinside=||, autogobble=true, frame=none]{text}
+					and |\color{green}{|s0|}|, s1, s2
+					lw |\color{green}{|s0|}|, 0(s3)
+				\end{minted}
+				\end{minipage}
+				\caption{WAW-Abhängigkeit bzgl. \texttt{s0}}
+			\end{listing}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c, fragile]{Pipelinekonflikte}{}
+	\vspace{-0.5cm}
+	\begin{columns}
+		\begin{column}{0.45\textwidth}
+			\begin{center}\textbf{Data Hazards}\\(Datenkonflikte\footnote[frame]{Nicht zu verwechseln mit den vorher genannten Daten\textit{abhängigkeiten} (RAW, WAR, WAW)})\end{center}
+			\begin{itemize}
+				\item können nur bei RAW auftreten\footnote[frame]{müssen aber nicht!}
+				\item abhängige Instruktion in Decode, aber Ergebnis noch nicht zurückgeschrieben
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.45\textwidth}
+			\begin{center}\textbf{Control Hazards}\\(Steuerkonflikte)\end{center}
+			\begin{itemize}
+				\item Kontrollflussänderungen durch branches/jumps
+				\item falsche Sprungentscheidung: falsche Instruktionen in Pipeline geladen
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c, fragile]{Lösung von Konflikten: Data Hazards}
+	\begin{columns}
+		\begin{column}[c]{0.5\textwidth}
+			Mindestens \textbf{3 Befehle} zwischen zwei Instruktionen mit RAW-Abhängigkeit:
+			\begin{itemize}
+				\item<2-> NOPs (Stalling)
+				\item<3-> Befehlsumordnung (ohne Änderung der Semantik)
+			\end{itemize}
+			\vspace*{\baselineskip}
+			\visible<4->{Alternativ:}
+			\begin{itemize}
+				\item<4-> Forwarding: noch nicht zurückgeschriebenes Ergebnis kann von einer Stage in eine andere geleitet werden
+			\end{itemize}
+		\end{column}
+		\begin{column}[c]{0.5\textwidth}
+			\centering
+
+			\resizebox{\textwidth}{!}{
+				\begin{tikzpicture}
+					% row labels
+					\node[rotate=90] at (0,2) {Zeitschritt};
+					\foreach \r in {1,...,5}
+					\node[label] at (0.4,5-\r) {\r};
+
+					% column labels
+					\foreach \c/\name in {1/Fetch,2/Decode,3/Execute,4/Memory,5/Writeb.}
+					\node[label] at (\cellspc*\c,4.75) {\name};
+
+					% grid
+					\foreach \r in {1,...,5}
+					\foreach \c in {1,...,5}
+					\node[cell,empty] at (\cellspc*\c,5-\r) {};
+
+					% i1
+					\foreach \r/\c in {1/1,2/2,3/3,4/4,5/5}
+					\node[cell,A] at (\cellspc*\c,5-\r) {\texttt{i1}};
+
+					% conflict and forwarding
+					\only<1, 4>{
+						% i2
+						\foreach \r/\c in {2/1,3/2,4/3,5/4}
+						\node[cell,B] at (\cellspc*\c,5-\r) {\texttt{i2}};
+
+						% i3
+						\foreach \r/\c in {3/1,4/2,5/3}
+						\node[cell,C] at (\cellspc*\c,5-\r) {\texttt{i3}};
+
+						% i4
+						\foreach \r/\c in {4/1,5/2}
+						\node[cell,D] at (\cellspc*\c,5-\r) {\texttt{i4}};
+
+						% i5
+						\foreach \r/\c in {5/1}
+						\node[cell,E] at (\cellspc*\c,5-\r) {\texttt{i5}};
+					}
+				
+				% stalling
+				\only<2>{
+					% nop
+					\foreach \r/\c in {2/1,3/2,4/3,5/4}
+					\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
+					
+					% nop
+					\foreach \r/\c in {3/1,4/2,5/3}
+					\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
+					
+					% nop
+					\foreach \r/\c in {4/1,5/2}
+					\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
+					
+					% i2
+					\foreach \r/\c in {5/1}
+					\node[cell,B] at (\cellspc*\c,5-\r) {\texttt{i2}};
+				}
+			
+			% reordering
+			\only<3>{	
+				% i3
+				\foreach \r/\c in {2/1,3/2,4/3,5/4}
+				\node[cell,C] at (\cellspc*\c,5-\r) {\texttt{i3}};
+				
+				% i4
+				\foreach \r/\c in {3/1,4/2,5/3}
+				\node[cell,D] at (\cellspc*\c,5-\r) {\texttt{i4}};
+				
+				% i5
+				\foreach \r/\c in {4/1,5/2}
+				\node[cell,E] at (\cellspc*\c,5-\r) {\texttt{i5}};
+				
+				% i2
+				\foreach \r/\c in {5/1}
+				\node[cell,B] at (\cellspc*\c,5-\r) {\texttt{i2}};
+			}
+		
+			\visible<4>{
+				\draw[very thick, ->] (\cellspc*4,\cellht - 2pt) -- ++(0, -0.3*\cellht) -| (\cellspc*3,\cellht - 2pt);
+			}
+		
+				\end{tikzpicture}
+			}
+
+			\begin{center}
+				Konflikt zwischen \texttt{i1} und \texttt{i2}
+			\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c, fragile]{Lösung von Konflikten: Control  Hazards}
+	\begin{columns}
+		\begin{column}[c]{0.5\textwidth}
+			Mindestens \textbf{2 Befehle} zwischen Sprungentscheidung und
+			möglicherweise falsch geladener Instruktion:
+			\begin{itemize}
+				\item<2-> NOPs (Stalling)
+			\end{itemize}
+			\vspace*{\baselineskip}
+			\visible<3->{Alternativ:}
+			\begin{itemize}
+				\item<3-> Flushing: Falls Vorhersage der branch prediction falsch war, müssen geladene Instruktionen aus Pipeline entfernt werden
+			\end{itemize}
+		\end{column}
+	\begin{column}[c]{0.5\textwidth}
+		\centering
+		
+		\resizebox{\textwidth}{!}{
+			\begin{tikzpicture}
+				% row labels
+				\node[rotate=90] at (0,2) {Zeitschritt};
+				\foreach \r in {1,...,5}
+				\node[label] at (0.4,5-\r) {\r};
+				
+				% column labels
+				\foreach \c/\name in {1/Fetch,2/Decode,3/Execute,4/Memory,5/Writeb.}
+				\node[label] at (\cellspc*\c,4.75) {\name};
+				
+				% grid
+				\foreach \r in {1,...,5}
+				\foreach \c in {1,...,5}
+				\node[cell,empty] at (\cellspc*\c,5-\r) {};
+				
+				% i1
+				\foreach \r/\c in {1/1,2/2,3/3,4/4,5/5}
+				\node[cell,A] at (\cellspc*\c,5-\r) {\texttt{i1}};
+				
+				% conflict
+				\only<1>{
+					% i2
+					\foreach \r/\c in {2/1,3/2,4/3,5/4}
+					\node[cell,B] at (\cellspc*\c,5-\r) {\texttt{i2}};
+					
+					% i3
+					\foreach \r/\c in {3/1,4/2,5/3}
+					\node[cell,C] at (\cellspc*\c,5-\r) {\texttt{i3}};
+					
+					% i4
+					\foreach \r/\c in {4/1,5/2}
+					\node[cell,D] at (\cellspc*\c,5-\r) {\texttt{i4}};
+					
+					% i5
+					\foreach \r/\c in {5/1}
+					\node[cell,E] at (\cellspc*\c,5-\r) {\texttt{i5}};
+				}
+				
+				% stalling
+				\only<2>{
+					% nop
+					\foreach \r/\c in {2/1,3/2,4/3,5/4}
+					\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
+					
+					% nop
+					\foreach \r/\c in {3/1,4/2,5/3}
+					\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
+					
+					% i22
+					\foreach \r/\c in {4/1,5/2}
+					\node[cell,F] at (\cellspc*\c,5-\r) {\texttt{i22}};
+					
+					% i23
+					\foreach \r/\c in {5/1}
+					\node[cell,G] at (\cellspc*\c,5-\r) {\texttt{i23}};
+				}
+				
+				% flushing
+				\only<3>{
+					% nop
+					\foreach \r/\c in {4/3,5/4}
+					\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
+					
+					% nop
+					\foreach \r/\c in {4/2,5/3}
+					\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
+					
+					% i2
+					\foreach \r/\c in {2/1,3/2}
+					\node[cell,B] at (\cellspc*\c,5-\r) {\texttt{i2}};
+					
+					% i3
+					\foreach \r/\c in {3/1}
+					\node[cell,C] at (\cellspc*\c,5-\r) {\texttt{i3}};
+					
+					% i22
+					\foreach \r/\c in {4/1,5/2}
+					\node[cell,F] at (\cellspc*\c,5-\r) {\texttt{i22}};
+					
+					% i23
+					\foreach \r/\c in {5/1}
+					\node[cell,G] at (\cellspc*\c,5-\r) {\texttt{i23}};
+				}
+			\end{tikzpicture}
+		}
+		
+		\begin{center}
+			Branch durch \texttt{i1}
+		\end{center}
+	\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c, fragile]{Links}{}
+	\begin{itemize}
+		\item \href{https://zulip.in.tum.de/#narrow/channel/3255-ERA-Tutorium-.E2.80.93-Mi-1600-3}{\enquote{ERA Tutorium -- Mi-1600-3}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/channel/3264-ERA-Tutorium-.E2.80.93-Fr-1500-1}{\enquote{ERA Tutorium -- Fr-1500-1}}
+		\item \href{https://www.moodle.tum.de/course/view.php?id=111440}{ERA-Moodle-Kurs}
+		\item \href{https://artemis.tum.de/courses/516}{ERA-Artemis-Kurs}
+	\end{itemize}
+\end{frame}
+
+\maketitle
+
+\end{document}
