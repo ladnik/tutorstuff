@@ -1,0 +1,662 @@
+%%
+% This is an Overleaf template for presentations
+% using the TUM Corporate Desing https://www.tum.de/cd
+%
+% For further details on how to use the template, take a look at our
+% GitLab repository and browse through our test documents
+% https://gitlab.lrz.de/latex4ei/tum-templates.
+%
+% The tumbeamer class is based on the beamer class.
+% If you need further customization please consult the beamer class guide
+% https://ctan.org/pkg/beamer.
+% Additional class options are passed down to the base class.
+%
+% If you encounter any bugs or undesired behaviour, please raise an issue
+% in our GitLab repository
+% https://gitlab.lrz.de/latex4ei/tum-templates/issues
+% and provide a description and minimal working example of your problem.
+%%
+
+\PassOptionsToClass{onlytextwidth}{beamer}
+
+\documentclass[
+german,            % define the document language (english, german)
+aspectratio=169,    % define the aspect ratio (169, 43)
+% handout=2on1,       % create handout with multiple slides (2on1, 4on1)
+% partpage=false,     % insert page at beginning of parts (true, false)
+% sectionpage=true,   % insert page at beginning of sections (true, false)
+]{tumbeamer}
+
+
+% load additional packages
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{pgf}
+\usepackage{pgfplots}
+\usepackage{babel}[ngerman]
+\usepackage{csquotes}[autostyle]
+\usepackage[useregional]{datetime2}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage[cache=true]{minted}
+\usemintedstyle{borland}
+\usepackage{listings}
+\usepackage{tikz-timing}
+\usepackage{ifthen}
+\usepackage{karnaugh-map}
+
+% tikz
+\usetikzlibrary{overlay-beamer-styles}
+\usetikzlibrary{arrows,backgrounds,positioning,shapes,patterns,patterns.meta,matrix,arrows,shapes.geometric,matrix,fit,calc,automata}
+
+% requires circuitikz >= 1.1.0
+% for distros with older distributions, install TeX Live manually
+% instead of using your package manager
+% see: https://tug.org/texlive/quickinstall.html
+\ctikzset{logic ports=ieee}
+
+% minted
+\setminted{
+	fontsize=\small, 
+	frame=none,
+	breaklines=true,
+}
+
+% image path
+\graphicspath{ {./resources/} }
+
+% beamer
+\setbeamercolor{footnote}{fg=black}
+\setbeamercolor{footnote mark}{fg=black}
+
+% additional commands
+\newcommand{\n}[1]{\overline{#1}}
+
+% presentation metadata
+\title{Übung 13: Optimierung}
+\subtitle{Einführung in die Rechnerarchitektur}
+\author{Niklas Ladurner}
+
+\institute{\theChairName\\\theDepartmentName\\\theUniversityName}
+\date{\DTMdisplaydate{2026}{01}{23}{-1}}
+
+\footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
+
+
+% macro to configure the style of the presentation
+\TUMbeamersetup{
+  title page = TUM tower,         % style of the title page
+  part page = TUM toc,            % style of part pages
+  section page = TUM toc,         % style of section pages
+  content page = TUM more space,  % style of normal content pages
+  tower scale = 1.0,              % scaling factor of TUM tower (if used)
+  headline = TUM threeliner,      % which variation of headline to use
+  footline = TUM default,         % which variation of footline to use
+  % configure on which pages headlines and footlines should be printed
+  headline on = {title page},
+  footline on = {every page, title page=false},
+}
+
+\setbeamercolor{enumerate item}{fg=black}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}[c, fragile]{}{}
+	\begin{center}
+		\LARGE  Keine Garantie für die Richtigkeit der Tutorfolien.
+
+		\Large Bei Unklarheiten/Unstimmigkeiten haben VL/ZÜ-Folien recht!
+	\end{center}
+\end{frame}
+
+\begin{frame}[fragile, c]{Logiksynthese}{}
+	\begin{itemize}
+		\item Logiksynthese: Realisierung boolsche Funktion in Hardware
+		\item naive Synthese (direkte Übertragung der Wahrheitstabelle) nicht skalierbar
+		\item verschiedene Verfahren zur Optimierung und Reduktion von Funktionen auf ihr Minimalpolynom $\rightarrow$ optimale Schaltung
+	\end{itemize}
+	\begin{block}{Minimalpolynom}
+		Ein Polynom $p$ ist Minimalpolynom einer booleschen Funktion $f$, falls  $\psi(p) \equiv f$ (d.h. $p$ eine Formel für $f$ ist) und es keine weitere Vereinfachungen gibt.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile, c]{Karnaugh-Veitch-Diagramme\footnote{Oft auch als K-Maps bezeichnet}}{}
+\begin{columns}[c]
+\begin{column}{0.6\textwidth}
+	\begin{itemize}
+		\item rechteckiges Schema, in dem alle Literalkombinationen (positiv und negativ) vorkommen
+		\item nebeneinander liegende Zeilen/Spalten dürfen sich immer nur in 1 Bit unterscheiden (Gray-Code)!
+		\item Zusammenfassen von Einsen in $2^n$-Blöcken, Don't Care können als $0$ oder $1$ gewählt werden.
+		\item jedes maximal große Päckchen steht für einen Primimplikanten der Funktion $\rightarrow$ minimale Mengen von Päckchen die alle $1$en abdeckt ergibt ein Minimalpolynom
+	\end{itemize}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{center}
+\resizebox{!}{0.6\textheight}{
+	\begin{karnaugh-map}(label=corner,implicantcolors={TUMExtRed,TUMExtLime,TUMOrange,TUMBlue,TUMExtViolet})[4][4][1][d][c][b][a]
+	\maxterms{3,6,7,12,9} % zeroes
+	\minterms{4,5,15,14,8,11,10,13,2} % ones
+	\implicant{0}{5}
+	\implicant{15}{10}
+	\implicant{5}{13}
+	\implicantcorner
+	\autoterms[-]
+	\end{karnaugh-map}
+}\\
+$f=\textcolor{TUMExtRed}{\n{a}\n{c}}+\textcolor{TUMBlue}{\n{b}\n{d}}+\textcolor{TUMExtLime}{ac} +\textcolor{TUMOrange}{b\n{c}d}$
+\end{center}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{Logik-Hazards}{}
+\begin{columns}[c]
+\begin{column}{0.5\textwidth}
+	\begin{itemize}
+		\item Glitches (kurzzeitige Signaländerung) am Ausgang, die durch Gatterlaufzeit auftritt
+		\item kann zu Problemen führen (z.B. Oszillation)
+		\item in K-Map: Zwei nebeneinanderliegende Einsen, die nicht durch ein gemeinsames Päckchen abgedeckt sind
+		\item Lösung: Hinzufügen von zusätzlichem Päckchen $\rightarrow$ kein Minimalpolynom!
+	\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\vspace{-0.5cm}
+\begin{center}
+\resizebox{0.75\textwidth}{!}{
+	\begin{karnaugh-map}(label=corner,implicantcolors={TUMExtRed,TUMExtLime,TUMOrange,TUMBlue,TUMExtViolet})[4][2][1][c][b][a]
+	%\maxterms{} % zeroes
+	%\indeterminants{}
+	\minterms{0,1,5,7} % ones
+	\autoterms[0]
+	\implicant{0}{1}
+	\implicant{5}{7}
+	\only<3->{\implicant{1}{5}}
+	\end{karnaugh-map}
+}
+\resizebox{0.75\textwidth}{!}{
+	\begin{circuitikz}
+		\node[or port, number inputs=3, no input leads] (or) at (0,0) {};
+
+		\node[and port, number inputs=2, left=of or.in 1, anchor=out, yshift=1cm] (and1) {};
+		\node at (and1.bin 1) [notcirc, left]{};
+		\node at (and1.bin 2) [notcirc, left]{};
+
+		\node[and port, number inputs=2, left=of or.in 2, anchor=out, draw=white] (and2phantom) {};
+
+		\node[and port, number inputs=2, left=of or.in 3, anchor=out, yshift=-1cm] (and3) {};
+
+		\draw (and1.in 1) -- ++(-.75, 0) node[left] (a) {$a$};
+		\draw (and1.in 2) -- ++(-.75, 0) node[left] (b) {$b$};
+
+		\draw (and2phantom.in 2)++(-0.25, 0) -- ++(-.5, 0) node[left] (c) {$c$};
+
+		\draw (a) -- (and1.in 1);
+		\draw (b) -- (and1.in 2);
+
+
+		\draw (c) -- ++(0.75, 0) |- (and3.in 1);
+		\draw (a) -- ++(0.5, 0) node[circle,fill=black,inner sep=0pt,minimum size=3pt] {}  |- (and3.in 2);
+
+		\draw (and1.out) |- (or.bin 1);
+		\draw (and3.out) |- (or.bin 3);
+
+		\draw (or.out) -- ++(.5, 0) node[right] (y) {$y$};
+
+		\only<2>{
+			\draw[very thick, red] (a) -- (and1.bin 1) -- (and1.bout) -- (and1.out) |- (or.bin 1) -- (or.bout) -- (y);
+		}
+
+		\only<3->{
+			\node[and port, number inputs=2, left=of or.in 2, anchor=out, TUMOrange] (and2) {};
+			\node at (and2.bin 1) [notcirc, left, TUMOrange]{};
+			\draw (b) -- ++(0.75, 0) node[circle,fill=black,inner sep=0pt,minimum size=3pt] {}  |- (and2.in 1);
+			\draw (c) ++(0.75, 0) node[circle,fill=black,inner sep=0pt,minimum size=3pt] {};
+			\draw (c) -- (and2.in 2);
+			\draw (and2.out) |- (or.bin 2);
+		}
+	\end{circuitikz}
+}
+\end{center}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+% stolen from sheet u12
+\tikzset{
+	zeroarrow/.style = {-stealth,dashed},
+	onearrow/.style = {-stealth,solid},
+	c/.style = {circle,draw,solid,minimum width=2em,
+			minimum height=2em},
+	r/.style = {rectangle,draw,solid,minimum width=2em,
+			minimum height=2em},
+	e/.style = {draw=none,circle, minimum width=2em,minimum height=2em}
+}
+\begin{frame}[c, fragile]{Binary Decision Diagrams}{}
+	\begin{columns}[c]
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Darstellung einer boolschen Funktion als gerichteter azyklischer Graph (DAG)
+				\item Knoten repräsentieren Teilfunktionen, 2 ausgehende Kanten: $0$ (low), $1$ (high)
+				\item Aufbau bspw. mittels Shannon-Zerlegung: $f(x_0, x_1) \rightarrow f_{x_0=0}(x_1), f_{x_0=1}(x_1)$
+				\item \textbf{ROBDDs sind kanonisch (eindeutig)}
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\resizebox{!}{0.8\textheight}{
+					\begin{tikzpicture}[node distance=1cm and 1cm]\footnotesize
+						\node[c] (x1) {$x_1$};
+						\node[] (t) [above=of x1, yshift=-0.8cm] {$\n{x}_1x_2\n{x}_3+x_1\n{x}_2\n{x}_3+x_1x_2x_3$};
+						\node[c] (x2l) [below left=of x1] {$x_2$};
+						\node[c] (x2r) [below right=of x1] {$x_2$};
+
+						\node[c] (x3l) [below=of x2l] {$x_3$};
+						\node[c] (x3r) [below=of x2r] {$x_3$};
+
+						\node[r] (zero) [below=of x3r, xshift=-0.5cm] {0};
+						\node[r] (one) [below=of x3l, xshift=0.5cm] {1};
+
+						\draw[zeroarrow] (x1) -- (x2l) node [midway, fill=none, above left] {$x_2\n{x}_3$};
+						\draw[onearrow] (x1) -- (x2r)  node [near end, fill=none, above right, align=center] {$\n{x}_2\n{x}_3+$\\$x_2x_3$};
+
+						\draw[zeroarrow] (x2l) to [out=0,in=180] (zero);
+						\draw[onearrow] (x2l) -- (x3l) node [midway, fill=none, left] {$\n{x}_3$};
+
+						\draw[zeroarrow] (x2r) -- (x3l)  node [near end, fill=none, above left] {$\n{x}_3$};
+						\draw[onearrow] (x2r)  -- (x3r)  node [midway, fill=none,right] {$x_3$};
+
+						\draw[zeroarrow] (x3l) -- (one);
+						\draw[onearrow] (x3l) -- (zero);
+						\draw[zeroarrow] (x3r) -- (zero);
+						\draw[onearrow] (x3r) -- (one);
+					\end{tikzpicture}
+				}
+
+				\scriptsize Variablenordnung: $x_1\prec x_2\prec x_3$
+			\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c, fragile]{BDDs: Reduktionen}
+	\begin{columns}[c]
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\textbf{I-Reduktion}\\
+				Zusammenführung isomorpher Knoten
+				\vspace{\baselineskip}
+				\resizebox{!}{0.5\textheight}{
+					\begin{tikzpicture}
+						\node[e] (rl) {};
+						\node[e] (rm) [right=1em of rl]{};
+						\node[e] (rr) [right=1em of rm]{};
+						\node[c] (al) [below=of rl] {$a$};
+						\node[c] (ar) [below=of rr] {$a$};
+
+						\node[c] (bl) [below=of al] {$b$};
+						\node[c] (br) [below=of ar] {$b$};
+
+						\draw[zeroarrow] (rl) -- (al);
+						\draw[zeroarrow] (rm) -- (ar);
+						\draw[onearrow] (rr) -- (ar);
+
+						\draw[zeroarrow] (al) -- (bl);
+						\draw[zeroarrow] (ar) -- (bl);
+
+						\draw[onearrow] (al) -- (br);
+						\draw[onearrow] (ar) -- (br);
+
+						\node[e] (rl2) [right=4em of rr]{};
+						\node[e] (rm2) [right=1em of rl2]{};
+						\node[e] (rr2) [right=1em of rm2]{};
+						\node[c] (al2) [below=of rl2] {$a$};
+
+						\node[c] (bl2) [below=of al2] {$b$};
+						\node[c] (br2) [below=of al2, xshift=2cm] {$b$};
+
+						\draw[zeroarrow] (rl2) -- (al2);
+						\draw[zeroarrow] (rm2) -- (al2);
+						\draw[onearrow] (rr2) -- (al2);
+
+						\draw[zeroarrow] (al2) -- (bl2);
+						\draw[zeroarrow] (al2) -- (bl2);
+
+						\draw[onearrow] (al2) -- (br2);
+						\draw[onearrow] (al2) -- (br2);
+
+						\draw[-Latex, thick] (ar)++(2em,0) -- ++(2em,0);
+					\end{tikzpicture}
+				}
+			\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\textbf{S-Reduktion}\\
+				Entfernen von überflüssigen Knoten
+				\vspace{\baselineskip}
+				\resizebox{!}{0.5\textheight}{
+					\begin{tikzpicture}
+						\node[e] (rl) {};
+						\node[e] (rm) [right=1em of rl]{};
+						\node[e] (rr) [right=1em of rm]{};
+						\node[c] (al) [below=of rm] {$a$};
+						\node[c] (bl) [below=of al] {$b$};
+
+						\draw[zeroarrow] (rl) -- (al);
+						\draw[zeroarrow] (rm) -- (al);
+						\draw[onearrow] (rr) -- (al);
+
+						\draw[zeroarrow] (al) to[bend right] (bl);
+						\draw[onearrow] (al) to[bend left] (bl);
+
+						\node[e] (rl2) [right=0em of rr]{};
+						\node[e] (rm2) [right=1em of rl2]{};
+						\node[e] (rr2) [right=1em of rm2]{};
+
+						\node[e] (al2) [below=of rm2] {};
+						\node[c] (bl2) [below=of al2] {$b$};
+
+						\draw[zeroarrow] (rl2) -- (bl2);
+						\draw[zeroarrow] (rm2) -- (bl2);
+						\draw[onearrow] (rr2) -- (bl2);
+
+						\draw[-Latex, thick] (al)++(3em,0) -- ++(2em,0);
+					\end{tikzpicture}
+				}
+			\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c, fragile]{ITE}
+	\begin{columns}[c]
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Ternärer Operator $\textrm{ITE}(a, b, c)\equiv ab + \n{a}c$; falls $a$, dann $b$, sonst $c$
+				\item alle booleschen Operatoren können als ITE dargestellt werden, z.B.
+				      \begin{enumerate}
+					      \item $\textrm{NOT}(f) \equiv \textrm{ITE}(f, 0, 1)$
+					      \item $\textrm{OR}(f,g) \equiv \textrm{ITE}(f, 1, g)$
+					      \item $\textrm{AND}(f,g) \equiv \textrm{ITE}(f, g, 0)$
+				      \end{enumerate}
+				\item Zusammenhang mit BDDs: High-Kind im True-Fall, Low-Kind im False-Fall
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\begin{tikzpicture}
+					\def\smallspace{0.75cm}
+					\def\bigspace{6cm}
+					\def\margin{0.75cm}
+					\def\labelspacing{0cm}
+
+					\node[c] (x1) {$a$};
+					\node[above=\labelspacing of x1] {$f$};
+
+					\node[c] (x2l) [below=\smallspace of x1, xshift=-2*\smallspace] {$b$};
+					\node[above=\labelspacing of x2l] {$f_{\n{a}}$};
+					\node[c] (x2r) [below=\smallspace of x1, xshift=2*\smallspace] {$b$};
+					\node[above=\labelspacing of x2r] {$f_{a}$};
+
+					\node[c] (x3rl) [below=\smallspace of x2r, xshift=-2*\smallspace] {$c$};
+					\node[above=\labelspacing of x3rl] {$f_{a\n{b}}$};
+					\node[c] (x3rr) [below=\smallspace of x2r, xshift=2*\smallspace] {$c$};
+					\node[above=\labelspacing of x3rr] {$f_{ab}$};
+
+					\draw[zeroarrow](x1) -- (x2l);
+					\draw[onearrow](x1) -- (x2r);
+
+					\draw[zeroarrow](x2r) -- (x3rl);
+					\draw[onearrow](x2r) -- (x3rr);
+
+					\draw[zeroarrow] (x2l) -- ($(x2l) + (-\margin, -\margin)$) node[below] {$\ldots$};
+					\draw[onearrow] (x2l) -- ($(x2l) + (\margin, -\margin)$) node[below] {$\ldots$};
+
+					\draw[zeroarrow] (x3rl) -- ($(x3rl) + (-\margin, -\margin)$) node[below] {$\ldots$};
+					\draw[onearrow] (x3rl) -- ($(x3rl) + (\margin, -\margin)$) node[below] {$\ldots$};
+					\draw[zeroarrow] (x3rr) -- ($(x3rr) + (-\margin, -\margin)$) node[below] {$\ldots$};
+					\draw[onearrow] (x3rr) -- ($(x3rr) + (\margin, -\margin)$) node[below] {$\ldots$};
+				\end{tikzpicture}
+
+				$f\equiv\textrm{ITE}(a, f_{a}, f_{\n{a}})$ $\equiv\textrm{ITE}(a, \textrm{ITE}(b, f_{ab}, f_{a\n{b}}), f_{\n{a}})$
+			\end{center}
+		\end{column}
+	\end{columns}
+
+\end{frame}
+
+\begin{frame}[c, fragile]{BDDs: ITE-Algorithmus}
+	\tikzset{
+		highlight/.style={draw=TUMBlue, thick, fill=TUMBlue, fill opacity=0.35, text opacity=1},
+		ahighlight/.style={draw=TUMBlue, thick},
+		highlight on/.style={alt=#1{highlight}{}},
+		ahighlight on/.style={alt=#1{ahighlight}{}},
+	}
+
+	\only<1>{
+		Am Beispiel der Verknüpfung von zwei BDDs $A, B$ mittels $\oplus$:
+		\begin{enumerate}
+			\item Bezeichne alle Knoten mit einem eindeutigen Bezeichner
+			\item Erzeuge im Ergebnis-BDD einen Knoten $A_0 \oplus B_0$
+			\item Solange noch nicht alle Knoten besucht wurden:
+			      \begin{enumerate}
+				      \item Falls Terminalfall (d.h. $A_i$ und $B_i$ sind Terminalknoten), Rückgabewert berechnen und im Ergebnis-BDD an der aktuellen Stelle einen neuen Terminalknoten $A_i \oplus B_i$  erzeugen
+				      \item Top-Variable $t$ anhand der Variablenordnung bestimmen
+				      \item Für alle mit $t$ bezeichneten Knoten: Abstieg ins Low-Kind, erzeuge im Ergebnis-BDD an der aktuellen Stelle den Kindknoten $A_{i, t=0} \oplus B_{i, t=0}$
+				      \item Für alle mit $t$ bezeichneten Knoten: Abstieg ins High-Kind, erzeuge im Ergebnis-BDD an der aktuellen Stelle den Kindknoten $A_{i, t=1} \oplus B_{i, t=1}$
+			      \end{enumerate}
+			\item Eventuell I- und S-Reduktionen anwenden
+		\end{enumerate}
+	}
+	\only<2-12>{
+		\begin{center}
+			\begin{tikzpicture}
+
+				\def\smallspace{0.75cm}
+				\def\bigspace{3cm}
+				\def\margin{0.75cm}
+				\def\labelspacing{0cm}
+
+				% f
+				\node[c, highlight on=<3>, highlight on=<9>] (x1) {$a$};
+				\node[right=\labelspacing of x1] {$A_1$};
+
+				\node[c] (x2l) [below=\smallspace of x1, xshift=-2*\smallspace, highlight on=<4>, highlight on=<8>] {$b$};
+				\node[left=\labelspacing of x2l] {$A_2$};
+
+				\node[right=0.4*\bigspace of x1, yshift=-2*\smallspace, align=center] {\LARGE$\oplus$};
+
+				\node[c] (x3rl) [below=\smallspace of x2r, xshift=-2*\smallspace, highlight on=<10>, highlight on=<11>, highlight on=<12>] {$c$};
+				\node[right=\labelspacing of x3rl] {$A_3$};
+
+				\node[r, below=\smallspace of x3rl, xshift=-2*\smallspace, highlight on=<5>, highlight on=<6>] (zero) {$0$};
+				\node[r, below=\smallspace of x3rl, highlight on=<7>] (one) {$1$};
+
+				\draw[zeroarrow] (x1) -- (x2l);
+				\draw[onearrow] (x1) -- (x3rl);
+
+				\draw[zeroarrow] (x2l) -- (zero);
+				\draw[onearrow] (x2l) -- (one);
+
+				\draw[zeroarrow] (x3rl) -- (one);
+				\draw[onearrow] (x3rl) -- (zero);
+
+				% g
+				\node[c, right=\bigspace of x1, highlight on=<3>, highlight on=<9>] (y1) {$a$};
+				\node[right=\labelspacing of y1] {$B_1$};
+
+				\node[c] (y2r) [below=\smallspace of y1, xshift=2*\smallspace, highlight on=<10>] {$b$};
+				\node[right=\labelspacing of y2r] {$B_2$};
+
+				\node[c] (y3lr) [below=\smallspace of y2r, xshift=-2*\smallspace, highlight on=<4>, highlight on=<5>,  highlight on=<6>, highlight on=<7>, highlight on=<8>] {$c$};
+				\node[left=\labelspacing of y3lr] {$B_3$};
+
+				\node[r, below=\smallspace of y3lr, highlight on=<11>] (yzero) {$0$};
+				\node[r, below=\smallspace of y3lr, xshift=2*\smallspace, highlight on=<12>] (yone) {$1$};
+
+				\draw[zeroarrow] (y1) -- (y3lr);
+				\draw[onearrow] (y1) -- (y2r);
+
+				\draw[zeroarrow] (y2r) -- (yzero);
+				\draw[onearrow] (y2r) -- (yone);
+
+				\draw[zeroarrow] (y3lr) -- (yone);
+				\draw[onearrow] (y3lr) -- (yzero);
+
+				% result
+
+				\node[c, right=2*\bigspace of y1, visible on=<3->, highlight on=<3>, highlight on=<9>] (r1) {$a$};
+				\node[left=\labelspacing of r1, visible on=<3->] {$A_1, B_1$};
+
+				\node[c] (r2l) [below=\smallspace of r1, xshift=-2*\smallspace, visible on=<4->, highlight on=<4>, highlight on=<8>] {$b$};
+				\node[left=\labelspacing of r2l, visible on=<4->] {$A_2, B_3$};
+				\draw[zeroarrow, visible on=<4->] (r1) -- (r2l);
+
+				\node[c] (r3ll) [below=\smallspace of r2l, xshift=-2*\smallspace, visible on=<5->, highlight on=<5>, highlight on=<11>] {$c$};
+				\node[left=\labelspacing of r3ll, visible on=<5->] {$B_3$};
+				\draw[zeroarrow, visible on=<5->] (r2l) -- (r3ll);
+
+				\node[r, below=\smallspace of r3ll, visible on=<6->, highlight on=<6>] (rzero) {$0$};
+				\node[r, below=\smallspace of r3ll, xshift=2*\smallspace, visible on=<6->, highlight on=<6>] (rone) {$1$};
+				\draw[zeroarrow, visible on=<6->] (r3ll) -- (rone);
+				\draw[onearrow, visible on=<6->] (r3ll) -- (rzero);
+
+				\node[c] (r3lr) [below=\smallspace of r2l, visible on=<7->, highlight on=<7>, highlight on=<12>] {$c$};
+				\node[right=\labelspacing of r3lr, visible on=<7->] {$\neg B_3$};
+				\draw[onearrow, visible on=<7->] (r2l) -- (r3lr);
+				\draw[zeroarrow, visible on=<7->] (r3lr) -- (rzero);
+				\draw[onearrow, visible on=<7->] (r3lr) -- (rone);
+
+				\node[c] (r2r) [below=\smallspace of r1, xshift=0, visible on=<10->, highlight on=<10>] {$b$};
+				\node[below=\labelspacing of r2r, visible on=<10->] {$A_3,B_2$};
+				\draw[onearrow, visible on=<10->] (r1) -- (r2r);
+
+				\draw[zeroarrow, visible on=<11->] (r2r) -- (r3ll);
+				\draw[onearrow, visible on=<12->] (r2r) -- (r3lr);
+			\end{tikzpicture}
+			\vfill{}
+			\only<1-2>{\phantom{label}}
+			\only<3>{Top-Variable $a$}
+			\only<4>{Top-Variable $b$, Abstieg ins Low-Kind}
+			\only<5>{Top-Variable $c$, Abstieg ins Low-Kind}
+			\only<6>{$0 \oplus B_3 \equiv B_3$}
+			\only<7>{$1 \oplus B_3 \equiv \neg B_3$}
+			\only<8>{Top-Variable $b$}
+			\only<9>{Top-Variable $a$}
+			\only<10>{Top-Variable $b$, Abstieg ins High-Kind}
+			\only<11>{$A_3 \oplus 0 \equiv A_3$}
+			\only<12>{$A_3 \oplus 1 \equiv \neg A_3$}
+		\end{center}
+	}
+	\only<13->{
+		\begin{center}
+			\begin{tikzpicture}
+
+				\def\smallspace{0.75cm}
+				\def\bigspace{3cm}
+				\def\margin{0.75cm}
+				\def\labelspacing{0cm}
+
+				% f
+				\node[c] (x1) {$a$};
+				\node[right=\labelspacing of x1] {$A_1$};
+
+				\node[c] (x2l) [below=\smallspace of x1, xshift=-2*\smallspace] {$b$};
+				\node[left=\labelspacing of x2l] {$A_2$};
+
+				\node[right=0.4*\bigspace of x1, yshift=-2*\smallspace, align=center] {\LARGE$\oplus$};
+
+				\node[c] (x3rl) [below=\smallspace of x2r, xshift=-2*\smallspace] {$c$};
+				\node[right=\labelspacing of x3rl] {$A_3$};
+
+				\node[r, below=\smallspace of x3rl, xshift=-2*\smallspace] (zero) {$0$};
+				\node[r, below=\smallspace of x3rl] (one) {$1$};
+
+				\draw[zeroarrow] (x1) -- (x2l);
+				\draw[onearrow] (x1) -- (x3rl);
+
+				\draw[zeroarrow] (x2l) -- (zero);
+				\draw[onearrow] (x2l) -- (one);
+
+				\draw[zeroarrow] (x3rl) -- (one);
+				\draw[onearrow] (x3rl) -- (zero);
+
+				% g
+				\node[c, right=\bigspace of x1] (y1) {$a$};
+				\node[right=\labelspacing of y1] {$B_1$};
+
+				\node[c] (y2r) [below=\smallspace of y1, xshift=2*\smallspace] {$b$};
+				\node[right=\labelspacing of y2r] {$B_2$};
+
+				\node[c] (y3lr) [below=\smallspace of y2r, xshift=-2*\smallspace] {$c$};
+				\node[left=\labelspacing of y3lr] {$B_3$};
+
+				\node[r, below=\smallspace of y3lr] (yzero) {$0$};
+				\node[r, below=\smallspace of y3lr, xshift=2*\smallspace] (yone) {$1$};
+
+				\draw[zeroarrow] (y1) -- (y3lr);
+				\draw[onearrow] (y1) -- (y2r);
+
+				\draw[zeroarrow] (y2r) -- (yzero);
+				\draw[onearrow] (y2r) -- (yone);
+
+				\draw[zeroarrow] (y3lr) -- (yone);
+				\draw[onearrow] (y3lr) -- (yzero);
+
+				% result	
+				\node[c, right=2*\bigspace-\smallspace of y1, visible on=<13>] (r1) {$a$};
+
+				\node[c] (r2l) [below=\smallspace of r1] {$b$};
+				\draw[zeroarrow, visible on=<13>] (r1) to[bend right] (r2l);
+
+				\node[c] (r3ll) [below=\smallspace of r2l, xshift=-\smallspace] {$c$};
+				\draw[zeroarrow] (r2l) -- (r3ll);
+
+				\node[r, below=\smallspace of r3ll] (rzero) {$0$};
+				\node[r, below=\smallspace of r3ll, xshift=2*\smallspace] (rone) {$1$};
+				\draw[zeroarrow] (r3ll) -- (rone);
+				\draw[onearrow] (r3ll) -- (rzero);
+
+				\node[c] (r3lr) [below=\smallspace of r2l,xshift=\smallspace] {$c$};
+				\draw[onearrow] (r2l) -- (r3lr);
+				\draw[zeroarrow] (r3lr) -- (rzero);
+				\draw[onearrow] (r3lr) -- (rone);
+
+				\draw[onearrow, visible on=<13>] (r1) to[bend left] (r2l);
+
+			\end{tikzpicture}
+			\vfill{}
+			\only<13>{I-Reduktion}
+			\only<14>{S-Reduktion}
+		\end{center}
+	}
+\end{frame}
+
+\begin{frame}[c]{}{}
+	\begin{center}
+		\LARGE Fragen?
+	\end{center}
+\end{frame}
+
+\begin{frame}[c, fragile]{Links}{}
+	\begin{itemize}
+		\item Zulip: \href{https://zulip.in.tum.de/#narrow/channel/3255-ERA-Tutorium-.E2.80.93-Mi-1600-3}{\enquote{ERA Tutorium -- Mi-1600-3}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/channel/3264-ERA-Tutorium-.E2.80.93-Fr-1500-1}{\enquote{ERA Tutorium -- Fr-1500-1}}
+		\item \href{https://www.moodle.tum.de/course/view.php?id=111440}{ERA-Moodle-Kurs}
+		\item \href{https://artemis.tum.de/courses/516}{ERA-Artemis-Kurs}
+		\item \href{https://en.wikipedia.org/wiki/Binary_decision_diagram}{Wikipedia zu BDDs}
+	\end{itemize}
+\end{frame}
+
+\maketitle
+
+\end{document}
