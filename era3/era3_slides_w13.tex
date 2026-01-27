@@ -495,28 +495,39 @@ $f=\textcolor{TUMExtRed}{\n{a}\n{c}}+\textcolor{TUMBlue}{\n{b}\n{d}}+\textcolor{
 
 \end{frame}
 
+
 \begin{frame}[c, fragile]{BDDs: ITE-Algorithmus}
+	Am Beispiel der Verknüpfung von zwei BDDs $A, B$ mittels $\oplus$:
+	\begin{enumerate}
+		\item Bezeichne alle Knoten mit einem eindeutigen Bezeichner
+		\item Erzeuge im Ergebnis-BDD einen Knoten $A_0 \oplus B_0$
+		\item Solange noch nicht alle Knoten besucht wurden:
+		\begin{enumerate}
+			\item Falls Terminalfall (d.h. $A_i$ und $B_i$ sind Terminalknoten), Rückgabewert berechnen und im Ergebnis-BDD an der aktuellen Stelle einen neuen Terminalknoten $A_i \oplus B_i$  erzeugen
+			\item Top-Variable $t$ anhand der Variablenordnung bestimmen
+			\item Für alle mit $t$ bezeichneten Knoten: Abstieg ins Low-Kind, erzeuge im Ergebnis-BDD an der aktuellen Stelle den Kindknoten $A_{i, t=0} \oplus B_{i, t=0}$
+			\item Für alle mit $t$ bezeichneten Knoten: Abstieg ins High-Kind, erzeuge im Ergebnis-BDD an der aktuellen Stelle den Kindknoten $A_{i, t=1} \oplus B_{i, t=1}$
+		\end{enumerate}
+		\item Während der Konstruktion Knoten mit gleicher Teilformel direkt zusammenfassen
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}[c, plain, fragile]
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.5\linewidth]{w13_sonic.png}
+		
+		{\centering\scriptsize Danke an Bjarne Hansen für dieses treffende Bild}
+	\end{figure}
+\end{frame}
+
+\begin{frame}<2->[c, fragile]{BDDs: ITE-Algorithmus}
 	\tikzset{
 		highlight/.style={draw=TUMBlue, thick, fill=TUMBlue, fill opacity=0.35, text opacity=1},
 		ahighlight/.style={draw=TUMBlue, thick},
 		highlight on/.style={alt=#1{highlight}{}},
 		ahighlight on/.style={alt=#1{ahighlight}{}},
-	}
-
-	\only<1>{
-		Am Beispiel der Verknüpfung von zwei BDDs $A, B$ mittels $\oplus$:
-		\begin{enumerate}
-			\item Bezeichne alle Knoten mit einem eindeutigen Bezeichner
-			\item Erzeuge im Ergebnis-BDD einen Knoten $A_0 \oplus B_0$
-			\item Solange noch nicht alle Knoten besucht wurden:
-			      \begin{enumerate}
-				      \item Falls Terminalfall (d.h. $A_i$ und $B_i$ sind Terminalknoten), Rückgabewert berechnen und im Ergebnis-BDD an der aktuellen Stelle einen neuen Terminalknoten $A_i \oplus B_i$  erzeugen
-				      \item Top-Variable $t$ anhand der Variablenordnung bestimmen
-				      \item Für alle mit $t$ bezeichneten Knoten: Abstieg ins Low-Kind, erzeuge im Ergebnis-BDD an der aktuellen Stelle den Kindknoten $A_{i, t=0} \oplus B_{i, t=0}$
-				      \item Für alle mit $t$ bezeichneten Knoten: Abstieg ins High-Kind, erzeuge im Ergebnis-BDD an der aktuellen Stelle den Kindknoten $A_{i, t=1} \oplus B_{i, t=1}$
-			      \end{enumerate}
-			\item Während der Konstruktion Knoten mit gleicher Teilformel direkt zusammenfassen
-		\end{enumerate}
 	}
 	\only<2-17>{
 		\begin{center}
@@ -576,10 +587,10 @@ $f=\textcolor{TUMExtRed}{\n{a}\n{c}}+\textcolor{TUMBlue}{\n{b}\n{d}}+\textcolor{
 				% result
 
 				\node[c, right=2*\bigspace of y1, visible on=<3->, highlight on=<3>, highlight on=<11>] (r1) {$a$};
-				\node[left=\labelspacing of r1, visible on=<3->] {$A_1, B_1$};
+				\node[left=\labelspacing of r1, visible on=<3->] {$A_1 \oplus B_1$};
 
 				\node[c] (r2l) [below=\smallspace of r1, xshift=-2*\smallspace, visible on=<4->, highlight on=<{4,7,10}>] {$b$};
-				\node[left=\labelspacing of r2l, visible on=<4->] {$A_2, B_3$};
+				\node[left=\labelspacing of r2l, visible on=<4->] {$A_2 \oplus B_3$};
 				\draw[zeroarrow, visible on=<4->] (r1) -- (r2l);
 
 				\node[c] (r3ll) [below=\smallspace of r2l, xshift=-2*\smallspace, visible on=<5->, highlight on=<5>, highlight on=<{13,14}>] {$c$};
@@ -598,7 +609,7 @@ $f=\textcolor{TUMExtRed}{\n{a}\n{c}}+\textcolor{TUMBlue}{\n{b}\n{d}}+\textcolor{
 				\draw[onearrow, visible on=<9->] (r3lr) -- (rone);
 
 				\node[c] (r2r) [below=\smallspace of r1, xshift=0, visible on=<12->, highlight on=<{12,15}>] {$b$};
-				\node[below=\labelspacing of r2r, visible on=<12->] {$A_3,B_2$};
+				\node[below=\labelspacing of r2r, visible on=<12->] {$A_3 \oplus B_2$};
 				\draw[onearrow, visible on=<12->] (r1) -- (r2r);
 
 				\draw[zeroarrow, visible on=<14->] (r2r) -- (r3ll);
