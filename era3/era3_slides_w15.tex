@@ -1,0 +1,477 @@
+%%
+% This is an Overleaf template for presentations
+% using the TUM Corporate Desing https://www.tum.de/cd
+%
+% For further details on how to use the template, take a look at our
+% GitLab repository and browse through our test documents
+% https://gitlab.lrz.de/latex4ei/tum-templates.
+%
+% The tumbeamer class is based on the beamer class.
+% If you need further customization please consult the beamer class guide
+% https://ctan.org/pkg/beamer.
+% Additional class options are passed down to the base class.
+%
+% If you encounter any bugs or undesired behaviour, please raise an issue
+% in our GitLab repository
+% https://gitlab.lrz.de/latex4ei/tum-templates/issues
+% and provide a description and minimal working example of your problem.
+%%
+
+\PassOptionsToClass{onlytextwidth}{beamer}
+
+\documentclass[
+german,            % define the document language (english, german)
+aspectratio=169,    % define the aspect ratio (169, 43)
+% handout=2on1,       % create handout with multiple slides (2on1, 4on1)
+% partpage=false,     % insert page at beginning of parts (true, false)
+% sectionpage=true,   % insert page at beginning of sections (true, false)
+]{tumbeamer}
+
+
+% load additional packages
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{pgf}
+\usepackage{pgfplots}
+\usepackage{babel}[ngerman]
+\usepackage{csquotes}[autostyle]
+\usepackage[useregional]{datetime2}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage[cache=true]{minted}
+\usemintedstyle{borland}
+\usepackage{listings}
+\usepackage{tikz-timing}
+\usepackage{ifthen}
+\usepackage{karnaugh-map}
+\usepackage{pifont}
+
+% tikz
+\usetikzlibrary{overlay-beamer-styles}
+\usetikzlibrary{arrows,backgrounds,positioning,shapes,patterns,patterns.meta,matrix,arrows,shapes.geometric,matrix,fit,calc,automata}
+
+% requires circuitikz >= 1.1.0
+% for distros with older distributions, install TeX Live manually
+% instead of using your package manager
+% see: https://tug.org/texlive/quickinstall.html
+\ctikzset{logic ports=ieee}
+
+% minted
+\setminted{
+	fontsize=\small, 
+	frame=none,
+	breaklines=true,
+}
+
+% image path
+\graphicspath{ {./resources/} }
+
+% beamer
+\setbeamercolor{footnote}{fg=black}
+\setbeamercolor{footnote mark}{fg=black}
+\setbeamercolor{enumerate item}{fg=black}
+
+% additional commands
+\newcommand{\n}[1]{\overline{#1}}
+
+% https://tex.stackexchange.com/a/7045
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt, font=\scriptsize] (char) {#1};}}
+
+\newcommand*\colorcirc[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,fill=#1,inner sep=2pt] {};}}
+	
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+% presentation metadata
+\title{Klausurinfos}
+\subtitle{Einführung in die Rechnerarchitektur}
+\author{Niklas Ladurner}
+
+\institute{\theChairName\\\theDepartmentName\\\theUniversityName}
+\date{\DTMdisplaydate{2026}{01}{30}{-1}}
+
+\footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
+
+
+% macro to configure the style of the presentation
+\TUMbeamersetup{
+	title page = TUM tower,         % style of the title page
+	part page = TUM toc,            % style of part pages
+	section page = TUM toc,         % style of section pages
+	content page = TUM more space,  % style of normal content pages
+	tower scale = 1.0,              % scaling factor of TUM tower (if used)
+	headline = TUM threeliner,      % which variation of headline to use
+	footline = TUM default,         % which variation of footline to use
+	% configure on which pages headlines and footlines should be printed
+	headline on = {title page},
+	footline on = {every page, title page=false},
+}
+
+
+\begin{document}
+\maketitle
+
+\begin{frame}[c]{Feedback}{}
+	\begin{columns}[c]
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\LARGE  \href{https://t1p.de/era2526}{t1p.de/era2526}\\
+				\includegraphics[height=0.5\textheight]{feedback_qr.pdf}
+			\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\LARGE  \href{https://home.in.tum.de/~ladu/}{home.in.tum.de/\string~ladu/}\\
+				\includegraphics[height=0.5\textheight]{website_qr.pdf}
+			\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c, fragile]{}{}
+	\begin{center}
+		\LARGE  Keine Garantie für die Richtigkeit der Tutorfolien.
+
+		\Large Bei Unklarheiten/Unstimmigkeiten haben VL/ZÜ-Folien recht!
+	\end{center}
+\end{frame}
+
+\begin{frame}[c]{Unterlagen aus den Tutorübungen}{}
+	\begin{columns}[c]
+		\begin{column}{0.6\textwidth}
+			\begin{itemize}
+				\item Slides gerne mit Kommiliton*innen teilen
+				\item zusätzliches Material (Mitschriften) aus vergangenen Jahren: manche Dinge dieses Jahr nicht relevant!
+				\item Fehler gerne melden!
+				\item \underline{KEIN UPLOAD} auf Studocu/Studydrive
+				\item Slides von Bjarne Hansen: \href{https://home.cit.tum.de/~hbj}{home.in.tum.de/\string~hbj/}
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.4\textwidth}
+			\begin{center}
+				\scalebox{-1}[1]{\includegraphics[width=0.5\textwidth]{w15_popcat.png}}
+			\end{center}
+		\end{column}
+	\end{columns}
+
+\end{frame}
+
+\begin{frame}[c]{Klausur: Dos and Don'ts}{}
+	\begin{columns}[c]
+		\begin{column}{0.5\textwidth}
+			\centering \textbf{Dos} \textcolor{TUMGreen}{\cmark}
+			\vspace{\baselineskip}
+			\begin{itemize}
+				\item Student Card unbedingt mitbringen
+				\item genügend Kugelschreiber mitnehmen
+				\item Essen/Trinken mitnehmen
+				\item ca. 20 Minuten vorher im Hörsaal sein
+				\item Wörterbuch Deutsch $\leftrightarrow$ Muttersprache mitnehmen, falls benötigt: Keine Anmerkungen im Wörterbuch!
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\centering \textbf{Don'ts} \textcolor{TUMExtRed}{\xmark}
+			\vspace{\baselineskip}
+			\begin{itemize}
+				\item rote oder grüne Stifte, Bleistift
+				\item Tipp-Ex oder wärmeempfindliche Stifte
+				\item Taschenrechner (zählt als Unterschleif!)
+				\item eigene Schmierblätter
+				\item irgendwelche Spickzettel -- wir finden die sowieso
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c]{Klausur: Vorbereitung}{}
+	\begin{itemize}
+		\item Übungsblätter rechnen
+		\item Altklausuren rechnen, um Gefühl für Klausurformat und eigene Stärken zu bekommen. Am besten ohne Hilfsmittel/Lösung + Stoppuhr
+		\item Assembly üben! Aufgaben oft sehr einfach
+		\item zusätzliche Assembly-Aufgaben: \href{https://github.com/ladnik/RISC-V-Assembly-Introductory-Exercises}{github.com/ladnik}
+		\item meist ist ERA eine Überhangsklausur: zuerst Aufgaben machen, die ihr gut könnt
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile, c]{Statistik zur Endterm WS 23/24}{}
+	\begin{columns}[c]
+		\begin{column}{\textwidth}
+			\begin{tikzpicture}
+				\definecolor{col10}{RGB}{0, 255, 0}
+				\definecolor{col13}{RGB}{51, 255, 0}
+				\definecolor{col17}{RGB}{102, 255, 0}
+				\definecolor{col20}{RGB}{154, 255, 0}
+				\definecolor{col23}{RGB}{205, 255, 0}
+				\definecolor{col27}{RGB}{255, 255, 0}
+				\definecolor{col30}{RGB}{255, 205, 0}
+				\definecolor{col33}{RGB}{255, 154, 0}
+				\definecolor{col37}{RGB}{255, 102, 0}
+				\definecolor{col40}{RGB}{255, 51, 0}
+				\definecolor{col43}{RGB}{255, 0, 0}
+				\definecolor{col47}{RGB}{170, 0, 0}
+				\definecolor{col50}{RGB}{85, 0, 0}
+				
+				\begin{axis}[
+					scale only axis,
+					axis line style={draw=none},
+					tick style={draw=none},
+					width=\textwidth,
+					height=0.75\textheight,
+					yticklabel=\empty,
+					xtick={1.0, 1.3, 1.7, 2.0, 2.3, 2.7, 3.0, 3.3, 3.7, 4.0, 4.3, 4.7, 5.0},
+					x tick label style={
+						/pgf/number format/.cd,
+						fixed,
+						fixed zerofill,
+						precision=1,
+						/tikz/.cd
+					},
+					nodes near coords,
+					bar width=0.8cm,
+					]
+					\addplot[ybar, fill=col10] coordinates {(1.0, 37)};
+					\addplot[ybar, fill=col13] coordinates {(1.3, 34)};
+					\addplot[ybar, fill=col17] coordinates {(1.7, 37)};
+					\addplot[ybar, fill=col20] coordinates {(2.0, 42)};
+					\addplot[ybar, fill=col23] coordinates {(2.3, 59)};
+					\addplot[ybar, fill=col27] coordinates {(2.7, 59)};
+					\addplot[ybar, fill=col30] coordinates {(3.0, 62)};
+					\addplot[ybar, fill=col33] coordinates {(3.3, 46)};
+					\addplot[ybar, fill=col37] coordinates {(3.7, 73)};
+					\addplot[ybar, fill=col40] coordinates {(4.0, 33)};
+					\addplot[ybar, fill=col43] coordinates {(4.3, 51)};
+					\addplot[ybar, fill=col47] coordinates {(4.7, 90)};
+					\addplot[ybar, fill=col50] coordinates {(5.0, 195)};
+					
+					\node [align=left, anchor=west] at (axis cs:0.8,150) {
+						\fontfamily{cmr}\selectfont Angetreten:  818\\
+						\fontfamily{cmr}\selectfont Anteil negativer Beurteilungen: 41\% \\
+						\fontfamily{cmr}\selectfont Durchschnitt gesamt: 3.52\\
+						\fontfamily{cmr}\selectfont Durchschnitt bestanden:  2.62\\
+					};    
+				\end{axis}
+			\end{tikzpicture}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile, c]{Statistik zur Retake WS 23/24}{}
+	\begin{columns}[c]
+		\begin{column}{\textwidth}
+			\begin{tikzpicture}
+				\definecolor{col10}{RGB}{0, 255, 0}
+				\definecolor{col13}{RGB}{51, 255, 0}
+				\definecolor{col17}{RGB}{102, 255, 0}
+				\definecolor{col20}{RGB}{154, 255, 0}
+				\definecolor{col23}{RGB}{205, 255, 0}
+				\definecolor{col27}{RGB}{255, 255, 0}
+				\definecolor{col30}{RGB}{255, 205, 0}
+				\definecolor{col33}{RGB}{255, 154, 0}
+				\definecolor{col37}{RGB}{255, 102, 0}
+				\definecolor{col40}{RGB}{255, 51, 0}
+				\definecolor{col43}{RGB}{255, 0, 0}
+				\definecolor{col47}{RGB}{170, 0, 0}
+				\definecolor{col50}{RGB}{85, 0, 0}
+				
+				\begin{axis}[
+					scale only axis,
+					axis line style={draw=none},
+					tick style={draw=none},
+					ymin=0,
+					width=\textwidth,
+					height=0.75\textheight,
+					yticklabel=\empty,
+					xtick={1.0, 1.3, 1.7, 2.0, 2.3, 2.7, 3.0, 3.3, 3.7, 4.0, 4.3, 4.7, 5.0},
+					x tick label style={
+						/pgf/number format/.cd,
+						fixed,
+						fixed zerofill,
+						precision=1,
+						/tikz/.cd
+					},
+					nodes near coords,
+					bar width=0.8cm,
+					]
+					\addplot[ybar, fill=col10] coordinates {(1.0, 2)};
+					\addplot[ybar, fill=col13] coordinates {(1.3, 4)};
+					\addplot[ybar, fill=col17] coordinates {(1.7, 9)};
+					\addplot[ybar, fill=col20] coordinates {(2.0, 6)};
+					\addplot[ybar, fill=col23] coordinates {(2.3, 7)};
+					\addplot[ybar, fill=col27] coordinates {(2.7, 16)};
+					\addplot[ybar, fill=col30] coordinates {(3.0, 23)};
+					\addplot[ybar, fill=col33] coordinates {(3.3, 25)};
+					\addplot[ybar, fill=col37] coordinates {(3.7, 33)};
+					\addplot[ybar, fill=col40] coordinates {(4.0, 44)};
+					\addplot[ybar, fill=col43] coordinates {(4.3, 32)};
+					\addplot[ybar, fill=col47] coordinates {(4.7, 20)};
+					\addplot[ybar, fill=col50] coordinates {(5.0, 72)};
+					
+					\node [align=left, anchor=west] at (axis cs:0.8,54.25) {
+						\fontfamily{cmr}\selectfont Angetreten:  293\\
+						\fontfamily{cmr}\selectfont Anteil negativer Beurteilungen: 42\% \\
+						\fontfamily{cmr}\selectfont Durchschnitt gesamt: 3.87\\
+						\fontfamily{cmr}\selectfont Durchschnitt bestanden:  3.22\\
+					};    
+				\end{axis}
+			\end{tikzpicture}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile, c]{Statistik zur Endterm WS 24/25}{}
+	\begin{columns}[c]
+		\begin{column}{\textwidth}
+			\begin{tikzpicture}
+				\definecolor{col10}{RGB}{0, 255, 0}
+				\definecolor{col13}{RGB}{51, 255, 0}
+				\definecolor{col17}{RGB}{102, 255, 0}
+				\definecolor{col20}{RGB}{154, 255, 0}
+				\definecolor{col23}{RGB}{205, 255, 0}
+				\definecolor{col27}{RGB}{255, 255, 0}
+				\definecolor{col30}{RGB}{255, 205, 0}
+				\definecolor{col33}{RGB}{255, 154, 0}
+				\definecolor{col37}{RGB}{255, 102, 0}
+				\definecolor{col40}{RGB}{255, 51, 0}
+				\definecolor{col43}{RGB}{255, 0, 0}
+				\definecolor{col47}{RGB}{170, 0, 0}
+				\definecolor{col50}{RGB}{85, 0, 0}
+
+				\begin{axis}[
+						scale only axis,
+						axis line style={draw=none},
+						tick style={draw=none},
+						width=\textwidth,
+						height=0.75\textheight,
+						yticklabel=\empty,
+						xtick={1.0, 1.3, 1.7, 2.0, 2.3, 2.7, 3.0, 3.3, 3.7, 4.0, 4.3, 4.7, 5.0},
+						x tick label style={
+							/pgf/number format/.cd,
+							fixed,
+							fixed zerofill,
+							precision=1,
+							/tikz/.cd
+						},
+						nodes near coords,
+						bar width=0.8cm,
+					]
+					\addplot[ybar, fill=col10] coordinates {(1.0, 26)};
+					\addplot[ybar, fill=col13] coordinates {(1.3, 37)};
+					\addplot[ybar, fill=col17] coordinates {(1.7, 32)};
+					\addplot[ybar, fill=col20] coordinates {(2.0, 39)};
+					\addplot[ybar, fill=col23] coordinates {(2.3, 38)};
+					\addplot[ybar, fill=col27] coordinates {(2.7, 45)};
+					\addplot[ybar, fill=col30] coordinates {(3.0, 41)};
+					\addplot[ybar, fill=col33] coordinates {(3.3, 52)};
+					\addplot[ybar, fill=col37] coordinates {(3.7, 39)};
+					\addplot[ybar, fill=col40] coordinates {(4.0, 24)};
+					\addplot[ybar, fill=col43] coordinates {(4.3, 40)};
+					\addplot[ybar, fill=col47] coordinates {(4.7, 38)};
+					\addplot[ybar, fill=col50] coordinates {(5.0, 147)};
+					
+					\node [align=left, anchor=west] at (axis cs:0.8,113) {
+						\fontfamily{cmr}\selectfont Angetreten: 598\\
+						\fontfamily{cmr}\selectfont Anteil negativer Beurteilungen: 38\% \\
+						\fontfamily{cmr}\selectfont Durchschnitt gesamt: 3.40\\
+						\fontfamily{cmr}\selectfont Durchschnitt bestanden:  2.55\\
+					};    
+				\end{axis}
+			\end{tikzpicture}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile, c]{Statistik zur Retake WS 24/25}{}
+	\begin{columns}[c]
+		\begin{column}{\textwidth}
+			\begin{tikzpicture}
+				\definecolor{col10}{RGB}{0, 255, 0}
+				\definecolor{col13}{RGB}{51, 255, 0}
+				\definecolor{col17}{RGB}{102, 255, 0}
+				\definecolor{col20}{RGB}{154, 255, 0}
+				\definecolor{col23}{RGB}{205, 255, 0}
+				\definecolor{col27}{RGB}{255, 255, 0}
+				\definecolor{col30}{RGB}{255, 205, 0}
+				\definecolor{col33}{RGB}{255, 154, 0}
+				\definecolor{col37}{RGB}{255, 102, 0}
+				\definecolor{col40}{RGB}{255, 51, 0}
+				\definecolor{col43}{RGB}{255, 0, 0}
+				\definecolor{col47}{RGB}{170, 0, 0}
+				\definecolor{col50}{RGB}{85, 0, 0}
+				
+				\begin{axis}[
+					scale only axis,
+					axis line style={draw=none},
+					tick style={draw=none},
+					ymin=0,
+					width=\textwidth,
+					height=0.75\textheight,
+					yticklabel=\empty,
+					xtick={1.0, 1.3, 1.7, 2.0, 2.3, 2.7, 3.0, 3.3, 3.7, 4.0, 4.3, 4.7, 5.0},
+					x tick label style={
+						/pgf/number format/.cd,
+						fixed,
+						fixed zerofill,
+						precision=1,
+						/tikz/.cd
+					},
+					nodes near coords,
+					bar width=0.8cm,
+					]
+					\addplot[ybar, fill=col10] coordinates {(1.0, 1)};
+					\addplot[ybar, fill=col13] coordinates {(1.3, 1)};
+					\addplot[ybar, fill=col17] coordinates {(1.7, 2)};
+					\addplot[ybar, fill=col20] coordinates {(2.0, 4)};
+					\addplot[ybar, fill=col23] coordinates {(2.3, 7)};
+					\addplot[ybar, fill=col27] coordinates {(2.7, 6)};
+					\addplot[ybar, fill=col30] coordinates {(3.0, 17)};
+					\addplot[ybar, fill=col33] coordinates {(3.3, 20)};
+					\addplot[ybar, fill=col37] coordinates {(3.7, 19)};
+					\addplot[ybar, fill=col40] coordinates {(4.0, 16)};
+					\addplot[ybar, fill=col43] coordinates {(4.3, 19)};
+					\addplot[ybar, fill=col47] coordinates {(4.7, 25)};
+					\addplot[ybar, fill=col50] coordinates {(5.0, 99)};
+					
+					\node [align=left, anchor=west] at (axis cs:0.8,74.75) {
+						\fontfamily{cmr}\selectfont Angetreten:  236\\
+						\fontfamily{cmr}\selectfont Anteil negativer Beurteilungen: 60\% \\
+						\fontfamily{cmr}\selectfont Durchschnitt gesamt: 4.20\\
+						\fontfamily{cmr}\selectfont Durchschnitt bestanden:  3.20\\
+					};    
+				\end{axis}
+			\end{tikzpicture}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c]{}{}
+	\begin{center}
+		\LARGE Fragen?
+	\end{center}
+\end{frame}
+
+
+\begin{frame}[c]{}{}
+	\begin{center}
+		\LARGE Viel Erfolg bei der Klausur :)
+	\end{center}
+\end{frame}
+
+\begin{frame}[c, fragile]{Links}{}
+	\begin{itemize}
+		\item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2661-ERA-Tutorium---Do-1600-1}{\enquote{ERA Tutorium - Do-1600-1}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/stream/2675-ERA-Tutorium---Fr-1500-2 }{\enquote{ERA Tutorium - Fr-1500-2}}
+		\item \href{https://www.moodle.tum.de/course/view.php?id=100633}{ERA-Moodle-Kurs}
+		\item \href{https://artemis.in.tum.de/courses/401}{ERA-Artemis-Kurs}
+	\end{itemize}
+\end{frame}
+
+\maketitle
+
+\end{document}
