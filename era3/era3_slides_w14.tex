@@ -440,14 +440,12 @@ aspectratio=169,    % define the aspect ratio (169, 43)
 						}
 						\only<13>{
 							\draw[bboxline] (5,2) -- (3,2);
-							\draw[bboxline] (3,2) -- (3,4);
-							\draw[bboxline] (5,2) -- (5,4);
-							\draw[bboxline] (5,4) -- (3,4);
+							\draw[bboxline] (3,2) -- (3,5);
 						}
 
 						\only<14, 15>{
 							\draw[steinerbranch] (5,2) -- (3,2);
-							\draw[steinerbranch] (3,2) -- (3,4);
+							\draw[steinerbranch] (3,2) -- (3,5);
 						}
 
 						\only<2>{
@@ -456,7 +454,7 @@ aspectratio=169,    % define the aspect ratio (169, 43)
 							\draw[hananline] (0, 1) -- (5, 1);
 							\draw[hananline] (0, 2) -- (5, 2);
 							\draw[hananline] (0, 3) -- (5, 3);
-							\draw[hananline] (0, 4) -- (5, 4);
+							\draw[hananline] (0, 5) -- (5, 5);
 
 							% vertical
 							\draw[hananline] (0, 0) -- (0, 5);
@@ -467,12 +465,12 @@ aspectratio=169,    % define the aspect ratio (169, 43)
 							\node[hanan] at (0, 0) {};
 							\node[hanan] at (0, 2) {};
 							\node[hanan] at (0, 3) {};
-							\node[hanan] at (0, 4) {};
+							\node[hanan] at (0, 5) {};
 
 							\node[hanan] at (1, 0) {};
 							\node[hanan] at (1, 1) {};
 							\node[hanan] at (1, 2) {};
-							\node[hanan] at (1, 4) {};
+							\node[hanan] at (1, 5) {};
 
 							\node[hanan] at (3, 1) {};
 							\node[hanan] at (3, 2) {};
@@ -481,14 +479,14 @@ aspectratio=169,    % define the aspect ratio (169, 43)
 							\node[hanan] at (5, 0) {};
 							\node[hanan] at (5, 1) {};
 							\node[hanan] at (5, 3) {};
-							\node[hanan] at (5, 4) {};
+							\node[hanan] at (5, 5) {};
 						}
 
 						\node[terminal] at (3, 0) {};
 						\node[terminal] at (0, 1) {};
 						\node[terminal] at (5, 2) {};
 						\node[terminal] at (1, 3) {};
-						\node[terminal] at (3, 4) {};
+						\node[terminal] at (3, 5) {};
 
 
 
@@ -506,7 +504,7 @@ aspectratio=169,    % define the aspect ratio (169, 43)
 						}
 
 						\only<12, 13, 14>{
-							\node[marker] at (3,4) {};
+							\node[marker] at (3,5) {};
 						}
 					\end{tikzpicture}
 				}
@@ -533,8 +531,8 @@ aspectratio=169,    % define the aspect ratio (169, 43)
 				\begin{enumerate}
 					\item Finde Terminale mit minimaler Manhattan-Distanz $\delta = \Delta x + \Delta y$
 					\item<4-> Konstruiere die kürzesten Verbindungen (bounding box)
-					\item<5-> Wähle die Verbindung, deren Hanan-Punkte den geringsten Abstand zu einem der anderen Terminalknoten hat
-					\item<6-> Füge diese Verbindung dem Steinerbaum hinzu und fahre mit Schritt 2 fort
+					\item<5-> Wähle die Verbindung, auf der der Hanan-Punkt mit geringstem Abstand zu einem der anderen Terminalknoten liegt
+					\item<6-> Füge diese Verbindung dem Steinerbaum hinzu und fahre mit Schritt 2 fort, ausgehend vom Hanan-Punkt mit geringstem Abstand
 				\end{enumerate}
 
 			}
