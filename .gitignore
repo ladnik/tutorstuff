@@ -9,15 +9,15 @@
 **/*.snm
 **/*.vrb
 **/*.synctex.gz
+**/*.synctex(busy)
 **/*.fls
 **/*.fdb_latexmk
 **/*.dvi
 **/*.bak*
-**/_minted-*/
+**/*.auxlock
+**/_minted*/
 **/*.minted
+**/svg-inkscape/
 
 # VSCode
 **/.vscode/*
-
-# other
-**/*.log

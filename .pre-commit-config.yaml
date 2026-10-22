@@ -1,0 +1,17 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude_types: [pdf, binary]
+      - id: end-of-file-fixer
+        exclude_types: [pdf, binary]
+      - id: check-merge-conflict
+
+  - repo: local
+    hooks:
+      - id: latexindent
+        name: latexindent
+        entry: latexindent -w -y "onlyOneBackUp: 1" -g /dev/null
+        language: system
+        types: [tex]
