@@ -9,54 +9,54 @@
 \maketitle
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
-    haben VL-Folien Recht!
-  \end{center}
+	\begin{center}
+		\LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
+		haben VL-Folien Recht!
+	\end{center}
 \end{frame}
 
 \begin{frame}[c, fragile]{SIMD}{}
-  \begin{itemize}
-    \item \textbf{S}ingle \textbf{I}nstruction, \textbf{M}ultiple \textbf{D}ata
-    \item Vektorisierung von Instruktionen, parallele Ausführung auf mehreren Datenströmen
-    \item Achtung: SIMD ist nicht immer sinnvoll / einfach zu implementieren!
-    \item XMM-Register mit 128 Bit (16 Byte), bspw.
-    \begin{itemize}
-      \item 16 chars (1 Byte)
-      \item 4 ints (4 Byte)
-      \item 4 floats (4 Byte)
-      \item 2 doubles (8 Byte)
-    \end{itemize}
-    \item Naming Convention: p für '\textbf{p}acked' (vgl. 'scalar')
-    \item Achtung: Bei SIMD-Instruktionen wird 16-Byte-Alignment gefordert! \\ $\rightarrow$ \verb|movaps| vs. \verb|movups|
-  \end{itemize}
+	\begin{itemize}
+		\item \textbf{S}ingle \textbf{I}nstruction, \textbf{M}ultiple \textbf{D}ata
+		\item Vektorisierung von Instruktionen, parallele Ausführung auf mehreren Datenströmen
+		\item Achtung: SIMD ist nicht immer sinnvoll / einfach zu implementieren!
+		\item XMM-Register mit 128 Bit (16 Byte), bspw.
+		      \begin{itemize}
+			      \item 16 chars (1 Byte)
+			      \item 4 ints (4 Byte)
+			      \item 4 floats (4 Byte)
+			      \item 2 doubles (8 Byte)
+		      \end{itemize}
+		\item Naming Convention: p für '\textbf{p}acked' (vgl. 'scalar')
+		\item Achtung: Bei SIMD-Instruktionen wird 16-Byte-Alignment gefordert! \\ $\rightarrow$ \verb|movaps| vs. \verb|movups|
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c, fragile]{SIMD in C}{}
-  \begin{itemize}
-    \item Nutzung von sog. \textit{Intrinsics} (Liste siehe Intel Intrinsics Guide)
-    \item im Praktikum werden SSE/SSE2/AVX verwendet $\rightarrow$ muss von der Zielarchitektur unterstützt werden
-    \item neue Datentypen \verb|__m128i|, \verb|__m128d|, \ldots
-    \item Funktionen für einzelne SIMD-Operationen
-    \item \verb|#include <immintrin.h>| nicht vergessen!
-    \item Vergleiche in SIMD ergeben Bitmasken
-  \end{itemize}
+	\begin{itemize}
+		\item Nutzung von sog. \textit{Intrinsics} (Liste siehe Intel Intrinsics Guide)
+		\item im Praktikum werden SSE/SSE2/AVX verwendet $\rightarrow$ muss von der Zielarchitektur unterstützt werden
+		\item neue Datentypen \verb|__m128i|, \verb|__m128d|, \ldots
+		\item Funktionen für einzelne SIMD-Operationen
+		\item \verb|#include <immintrin.h>| nicht vergessen!
+		\item Vergleiche in SIMD ergeben Bitmasken
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE Fragen?
-  \end{center}
+	\begin{center}
+		\LARGE Fragen?
+	\end{center}
 \end{frame}
 
 \begin{frame}[fragile, c]{Links}{}
-  \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2267-GRA-Tutorium---Gruppe-20}{\enquote{GRA Tutorium - Gruppe 20}}
-          bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\enquote{GRA Tutorium - Gruppe 22}}
-    \item \href{https://gra.caps.in.tum.de}{Praktikumswebsite}
-    \item \href{https://www.felixcloutier.com/x86/}{x86 instruction reference by Félix Cloutier}
-    \item \href{https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#}{Intel Intrinsics Guide}
-  \end{itemize}
+	\begin{itemize}
+		\item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2267-GRA-Tutorium---Gruppe-20}{\enquote{GRA Tutorium - Gruppe 20}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\enquote{GRA Tutorium - Gruppe 22}}
+		\item \href{https://gra.caps.in.tum.de}{Praktikumswebsite}
+		\item \href{https://www.felixcloutier.com/x86/}{x86 instruction reference by Félix Cloutier}
+		\item \href{https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#}{Intel Intrinsics Guide}
+	\end{itemize}
 \end{frame}
 
 \maketitle

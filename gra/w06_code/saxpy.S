@@ -34,8 +34,8 @@ saxpy:
         sub rdi, 4
         jmp simd_l
 
-    // use scalar operations for remaining elements 
-    cont:    
+    // use scalar operations for remaining elements
+    cont:
         cmp rdi, 0
         je finish
 

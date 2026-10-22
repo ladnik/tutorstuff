@@ -44,10 +44,10 @@
 \newif\if@tum@colormodel@cmyk@
 
 \pgfqkeys{/TUM/colors}{
-  colormodel/.is choice,
-  colormodel/cmyk/.code = {\@tum@colormodel@cmyk@true},
-  colormodel/rgb/.code = {\@tum@colormodel@cmyk@false},
-  print/.is if = @tum@colormodel@cmyk@,
+	colormodel/.is choice,
+	colormodel/cmyk/.code = {\@tum@colormodel@cmyk@true},
+	colormodel/rgb/.code = {\@tum@colormodel@cmyk@false},
+	print/.is if = @tum@colormodel@cmyk@,
 }
 
 % set default option (colormodel=rgb)
@@ -63,9 +63,9 @@
 
 % select color model based on option
 \if@tum@colormodel@cmyk@
-  \selectcolormodel{cmyk}
+	\selectcolormodel{cmyk}
 \else
-  \selectcolormodel{rgb}
+	\selectcolormodel{rgb}
 \fi
 
 

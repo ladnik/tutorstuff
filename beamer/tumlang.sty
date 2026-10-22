@@ -43,11 +43,11 @@
 \newif\if@tum@language@english@
 
 \pgfqkeys{/TUM/lang}{
-  language/.is choice,
-  language/german/.code = {\@tum@language@english@false},
-  language/english/.code = {\@tum@language@english@true},
-  english/.style = {language=english},
-  german/.style = {language=german},
+	language/.is choice,
+	language/german/.code = {\@tum@language@english@false},
+	language/english/.code = {\@tum@language@english@true},
+	english/.style = {language=english},
+	german/.style = {language=german},
 }
 
 % set default option (language=english)
@@ -63,9 +63,9 @@
 
 % load babel package with selected language
 \if@tum@language@english@
-  \RequirePackage[main=english, ngerman]{babel}
+	\RequirePackage[main=english, ngerman]{babel}
 \else
-  \RequirePackage[english, main=ngerman]{babel}
+	\RequirePackage[english, main=ngerman]{babel}
 \fi
 
 
@@ -74,9 +74,9 @@
 % macro name (arg1), english string (arg2), and german string (arg3)
 
 \newcommand{\provideName}[3]{%
-  \providecommand{#1}{#2}
-  \addto\captionsenglish{\renewcommand{#1}{#2}}
-  \addto\captionsngerman{\renewcommand{#1}{#3}}
+	\providecommand{#1}{#2}
+	\addto\captionsenglish{\renewcommand{#1}{#2}}
+	\addto\captionsngerman{\renewcommand{#1}{#3}}
 }
 
 
@@ -84,10 +84,10 @@
 % ----------------------------------------------------------------------------
 
 \provideName{\theUniversityName}{Technical University of Munich}{Technische
-  Universität München}
+	Universität München}
 
 \provideName{\theDepartmentName}{Department of Electrical and Computer
-  Engineering}{Fakultät für Elektrotechnik und Informationstechnik}
+	Engineering}{Fakultät für Elektrotechnik und Informationstechnik}
 
 \provideName{\theChairName}{Please adjust group name in tumuser.sty.}{Bitte
-  passen Sie den Lehrstuhlnamen in tumuser.sty an.}
+	passen Sie den Lehrstuhlnamen in tumuser.sty an.}

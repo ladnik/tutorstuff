@@ -1,4 +1,4 @@
-﻿# Für sparsamere Herangehensweise mit 
+﻿# Für sparsamere Herangehensweise mit
 # Registern siehe Mitschrift WS 23/24
 swap:
     # a0: Startadresse (später Adresse
@@ -10,7 +10,7 @@ swap:
     # Addition Startadresse + Offset
     add a0, a0, a1
     addi a1, a0, 8
-    
+
 
     # Laden von Element 1
     lw t0, 0(a0)

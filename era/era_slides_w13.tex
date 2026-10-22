@@ -9,101 +9,101 @@
 \maketitle
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE  Durchzählen!
-  \end{center}
+	\begin{center}
+		\LARGE  Durchzählen!
+	\end{center}
 \end{frame}
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
-    haben VL/ZÜ-Folien Recht!
-  \end{center}
+	\begin{center}
+		\LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
+		haben VL/ZÜ-Folien Recht!
+	\end{center}
 \end{frame}
 
 \begin{frame}[fragile, c]{Parallelisierungstechniken}{}
-  \begin{columns}[c]
-    \begin{column}{0.5\textwidth}
-      \begin{itemize}
-        \item Single-Threaded Rechenleistung immer weiter durch physikalische Limits eingeschränkt
-        \item Optimierungen: Pipelining, Out-of-Order-Processing, Ausnutzen von Parallelität
-        \item SIMD: Eine Instruktion, die gleichzeitig auf mehrere Daten ausgeführt wird (mehr dazu in GRA)
-        \item Multithreading/Mehrkernsysteme $\rightarrow$ mögliche Cache-Inkonsistenzen
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.5\textwidth}
-      \begin{center}
-        \includegraphics[width=0.7\textwidth]{w13_flynn.png}
-      \end{center}
-      \centering
-      \tiny{Quelle: A Taxonomy of Reconfigurable Single-/Multiprocessor\\Systems-on-Chip}
-    \end{column}
-  \end{columns}
+	\begin{columns}[c]
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Single-Threaded Rechenleistung immer weiter durch physikalische Limits eingeschränkt
+				\item Optimierungen: Pipelining, Out-of-Order-Processing, Ausnutzen von Parallelität
+				\item SIMD: Eine Instruktion, die gleichzeitig auf mehrere Daten ausgeführt wird (mehr dazu in GRA)
+				\item Multithreading/Mehrkernsysteme $\rightarrow$ mögliche Cache-Inkonsistenzen
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\includegraphics[width=0.7\textwidth]{w13_flynn.png}
+			\end{center}
+			\centering
+			\tiny{Quelle: A Taxonomy of Reconfigurable Single-/Multiprocessor\\Systems-on-Chip}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[fragile, c]{MSI/MESI}{}
-  \begin{columns}[c]
-    \begin{column}{0.5\textwidth}
-      \begin{itemize}
-        \item Einführung von Zuständen für Cachezeilen
-        \item \textbf{M}odified, (\textbf{E}xclusive), \textbf{S}hared, \textbf{I}nvalid
-        \item Erklärung siehe ZÜ
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.5\textwidth}
-      \begin{center}
-        \includegraphics[width=0.7\textwidth]{w13_mesi.png}
-      \end{center}
-      \centering
-      \tiny{Quelle: Jugones55, CC BY-SA 4.0 \href{https://creativecommons.org/licenses/by-sa/4.0}{via Wikimedia Commons}}
-    \end{column}
-  \end{columns}
+	\begin{columns}[c]
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Einführung von Zuständen für Cachezeilen
+				\item \textbf{M}odified, (\textbf{E}xclusive), \textbf{S}hared, \textbf{I}nvalid
+				\item Erklärung siehe ZÜ
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\includegraphics[width=0.7\textwidth]{w13_mesi.png}
+			\end{center}
+			\centering
+			\tiny{Quelle: Jugones55, CC BY-SA 4.0 \href{https://creativecommons.org/licenses/by-sa/4.0}{via Wikimedia Commons}}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
 \begin{frame}[c, fragile]{Speedup durch Parallelisierung}{}
-  Mit $t_s$ sequentieller Programmteil, $t_p$ paralleler Programmteil, $n$ Anzahl CPU-Kerne
-  \begin{itemize}
-    \item Amdahl's Law: $s_{\textrm{Amdahl}}(n)=\frac{T}{t_s+\frac{t_p}{n}}$\\
-          Gleiche Problemgröße, aufgeteilt auf mehrere Kerne $\rightarrow$ begrenzt durch sequentiellen Anteil
-    \item Gustafson's Law: $s_{\textrm{Gustavson}}(n)=\frac{t_s+n\cdot t_p}{T}$\\
-          Größeres Problem$\rightarrow$ paralleler Anteil wächst mit Problemgröße, $t_s$ proportional kleiner
-    \item Zwei verschiedene Perspektiven, abhängig von Problemszenario verschieden geeignet
-  \end{itemize}
+	Mit $t_s$ sequentieller Programmteil, $t_p$ paralleler Programmteil, $n$ Anzahl CPU-Kerne
+	\begin{itemize}
+		\item Amdahl's Law: $s_{\textrm{Amdahl}}(n)=\frac{T}{t_s+\frac{t_p}{n}}$\\
+		      Gleiche Problemgröße, aufgeteilt auf mehrere Kerne $\rightarrow$ begrenzt durch sequentiellen Anteil
+		\item Gustafson's Law: $s_{\textrm{Gustavson}}(n)=\frac{t_s+n\cdot t_p}{T}$\\
+		      Größeres Problem$\rightarrow$ paralleler Anteil wächst mit Problemgröße, $t_s$ proportional kleiner
+		\item Zwei verschiedene Perspektiven, abhängig von Problemszenario verschieden geeignet
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile, c]{Amdahl's Law: graphische Darstellung}{}
-      \begin{center}
-        \includegraphics[width=0.65\textwidth]{w13_amdahl.png}
-      \end{center}
-  \centering
-  \tiny{Quelle: Vorlesungsmaterial ERA}
+	\begin{center}
+		\includegraphics[width=0.65\textwidth]{w13_amdahl.png}
+	\end{center}
+	\centering
+	\tiny{Quelle: Vorlesungsmaterial ERA}
 \end{frame}
 
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE Fragen?
-  \end{center}
+	\begin{center}
+		\LARGE Fragen?
+	\end{center}
 \end{frame}
 
 \begin{frame}[c, fragile]{Artemis-Hausaufgaben}{}
-  \begin{itemize}
-    \item H13 - MESI bis 04.02.2024 23:59 Uhr
-    \item MESI-Tabelle zu verschiedenen Aktionen ausfüllen
-    \item Letzte reguläre Hausaufgabe
-    \item \underline{Um den Notenbonus zu erhalten, braucht man also $\ge 0.8\cdot 130 = 104$ Punkte!}
-    \item Der Notenbonus wird nur angewandt, wenn die Ausgangsnote besser als 5.0 und nicht 1.0 ist
-  \end{itemize}
+	\begin{itemize}
+		\item H13 - MESI bis 04.02.2024 23:59 Uhr
+		\item MESI-Tabelle zu verschiedenen Aktionen ausfüllen
+		\item Letzte reguläre Hausaufgabe
+		\item \underline{Um den Notenbonus zu erhalten, braucht man also $\ge 0.8\cdot 130 = 104$ Punkte!}
+		\item Der Notenbonus wird nur angewandt, wenn die Ausgangsnote besser als 5.0 und nicht 1.0 ist
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile, c]{Links}{}
-  \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\enquote{ERA Tutorium - Mi-1600-MI4}}
-    bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\enquote{ERA Tutorium - Fr-1100-MW2}}
-    \item \href{https://de.wikipedia.org/wiki/MESI}{Wikipedia zu MESI}
-    \item \href{https://www.educative.io/answers/difference-between-amdahls-and-gustafsons-laws}{Amdahlsches und Gustafsons Gesetz}
-  \end{itemize}
+	\begin{itemize}
+		\item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\enquote{ERA Tutorium - Mi-1600-MI4}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\enquote{ERA Tutorium - Fr-1100-MW2}}
+		\item \href{https://de.wikipedia.org/wiki/MESI}{Wikipedia zu MESI}
+		\item \href{https://www.educative.io/answers/difference-between-amdahls-and-gustafsons-laws}{Amdahlsches und Gustafsons Gesetz}
+	\end{itemize}
 \end{frame}
 
 \maketitle

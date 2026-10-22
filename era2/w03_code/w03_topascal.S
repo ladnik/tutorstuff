@@ -27,7 +27,7 @@ loop:
 
     # Andernfalls inkrementieren wir unsere aktuelle Adresse
     addi a1, a1, 1
-    # Wir speichern den gerade gelesenen char in t0, 
+    # Wir speichern den gerade gelesenen char in t0,
     # d.h. dieser wird im nächsten Durchlauf um eine
     # Stelle nach hinten gespeichert
     add t0, t1, zero
@@ -37,8 +37,8 @@ loop:
 
     # j entspricht jal zero, label und überschreibt somit
     # ra nicht!
-    j loop         
-    
+    j loop
+
 end:
     # Berechnung: Stringlänge = Endadresse - Startadresse
     sub a1, a1, a0

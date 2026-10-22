@@ -9,66 +9,66 @@
 \maketitle
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
-    haben VL-Folien Recht!
-  \end{center}
+	\begin{center}
+		\LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
+		haben VL-Folien Recht!
+	\end{center}
 \end{frame}
 
 \begin{frame}[c]{Organisatorisches}{}
-  \begin{itemize}
-    \item Präferenzabgabe zur Wahl des Vertiefungszweigs auf Artemis verfügbar
-    \item Syntaxtest zeigt an, ob Abgabe im korrekten Format
-    \item Präferenzen von 1-3
-    \item Es ist nicht garantiert, dass ihr eure erste Wahl bekommt!
-    \item 3er-Gruppen, Gruppen mit randoms sind nicht zu empfehlen!
-  \end{itemize}
+	\begin{itemize}
+		\item Präferenzabgabe zur Wahl des Vertiefungszweigs auf Artemis verfügbar
+		\item Syntaxtest zeigt an, ob Abgabe im korrekten Format
+		\item Präferenzen von 1-3
+		\item Es ist nicht garantiert, dass ihr eure erste Wahl bekommt!
+		\item 3er-Gruppen, Gruppen mit randoms sind nicht zu empfehlen!
+	\end{itemize}
 \end{frame}
 
 
 \begin{frame}[c, fragile]{Sichere Programmierung}{}
-  \begin{itemize}
-    \item häufige Fehler:
-    \begin{itemize}
-      \item Buffer Overflows
-      \item Memory Leaks
-      \item Zugriff auf ungültige Adressen  
-    \end{itemize}
-    \item Undefined Behavior: Verhalten bei nicht im C-Standard definiertem Code
-    \begin{itemize}
-      \item Double free bzw. use after free
-      \item Schreibzugriff auf string literal
-      \item Division durch 0
-      \item Lesen uninitialisierter Variablen
-      \item ...
-    \end{itemize}
-    \item Hilfreich: \verb|fsanitize=address|, \verb|-fsanitize=leak|, \verb|-fsanitize=undefined|
-    \item Achtung: Sanitizer bringen erhebliche Performanceeinbußen mit sich, nicht in production verwenden!
-  \end{itemize}
+	\begin{itemize}
+		\item häufige Fehler:
+		      \begin{itemize}
+			      \item Buffer Overflows
+			      \item Memory Leaks
+			      \item Zugriff auf ungültige Adressen
+		      \end{itemize}
+		\item Undefined Behavior: Verhalten bei nicht im C-Standard definiertem Code
+		      \begin{itemize}
+			      \item Double free bzw. use after free
+			      \item Schreibzugriff auf string literal
+			      \item Division durch 0
+			      \item Lesen uninitialisierter Variablen
+			      \item ...
+		      \end{itemize}
+		\item Hilfreich: \verb|fsanitize=address|, \verb|-fsanitize=leak|, \verb|-fsanitize=undefined|
+		\item Achtung: Sanitizer bringen erhebliche Performanceeinbußen mit sich, nicht in production verwenden!
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c, fragile]{Kommandozeilenargumente}{}
-  \begin{itemize}
-    \item \verb|argc|... Anzahl Argumente, \verb|argv|... String-Array leerzeichengetrennter Argumente
-    \item \verb|getopt| für effiziente Verarbeitung von kurzen Argumenten (bspw. \verb|-h|)
-    \item \verb|getgetopt_long| für lange Argumente (bspw. \verb|--help|).\\Achtung: kann bei falscher 
-    Verwendung sehr leicht zu einem SEGFAULT führen
-  \end{itemize}
+	\begin{itemize}
+		\item \verb|argc|... Anzahl Argumente, \verb|argv|... String-Array leerzeichengetrennter Argumente
+		\item \verb|getopt| für effiziente Verarbeitung von kurzen Argumenten (bspw. \verb|-h|)
+		\item \verb|getgetopt_long| für lange Argumente (bspw. \verb|--help|).\\Achtung: kann bei falscher
+		      Verwendung sehr leicht zu einem SEGFAULT führen
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE Fragen?
-  \end{center}
+	\begin{center}
+		\LARGE Fragen?
+	\end{center}
 \end{frame}
 
 \begin{frame}[fragile, c]{Links}{}
-  \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2267-GRA-Tutorium---Gruppe-20}{\enquote{GRA Tutorium - Gruppe 20}}
-          bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\enquote{GRA Tutorium - Gruppe 22}}
-    \item \href{https://artemis.in.tum.de/courses/329}{GRA-Artemis-Kurs}
-    \item \href{https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html}{gcc Program Instrumentation Options}
-  \end{itemize}
+	\begin{itemize}
+		\item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2267-GRA-Tutorium---Gruppe-20}{\enquote{GRA Tutorium - Gruppe 20}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\enquote{GRA Tutorium - Gruppe 22}}
+		\item \href{https://artemis.in.tum.de/courses/329}{GRA-Artemis-Kurs}
+		\item \href{https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html}{gcc Program Instrumentation Options}
+	\end{itemize}
 \end{frame}
 
 \maketitle

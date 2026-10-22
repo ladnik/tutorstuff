@@ -73,9 +73,9 @@ $f=\textcolor{red}{\bar a\bar c}+\textcolor{blue}{\bar b\bar d}+\textcolor{lime}
 	zeroarrow/.style = {-stealth,dashed},
 	onearrow/.style = {-stealth,solid},
 	c/.style = {circle,draw,solid,minimum width=2em,
-		minimum height=2em},
+			minimum height=2em},
 	r/.style = {rectangle,draw,solid,minimum width=2em,
-		minimum height=2em},
+			minimum height=2em},
 	e/.style = {draw=none,circle, minimum width=2em,minimum height=2em}
 }
 \begin{frame}[c, fragile]{Binary Decision Diagrams (BDDs)}{}
@@ -89,36 +89,36 @@ $f=\textcolor{red}{\bar a\bar c}+\textcolor{blue}{\bar b\bar d}+\textcolor{lime}
 			\end{itemize}
 		\end{column}
 		\begin{column}{0.5\textwidth}
-			 \begin{center}
-			 	\resizebox{!}{0.8\textheight}{
-				\begin{tikzpicture}[node distance=1cm and 1cm]\footnotesize
-					\node[c] (x1) {$x_1$};
-					\node[] (t) [above=of x1, yshift=-0.8cm] {$\n{x}_1x_2\n{x}_3+x_1\n{x}_2\n{x}_3+x_1x_2x_3$};
-					\node[c] (x2l) [below left=of x1] {$x_2$};
-					\node[c] (x2r) [below right=of x1] {$x_2$};
-					
-					\node[c] (x3l) [below=of x2l] {$x_3$};
-					\node[c] (x3r) [below=of x2r] {$x_3$};
-					
-					\node[r] (zero) [below=of x3r, xshift=-0.5cm] {0};
-					\node[r] (one) [below=of x3l, xshift=0.5cm] {1};
+			\begin{center}
+				\resizebox{!}{0.8\textheight}{
+					\begin{tikzpicture}[node distance=1cm and 1cm]\footnotesize
+						\node[c] (x1) {$x_1$};
+						\node[] (t) [above=of x1, yshift=-0.8cm] {$\n{x}_1x_2\n{x}_3+x_1\n{x}_2\n{x}_3+x_1x_2x_3$};
+						\node[c] (x2l) [below left=of x1] {$x_2$};
+						\node[c] (x2r) [below right=of x1] {$x_2$};
 
-					\draw[zeroarrow] (x1) -- (x2l) node [midway, fill=none, above left] {$x_2\n{x}_3$};
-					\draw[onearrow] (x1) -- (x2r)  node [near end, fill=none, above right, align=center] {$\n{x}_2\n{x}_3+$\\$x_2x_3$};
-					
-					\draw[zeroarrow] (x2l) to [out=0,in=180] (zero);
-					\draw[onearrow] (x2l) -- (x3l) node [midway, fill=none, left] {$\n{x}_3$};
-	
-					\draw[zeroarrow] (x2r) -- (x3l)  node [near end, fill=none, above left] {$\n{x}_3$};
-					\draw[onearrow] (x2r)  -- (x3r)  node [midway, fill=none,right] {$x_3$};
-					
-					\draw[zeroarrow] (x3l) -- (one);
-					\draw[onearrow] (x3l) -- (zero);
-					\draw[zeroarrow] (x3r) -- (zero);
-					\draw[onearrow] (x3r) -- (one);
-				\end{tikzpicture}
-			}\\
-		\scriptsize Variablenordnung: $x_1\prec x_2\prec x_3$
+						\node[c] (x3l) [below=of x2l] {$x_3$};
+						\node[c] (x3r) [below=of x2r] {$x_3$};
+
+						\node[r] (zero) [below=of x3r, xshift=-0.5cm] {0};
+						\node[r] (one) [below=of x3l, xshift=0.5cm] {1};
+
+						\draw[zeroarrow] (x1) -- (x2l) node [midway, fill=none, above left] {$x_2\n{x}_3$};
+						\draw[onearrow] (x1) -- (x2r)  node [near end, fill=none, above right, align=center] {$\n{x}_2\n{x}_3+$\\$x_2x_3$};
+
+						\draw[zeroarrow] (x2l) to [out=0,in=180] (zero);
+						\draw[onearrow] (x2l) -- (x3l) node [midway, fill=none, left] {$\n{x}_3$};
+
+						\draw[zeroarrow] (x2r) -- (x3l)  node [near end, fill=none, above left] {$\n{x}_3$};
+						\draw[onearrow] (x2r)  -- (x3r)  node [midway, fill=none,right] {$x_3$};
+
+						\draw[zeroarrow] (x3l) -- (one);
+						\draw[onearrow] (x3l) -- (zero);
+						\draw[zeroarrow] (x3r) -- (zero);
+						\draw[onearrow] (x3r) -- (one);
+					\end{tikzpicture}
+				}\\
+				\scriptsize Variablenordnung: $x_1\prec x_2\prec x_3$
 			\end{center}
 		\end{column}
 	\end{columns}
@@ -127,92 +127,92 @@ $f=\textcolor{red}{\bar a\bar c}+\textcolor{blue}{\bar b\bar d}+\textcolor{lime}
 
 \begin{frame}[c, fragile]{BDDs: Reduktionen}
 	\begin{columns}[c]
-	\begin{column}{0.5\textwidth}
-		\begin{center}
-			\textbf{I-Reduktion}\\
-			Zusammenführung isomorpher Knoten
-			\vspace{\baselineskip}
-			\resizebox{!}{0.5\textheight}{
-			\begin{tikzpicture}
-				\node[e] (rl) {};
-				\node[e] (rm) [right=1em of rl]{};
-				\node[e] (rr) [right=1em of rm]{};
-				\node[c] (al) [below=of rl] {$a$};
-				\node[c] (ar) [below=of rr] {$a$};
-				
-				\node[c] (bl) [below=of al] {$b$};
-				\node[c] (br) [below=of ar] {$b$};
-				
-				\draw[zeroarrow] (rl) -- (al);
-				\draw[zeroarrow] (rm) -- (ar);
-				\draw[onearrow] (rr) -- (ar);
-				
-				\draw[zeroarrow] (al) -- (bl);
-				\draw[zeroarrow] (ar) -- (bl);
-				
-				\draw[onearrow] (al) -- (br);
-				\draw[onearrow] (ar) -- (br);
-				
-				\node[e] (rl2) [right=4em of rr]{};
-				\node[e] (rm2) [right=1em of rl2]{};
-				\node[e] (rr2) [right=1em of rm2]{};
-				\node[c] (al2) [below=of rl2] {$a$};
-				
-				\node[c] (bl2) [below=of al2] {$b$};
-				\node[c] (br2) [below=of al2, xshift=2cm] {$b$};
-				
-				\draw[zeroarrow] (rl2) -- (al2);
-				\draw[zeroarrow] (rm2) -- (al2);
-				\draw[onearrow] (rr2) -- (al2);
-				
-				\draw[zeroarrow] (al2) -- (bl2);
-				\draw[zeroarrow] (al2) -- (bl2);
-				
-				\draw[onearrow] (al2) -- (br2);
-				\draw[onearrow] (al2) -- (br2);
-				
-				\draw[->, very thick] (ar)++(2em,0) -- ++(2em,0);
-		\end{tikzpicture}
-	}
-		\end{center}
-	\end{column}
-\begin{column}{0.5\textwidth}
-	\begin{center}
-		\textbf{S-Reduktion}\\
-		Überflüssige Knoten entfernen
-		\vspace{\baselineskip}
-		\resizebox{!}{0.5\textheight}{
-			\begin{tikzpicture}
-				\node[e] (rl) {};
-				\node[e] (rm) [right=1em of rl]{};
-				\node[e] (rr) [right=1em of rm]{};
-				\node[c] (al) [below=of rm] {$a$};
-				\node[c] (bl) [below=of al] {$b$};
-				
-				\draw[zeroarrow] (rl) -- (al);
-				\draw[zeroarrow] (rm) -- (al);
-				\draw[onearrow] (rr) -- (al);
-				
-				\draw[zeroarrow] (al) to[bend right] (bl);
-				\draw[onearrow] (al) to[bend left] (bl);
-				
-				\node[e] (rl2) [right=0em of rr]{};
-				\node[e] (rm2) [right=1em of rl2]{};
-				\node[e] (rr2) [right=1em of rm2]{};
-	
-				\node[e] (al2) [below=of rm2] {};
-				\node[c] (bl2) [below=of al2] {$b$};
-				
-				\draw[zeroarrow] (rl2) -- (bl2);
-				\draw[zeroarrow] (rm2) -- (bl2);
-				\draw[onearrow] (rr2) -- (bl2);
-				
-				\draw[->, very thick] (al)++(3em,0) -- ++(2em,0);
-			\end{tikzpicture}
-		}
-	\end{center}
-\end{column}
-\end{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\textbf{I-Reduktion}\\
+				Zusammenführung isomorpher Knoten
+				\vspace{\baselineskip}
+				\resizebox{!}{0.5\textheight}{
+					\begin{tikzpicture}
+						\node[e] (rl) {};
+						\node[e] (rm) [right=1em of rl]{};
+						\node[e] (rr) [right=1em of rm]{};
+						\node[c] (al) [below=of rl] {$a$};
+						\node[c] (ar) [below=of rr] {$a$};
+
+						\node[c] (bl) [below=of al] {$b$};
+						\node[c] (br) [below=of ar] {$b$};
+
+						\draw[zeroarrow] (rl) -- (al);
+						\draw[zeroarrow] (rm) -- (ar);
+						\draw[onearrow] (rr) -- (ar);
+
+						\draw[zeroarrow] (al) -- (bl);
+						\draw[zeroarrow] (ar) -- (bl);
+
+						\draw[onearrow] (al) -- (br);
+						\draw[onearrow] (ar) -- (br);
+
+						\node[e] (rl2) [right=4em of rr]{};
+						\node[e] (rm2) [right=1em of rl2]{};
+						\node[e] (rr2) [right=1em of rm2]{};
+						\node[c] (al2) [below=of rl2] {$a$};
+
+						\node[c] (bl2) [below=of al2] {$b$};
+						\node[c] (br2) [below=of al2, xshift=2cm] {$b$};
+
+						\draw[zeroarrow] (rl2) -- (al2);
+						\draw[zeroarrow] (rm2) -- (al2);
+						\draw[onearrow] (rr2) -- (al2);
+
+						\draw[zeroarrow] (al2) -- (bl2);
+						\draw[zeroarrow] (al2) -- (bl2);
+
+						\draw[onearrow] (al2) -- (br2);
+						\draw[onearrow] (al2) -- (br2);
+
+						\draw[->, very thick] (ar)++(2em,0) -- ++(2em,0);
+					\end{tikzpicture}
+				}
+			\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\textbf{S-Reduktion}\\
+				Überflüssige Knoten entfernen
+				\vspace{\baselineskip}
+				\resizebox{!}{0.5\textheight}{
+					\begin{tikzpicture}
+						\node[e] (rl) {};
+						\node[e] (rm) [right=1em of rl]{};
+						\node[e] (rr) [right=1em of rm]{};
+						\node[c] (al) [below=of rm] {$a$};
+						\node[c] (bl) [below=of al] {$b$};
+
+						\draw[zeroarrow] (rl) -- (al);
+						\draw[zeroarrow] (rm) -- (al);
+						\draw[onearrow] (rr) -- (al);
+
+						\draw[zeroarrow] (al) to[bend right] (bl);
+						\draw[onearrow] (al) to[bend left] (bl);
+
+						\node[e] (rl2) [right=0em of rr]{};
+						\node[e] (rm2) [right=1em of rl2]{};
+						\node[e] (rr2) [right=1em of rm2]{};
+
+						\node[e] (al2) [below=of rm2] {};
+						\node[c] (bl2) [below=of al2] {$b$};
+
+						\draw[zeroarrow] (rl2) -- (bl2);
+						\draw[zeroarrow] (rm2) -- (bl2);
+						\draw[onearrow] (rr2) -- (bl2);
+
+						\draw[->, very thick] (al)++(3em,0) -- ++(2em,0);
+					\end{tikzpicture}
+				}
+			\end{center}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 

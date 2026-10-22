@@ -152,7 +152,7 @@
 
 
 
-						\newcommand{\registerpath}[3]{
+\newcommand{\registerpath}[3]{
 	\draw[regpath] (#2, -#1) node[circle, draw, fill, scale=0.4] {} -- (#3, -#1) node[shape=diamond, draw, fill, scale=0.4] {};
 }
 
@@ -212,22 +212,22 @@
 						\visible<7>{
 							\draw[default] (t1) -- (t3);
 						}
-					
-					\only<8>{
-								\node[shape=circle,fill=yellow] (t1) at (p.corner 1) {$t1$};
-								\node[shape=circle,fill=orange] (t2) at (p.corner 2) {$t2$};
-								\node[shape=circle,fill=red] (t3) at (p.corner 3) {$t3$};
-								\node[shape=circle,fill=orange] (t4) at (p.corner 4) {$t4$};
-								\node[shape=circle,fill=yellow] (t5) at (p.corner 5) {$t5$};
 
-					}
+						\only<8>{
+							\node[shape=circle,fill=yellow] (t1) at (p.corner 1) {$t1$};
+							\node[shape=circle,fill=orange] (t2) at (p.corner 2) {$t2$};
+							\node[shape=circle,fill=red] (t3) at (p.corner 3) {$t3$};
+							\node[shape=circle,fill=orange] (t4) at (p.corner 4) {$t4$};
+							\node[shape=circle,fill=yellow] (t5) at (p.corner 5) {$t5$};
+
+						}
 
 					\end{tikzpicture}
 				}
 			}
 		\end{column}
 		\begin{column}{0.5\textwidth}
-						\only<-7>{
+			\only<-7>{
 				\resizebox{0.85\textwidth}{!}{
 					\begin{tikzpicture}[
 							regpath/.style={blue, ultra thick},
@@ -431,9 +431,9 @@
 					\item Finde Terminale mit minimaler Manhattan-Distanz $\delta = \Delta x + \Delta y$
 					\item<4-> Konstruiere die kürzesten Verbindungen (bounding box)
 					\item<5-> Wähle die Verbindung, welche den geringsten Abstand zu einem der anderen Terminalknoten hat
-					\item<6-> Finde Terminale mit minimaler Manhatten-Distanz zur konstruierten Verbindung und fahre mit Schritt 2 fort		 
+					\item<6-> Finde Terminale mit minimaler Manhatten-Distanz zur konstruierten Verbindung und fahre mit Schritt 2 fort
 				\end{enumerate}
-				
+
 			}
 
 

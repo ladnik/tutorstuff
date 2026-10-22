@@ -18,55 +18,55 @@
 \maketitle
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien.
+	\begin{center}
+		\LARGE  Keine Garantie für die Richtigkeit der Tutorfolien.
 
-    \Large Bei Unklarheiten/Unstimmigkeiten haben VL/ZÜ-Folien recht!
-  \end{center}
+		\Large Bei Unklarheiten/Unstimmigkeiten haben VL/ZÜ-Folien recht!
+	\end{center}
 \end{frame}
 
 \begin{frame}[c, fragile]{Sprungbefehle}{}
-  \vspace{-1cm}
-  \begin{columns}
-    \begin{column}{0.5\textwidth}
-      \begin{center}\textbf{Branch-Befehle}\end{center}
-      Rücksprungadresse wird nicht gesichert, \textbf{Sprungbedingung}
-      muss erfüllt sein
-      \begin{itemize}
-        \item \verb|beq|: $rs1 = rs2$
-        \item \verb|bne|: $rs1 \ne rs2$
-        \item \verb|blt(u)|: $rs1 < rs2$
-        \item \verb|bgt(u)|: $rs1 > rs2$
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.5\textwidth}
-      \begin{center}\textbf{Jump-Befehle}\end{center}
-      Schreiben Rücksprungadresse in ra oder angegebenes Register,
-      springen immer
-      \begin{itemize}
-        \item \verb|jal label|
-        \item \verb|jalr rd, offset(rs)|
-        \item \verb|j label| Achtung, überschreibt ra nicht!
-      \end{itemize}
-    \end{column}
-  \end{columns}
+	\vspace{-1cm}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{center}\textbf{Branch-Befehle}\end{center}
+			Rücksprungadresse wird nicht gesichert, \textbf{Sprungbedingung}
+			muss erfüllt sein
+			\begin{itemize}
+				\item \verb|beq|: $rs1 = rs2$
+				\item \verb|bne|: $rs1 \ne rs2$
+				\item \verb|blt(u)|: $rs1 < rs2$
+				\item \verb|bgt(u)|: $rs1 > rs2$
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}\textbf{Jump-Befehle}\end{center}
+			Schreiben Rücksprungadresse in ra oder angegebenes Register,
+			springen immer
+			\begin{itemize}
+				\item \verb|jal label|
+				\item \verb|jalr rd, offset(rs)|
+				\item \verb|j label| Achtung, überschreibt ra nicht!
+			\end{itemize}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[c, fragile]{Speicherzugriffe}{}
-  lade 32 Bit an der Adresse a0 + 0 Bytes Offset in das Register t0:
-  \begin{verbatim}lw t0, 0(a0)\end{verbatim}
-  lade 8 Bit an der Adresse a2 - 4 Bytes Offset in das Register t1:
-  \begin{verbatim}lb t1, -4(a2)\end{verbatim}
-  speichere den gesamten Inhalt des Registers t2 an die Adresse a1 + 16 Bytes Offset:
-  \begin{verbatim}sw t2, 16(a1)\end{verbatim}
+	lade 32 Bit an der Adresse a0 + 0 Bytes Offset in das Register t0:
+	\begin{verbatim}lw t0, 0(a0)\end{verbatim}
+	lade 8 Bit an der Adresse a2 - 4 Bytes Offset in das Register t1:
+	\begin{verbatim}lb t1, -4(a2)\end{verbatim}
+	speichere den gesamten Inhalt des Registers t2 an die Adresse a1 + 16 Bytes Offset:
+	\begin{verbatim}sw t2, 16(a1)\end{verbatim}
 \end{frame}
 
 \begin{frame}[c, fragile]{Sections und Direktiven}
-  \begin{columns}[c]
-    \begin{column}{0.45\textwidth}
-      \begin{minted}{gas}
+	\begin{columns}[c]
+		\begin{column}{0.45\textwidth}
+			\begin{minted}{gas}
 # compile-time Konstante
-.equ NUM, 2748 
+.equ NUM, 2748
 
 # ro + init. Daten
 .rodata
@@ -79,9 +79,9 @@
   string1: .ascii "asdf"
   string2: .asciz "asdf"
         \end{minted}
-    \end{column}
-    \begin{column}{0.45\textwidth}
-      \begin{minted}{gas}
+		\end{column}
+		\begin{column}{0.45\textwidth}
+			\begin{minted}{gas}
 # rw + uninit. Daten
 .bss
   a: .space 16
@@ -95,39 +95,39 @@ _start:
    la a0, arr
    lbu a1, 0(a0)
       \end{minted}
-    \end{column}
-  \end{columns}
-  \begin{center}
-  \small{\textbf{ro}: read-only, \textbf{rw}: les- und schreibbar}
-  \end{center}
+		\end{column}
+	\end{columns}
+	\begin{center}
+		\small{\textbf{ro}: read-only, \textbf{rw}: les- und schreibbar}
+	\end{center}
 \end{frame}
 
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE Fragen?\\
-    \Large (Die ZÜ-Folien sind sehr gut, schaut euch die an)
-  \end{center}
+	\begin{center}
+		\LARGE Fragen?\\
+		\Large (Die ZÜ-Folien sind sehr gut, schaut euch die an)
+	\end{center}
 \end{frame}
 
 \begin{frame}[c, fragile]{Artemis-Hausaufgaben}{}
-  \begin{itemize}
-    \item \enquote{H03 --- Palindromerkennung} bis 10.11.2024 23:59 Uhr
-    \item Verwendung von Speicheroperationen, Unterprogrammaufrufe
-    \item Pseudoinstruktion \verb|tail| für tailcalls, verwendet aktuellen Stackframe wieder
-  \end{itemize}
+	\begin{itemize}
+		\item \enquote{H03 --- Palindromerkennung} bis 10.11.2024 23:59 Uhr
+		\item Verwendung von Speicheroperationen, Unterprogrammaufrufe
+		\item Pseudoinstruktion \verb|tail| für tailcalls, verwendet aktuellen Stackframe wieder
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c, fragile]{Links}{}
-  \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2661-ERA-Tutorium---Do-1600-1}{\enquote{ERA Tutorium - Do-1600-1}}
-          bzw. \href{https://zulip.in.tum.de/#narrow/stream/2675-ERA-Tutorium---Fr-1500-2 }{\enquote{ERA Tutorium - Fr-1500-2}}
-    \item \href{https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf}{RISC-V-Spezifikation}
-    \item \href{https://www.moodle.tum.de/course/view.php?id=100633}{ERA-Moodle-Kurs}
-    \item \href{https://artemis.in.tum.de/courses/401}{ERA-Artemis-Kurs}
-    \item \href{https://msyksphinz-self.github.io/riscv-isadoc/html/index.html}{Übersicht an RISC-V-Instruktionen}
-    \item \href{https://ftp.gnu.org/old-gnu/Manuals/gas/html_chapter/as_7.html}{GNU as directives}
-  \end{itemize}
+	\begin{itemize}
+		\item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2661-ERA-Tutorium---Do-1600-1}{\enquote{ERA Tutorium - Do-1600-1}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/stream/2675-ERA-Tutorium---Fr-1500-2 }{\enquote{ERA Tutorium - Fr-1500-2}}
+		\item \href{https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf}{RISC-V-Spezifikation}
+		\item \href{https://www.moodle.tum.de/course/view.php?id=100633}{ERA-Moodle-Kurs}
+		\item \href{https://artemis.in.tum.de/courses/401}{ERA-Artemis-Kurs}
+		\item \href{https://msyksphinz-self.github.io/riscv-isadoc/html/index.html}{Übersicht an RISC-V-Instruktionen}
+		\item \href{https://ftp.gnu.org/old-gnu/Manuals/gas/html_chapter/as_7.html}{GNU as directives}
+	\end{itemize}
 \end{frame}
 
 \maketitle

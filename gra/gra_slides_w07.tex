@@ -9,46 +9,46 @@
 \maketitle
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
-    haben VL-Folien Recht!
-  \end{center}
+	\begin{center}
+		\LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
+		haben VL-Folien Recht!
+	\end{center}
 \end{frame}
 
 \begin{frame}[c, fragile]{Profiling und Zeitmessung}{}
-  \begin{itemize}
-    \item tracing profiler: Eingriffe des Profilers in Programmcode (präzise)
-    \item sampling profiler: regelmäßige Samples während Ausführung (ungenauer), bspw. \verb|perf|
-    \item Zeitmessung über \verb|clock_gettime(...)|
-    \item \verb|CLOCK_MONOTONIC| verwenden!
-  \end{itemize}
+	\begin{itemize}
+		\item tracing profiler: Eingriffe des Profilers in Programmcode (präzise)
+		\item sampling profiler: regelmäßige Samples während Ausführung (ungenauer), bspw. \verb|perf|
+		\item Zeitmessung über \verb|clock_gettime(...)|
+		\item \verb|CLOCK_MONOTONIC| verwenden!
+	\end{itemize}
 \end{frame}
 
 
 \begin{frame}[c, fragile]{Anwendung im Projekt}{}
-  \begin{itemize}
-    \item \textit{ein} System zum Vergleich von Ausführungszeiten verwenden
-    \item am besten bare-metal Linux (keine VMs, keine Rechnerhalle), \verb|-O2|
-    \item mehrmals mindestens 1s lang testen, evtl. Programm wiederholen $\rightarrow$ arith. Mittel über Ausführungszeiten
-    \item falls Ausarbeitung erforderlich, relevante Systeminformationen angeben (\verb|sudo lshw|)
-    \item Begründung, welche Speedups auf welche Optimierungen zurückzuführen sind
-  \end{itemize}
+	\begin{itemize}
+		\item \textit{ein} System zum Vergleich von Ausführungszeiten verwenden
+		\item am besten bare-metal Linux (keine VMs, keine Rechnerhalle), \verb|-O2|
+		\item mehrmals mindestens 1s lang testen, evtl. Programm wiederholen $\rightarrow$ arith. Mittel über Ausführungszeiten
+		\item falls Ausarbeitung erforderlich, relevante Systeminformationen angeben (\verb|sudo lshw|)
+		\item Begründung, welche Speedups auf welche Optimierungen zurückzuführen sind
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE Fragen?
-  \end{center}
+	\begin{center}
+		\LARGE Fragen?
+	\end{center}
 \end{frame}
 
 \begin{frame}[fragile, c]{Links}{}
-  \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2267-GRA-Tutorium---Gruppe-20}{\enquote{GRA Tutorium - Gruppe 20}}
-          bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\enquote{GRA Tutorium - Gruppe 22}}
-    \item \href{https://gra.caps.in.tum.de}{Praktikumswebsite}
-    \item \href{https://www.felixcloutier.com/x86/}{x86 instruction reference by Félix Cloutier}
-    \item \href{https://perf.wiki.kernel.org/}{perf Wiki}
-  \end{itemize}
+	\begin{itemize}
+		\item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2267-GRA-Tutorium---Gruppe-20}{\enquote{GRA Tutorium - Gruppe 20}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\enquote{GRA Tutorium - Gruppe 22}}
+		\item \href{https://gra.caps.in.tum.de}{Praktikumswebsite}
+		\item \href{https://www.felixcloutier.com/x86/}{x86 instruction reference by Félix Cloutier}
+		\item \href{https://perf.wiki.kernel.org/}{perf Wiki}
+	\end{itemize}
 \end{frame}
 
 \maketitle

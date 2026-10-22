@@ -44,7 +44,7 @@ check_calc:
 # ------------------------------------------------------------
     # TODO: implement function
 
-    # Wir müssen die Elemente des structs in Register laden, 
+    # Wir müssen die Elemente des structs in Register laden,
     # damit wir diese verwenden können. Da wir die Adresse
     # von calc haben (a0), können wir ganz einfach mittels
     # Offsets dies erzielen.
@@ -76,7 +76,7 @@ check_calc:
     # Wir wissen, dass die Instruktionen nacheinander im Speicher liegen.
     # D.h. wir können ausgehend vom Label calc_add_jumper unsere
     # gewünschte beq-Instruktion auswählen, indem wir den Unterschied
-    # zwischen zwei "operator"-Werten von 1 auf 4 erweitern, d.h. mit 4 
+    # zwischen zwei "operator"-Werten von 1 auf 4 erweitern, d.h. mit 4
     # multiplizieren.
     slli a0, a0, 2
     la t2, calc_add_jumper
@@ -97,7 +97,7 @@ check_calc:
     beq zero, zero, calc_not
     calc_and_jumper:
     beq zero, zero, calc_and
-    calc_or_jumper: 
+    calc_or_jumper:
     beq zero, zero, calc_or
     calc_xor_jumper:
     beq zero, zero, calc_xor
@@ -131,13 +131,13 @@ check_calc:
 
     calc_or:
     or t0, t0, t1
-    beq zero, zero, result 
- 
+    beq zero, zero, result
+
     calc_xor:
     xor t0, t0, t1
     beq zero, zero, result
 
-    # Wir überprüfen ob das tatsächliche Ergebnis mit dem 
+    # Wir überprüfen ob das tatsächliche Ergebnis mit dem
     # struct-Wert "ergebnis" in t3 übereinstimmt.
     # Falls dem so ist, springen wir zu "correct"
     result:

@@ -10,93 +10,93 @@
 \maketitle
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien.
+	\begin{center}
+		\LARGE  Keine Garantie für die Richtigkeit der Tutorfolien.
 
-    \Large Bei Unklarheiten/Unstimmigkeiten haben VL/ZÜ-Folien recht!
-  \end{center}
+		\Large Bei Unklarheiten/Unstimmigkeiten haben VL/ZÜ-Folien recht!
+	\end{center}
 \end{frame}
 
 \begin{frame}[c]{Abstraktionsebenen}{}
-  \begin{columns}[c]
-    \begin{column}{0.6\textwidth}
-      \begin{itemize}
-        \item Code in einer Hochsprache (C, Java, \textellipsis) ist lediglich eine Abstraktion
-        \item Compiler: Hochsprache $\rightarrow$ Assemblersprache
-        \item Assembler: Assemblercode $\rightarrow$ Maschinensprache (1:1 Übersetzung)
-        \item Maschinensprache ist plattformspezifisch!
-        \item ISA: \enquote{Bedienungsanleitung} einer CPU
-        \item RISC vs. CISC
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.3\textwidth}
-      \begin{figure}
-      \begin{tikzpicture}[
-          block/.style = {draw, rectangle, minimum width=3cm, minimum height=0.75cm, align=center},
-          node distance=1.2cm
-        ]
+	\begin{columns}[c]
+		\begin{column}{0.6\textwidth}
+			\begin{itemize}
+				\item Code in einer Hochsprache (C, Java, \textellipsis) ist lediglich eine Abstraktion
+				\item Compiler: Hochsprache $\rightarrow$ Assemblersprache
+				\item Assembler: Assemblercode $\rightarrow$ Maschinensprache (1:1 Übersetzung)
+				\item Maschinensprache ist plattformspezifisch!
+				\item ISA: \enquote{Bedienungsanleitung} einer CPU
+				\item RISC vs. CISC
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\begin{figure}
+				\begin{tikzpicture}[
+						block/.style = {draw, rectangle, minimum width=3cm, minimum height=0.75cm, align=center},
+						node distance=1.2cm
+					]
 
-        \node[block] (source) at (0,0) {Source Code};
-        \node[block, yshift=-1cm] (compiler)  at (source.south){Compiler};
-        \node[block, yshift=-1cm] (assembler) at (compiler.south){Assembler};
-        \node[block, yshift=-1cm] (machine) at (assembler.south) {Maschinensprache};
-        \node[block, yshift=-1cm] (cpu) at (machine.south) {CPU};
+					\node[block] (source) at (0,0) {Source Code};
+					\node[block, yshift=-1cm] (compiler)  at (source.south){Compiler};
+					\node[block, yshift=-1cm] (assembler) at (compiler.south){Assembler};
+					\node[block, yshift=-1cm] (machine) at (assembler.south) {Maschinensprache};
+					\node[block, yshift=-1cm] (cpu) at (machine.south) {CPU};
 
-        \draw[->] (source) -- (compiler) node[midway, right] {};
-        \draw[->] (compiler) -- (assembler) node[midway, right] {};
-        \draw[->] (assembler) -- (machine) node[midway, right] {};
-        \draw[->] (machine) -- (cpu) node[midway, right] {};
+					\draw[->] (source) -- (compiler) node[midway, right] {};
+					\draw[->] (compiler) -- (assembler) node[midway, right] {};
+					\draw[->] (assembler) -- (machine) node[midway, right] {};
+					\draw[->] (machine) -- (cpu) node[midway, right] {};
 
-        \node[draw, dashed, thick, inner sep=0.3cm, fit=(compiler) (assembler)] {};
-      \end{tikzpicture}
-      \footnotesize  (Abbildung stark vereinfacht)
-    \end{figure}
-    \end{column}
-  \end{columns}
+					\node[draw, dashed, thick, inner sep=0.3cm, fit=(compiler) (assembler)] {};
+				\end{tikzpicture}
+				\footnotesize  (Abbildung stark vereinfacht)
+			\end{figure}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[c]{RISC-V}{}
-  \begin{columns}[c]
-    \begin{column}{0.6\textwidth}
-      \begin{itemize}
-        \item eine von vielen Assemblersprachen
-        \item Datenwortbreite: 32 Bit (4 Byte)
-        \item Little-Endian-Architektur
-        \item 32 Register, einige davon mit spezieller Funktion
-        \item grundlegende Instruktionen auf 32 Bit begrenzt 
-        $\rightarrow$ Konstanten müssen zusammengebastelt werden
-        \item Immediates sind 12 Bit lang (sign-extended)
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.3\textwidth}
-      \includegraphics[width=\linewidth]{risc_v_logo.png}
-    \end{column}
-  \end{columns}
+	\begin{columns}[c]
+		\begin{column}{0.6\textwidth}
+			\begin{itemize}
+				\item eine von vielen Assemblersprachen
+				\item Datenwortbreite: 32 Bit (4 Byte)
+				\item Little-Endian-Architektur
+				\item 32 Register, einige davon mit spezieller Funktion
+				\item grundlegende Instruktionen auf 32 Bit begrenzt
+				      $\rightarrow$ Konstanten müssen zusammengebastelt werden
+				\item Immediates sind 12 Bit lang (sign-extended)
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\includegraphics[width=\linewidth]{risc_v_logo.png}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE Fragen?
-  \end{center}
+	\begin{center}
+		\LARGE Fragen?
+	\end{center}
 \end{frame}
 
 
 \begin{frame}[c]{Artemis-Hausaufgaben}{}
-  \begin{itemize}
-    \item \enquote{H02 --- Festkommarechnung} bis 03.11.2024 23:59 Uhr
-    \item Vorüberlegungen zu Festkommarechnung auf Mitschrift WS 23/24
-  \end{itemize}
+	\begin{itemize}
+		\item \enquote{H02 --- Festkommarechnung} bis 03.11.2024 23:59 Uhr
+		\item Vorüberlegungen zu Festkommarechnung auf Mitschrift WS 23/24
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile, c]{Links}{}
-  \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2661-ERA-Tutorium---Do-1600-1}{\enquote{ERA Tutorium - Do-1600-1}}
-          bzw. \href{https://zulip.in.tum.de/#narrow/stream/2675-ERA-Tutorium---Fr-1500-2 }{\enquote{ERA Tutorium - Fr-1500-2}}
-    \item \href{https://www.moodle.tum.de/course/view.php?id=100633}{ERA-Moodle-Kurs}
-    \item \href{https://artemis.in.tum.de/courses/401}{ERA-Artemis-Kurs}
-    \item \href{https://vanhunteradams.com/FixedPoint/FixedPoint.html}{Einführung Fixpunktarithmetik}, \href{https://specbranch.com/posts/fixed-point/}{Alternative}
-    \item \href{https://msyksphinz-self.github.io/riscv-isadoc/html/index.html}{Übersicht an RISC-V-Instruktionen}
-  \end{itemize}
+	\begin{itemize}
+		\item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2661-ERA-Tutorium---Do-1600-1}{\enquote{ERA Tutorium - Do-1600-1}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/stream/2675-ERA-Tutorium---Fr-1500-2 }{\enquote{ERA Tutorium - Fr-1500-2}}
+		\item \href{https://www.moodle.tum.de/course/view.php?id=100633}{ERA-Moodle-Kurs}
+		\item \href{https://artemis.in.tum.de/courses/401}{ERA-Artemis-Kurs}
+		\item \href{https://vanhunteradams.com/FixedPoint/FixedPoint.html}{Einführung Fixpunktarithmetik}, \href{https://specbranch.com/posts/fixed-point/}{Alternative}
+		\item \href{https://msyksphinz-self.github.io/riscv-isadoc/html/index.html}{Übersicht an RISC-V-Instruktionen}
+	\end{itemize}
 \end{frame}
 
 \maketitle

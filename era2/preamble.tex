@@ -19,11 +19,11 @@
 
 %% ================================== base ================================== %%
 \documentclass[
-  german,            % define the document language (english, german)
-  aspectratio=169,    % define the aspect ratio (169, 43)
-  % handout=2on1,       % create handout with multiple slides (2on1, 4on1)
-  % partpage=false,     % insert page at beginning of parts (true, false)
-  % sectionpage=true,   % insert page at beginning of sections (true, false)
+	german,            % define the document language (english, german)
+	aspectratio=169,    % define the aspect ratio (169, 43)
+	% handout=2on1,       % create handout with multiple slides (2on1, 4on1)
+	% partpage=false,     % insert page at beginning of parts (true, false)
+	% sectionpage=true,   % insert page at beginning of sections (true, false)
 ]{tumbeamer}
 
 \usepackage{booktabs}
@@ -62,13 +62,13 @@
 \usepackage{karnaugh-map}
 
 \usetikzlibrary{arrows, arrows.meta, backgrounds, positioning,
-  shapes, shapes.geometric, shapes.symbols,
-  patterns, patterns.meta,
-  matrix, fit, calc,
-  decorations.pathreplacing,
-  tikzmark, chains,
-  overlay-beamer-styles,
-  automata}
+	shapes, shapes.geometric, shapes.symbols,
+	patterns, patterns.meta,
+	matrix, fit, calc,
+	decorations.pathreplacing,
+	tikzmark, chains,
+	overlay-beamer-styles,
+	automata}
 
 % requires circuitikz >= 1.1.0
 % for distros with older distributions, install TeX Live manually
@@ -82,9 +82,9 @@
 
 \usemintedstyle{borland}
 \setminted{
-  fontsize=\small,
-  frame=none,
-  breaklines=true,
+	fontsize=\small,
+	frame=none,
+	breaklines=true,
 }
 
 %% ============================ colors & styling ============================ %%
@@ -95,10 +95,10 @@
 %% ============================= custom macros ============================= %%
 % https://tex.stackexchange.com/a/7045
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
-    \node[shape=circle,draw,inner sep=2pt, font=\scriptsize] (char) {#1};}}
+		\node[shape=circle,draw,inner sep=2pt, font=\scriptsize] (char) {#1};}}
 
 \newcommand*\colorcirc[1]{\tikz[baseline=(char.base)]{
-    \node[shape=circle,fill=#1,inner sep=2pt] {};}}
+		\node[shape=circle,fill=#1,inner sep=2pt] {};}}
 
 \newcommand{\n}[1]{\overline{#1}}
 
@@ -109,16 +109,16 @@
 \footline{\insertauthor~|~\insertshorttitle~|~\insertshortdate}
 
 \TUMbeamersetup{
-  title page = TUM tower,         % style of the title page
-  part page = TUM toc,            % style of part pages
-  section page = TUM toc,         % style of section pages
-  content page = TUM more space,  % style of normal content pages
-  tower scale = 1.0,              % scaling factor of TUM tower (if used)
-  headline = TUM threeliner,      % which variation of headline to use
-  footline = TUM default,         % which variation of footline to use
-  % configure on which pages headlines and footlines should be printed
-  headline on = {title page},
-  footline on = {every page, title page=false},
+	title page = TUM tower,         % style of the title page
+	part page = TUM toc,            % style of part pages
+	section page = TUM toc,         % style of section pages
+	content page = TUM more space,  % style of normal content pages
+	tower scale = 1.0,              % scaling factor of TUM tower (if used)
+	headline = TUM threeliner,      % which variation of headline to use
+	footline = TUM default,         % which variation of footline to use
+	% configure on which pages headlines and footlines should be printed
+	headline on = {title page},
+	footline on = {every page, title page=false},
 }
 
 % available frame styles for title page, part page, and section page:

@@ -9,71 +9,71 @@
 \maketitle
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE  Durchzählen!
-  \end{center}
+	\begin{center}
+		\LARGE  Durchzählen!
+	\end{center}
 \end{frame}
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
-    haben VL/ZÜ-Folien Recht!
-  \end{center}
+	\begin{center}
+		\LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
+		haben VL/ZÜ-Folien Recht!
+	\end{center}
 \end{frame}
 
 \begin{frame}[fragile, c]{RISC-V Instruktionstypen}{}
-  \begin{itemize}
-    \item R-Typ: Register-Register-Operationen (bspw. add, sub, sll)
-    \item I-Typ: kleine Immediates (12 Bit) und Ladebefehle (bspw. jalr, lw, ori)
-    \item S-Typ: Speicherbefehle (bspw. sw, sh)
-    \item B-Typ: Branches (bedingte Sprünge) (bspw. beq, blt, bgtu)
-    \item U-Typ: große Immediates (20 Bit) (bspw. lui, auipc)
-    \item J-Typ: Jumps (unbedingte Sprünge) (jal, )
-  \end{itemize}
+	\begin{itemize}
+		\item R-Typ: Register-Register-Operationen (bspw. add, sub, sll)
+		\item I-Typ: kleine Immediates (12 Bit) und Ladebefehle (bspw. jalr, lw, ori)
+		\item S-Typ: Speicherbefehle (bspw. sw, sh)
+		\item B-Typ: Branches (bedingte Sprünge) (bspw. beq, blt, bgtu)
+		\item U-Typ: große Immediates (20 Bit) (bspw. lui, auipc)
+		\item J-Typ: Jumps (unbedingte Sprünge) (jal, )
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c, fragile]{Übersetzung Machinencode $\leftrightarrow$ Assembly}{}
-  \begin{itemize}
-    \item Jeder Instruktionstyp wir in 32 Bit enkodiert
-    \item Bei CISC ist eine solche Übersetzung sehr aufwendig (verschiedene Tabellen etc.)
-    \item RISC-V: 1:1 als Binärzahl im passenden Format schreiben $\rightarrow$ entspricht Enkodierung
-  \end{itemize}
-  \begin{center}
-    \includegraphics[width=0.6\textwidth]{w07_types.png}
-  \end{center}
+	\begin{itemize}
+		\item Jeder Instruktionstyp wir in 32 Bit enkodiert
+		\item Bei CISC ist eine solche Übersetzung sehr aufwendig (verschiedene Tabellen etc.)
+		\item RISC-V: 1:1 als Binärzahl im passenden Format schreiben $\rightarrow$ entspricht Enkodierung
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{w07_types.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}[c]{RISC-V Single-Cycle-Prozessor}{}
-  \begin{center}
-    \includegraphics[width=0.8\textwidth]{w07_single_cycle.png}
-  \end{center}
-  \centering
-  \tiny (Quelle: Vorlesungsmaterialien ERA)
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{w07_single_cycle.png}
+	\end{center}
+	\centering
+	\tiny (Quelle: Vorlesungsmaterialien ERA)
 \end{frame}
 
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE Fragen?
-  \end{center}
+	\begin{center}
+		\LARGE Fragen?
+	\end{center}
 \end{frame}
 
 \begin{frame}[c, fragile]{Artemis-Hausaufgaben}{}
-  \begin{itemize}
-    \item H07 - RISCV Single bis 10.12.2023 23:59 Uhr
-    \item Erweiterung des RISC-V-Prozessors, mögliche Klausuraufgabe
-    \item bge und slli - ein Großteil der Logik ist schon implementiert
-    \item eigentliche Aufgabe mit wenigen Bauteilen/Verbindungen lösbar
-  \end{itemize}
+	\begin{itemize}
+		\item H07 - RISCV Single bis 10.12.2023 23:59 Uhr
+		\item Erweiterung des RISC-V-Prozessors, mögliche Klausuraufgabe
+		\item bge und slli - ein Großteil der Logik ist schon implementiert
+		\item eigentliche Aufgabe mit wenigen Bauteilen/Verbindungen lösbar
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile, c]{Links}{}
-  \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\enquote{ERA Tutorium - Mi-1600-MI4}}
-    bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\enquote{ERA Tutorium - Fr-1100-MW2}}
-    \item \href{https://github.com/logisim-evolution/logisim-evolution/releases}{Logisim Evolution}
-    \item \href{https://courses.edx.org/assets/courseware/v1/f06a2dc0c856f60ec0711e9f5e1c98cf/asset-v1:HarveyMuddX+ENGR85B+1T2023+type@asset+block/FinalReferences.pdf}{Referenztabellen (offizielle Tabellen sind auf den Übungblättern)}
-  \end{itemize}
+	\begin{itemize}
+		\item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\enquote{ERA Tutorium - Mi-1600-MI4}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\enquote{ERA Tutorium - Fr-1100-MW2}}
+		\item \href{https://github.com/logisim-evolution/logisim-evolution/releases}{Logisim Evolution}
+		\item \href{https://courses.edx.org/assets/courseware/v1/f06a2dc0c856f60ec0711e9f5e1c98cf/asset-v1:HarveyMuddX+ENGR85B+1T2023+type@asset+block/FinalReferences.pdf}{Referenztabellen (offizielle Tabellen sind auf den Übungblättern)}
+	\end{itemize}
 \end{frame}
 
 \maketitle

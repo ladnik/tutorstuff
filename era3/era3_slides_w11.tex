@@ -126,8 +126,8 @@
 			\draw[read, <-](leg3.west) -- ++(-0.5,0);
 			\draw[, <-](leg4.west) -- ++(-0.5,0);
 		}{}
-	
-	\node[draw=none, fit= (m) (e) (s) (i), inner sep=28pt] {};
+
+		\node[draw=none, fit= (m) (e) (s) (i), inner sep=28pt] {};
 	\end{tikzpicture}
 }
 
@@ -172,7 +172,7 @@
 \begin{frame}[c, fragile]{Speedup durch Parallelisierung}{}
 	Mit $t_s$ sequentieller Programmteil, $t_p$ paralleler Programmteil, $n$ CPU-Kerne,\\Ausführungszeit $T$ mit $n=1$:
 	\vspace*{\baselineskip}
-	
+
 	\begin{itemize}
 		\item Amdahlsches Gesetz:
 		      Gleiche Problemgröße, aufgeteilt auf mehrere Kerne\\$\rightarrow$ begrenzt durch sequentiellen Anteil
@@ -204,7 +204,7 @@
 
 			\onslide<3->{
 				\node[minimum width=\parWidth, right=\gap+\parWidth of seq1, dotted] (par_shadow) {};
-				%\node[minimum width=\parWidth, right=\gap of par_shadow_2, dotted] (par_shadow_3) {};	
+				%\node[minimum width=\parWidth, right=\gap of par_shadow_2, dotted] (par_shadow_3) {};
 			}
 
 			\onslide<2->{
@@ -313,7 +313,7 @@
 \begin{frame}[c, fragile]{Links}{}
 	\begin{itemize}
 		\item Zulip: \href{https://zulip.in.tum.de/#narrow/channel/3255-ERA-Tutorium-.E2.80.93-Mi-1600-3}{\enquote{ERA Tutorium -- Mi-1600-3}}
-		bzw. \href{https://zulip.in.tum.de/#narrow/channel/3264-ERA-Tutorium-.E2.80.93-Fr-1500-1}{\enquote{ERA Tutorium -- Fr-1500-1}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/channel/3264-ERA-Tutorium-.E2.80.93-Fr-1500-1}{\enquote{ERA Tutorium -- Fr-1500-1}}
 		\item \href{https://www.moodle.tum.de/course/view.php?id=111440}{ERA-Moodle-Kurs}
 		\item \href{https://artemis.tum.de/courses/516}{ERA-Artemis-Kurs}
 		\item \href{https://de.wikipedia.org/wiki/MESI}{Wikipedia zu MESI}

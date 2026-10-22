@@ -9,85 +9,85 @@
 \maketitle
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE  Durchzählen!
-  \end{center}
+	\begin{center}
+		\LARGE  Durchzählen!
+	\end{center}
 \end{frame}
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
-    haben VL/ZÜ-Folien Recht!
-  \end{center}
+	\begin{center}
+		\LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
+		haben VL/ZÜ-Folien Recht!
+	\end{center}
 \end{frame}
 
 \begin{frame}[fragile, c]{AIGs}{}
-  \begin{columns}[c]
-    \begin{column}{0.5\textwidth}
-      \begin{itemize}
-        \item $\{\wedge, \neg\}$ ist funktional vollständig $\rightarrow$ NAND-Logik
-        \item geringere Kosten für Darstellung einer boolschen Funktion
-        \item AIG: Knoten stehen für Verundung beider Inputs, Output-Linie gestrichelt/durchgezogen für Negation/keine Negation
-        \item $x_0$ ist reserviert für Konstante $0$
-        \item im Bild sind Inputs unten, Outputs oben
-        \item algebraische Redundanzen siehe VL
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.5\textwidth}
-      \begin{center}
-        \includegraphics[width=0.65\textwidth]{w12_aig.png}
-      \end{center}
-      \centering
-      \tiny{Quelle: Vorlesungsmaterialien ERA}
-    \end{column}
-  \end{columns}
+	\begin{columns}[c]
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item $\{\wedge, \neg\}$ ist funktional vollständig $\rightarrow$ NAND-Logik
+				\item geringere Kosten für Darstellung einer boolschen Funktion
+				\item AIG: Knoten stehen für Verundung beider Inputs, Output-Linie gestrichelt/durchgezogen für Negation/keine Negation
+				\item $x_0$ ist reserviert für Konstante $0$
+				\item im Bild sind Inputs unten, Outputs oben
+				\item algebraische Redundanzen siehe VL
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\includegraphics[width=0.65\textwidth]{w12_aig.png}
+			\end{center}
+			\centering
+			\tiny{Quelle: Vorlesungsmaterialien ERA}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[fragile, c]{Satisfiability Solving}{}
-  \begin{itemize}
-    \item Satisfiability $\rightarrow$ Erfüllbarkeit einer boolschen Funktion feststellen
-    \item Viele Probleme können durch Abbildung auf KNF in ein SAT-Problem überführt werden
-    \item DPLL-Algorithmus (bekannt aus DS) zur Lösung von KNF-SAT:
-          \begin{enumerate}
-            \item Wähle Variable $x_i$ und belege sie in allen Klauseln $\omega_i$
-            \item Kann die Belegung anderer Variablen dadurch abgeleitet werden? (Propagation)
-            \item Bei Konflikten aus Implikationsgraph \enquote{gelernte Klausel} ableiten, dann Backtracking
-            \item So lange fortführen bis erfüllende Belegung gefunden
-          \end{enumerate}
-  \end{itemize}
+	\begin{itemize}
+		\item Satisfiability $\rightarrow$ Erfüllbarkeit einer boolschen Funktion feststellen
+		\item Viele Probleme können durch Abbildung auf KNF in ein SAT-Problem überführt werden
+		\item DPLL-Algorithmus (bekannt aus DS) zur Lösung von KNF-SAT:
+		      \begin{enumerate}
+			      \item Wähle Variable $x_i$ und belege sie in allen Klauseln $\omega_i$
+			      \item Kann die Belegung anderer Variablen dadurch abgeleitet werden? (Propagation)
+			      \item Bei Konflikten aus Implikationsgraph \enquote{gelernte Klausel} ableiten, dann Backtracking
+			      \item So lange fortführen bis erfüllende Belegung gefunden
+		      \end{enumerate}
+	\end{itemize}
 \end{frame}
 
 
 \begin{frame}[c, fragile]{Implikationsgraphen (Konfliktanalyse)}{}
 
-  \begin{center}
-    \includegraphics[width=0.8\textwidth]{w12_sat.png}
-  \end{center}
-  \begin{center}
-    \tiny{Quelle: Conflict-Driven Clause Learning SAT Solvers, Joao Marques-Silva and In{\^e}s Lynce and Sharad Malik}
-  \end{center}
-  gelernte Klausel: $\omega_\kappa:=(x_{31} + x_1 + x_{21})$
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{w12_sat.png}
+	\end{center}
+	\begin{center}
+		\tiny{Quelle: Conflict-Driven Clause Learning SAT Solvers, Joao Marques-Silva and In{\^e}s Lynce and Sharad Malik}
+	\end{center}
+	gelernte Klausel: $\omega_\kappa:=(x_{31} + x_1 + x_{21})$
 \end{frame}
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE Fragen?
-  \end{center}
+	\begin{center}
+		\LARGE Fragen?
+	\end{center}
 \end{frame}
 
 \begin{frame}[c, fragile]{Artemis-Hausaufgaben}{}
-  \begin{itemize}
-    \item H12 - Mastermind bis 28.01.2024 23:59 Uhr
-    \item Finden von KNFs für Mastermind-Regeln
-  \end{itemize}
+	\begin{itemize}
+		\item H12 - Mastermind bis 28.01.2024 23:59 Uhr
+		\item Finden von KNFs für Mastermind-Regeln
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile, c]{Links}{}
-  \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\enquote{ERA Tutorium - Mi-1600-MI4}}
-    bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\enquote{ERA Tutorium - Fr-1100-MW2}}
-    \item \href{https://en.wikipedia.org/wiki/Boolean_satisfiability_problem}{Wikipedia zu SAT}
-  \end{itemize}
+	\begin{itemize}
+		\item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\enquote{ERA Tutorium - Mi-1600-MI4}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\enquote{ERA Tutorium - Fr-1100-MW2}}
+		\item \href{https://en.wikipedia.org/wiki/Boolean_satisfiability_problem}{Wikipedia zu SAT}
+	\end{itemize}
 \end{frame}
 
 \maketitle

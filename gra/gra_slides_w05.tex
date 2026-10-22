@@ -9,54 +9,54 @@
 \maketitle
 
 \begin{frame}[c]{Feedback}{}
-  \begin{center}
-    \LARGE  \href{https://t1p.de/m0i0y}{https://t1p.de/m0i0y}\\
-    \includegraphics[height=0.5\textheight]{feedback_qr.png}
-  \end{center}
+	\begin{center}
+		\LARGE  \href{https://t1p.de/m0i0y}{https://t1p.de/m0i0y}\\
+		\includegraphics[height=0.5\textheight]{feedback_qr.png}
+	\end{center}
 \end{frame}
 
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
-    haben VL-Folien Recht!
-  \end{center}
+	\begin{center}
+		\LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
+		haben VL-Folien Recht!
+	\end{center}
 \end{frame}
 
 \begin{frame}[c, fragile]{Floating Point}{}
-  \begin{itemize}
-    \item Fixkommazahlen bekannt aus ERA :)
-    \item Fließkommazahlen der Form: $(-1)^\text{sign}\cdot 1.\text{mantissa}\cdot 2^{\text{exp}-\text{bias}}$
-    \item logarithmische Verteilung der darstellbaren Zahlen und funky Konzepte wie Absorption/Auslöschung/fehlende Assoziativität und Distributivität
-    \item Spezielle Darstellungen für NaN, $+\infty$, $-\infty$
-    \item Alle Operationen mit NaN ergeben NaN, alle Vergleiche (außer $\ne$!) ergeben \verb|false|
-  \end{itemize}
+	\begin{itemize}
+		\item Fixkommazahlen bekannt aus ERA :)
+		\item Fließkommazahlen der Form: $(-1)^\text{sign}\cdot 1.\text{mantissa}\cdot 2^{\text{exp}-\text{bias}}$
+		\item logarithmische Verteilung der darstellbaren Zahlen und funky Konzepte wie Absorption/Auslöschung/fehlende Assoziativität und Distributivität
+		\item Spezielle Darstellungen für NaN, $+\infty$, $-\infty$
+		\item Alle Operationen mit NaN ergeben NaN, alle Vergleiche (außer $\ne$!) ergeben \verb|false|
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c, fragile]{Streaming SIMD Extensions (SSE)}{}
-  \begin{itemize}
-    \item Einführung von 128-Bit-Registern \verb|xmm0-xmm15|, verwendbar für FP und SIMD
-    \item Schreiben der Register mittels \verb|movss, movd, movq, ...|
-    \item arithmetische Befehle für float (ss) und double (sd): bspw. \verb|addss|
-    \item anstelle von \verb|cmp| \verb|ucomiss| bzw. \verb|ucomisd|
-  \end{itemize}
+	\begin{itemize}
+		\item Einführung von 128-Bit-Registern \verb|xmm0-xmm15|, verwendbar für FP und SIMD
+		\item Schreiben der Register mittels \verb|movss, movd, movq, ...|
+		\item arithmetische Befehle für float (ss) und double (sd): bspw. \verb|addss|
+		\item anstelle von \verb|cmp| \verb|ucomiss| bzw. \verb|ucomisd|
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE Fragen?
-  \end{center}
+	\begin{center}
+		\LARGE Fragen?
+	\end{center}
 \end{frame}
 
 \begin{frame}[fragile, c]{Links}{}
-  \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2267-GRA-Tutorium---Gruppe-20}{\enquote{GRA Tutorium - Gruppe 20}}
-          bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\enquote{GRA Tutorium - Gruppe 22}}
-    \item \href{https://gra.caps.in.tum.de}{\enquote{Praktikumswebsite}}
-    \item \href{https://www.felixcloutier.com/x86/}{x86 instruction reference by Félix Cloutier}
-    \item \href{https://flint.cs.yale.edu/cs421/papers/x86-asm/asm.html}{x86 ASM Guide}
-    \item \href{https://courses.cs.washington.edu/courses/cse351/19wi/lectures/07/CSE351-L07-fp-II-x86intro-19wi.pdf}{University of Washington: Floating Point II}
-  \end{itemize}
+	\begin{itemize}
+		\item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2267-GRA-Tutorium---Gruppe-20}{\enquote{GRA Tutorium - Gruppe 20}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\enquote{GRA Tutorium - Gruppe 22}}
+		\item \href{https://gra.caps.in.tum.de}{\enquote{Praktikumswebsite}}
+		\item \href{https://www.felixcloutier.com/x86/}{x86 instruction reference by Félix Cloutier}
+		\item \href{https://flint.cs.yale.edu/cs421/papers/x86-asm/asm.html}{x86 ASM Guide}
+		\item \href{https://courses.cs.washington.edu/courses/cse351/19wi/lectures/07/CSE351-L07-fp-II-x86intro-19wi.pdf}{University of Washington: Floating Point II}
+	\end{itemize}
 \end{frame}
 
 \maketitle

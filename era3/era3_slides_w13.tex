@@ -294,49 +294,49 @@ $f=\textcolor{TUMExtRed}{\n{a}\n{c}}+\textcolor{TUMBlue}{\n{b}\n{d}}+\textcolor{
 			}
 			\def\smallspace{0.75cm}
 			\def\bigspace{6cm}
-			
+
 			\node[c] (x1) {$a$};
 			\node[below=4.5*\smallspace of x1] {$a\prec b\prec c$};
-			
+
 			\node[c] (x2l) [below=\smallspace of x1, xshift=-2*\smallspace] {$b$};
 			\node[c] (x2r) [below=\smallspace of x1, xshift=2*\smallspace] {$b$};
-			
+
 			\node[c] (x3ll) [below=\smallspace of x2l, xshift=-\smallspace, highlight on=<2>] {$c_1$};
 			\node[c] (x3lr) [below=\smallspace of x2l, xshift=\smallspace, highlight on=<4>] {$c_2$};
 			\node[c] (x3rl) [below=\smallspace of x2r, xshift=-\smallspace, highlight on=<5>] {$c_3$};
 			\node[c] (x3rr) [below=\smallspace of x2r, xshift=\smallspace, highlight on=<3>] {$c_4$};
-			
+
 			\draw[zeroarrow,visible on=<1-3>, ahighlight on=<2>] (x1) -- (x2l) node[midway, above left, TUMBlue, visible on=<2>] {$0$};
 			\draw[zeroarrow,visible on=<4->, ahighlight on=<4>] (x1) -- (x2l) node[midway, above left, TUMBlue, visible on=<4>] {$0$};
 			\draw[onearrow, visible on=<1-4>,ahighlight on=<3>] (x1) -- (x2r) node[midway, above right, TUMBlue,visible on=<3>] {$1$};
 			\draw[onearrow, visible on=<5->,ahighlight on=<5>] (x1) -- (x2r) node[midway, above right, TUMBlue,visible on=<5>] {$1$};
-			
+
 			\draw[zeroarrow, ahighlight on=<2>] (x2l) -- (x3ll) node[pos=0.6, above left,TUMBlue, visible on=<2>] {$0$};
 			\draw[onearrow, ahighlight on=<4>] (x2l) -- (x3lr) node[pos=0.6,above right, TUMBlue,visible on=<4>] {$1$};
 			\draw[zeroarrow, ahighlight on=<5>] (x2r) -- (x3rl) node[pos=0.6,above left, TUMBlue, visible on=<5>] {$0$};
 			\draw[onearrow, ahighlight on=<3>] (x2r) -- (x3rr) node[pos=0.6, above right, TUMBlue, visible on=<3>] {$1$};
-			
+
 			\node[c, right=\bigspace of x1] (y1) {$b$};
 			\node[below=4.5*\smallspace of y1] {$b\prec a\prec c$};
-			
+
 			\node[c] (y2l) [below=\smallspace of y1, xshift=-2*\smallspace] {$a$};
 			\node[c] (y2r) [below=\smallspace of y1, xshift=2*\smallspace] {$a$};
-			
+
 			\node[c] (y3ll) [below=\smallspace of y2l, xshift=-\smallspace, visible on=<2->, highlight on=<2>] {$c_1$};
 			\node[c] (y3lr) [below=\smallspace of y2l, xshift=\smallspace, visible on=<5->, highlight on=<5>] {$c_3$};
 			\node[c] (y3rl) [below=\smallspace of y2r, xshift=-\smallspace, visible on=<4->, highlight on=<4>] {$c_2$};
 			\node[c] (y3rr) [below=\smallspace of y2r, xshift=\smallspace, visible on=<3->, highlight on=<3>] {$c_4$};
-			
+
 			\draw[zeroarrow, visible on=<2-4>, ahighlight on=<2>] (y1) -- (y2l) node[midway, above left, TUMBlue,visible on=<2>] {$0$};
 			\draw[zeroarrow, visible on=<5->, ahighlight on=<5>] (y1) -- (y2l) node[midway, above left, TUMBlue,visible on=<5>] {$0$};
 			\draw[onearrow, visible on=<3>, ahighlight on=<3>] (y1) -- (y2r) node[midway, above right, TUMBlue,visible on=<3>] {$1$};
 			\draw[onearrow, visible on=<4->, ahighlight on=<4>] (y1) -- (y2r) node[midway, above right, TUMBlue,visible on=<4>] {$1$};
-			
+
 			\draw[zeroarrow, visible on=<2->, ahighlight on=<2>] (y2l) -- (y3ll) node[pos=0.6, above left, TUMBlue,visible on=<2>] {$0$};
 			\draw[onearrow, visible on=<5->,ahighlight on=<5>] (y2l) -- (y3lr) node[pos=0.6,above right,TUMBlue,visible on=<5>] {$1$};
 			\draw[zeroarrow, visible on=<4->,ahighlight on=<4>] (y2r) -- (y3rl) node[pos=0.6,above left,TUMBlue,visible on=<4>] {$0$};
 			\draw[onearrow, visible on=<3->, ahighlight on=<3>] (y2r) -- (y3rr) node[pos=0.6, above right, TUMBlue,visible on=<3>] {$1$};
-			
+
 			\node[draw=none, visible on=<6>] {};
 		\end{tikzpicture}
 	\end{center}
@@ -407,12 +407,12 @@ $f=\textcolor{TUMExtRed}{\n{a}\n{c}}+\textcolor{TUMBlue}{\n{b}\n{d}}+\textcolor{
 		\item Bezeichne alle Knoten mit einem eindeutigen Bezeichner
 		\item Erzeuge im Ergebnis-BDD einen Knoten $A_0 \oplus B_0$
 		\item Solange noch nicht alle Knoten besucht wurden:
-		\begin{enumerate}
-			\item Falls Terminalfall (d.h. $A_i$ und $B_i$ sind Terminalknoten), Rückgabewert berechnen und im Ergebnis-BDD an der aktuellen Stelle einen neuen Terminalknoten $A_i \oplus B_i$  erzeugen
-			\item Top-Variable $t$ anhand der Variablenordnung bestimmen
-			\item Für alle mit $t$ bezeichneten Knoten: Abstieg ins Low-Kind, erzeuge im Ergebnis-BDD an der aktuellen Stelle den Kindknoten $A_{i, t=0} \oplus B_{i, t=0}$
-			\item Für alle mit $t$ bezeichneten Knoten: Abstieg ins High-Kind, erzeuge im Ergebnis-BDD an der aktuellen Stelle den Kindknoten $A_{i, t=1} \oplus B_{i, t=1}$
-		\end{enumerate}
+		      \begin{enumerate}
+			      \item Falls Terminalfall (d.h. $A_i$ und $B_i$ sind Terminalknoten), Rückgabewert berechnen und im Ergebnis-BDD an der aktuellen Stelle einen neuen Terminalknoten $A_i \oplus B_i$  erzeugen
+			      \item Top-Variable $t$ anhand der Variablenordnung bestimmen
+			      \item Für alle mit $t$ bezeichneten Knoten: Abstieg ins Low-Kind, erzeuge im Ergebnis-BDD an der aktuellen Stelle den Kindknoten $A_{i, t=0} \oplus B_{i, t=0}$
+			      \item Für alle mit $t$ bezeichneten Knoten: Abstieg ins High-Kind, erzeuge im Ergebnis-BDD an der aktuellen Stelle den Kindknoten $A_{i, t=1} \oplus B_{i, t=1}$
+		      \end{enumerate}
 		\item Während der Konstruktion Knoten mit gleicher Teilformel direkt zusammenfassen
 	\end{enumerate}
 \end{frame}
@@ -422,7 +422,7 @@ $f=\textcolor{TUMExtRed}{\n{a}\n{c}}+\textcolor{TUMBlue}{\n{b}\n{d}}+\textcolor{
 	\begin{figure}
 		\centering
 		\includegraphics[width=0.5\linewidth]{w13_sonic.png}
-		
+
 		{\centering\scriptsize Danke an Bjarne Hansen für dieses treffende Bild}
 	\end{figure}
 \end{frame}
@@ -594,7 +594,7 @@ $f=\textcolor{TUMExtRed}{\n{a}\n{c}}+\textcolor{TUMBlue}{\n{b}\n{d}}+\textcolor{
 				\draw[zeroarrow] (y3lr) -- (yone);
 				\draw[onearrow] (y3lr) -- (yzero);
 
-				% result	
+				% result
 				\node[c, right=2*\bigspace-\smallspace of y1, visible on=<18>] (r1) {$a$};
 
 				\node[c] (r2l) [below=\smallspace of r1] {$b$};

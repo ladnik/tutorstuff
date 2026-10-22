@@ -4,7 +4,7 @@
 pi:
     // params:
     // rdi: n
-    
+
     // return value:
     // xmm0: approximation for pi
 
@@ -13,14 +13,14 @@ pi:
     mov rax, 4
     mov rcx, 0
     cvtsi2ss xmm0, rcx  // clear result reg
-    
+
     loop:
         cmp rcx, rdi
         jge finish
 
         // lea (load effective address) is an instruction
-        // to calculate addresses. But it can also be 
-        // used as a shortcut for multiplications by 
+        // to calculate addresses. But it can also be
+        // used as a shortcut for multiplications by
         // a power of 2 of a reg + imm offset
         lea rdx, [2*rcx+1]
 
@@ -31,8 +31,8 @@ pi:
 
         // test affects the flags the same way 'and'
         // would, but doesn't change any register values
-        // even and odd numbers differ in the last bit, 
-        // so we can use that to check wether k is 
+        // even and odd numbers differ in the last bit,
+        // so we can use that to check wether k is
         // even or odd
         test rcx, 0x1
         jz pos
@@ -42,7 +42,7 @@ pi:
 
         pos:
         addss xmm0, xmm1
-        
+
         cont:
         inc rcx
         jmp loop
@@ -50,4 +50,3 @@ pi:
     finish:
     // nothing to do here, xmm0 already contains result
     ret
-

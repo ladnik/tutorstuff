@@ -9,71 +9,71 @@
 \maketitle
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
-    haben VL-Folien Recht!
-  \end{center}
+	\begin{center}
+		\LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
+		haben VL-Folien Recht!
+	\end{center}
 \end{frame}
 
 \begin{frame}[c, fragile]{Organisatorisches}{}
-  \begin{itemize}
-    \item Für den ASM-Teil wird wieder die alte Praktikumswebsite verwendet (siehe Links)
-    \item Anmeldung mit eurer TUM-Kennung (gxXXxxx)
-    \item noch 4 Wochen mit Aufgaben, danach Projektphase
-    \item Notenbonus-Grenze von 75\% wird über \textit{alle} Wochen hinweg berechnet
-  \end{itemize}
+	\begin{itemize}
+		\item Für den ASM-Teil wird wieder die alte Praktikumswebsite verwendet (siehe Links)
+		\item Anmeldung mit eurer TUM-Kennung (gxXXxxx)
+		\item noch 4 Wochen mit Aufgaben, danach Projektphase
+		\item Notenbonus-Grenze von 75\% wird über \textit{alle} Wochen hinweg berechnet
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c, fragile]{x86-64 Basics}{}
-  \begin{itemize}
-    \item CISC-Architektur, 64 Bit (8 Byte Register), weit verbreitet
-    \item nur 16 GP-Register!
-    \item 32 Bit sign extended Immediates (mov verwendet 64 Bit!)
-    \item kein Unterschied zwischen Instruktionsbezeichnungen für reg/reg vs reg/imm wie in RISC-V
-    \item Aufteilung der Register in Teilregister (8B, 4B, 2B, 1B, 1B):
-          \begin{center}
-            \includegraphics[width=0.7\textwidth]{w04_reg_div.png}
-          \end{center}
-    \item Schreiben von 4B-Register löscht obere Bits!
-  \end{itemize}
+	\begin{itemize}
+		\item CISC-Architektur, 64 Bit (8 Byte Register), weit verbreitet
+		\item nur 16 GP-Register!
+		\item 32 Bit sign extended Immediates (mov verwendet 64 Bit!)
+		\item kein Unterschied zwischen Instruktionsbezeichnungen für reg/reg vs reg/imm wie in RISC-V
+		\item Aufteilung der Register in Teilregister (8B, 4B, 2B, 1B, 1B):
+		      \begin{center}
+			      \includegraphics[width=0.7\textwidth]{w04_reg_div.png}
+		      \end{center}
+		\item Schreiben von 4B-Register löscht obere Bits!
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c, fragile]{Grundlegende Befehle}{}
-  \begin{itemize}
-    \item \verb|mov dst, src|
-    \item \verb|add/sub dst, src| (erster Operand sowohl src als auch dst)
-    \item arithmetische Operationen setzen Flags, Sprünge/Branches überprüfen Flag-Register
-    \item \verb|cmp| entspricht \verb|sub|, setzt aber nur Flags
-    \item \verb|test| entspricht \verb|and|, setzt aber nur Flags
-    \item Speicherzugriff (explizite Größenangabe): \verb|add dword ptr [rax], 1|
-    \item Warum funktioniert \verb|mov eax, [edx]| ohne explizite Zugriffsgröße?
-  \end{itemize}
+	\begin{itemize}
+		\item \verb|mov dst, src|
+		\item \verb|add/sub dst, src| (erster Operand sowohl src als auch dst)
+		\item arithmetische Operationen setzen Flags, Sprünge/Branches überprüfen Flag-Register
+		\item \verb|cmp| entspricht \verb|sub|, setzt aber nur Flags
+		\item \verb|test| entspricht \verb|and|, setzt aber nur Flags
+		\item Speicherzugriff (explizite Größenangabe): \verb|add dword ptr [rax], 1|
+		\item Warum funktioniert \verb|mov eax, [edx]| ohne explizite Zugriffsgröße?
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c, fragile]{Stack}{}
-  \begin{itemize}
-    \item kein explizites Schreiben an sp wie in RISC-V notwendig
-    \item \verb|push|, \verb|pop| ändert sp automatisch
-    \item Rücksprungadresse wird auch automatisch abgespeichert/wiederhergestellt: \verb|call| und \verb|ret|
-    \item 16-Byte-Alignment vor Funktionsaufrufen wie in RISC-V
-  \end{itemize}
+	\begin{itemize}
+		\item kein explizites Schreiben an sp wie in RISC-V notwendig
+		\item \verb|push|, \verb|pop| ändert sp automatisch
+		\item Rücksprungadresse wird auch automatisch abgespeichert/wiederhergestellt: \verb|call| und \verb|ret|
+		\item 16-Byte-Alignment vor Funktionsaufrufen wie in RISC-V
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE Fragen?
-  \end{center}
+	\begin{center}
+		\LARGE Fragen?
+	\end{center}
 \end{frame}
 
 \begin{frame}[fragile, c]{Links}{}
-  \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2267-GRA-Tutorium---Gruppe-20}{\enquote{GRA Tutorium - Gruppe 20}}
-          bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\enquote{GRA Tutorium - Gruppe 22}}
-    \item \href{https://gra.caps.in.tum.de}{\enquote{Praktikumswebsite}}
-    \item \href{https://www.felixcloutier.com/x86/}{x86 instruction reference by Félix Cloutier}
-    \item \href{https://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetParallel}{Bit Hacks}
-    \item \href{https://flint.cs.yale.edu/cs421/papers/x86-asm/asm.html}{x86 ASM Guide}
-  \end{itemize}
+	\begin{itemize}
+		\item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2267-GRA-Tutorium---Gruppe-20}{\enquote{GRA Tutorium - Gruppe 20}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/stream/2269-GRA-Tutorium---Gruppe-22}{\enquote{GRA Tutorium - Gruppe 22}}
+		\item \href{https://gra.caps.in.tum.de}{\enquote{Praktikumswebsite}}
+		\item \href{https://www.felixcloutier.com/x86/}{x86 instruction reference by Félix Cloutier}
+		\item \href{https://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetParallel}{Bit Hacks}
+		\item \href{https://flint.cs.yale.edu/cs421/papers/x86-asm/asm.html}{x86 ASM Guide}
+	\end{itemize}
 \end{frame}
 
 \maketitle

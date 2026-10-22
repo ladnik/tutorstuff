@@ -5,7 +5,7 @@
 # a0 := gcd(a, b)
 gcd:
     # check if a == b (exit condition)
-    beq a0, a1, exit 
+    beq a0, a1, exit
 
     # check a < b (unsigned)
     bltu a0, a1, case1
@@ -27,5 +27,5 @@ gcd:
     lw ra, 0(sp)        # restore ra
     addi sp, sp, 16     # clean up stack
 
-    exit:   
+    exit:
     jalr zero, 0(ra)    # return to caller

@@ -243,7 +243,7 @@ in ein 3-Bit-Zweierkomplement
         </entry>
         <entry>
           <string>Description</string>
-          <string>2. Da das implizite Bit b2 immer 
+          <string>2. Da das implizite Bit b2 immer
 0 ist, müsste cout des zweiten
 Addierers mit 1 addiert werden,
 um das Vorzeichen (= 3. Ausgangsbit)
@@ -294,7 +294,7 @@ reicht ein NOT-Gatter.</string>
         <entry>
           <string>Description</string>
           <string>3. Falls das Vorzeichenbit gesetzt ist,
-haben wir eine negative Zahl (im 
+haben wir eine negative Zahl (im
 ZK) am Ausgang. Da wir allerdings den
 Absolutbetrag wollen, müssen wir im
 Falle eines negativen Ergebnisses

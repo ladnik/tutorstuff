@@ -123,12 +123,12 @@
 		\begin{column}{0.49\textwidth}
 			\begin{minted}{gas}
 				# compile-time Konstante
-				.equ NUM, 2748 
-				
+				.equ NUM, 2748
+
 				# ro + init. Daten
 				.rodata
 				f: .word 2
-				
+
 				# rw + init. Daten
 				.org 0x400
 				.data
@@ -142,10 +142,10 @@
 				# rw + uninit. Daten
 				.bss
 				a: .space 16
-				
+
 				# globales Einstiegslabel
 				.globl _start
-				
+
 				.org 0x200 # section beginnt an Adresse 0x200
 				.text
 				_start:
@@ -173,7 +173,7 @@
 			\begin{minted}[escapeinside=||, beameroverlays=true,]{gas}
 				.org 0x400
 				.data
-				
+
 				|\only<1>{a: .byte \textcolor{red}{0x01}, \textcolor{orange}{0x02}, \textcolor{green}{0x03}, \textcolor{blue}{0x04}}\only<2->{a: .byte 0x01, 0x02, 0x03, 0x04}|
 				|\only<2>{b: .half 0x\textcolor{red}{ab}\textcolor{orange}{cd}, 0x\textcolor{green}{00}\textcolor{blue}{ef}}\only<3->{b: .half 0xabcd, 0x00ef}|
 				|\only<3>{c: .word 0x\textcolor{red}{aa}\textcolor{orange}{bb}\textcolor{green}{cc}\textcolor{blue}{dd}}\only<4->{c: .word 0xaabbccdd}|

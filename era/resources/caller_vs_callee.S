@@ -1,8 +1,8 @@
 caller:
     # hier befinden wir uns in der aufrufenden
     # Funktion (Caller)
-    
-    # Wir speichern die Rücksprungadresse auf 
+
+    # Wir speichern die Rücksprungadresse auf
     # den Stack -> ra ist Caller-saved!
     addi sp, sp, -16
     sw ra, 0(sp)

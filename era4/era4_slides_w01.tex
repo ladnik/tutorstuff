@@ -11,11 +11,11 @@
 \maketitle
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien.
+	\begin{center}
+		\LARGE  Keine Garantie für die Richtigkeit der Tutorfolien.
 
-    \Large Bei Unklarheiten/Unstimmigkeiten haben VL/ZÜ-Folien recht!
-  \end{center}
+		\Large Bei Unklarheiten/Unstimmigkeiten haben VL/ZÜ-Folien recht!
+	\end{center}
 \end{frame}
 
 \begin{frame}[c]{Organisatorisches}{}
@@ -24,17 +24,17 @@
 			\begin{itemize}
 				\item Wer bin ich?
 				\item Kommunikation:
-				\begin{itemize}
-					\item Zulip: ERA-Streams vs. Tutoriumsstream vs. DM
-					\item E-Mail
-					\item Fax (??)
-				\end{itemize}
+				      \begin{itemize}
+					      \item Zulip: ERA-Streams vs. Tutoriumsstream vs. DM
+					      \item E-Mail
+					      \item Fax (??)
+				      \end{itemize}
 				\item Mitschriften/Folien auf meiner Homepage
 				\item Tutoriumszeiten
 				\item Artemis-Hausaufgaben: 100\% bedeuten 100\%, keine \emph{hidden tests} nach der Deadline
 				\item Laptops mitbringen!
 			\end{itemize}
-				\end{column}
+		\end{column}
 		\begin{column}{0.4\textwidth}
 			\begin{center}
 				\LARGE  \href{https://home.in.tum.de/~ladu/}{home.cit.tum.de/\string~ladu/}\\
@@ -46,12 +46,12 @@
 \end{frame}
 
 \begin{frame}[c]{Motivation}{}
-  \begin{itemize}
-    \item Rechner arbeiten mit Zahlen: Bilder, Strings, ...
-    \item Dezimalsystem ungeeignet: zu viele Zustände (Ziffern)
-    \item Strom an und aus mittels Transistoren
-    \item zwei Zustände, d.h. Binärsystem
-  \end{itemize}
+	\begin{itemize}
+		\item Rechner arbeiten mit Zahlen: Bilder, Strings, ...
+		\item Dezimalsystem ungeeignet: zu viele Zustände (Ziffern)
+		\item Strom an und aus mittels Transistoren
+		\item zwei Zustände, d.h. Binärsystem
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c]{Definition}{}
@@ -59,13 +59,13 @@
 		\item Zahlensystem: Bestimmt die Darstellung einer Zahl zu einer gegebenen Basis $B$
 		\item Gleiche \emph{Werte} können in unterschiedlichen Systemen unterschiedliche \emph{Darstellungen} haben, bspw. $12_{10}=1100_2=C_{16}$
 	\end{itemize}
-	
+
 	\begin{equation}
 		W=\sum_{i=0}^{n-1}a_i\cdot B^i
 	\end{equation}
-	
+
 	\hspace{1cm}
-	
+
 	\begin{block}{Beispiele}
 		\begin{enumerate}
 			\item $(1010)_2 = 0\cdot 2^0+1\cdot 2^1+0\cdot 2^2+1\cdot 2^3=2+8=10$
@@ -79,9 +79,9 @@
 	\begin{itemize}
 		\item Für ERA hauptsächlich interessant:\\Binär ($B=2$), Oktal ($B=8=2^3$) und Hexadezimal ($B=16=2^4$)
 		\item Was passiert bei einem Verschieben der Stellen nach links/rechts?\pause\\
-		$\rightarrow$ nach links: $n\cdot B$, nach rechts: $\left\lfloor{\frac{n}{B}}\right\rfloor$
+		      $\rightarrow$ nach links: $n\cdot B$, nach rechts: $\left\lfloor{\frac{n}{B}}\right\rfloor$
 		\item Wie kann man Binärzahlen in Hexadezimal/Oktal umwandeln?\pause\\
-		$\rightarrow$ 4 Binärziffern ergeben eine Hexadezimalziffer, 3 Binärziffern ergeben eine Oktalziffer
+		      $\rightarrow$ 4 Binärziffern ergeben eine Hexadezimalziffer, 3 Binärziffern ergeben eine Oktalziffer
 	\end{itemize}
 \end{frame}
 
@@ -90,8 +90,8 @@
 		\begin{column}{0.3\textwidth}
 			\begin{figure}
 				\begin{tabular}{crr}
-					&$0100\;1110_2$ & $=\phantom{-}78$ \\
-					&\textcolor{TUMBlue}{$1$}$100\;1110_2$ & $=-78$
+					 & $0100\;1110_2$                        & $=\phantom{-}78$ \\
+					 & \textcolor{TUMBlue}{$1$}$100\;1110_2$ & $=-78$
 				\end{tabular}
 				\caption{Vorzeichenbit}
 			\end{figure}
@@ -99,8 +99,8 @@
 		\begin{column}{0.3\textwidth}
 			\begin{figure}
 				\begin{tabular}{crr}
-					&$0100\;1110_2$ & $=\phantom{-}78$ \\
-					&$1011\;0001_2$ &$=-78$
+					 & $0100\;1110_2$ & $=\phantom{-}78$ \\
+					 & $1011\;0001_2$ & $=-78$
 				\end{tabular}
 				\caption{Einerkomplement}
 			\end{figure}
@@ -108,10 +108,10 @@
 		\begin{column}{0.3\textwidth}
 			\begin{figure}
 				\begin{tabular}{rrl}
-					&$0100\;1110_2$ & $=\phantom{-}78$ \\\hline
-					&$1011\;0001_2$ &\\
-					+ & $1_2$& \\\hline
-					&$1011\;0010_2$ &$=-78$
+					  & $0100\;1110_2$ & $=\phantom{-}78$ \\\hline
+					  & $1011\;0001_2$ &                  \\
+					+ & $1_2$          &                  \\\hline
+					  & $1011\;0010_2$ & $=-78$
 				\end{tabular}
 				\caption{Zweierkomplement}
 			\end{figure}
@@ -136,25 +136,25 @@
 \end{frame}
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE Fragen?
-  \end{center}
+	\begin{center}
+		\LARGE Fragen?
+	\end{center}
 \end{frame}
 
 \begin{frame}[c]{Artemis-Hausaufgaben}{}
-  \begin{center}
-  	\LARGE kurze Einführung in Artemis/Git
-  \end{center}
+	\begin{center}
+		\LARGE kurze Einführung in Artemis/Git
+	\end{center}
 \end{frame}
 
 \begin{frame}[fragile, c]{Links}{}
-  \begin{itemize}
-    \item Zulip: \href{https://zulip.cit.tum.de/#narrow/channel/3254-ERA-Tutorium-.E2.80.93-Mi-1600-1}{\enquote{ERA Tutorium -- Mi-1600-1}}
-          bzw. \href{https://zulip.cit.tum.de/#narrow/channel/3266-ERA-Tutorium-.E2.80.93-Fr-1600-1}{\enquote{ERA Tutorium -- Fr-1600-1}}
-    \item \href{https://www.moodle.tum.de/course/view.php?id=121343}{ERA-Moodle-Kurs}
-    \item \href{https://artemis.tum.de/courses/596/exercises/21744}{ERA-Artemis-Kurs}
-    \item \href{https://git-scm.com/docs/gittutorial}{Git-Tutorial}, \href{https://rogerdudler.github.io/git-guide/}{alternatives Tutorial}
-  \end{itemize}
+	\begin{itemize}
+		\item Zulip: \href{https://zulip.cit.tum.de/#narrow/channel/3254-ERA-Tutorium-.E2.80.93-Mi-1600-1}{\enquote{ERA Tutorium -- Mi-1600-1}}
+		      bzw. \href{https://zulip.cit.tum.de/#narrow/channel/3266-ERA-Tutorium-.E2.80.93-Fr-1600-1}{\enquote{ERA Tutorium -- Fr-1600-1}}
+		\item \href{https://www.moodle.tum.de/course/view.php?id=121343}{ERA-Moodle-Kurs}
+		\item \href{https://artemis.tum.de/courses/596/exercises/21744}{ERA-Artemis-Kurs}
+		\item \href{https://git-scm.com/docs/gittutorial}{Git-Tutorial}, \href{https://rogerdudler.github.io/git-guide/}{alternatives Tutorial}
+	\end{itemize}
 \end{frame}
 
 \maketitle

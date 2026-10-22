@@ -10,95 +10,95 @@
 \maketitle
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien.
+	\begin{center}
+		\LARGE  Keine Garantie für die Richtigkeit der Tutorfolien.
 
-    \Large Bei Unklarheiten/Unstimmigkeiten haben VL/ZÜ-Folien recht!
-  \end{center}
+		\Large Bei Unklarheiten/Unstimmigkeiten haben VL/ZÜ-Folien recht!
+	\end{center}
 \end{frame}
 
 \begin{frame}[c]{Organisatorisches}{}
-  \begin{itemize}
-    \item Wer bin ich?
-    \item Kommunikation:
-          \begin{itemize}
-            \item Zulip: ERA-Streams vs. Tutoriumsstream vs. DM
-            \item E-Mail
-            \item Fax (??)
-          \end{itemize}
-    \item Mitschriften/Folien auf meiner Homepage: \url{https://home.in.tum.de/~ladu/}
-    \item Anmerkungen zu den Hausaufgaben/Übungen
-    \item Tutoriumszeiten
-  \end{itemize}
+	\begin{itemize}
+		\item Wer bin ich?
+		\item Kommunikation:
+		      \begin{itemize}
+			      \item Zulip: ERA-Streams vs. Tutoriumsstream vs. DM
+			      \item E-Mail
+			      \item Fax (??)
+		      \end{itemize}
+		\item Mitschriften/Folien auf meiner Homepage: \url{https://home.in.tum.de/~ladu/}
+		\item Anmerkungen zu den Hausaufgaben/Übungen
+		\item Tutoriumszeiten
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c]{Was macht so ein Rechner eigentlich?}{}
-  \begin{itemize}
-    \item Rechner arbeiten mit Zahlen: Bilder, Strings, ...
-    \item Dezimalsystem ungeeignet: zu viele Zustände (Ziffern)
-    \item Strom an bzw. aus mittels Transistoren
-    \item zwei Zustände $\rightarrow$ Binärsystem
-    \item Oktalsystem und Hexadezimalsystem passen gut dazu! \\ $\rightarrow$ Warum?
-  \end{itemize}
+	\begin{itemize}
+		\item Rechner arbeiten mit Zahlen: Bilder, Strings, ...
+		\item Dezimalsystem ungeeignet: zu viele Zustände (Ziffern)
+		\item Strom an bzw. aus mittels Transistoren
+		\item zwei Zustände $\rightarrow$ Binärsystem
+		\item Oktalsystem und Hexadezimalsystem passen gut dazu! \\ $\rightarrow$ Warum?
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c]{Wie funktioniert denn so ein Zahlensystem?}{}
 
-  \begin{equation}
-    W=\sum_{i=0}^{n-1}a_i\cdot B^i
-  \end{equation}
-  \begin{block}{Beispiel.}
-    \begin{enumerate}
-      \item $(1010)_2 = 0\cdot 2^0+1\cdot 2^1+0\cdot 2^2+1\cdot 2^3=2+8=10$
-      \item $(763)_8 = 3\cdot 8^0+6\cdot 8^1+7\cdot 8^2=3+48+448=499$
-      \item $(123)_{16} = 3\cdot 16^0+2\cdot 16^1+1\cdot 16^2=3+32+256=291$
-    \end{enumerate}
-  \end{block}
-  \hspace{1cm}
-  \begin{itemize}
-    \item Was passiert bei einem Verschieben der Stellen nach links/rechts?
-    \item Wie kann man Binärzahlen in Hexadezimal/Oktal umwandeln?
-  \end{itemize}
+	\begin{equation}
+		W=\sum_{i=0}^{n-1}a_i\cdot B^i
+	\end{equation}
+	\begin{block}{Beispiel.}
+		\begin{enumerate}
+			\item $(1010)_2 = 0\cdot 2^0+1\cdot 2^1+0\cdot 2^2+1\cdot 2^3=2+8=10$
+			\item $(763)_8 = 3\cdot 8^0+6\cdot 8^1+7\cdot 8^2=3+48+448=499$
+			\item $(123)_{16} = 3\cdot 16^0+2\cdot 16^1+1\cdot 16^2=3+32+256=291$
+		\end{enumerate}
+	\end{block}
+	\hspace{1cm}
+	\begin{itemize}
+		\item Was passiert bei einem Verschieben der Stellen nach links/rechts?
+		\item Wie kann man Binärzahlen in Hexadezimal/Oktal umwandeln?
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c]{Rechnen im Binärsystem}{}
-  \begin{itemize}
-    \item schriftliches Rechnen grundsätzlich gleich wie im Dezimalsystem
-    \item Subtraktion: Addition mit negativer Zahl
-    \item Einerkomplement vs. Zweierkomplement. Datenwortbreite ausschlaggebend!
-  \end{itemize}
-  \vfill{}
-  \begin{block}{Beispiel.}
-    \begin{enumerate}
-      \item $(1100.0110)_2 = -2^7+(2^1+2^2+2^6)=-58$ bei Breite von 8 Bit
-      \item $(1010)_2 = -2^3 + (2^1) = -6$ bei Breite von 4 Bit
-    \end{enumerate}
-  \end{block}
+	\begin{itemize}
+		\item schriftliches Rechnen grundsätzlich gleich wie im Dezimalsystem
+		\item Subtraktion: Addition mit negativer Zahl
+		\item Einerkomplement vs. Zweierkomplement. Datenwortbreite ausschlaggebend!
+	\end{itemize}
+	\vfill{}
+	\begin{block}{Beispiel.}
+		\begin{enumerate}
+			\item $(1100.0110)_2 = -2^7+(2^1+2^2+2^6)=-58$ bei Breite von 8 Bit
+			\item $(1010)_2 = -2^3 + (2^1) = -6$ bei Breite von 4 Bit
+		\end{enumerate}
+	\end{block}
 
 \end{frame}
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE Fragen?
-  \end{center}
+	\begin{center}
+		\LARGE Fragen?
+	\end{center}
 \end{frame}
 
 \begin{frame}[c]{Artemis-Hausaufgaben}{}
-  \begin{itemize}
-    \item \enquote{H01 --- Arithmetik und negative Zahlen} bis 27.10.2024 23:59 Uhr
-    \item 100\% bedeuten 100\%, keine \emph{hidden tests} nach der Deadline
-    \item kurze Einführung in Artemis/Git
-  \end{itemize}
+	\begin{itemize}
+		\item \enquote{H01 --- Arithmetik und negative Zahlen} bis 27.10.2024 23:59 Uhr
+		\item 100\% bedeuten 100\%, keine \emph{hidden tests} nach der Deadline
+		\item kurze Einführung in Artemis/Git
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile, c]{Links}{}
-  \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2661-ERA-Tutorium---Do-1600-1}{\enquote{ERA Tutorium - Do-1600-1}}
-          bzw. \href{https://zulip.in.tum.de/#narrow/stream/2675-ERA-Tutorium---Fr-1500-2 }{\enquote{ERA Tutorium - Fr-1500-2}}
-    \item \href{https://www.moodle.tum.de/course/view.php?id=100633}{ERA-Moodle-Kurs}
-    \item \href{https://artemis.in.tum.de/courses/401}{ERA-Artemis-Kurs}
-    \item \href{https://git-scm.com/docs/gittutorial}{Git-Tutorial}, \href{https://rogerdudler.github.io/git-guide/}{alternatives Tutorial}
-  \end{itemize}
+	\begin{itemize}
+		\item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/2661-ERA-Tutorium---Do-1600-1}{\enquote{ERA Tutorium - Do-1600-1}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/stream/2675-ERA-Tutorium---Fr-1500-2 }{\enquote{ERA Tutorium - Fr-1500-2}}
+		\item \href{https://www.moodle.tum.de/course/view.php?id=100633}{ERA-Moodle-Kurs}
+		\item \href{https://artemis.in.tum.de/courses/401}{ERA-Artemis-Kurs}
+		\item \href{https://git-scm.com/docs/gittutorial}{Git-Tutorial}, \href{https://rogerdudler.github.io/git-guide/}{alternatives Tutorial}
+	\end{itemize}
 \end{frame}
 
 \maketitle

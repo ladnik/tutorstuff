@@ -9,7 +9,7 @@ xor_cipher:
     // rsi: key
 
     // we can't address the lowest
-    // 8 bits of rsi directly, so 
+    // 8 bits of rsi directly, so
     // use rcx instead (cl)
     mov rcx, rsi
     loop:
@@ -18,7 +18,7 @@ xor_cipher:
         cmp al, 0
         je finish
 
-        // directly xor value from 
+        // directly xor value from
         // memory and store it back
         // (something like this doesn't
         // exist in RISC-V)

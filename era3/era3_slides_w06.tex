@@ -10,170 +10,170 @@
 \maketitle
 
 \begin{frame}[c, fragile]{}{}
-  \begin{center}
-    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien.
+	\begin{center}
+		\LARGE  Keine Garantie für die Richtigkeit der Tutorfolien.
 
-    \Large Bei Unklarheiten/Unstimmigkeiten haben VL/ZÜ-Folien recht!
-  \end{center}
+		\Large Bei Unklarheiten/Unstimmigkeiten haben VL/ZÜ-Folien recht!
+	\end{center}
 \end{frame}
 
 \begin{frame}[c, fragile]{Boolesche Funktionen}{}
-  \centering
-  \begin{columns}[T]
-    \begin{column}{0.3\textwidth}
-      \centering
-      OR-Gatter
+	\centering
+	\begin{columns}[T]
+		\begin{column}{0.3\textwidth}
+			\centering
+			OR-Gatter
 
-      \vspace{0.2cm}
+			\vspace{0.2cm}
 
-      \begin{circuitikz}
-        \draw (0,0) node[or port] (or) {};
-        \draw (or.in 1) node[left] {$A$};
-        \draw (or.in 2) node[left] {$B$};
-        \draw (or.out) -- ++(0.5,0) node[right] {$A \lor B$};
-      \end{circuitikz}
+			\begin{circuitikz}
+				\draw (0,0) node[or port] (or) {};
+				\draw (or.in 1) node[left] {$A$};
+				\draw (or.in 2) node[left] {$B$};
+				\draw (or.out) -- ++(0.5,0) node[right] {$A \lor B$};
+			\end{circuitikz}
 
-      \vspace{-0.3cm}
+			\vspace{-0.3cm}
 
-      \[
-        \begin{array}{|c|c|c|}
-          \hline
-          A & B & A \lor B \\
-          \hline
-          0 & 0 & 0        \\
-          0 & 1 & 1        \\
-          1 & 0 & 1        \\
-          1 & 1 & 1        \\
-          \hline
-        \end{array}
-      \]
+			\[
+				\begin{array}{|c|c|c|}
+					\hline
+					A & B & A \lor B \\
+					\hline
+					0 & 0 & 0        \\
+					0 & 1 & 1        \\
+					1 & 0 & 1        \\
+					1 & 1 & 1        \\
+					\hline
+				\end{array}
+			\]
 
-    \end{column}
+		\end{column}
 
-    \begin{column}{0.3\textwidth}
-      \centering
-      AND-Gatter
+		\begin{column}{0.3\textwidth}
+			\centering
+			AND-Gatter
 
-      \vspace{0.2cm}
+			\vspace{0.2cm}
 
-      \begin{circuitikz}
-        \draw (0,0) node[and port] (and) {};
-        \draw (and.in 1) node[left] {$A$};
-        \draw (and.in 2) node[left] {$B$};
-        \draw (and.out) -- ++(0.5,0) node[right] {$A \land B$};
-      \end{circuitikz}
+			\begin{circuitikz}
+				\draw (0,0) node[and port] (and) {};
+				\draw (and.in 1) node[left] {$A$};
+				\draw (and.in 2) node[left] {$B$};
+				\draw (and.out) -- ++(0.5,0) node[right] {$A \land B$};
+			\end{circuitikz}
 
-      \vspace{-0.3cm}
+			\vspace{-0.3cm}
 
-      \[
-        \begin{array}{|c|c|c|}
-          \hline
-          A & B & A \land B \\
-          \hline
-          0 & 0 & 0         \\
-          0 & 1 & 0         \\
-          1 & 0 & 0         \\
-          1 & 1 & 1         \\
-          \hline
-        \end{array}
-      \]
+			\[
+				\begin{array}{|c|c|c|}
+					\hline
+					A & B & A \land B \\
+					\hline
+					0 & 0 & 0         \\
+					0 & 1 & 0         \\
+					1 & 0 & 0         \\
+					1 & 1 & 1         \\
+					\hline
+				\end{array}
+			\]
 
-    \end{column}
+		\end{column}
 
-    \begin{column}{0.3\textwidth}
-      \centering
-      NOT-Gatter
+		\begin{column}{0.3\textwidth}
+			\centering
+			NOT-Gatter
 
-      \vspace{0.2cm}
+			\vspace{0.2cm}
 
-      \begin{circuitikz}
-        \draw (0,0) node[not port] (not) {};
-        \draw (not.in) -- ++(-0.5,0) node[left] {$A$};
-        \draw (not.out) -- ++(0.5,0) node[right] {$\lnot A$};
-      \end{circuitikz}
+			\begin{circuitikz}
+				\draw (0,0) node[not port] (not) {};
+				\draw (not.in) -- ++(-0.5,0) node[left] {$A$};
+				\draw (not.out) -- ++(0.5,0) node[right] {$\lnot A$};
+			\end{circuitikz}
 
-      \vspace{-0.3cm}
+			\vspace{-0.3cm}
 
-      \[
-        \begin{array}{|c|c|}
-          \hline
-          A & \lnot A \\
-          \hline
-          0 & 1       \\
-          1 & 0       \\
-          \hline
-        \end{array}
-      \]
+			\[
+				\begin{array}{|c|c|}
+					\hline
+					A & \lnot A \\
+					\hline
+					0 & 1       \\
+					1 & 0       \\
+					\hline
+				\end{array}
+			\]
 
-    \end{column}
+		\end{column}
 
-  \end{columns}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[c, fragile]{Boolesche Funktionen}{}
-  \centering
-  \begin{columns}[T]
-    \begin{column}{0.5\textwidth}
-      \centering
-      XOR-Gatter
+	\centering
+	\begin{columns}[T]
+		\begin{column}{0.5\textwidth}
+			\centering
+			XOR-Gatter
 
-      \vspace{0.2cm}
+			\vspace{0.2cm}
 
-      \begin{circuitikz}
-        \draw (0,0) node[xor port] (or) {};
-        \draw (or.in 1) node[left] {$A$};
-        \draw (or.in 2) node[left] {$B$};
-        \draw (or.out) -- ++(0.5,0) node[right] {$A \oplus B$};
-      \end{circuitikz}
+			\begin{circuitikz}
+				\draw (0,0) node[xor port] (or) {};
+				\draw (or.in 1) node[left] {$A$};
+				\draw (or.in 2) node[left] {$B$};
+				\draw (or.out) -- ++(0.5,0) node[right] {$A \oplus B$};
+			\end{circuitikz}
 
-      \vspace{-0.3cm}
+			\vspace{-0.3cm}
 
-      \[
-        \begin{array}{|c|c|c|}
-          \hline
-          A & B & A \oplus B \\
-          \hline
-          0 & 0 & 0        \\
-          0 & 1 & 1        \\
-          1 & 0 & 1        \\
-          1 & 1 & 0        \\
-          \hline
-        \end{array}
-      \]
+			\[
+				\begin{array}{|c|c|c|}
+					\hline
+					A & B & A \oplus B \\
+					\hline
+					0 & 0 & 0          \\
+					0 & 1 & 1          \\
+					1 & 0 & 1          \\
+					1 & 1 & 0          \\
+					\hline
+				\end{array}
+			\]
 
-    \end{column}
+		\end{column}
 
-    \begin{column}{0.5\textwidth}
-      \centering
-      XNOR-Gatter
+		\begin{column}{0.5\textwidth}
+			\centering
+			XNOR-Gatter
 
-      \vspace{0.2cm}
+			\vspace{0.2cm}
 
-      \begin{circuitikz}
-        \draw (0,0) node[xnor port] (or) {};
-        \draw (or.in 1) node[left] {$A$};
-        \draw (or.in 2) node[left] {$B$};
-        \draw (or.out) -- ++(0.5,0) node[right] {$A\leftrightarrow B$};
-      \end{circuitikz}
+			\begin{circuitikz}
+				\draw (0,0) node[xnor port] (or) {};
+				\draw (or.in 1) node[left] {$A$};
+				\draw (or.in 2) node[left] {$B$};
+				\draw (or.out) -- ++(0.5,0) node[right] {$A\leftrightarrow B$};
+			\end{circuitikz}
 
-      \vspace{-0.3cm}
+			\vspace{-0.3cm}
 
-      \[
-        \begin{array}{|c|c|c|}
-          \hline
-          A & B & A\leftrightarrow B\\
-          \hline
-          0 & 0 & 1        \\
-          0 & 1 & 0        \\
-          1 & 0 & 0        \\
-          1 & 1 & 1        \\
-          \hline
-        \end{array}
-      \]
-    \end{column}
+			\[
+				\begin{array}{|c|c|c|}
+					\hline
+					A & B & A\leftrightarrow B \\
+					\hline
+					0 & 0 & 1                  \\
+					0 & 1 & 0                  \\
+					1 & 0 & 0                  \\
+					1 & 1 & 1                  \\
+					\hline
+				\end{array}
+			\]
+		\end{column}
 
 
-  \end{columns}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[c, fragile]{Definitionen (1)}{}
@@ -183,10 +183,10 @@
 	\vfill{}
 	\begin{itemize}
 		\item Struktur zum Beweis, dass eine Menge $M$ funktional vollständig ist:
-		\begin{itemize}
-			\item Zeige, dass $\neg x$ durch Operatoren aus $M$ dargestellt werden kann
-			\item Zeige, dass $x\wedge y$ durch Operatoren aus $M$ dargestellt werden kann
-		\end{itemize}
+		      \begin{itemize}
+			      \item Zeige, dass $\neg x$ durch Operatoren aus $M$ dargestellt werden kann
+			      \item Zeige, dass $x\wedge y$ durch Operatoren aus $M$ dargestellt werden kann
+		      \end{itemize}
 		\item Gegenbeweis deutlich schwieriger: Finden einer booleschen Funktion  mit $n\ge1$ Variablen, die nicht dargestellt werden kann (bspw. $\n{x}$)
 	\end{itemize}
 \end{frame}
@@ -207,7 +207,7 @@
 \begin{frame}[c, fragile]{Definitionen (3)}{}
 	\begin{block}{Negationstheorem}
 		Es gilt, dass $\n{f(x_1, x_2, \ldots, x_n, 0, 1, \wedge, \vee)} \equiv f(\n{x_1}, \n{x_2}, \ldots, \n{x_n}, 1, 0, \vee, \wedge)$.
-		
+
 		Achtung: Anders als bei der Dualität werden hier auch die Variablen negiert!
 	\end{block}
 	\vfill{}
@@ -222,17 +222,17 @@
 \begin{frame}[c, fragile]{Gesetze der booleschen Algebra\footnote{In ERA werden sowohl die Schreibweisen $\wedge/\vee$ als auch $\cdot / +$ akzeptiert, solange sie einheitlich verwendet werden.}}{}
 	\begin{center}
 		\begin{tabular}{lcc}
-			Bezeichnung & Gesetz & duales Gesetz  \\\hline
-			Involution & $\n{\n{x}}\equiv x$ & --\\
-			Idempotenz & $x+x\equiv x$ & $x\cdot x\equiv x$ \\
-			Neutralität & $x+0\equiv x$ & $x\cdot 1\equiv x$  \\
-			Extremalgesetz & $x+1\equiv 1$ & $x\cdot 0\equiv 0$  \\
-			Komplementärgesetz & $x+\n{x}\equiv 1$ & $x\cdot\n{x}\equiv 0$  \\\pause
-			Assoziativität &$x + (y+z)\equiv (x + y)+z$ & $x\cdot(y\cdot z)\equiv (x\cdot y)\cdot z$ \\
-			Kommutativität &$x + y\equiv y+x$ & $x\cdot y\equiv y\cdot x$ \\
-			Distributivität & $x+(y\cdot z)\equiv (x+y)\cdot (x+z)$  & $x\cdot(y+z)\equiv (x\cdot y)+ (x\cdot z)$ \\
-			De Morgan &$\n{x+ y} \equiv (\n{x} \cdot \n{y})$ & $\n{x\cdot y} \equiv (\n{x} + \n{y})$ \\
-			Absorption & $x + (x\cdot y) \equiv x$ &$x \cdot (x+y) \equiv x$  \\
+			Bezeichnung        & Gesetz                                & duales Gesetz                              \\\hline
+			Involution         & $\n{\n{x}}\equiv x$                   & --                                         \\
+			Idempotenz         & $x+x\equiv x$                         & $x\cdot x\equiv x$                         \\
+			Neutralität        & $x+0\equiv x$                         & $x\cdot 1\equiv x$                         \\
+			Extremalgesetz     & $x+1\equiv 1$                         & $x\cdot 0\equiv 0$                         \\
+			Komplementärgesetz & $x+\n{x}\equiv 1$                     & $x\cdot\n{x}\equiv 0$                      \\\pause
+			Assoziativität     & $x + (y+z)\equiv (x + y)+z$           & $x\cdot(y\cdot z)\equiv (x\cdot y)\cdot z$ \\
+			Kommutativität     & $x + y\equiv y+x$                     & $x\cdot y\equiv y\cdot x$                  \\
+			Distributivität    & $x+(y\cdot z)\equiv (x+y)\cdot (x+z)$ & $x\cdot(y+z)\equiv (x\cdot y)+ (x\cdot z)$ \\
+			De Morgan          & $\n{x+ y} \equiv (\n{x} \cdot \n{y})$ & $\n{x\cdot y} \equiv (\n{x} + \n{y})$      \\
+			Absorption         & $x + (x\cdot y) \equiv x$             & $x \cdot (x+y) \equiv x$                   \\
 		\end{tabular}
 	\end{center}
 \end{frame}
@@ -244,7 +244,7 @@
 			\begin{itemize}
 				\item Konjunktive Normalform (OR in den Klammern, AND dazwischen): $(x+y) \cdot (x+\n{y})$
 				\item Disjunktive Normalform (AND in den Klammern, OR dazwischen): $(x\cdot y) + (x\cdot\n{y})$
-				\item KNF bei wenigen Nullen im Ergebnis, DNF bei wenigen Einsen im Ergebnis 
+				\item KNF bei wenigen Nullen im Ergebnis, DNF bei wenigen Einsen im Ergebnis
 			\end{itemize}
 		\end{column}%
 		\begin{column}{0.5\textwidth}
@@ -256,20 +256,20 @@
 \end{frame}
 
 \begin{frame}[c, fragile]{}{}
-  \begin{center}
-    \LARGE Fragen?
-  \end{center}
+	\begin{center}
+		\LARGE Fragen?
+	\end{center}
 \end{frame}
 
 \begin{frame}[c, fragile]{Links}{}
-  \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/channel/3255-ERA-Tutorium-.E2.80.93-Mi-1600-3}{\enquote{ERA Tutorium -- Mi-1600-3}}
-    bzw. \href{https://zulip.in.tum.de/#narrow/channel/3264-ERA-Tutorium-.E2.80.93-Fr-1500-1}{\enquote{ERA Tutorium -- Fr-1500-1}}
-    \item \href{https://www.moodle.tum.de/course/view.php?id=111440}{ERA-Moodle-Kurs}
-    \item \href{https://artemis.tum.de/courses/516}{ERA-Artemis-Kurs}
-    \item \href{https://www.elektronik-kompendium.de/sites/dig/2609191.htm}{Elektronik-Kompendium zu logischen Grundschaltungen}
-    \item \href{https://github.com/hneemann/Digital}{GitHub: Digital}
-  \end{itemize}
+	\begin{itemize}
+		\item Zulip: \href{https://zulip.in.tum.de/#narrow/channel/3255-ERA-Tutorium-.E2.80.93-Mi-1600-3}{\enquote{ERA Tutorium -- Mi-1600-3}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/channel/3264-ERA-Tutorium-.E2.80.93-Fr-1500-1}{\enquote{ERA Tutorium -- Fr-1500-1}}
+		\item \href{https://www.moodle.tum.de/course/view.php?id=111440}{ERA-Moodle-Kurs}
+		\item \href{https://artemis.tum.de/courses/516}{ERA-Artemis-Kurs}
+		\item \href{https://www.elektronik-kompendium.de/sites/dig/2609191.htm}{Elektronik-Kompendium zu logischen Grundschaltungen}
+		\item \href{https://github.com/hneemann/Digital}{GitHub: Digital}
+	\end{itemize}
 \end{frame}
 
 \maketitle

@@ -13,75 +13,75 @@
 \maketitle
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten 
-    haben VL/ZÜ-Folien Recht!
-  \end{center}
+	\begin{center}
+		\LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
+		haben VL/ZÜ-Folien Recht!
+	\end{center}
 \end{frame}
 
 \begin{frame}[c]{Sprünge und Unterprogramme}{}
-  \begin{itemize}
-    \item if, while, for $\rightarrow$ umgesetzt durch Sprünge
-    \item jumps: unbedingt, branches: bedingt
-    \item in x86 über Flags-Register, in RISC-V direkt im Befehl eingebaut
-    \item Unterprogrammaufrufe: Sicherung, Parameter, Sprung + Rückkehr
-  \end{itemize}
+	\begin{itemize}
+		\item if, while, for $\rightarrow$ umgesetzt durch Sprünge
+		\item jumps: unbedingt, branches: bedingt
+		\item in x86 über Flags-Register, in RISC-V direkt im Befehl eingebaut
+		\item Unterprogrammaufrufe: Sicherung, Parameter, Sprung + Rückkehr
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c]{Caller- und Callee-saved Register}{}
-  \begin{figure}[h]
-  \includegraphics[height=0.75\textheight]{resources/w03_calling_conv_regs.png}
-  \caption{Übersicht über die RISC-V-Register}
-  \end{figure}
+	\begin{figure}[h]
+		\includegraphics[height=0.75\textheight]{resources/w03_calling_conv_regs.png}
+		\caption{Übersicht über die RISC-V-Register}
+	\end{figure}
 \end{frame}
 
 \begin{frame}[c]{Von-Neumann-Architektur}{}
-  \begin{figure}[h]
-    \includegraphics[height=0.75\textheight]{resources/w03_von_Neumann.png}
-    \caption{Schematische Darstellung der von-Neumann-Architektur}
-  \end{figure}
+	\begin{figure}[h]
+		\includegraphics[height=0.75\textheight]{resources/w03_von_Neumann.png}
+		\caption{Schematische Darstellung der von-Neumann-Architektur}
+	\end{figure}
 \end{frame}
 
 \begin{frame}[fragile, c]{Hauptspeicher}{}
-  \begin{itemize}
-    \item Hauptspeicher = RAM, nicht Festplatten etc. 
-    \item Laden/speichern mittels lb/sb/lw/sw
-    \item Register als Basisadresse + Offset
-  \end{itemize}  
+	\begin{itemize}
+		\item Hauptspeicher = RAM, nicht Festplatten etc.
+		\item Laden/speichern mittels lb/sb/lw/sw
+		\item Register als Basisadresse + Offset
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile, c]{Speicherzugriffe in RISC-V}{}
-  lade 32 Bit an der Adresse a0 + 0 Bytes Offset in das Register t0: 
-  \begin{verbatim}lw t0, 0(a0)\end{verbatim}
-  lade 8 Bit an der Adresse a2 - 4 Bytes Offset in das Register t1: 
-  \begin{verbatim}lb t1, -4(a2)\end{verbatim}
-  speichere den gesamten Inhalt des Registers t2 an die Adresse a1 + 16 Bytes Offset:
-  \begin{verbatim}sw t2, 16(a1)\end{verbatim}
+	lade 32 Bit an der Adresse a0 + 0 Bytes Offset in das Register t0:
+	\begin{verbatim}lw t0, 0(a0)\end{verbatim}
+	lade 8 Bit an der Adresse a2 - 4 Bytes Offset in das Register t1:
+	\begin{verbatim}lb t1, -4(a2)\end{verbatim}
+	speichere den gesamten Inhalt des Registers t2 an die Adresse a1 + 16 Bytes Offset:
+	\begin{verbatim}sw t2, 16(a1)\end{verbatim}
 \end{frame}
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE Fragen?\\
-    \Large (Die ZÜ-Folien sind sehr gut, schaut euch die an)
-  \end{center}
+	\begin{center}
+		\LARGE Fragen?\\
+		\Large (Die ZÜ-Folien sind sehr gut, schaut euch die an)
+	\end{center}
 \end{frame}
 
 \begin{frame}[c]{Artemis-Hausaufgaben}{}
-  \begin{itemize}
-    \item H03 - Palindrom bis 12.11.2023 23:59 Uhr
-    \item Speicheroperationen
-    \item lasst euch nicht vom Label 'hard' abschrecken, das Prinzip ist sehr simpel
-  \end{itemize}
+	\begin{itemize}
+		\item H03 - Palindrom bis 12.11.2023 23:59 Uhr
+		\item Speicheroperationen
+		\item lasst euch nicht vom Label 'hard' abschrecken, das Prinzip ist sehr simpel
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile, c]{Links}{}
-  \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\enquote{ERA Tutorium - Mi-1600-MI4}}
-    bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\enquote{ERA Tutorium - Fr-1100-MW2}}
-    \item \href{https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf}{RISC-V-Spezifikation}
-    \item \href{https://www.geeksforgeeks.org/computer-organization-von-neumann-architecture/}{Von-Neumann-Architektur}
-    \item \href{https://msyksphinz-self.github.io/riscv-isadoc/html/rvi.html}{übersichtlichere Instruktionsliste}
-  \end{itemize}
+	\begin{itemize}
+		\item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\enquote{ERA Tutorium - Mi-1600-MI4}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\enquote{ERA Tutorium - Fr-1100-MW2}}
+		\item \href{https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf}{RISC-V-Spezifikation}
+		\item \href{https://www.geeksforgeeks.org/computer-organization-von-neumann-architecture/}{Von-Neumann-Architektur}
+		\item \href{https://msyksphinz-self.github.io/riscv-isadoc/html/rvi.html}{übersichtlichere Instruktionsliste}
+	\end{itemize}
 \end{frame}
 
 \maketitle

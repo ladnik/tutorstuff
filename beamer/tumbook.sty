@@ -79,18 +79,18 @@
 % ----------------------------------------------------------------------------
 
 \provideName{\theUniversityNameDativ}{Technical University of
-  Munich}{Technischen Universität München}
+	Munich}{Technischen Universität München}
 
 \provideName{\@tum@thesis@student@fineprint@pre@}{%
-  Thesis for the attainment of the academic degree%
+	Thesis for the attainment of the academic degree%
 }{%
-  Wissenschaftliche Arbeit zur Erlangung des Grades%
+	Wissenschaftliche Arbeit zur Erlangung des Grades%
 }
 
 \provideName{\@tum@thesis@student@fineprint@post@}{%
-  at the \theDepartmentName{} of the \theUniversityName.%
+	at the \theDepartmentName{} of the \theUniversityName.%
 }{%
-  an der \theDepartmentName{} der \theUniversityNameDativ.%
+	an der \theDepartmentName{} der \theUniversityNameDativ.%
 }
 
 \provideName{\@tum@examiner@}{Examiner}{Prüfer(in)}
@@ -103,23 +103,23 @@
 % ----------------------------------------------------------------------------
 
 \newcommand{\theTUMTitleBlock}{{
-    \raggedright\noindent
-    \usekomafont{title}\@title\par
-    \ifdefempty{\@subtitle}{}{
-      \vspace{1.5ex}\usekomafont{subtitle}\@subtitle\par}
-    \ifdefempty{\@edition}{}{
-      \vspace{1.5ex}\usekomafont{edition}\@edition\par}
-    \vspace{5ex plus 1fil minus 2ex}
-    \usekomafont{author}\@author\par
-    \vspace{5ex plus 1fil minus 5ex}
-  }}
+			\raggedright\noindent
+			\usekomafont{title}\@title\par
+			\ifdefempty{\@subtitle}{}{
+				\vspace{1.5ex}\usekomafont{subtitle}\@subtitle\par}
+			\ifdefempty{\@edition}{}{
+				\vspace{1.5ex}\usekomafont{edition}\@edition\par}
+			\vspace{5ex plus 1fil minus 2ex}
+			\usekomafont{author}\@author\par
+			\vspace{5ex plus 1fil minus 5ex}
+		}}
 
 
 \newlength{\TUMCoverImageHeight}
 \newlength{\TUMCoverImageWidth}
 
 \newcommand{\theTUMCoverImage}{\vfill\hfill
-  \includegraphics[width=.5\TUMCoverImageWidth]{resources/TUM_Tower.png}
+	\includegraphics[width=.5\TUMCoverImageWidth]{resources/TUM_Tower.png}
 }
 
 
@@ -127,59 +127,59 @@
 % ----------------------------------------------------------------------------
 
 \newcommand{\theTUMStudentFineprintBlock}{{
-    \usekomafont{TUM.thesispage}\raggedright\noindent
-    \@tum@thesis@student@fineprint@pre@\par
-    \vspace{\baselineskip}
-    \textbf{\theDegree}\par
-    \vspace{\baselineskip}
-    \@tum@thesis@student@fineprint@post@\par
-  }}
+			\usekomafont{TUM.thesispage}\raggedright\noindent
+			\@tum@thesis@student@fineprint@pre@\par
+			\vspace{\baselineskip}
+			\textbf{\theDegree}\par
+			\vspace{\baselineskip}
+			\@tum@thesis@student@fineprint@post@\par
+		}}
 
 \newcommand{\theTUMStudentCommitteeBlock}{{
-    \usekomafont{TUM.thesispage}\raggedright\noindent
-    \textbf{\@tum@examiner@:}\par
-    \theExaminer\par
-    \vspace{.5\baselineskip}
-    \textbf{\@tum@supervisor@:}\par
-    \theSupervisor\par
-    \vspace{.5\baselineskip}
-    \textbf{\@tum@submission@:}\par
-    \theAuthorCity\@tum@date@separator@\theDateSubmitted\par
-  }}
+			\usekomafont{TUM.thesispage}\raggedright\noindent
+			\textbf{\@tum@examiner@:}\par
+			\theExaminer\par
+			\vspace{.5\baselineskip}
+			\textbf{\@tum@supervisor@:}\par
+			\theSupervisor\par
+			\vspace{.5\baselineskip}
+			\textbf{\@tum@submission@:}\par
+			\theAuthorCity\@tum@date@separator@\theDateSubmitted\par
+		}}
 
 
 % .:: Elements for phd thesis page
 % ----------------------------------------------------------------------------
 
 \newcommand{\theTUMPhDFineprintBlock}{{
-    \usekomafont{TUM.thesispage}\raggedright\noindent
-    Vollständiger Abdruck der von der \theDepartmentName{} der
-    \theUniversityNameDativ{} zur Erlangung des akademischen Grades eines\par
-    \vspace{\baselineskip}
-    \textbf{\theDegree}\par
-    \vspace{\baselineskip}
-    genehmigten Dissertation.\par
-  }}
+			\usekomafont{TUM.thesispage}\raggedright\noindent
+			Vollständiger Abdruck der von der \theDepartmentName{} der
+			\theUniversityNameDativ{} zur Erlangung des akademischen Grades eines\par
+			\vspace{\baselineskip}
+			\textbf{\theDegree}\par
+			\vspace{\baselineskip}
+			genehmigten Dissertation.\par
+		}}
 
 \newcommand{\theTUMPhDCommitteeBlock}{{
-    \usekomafont{TUM.thesispage}\raggedright\noindent
-    \textbf{Vorsitzende(r):}\par
-    \theCommitteeChair\par
-    \vspace{.5\baselineskip}
-    \textbf{Prüfer der Dissertation:}\par
-    \begin{enumerate}[nosep, leftmargin=*]
-      \item \theCommitteeFirst
-      \item \theCommitteeSecond
-        \ifdefempty{\theCommitteeThird}{}{\item \theCommitteeThird}
-    \end{enumerate}\par
-  }}
+			\usekomafont{TUM.thesispage}\raggedright\noindent
+			\textbf{Vorsitzende(r):}\par
+			\theCommitteeChair\par
+			\vspace{.5\baselineskip}
+			\textbf{Prüfer der Dissertation:}\par
+			\begin{enumerate}[nosep, leftmargin=*]
+				\item \theCommitteeFirst
+				\item \theCommitteeSecond
+				      \ifdefempty{\theCommitteeThird}{}{\item \theCommitteeThird}
+			\end{enumerate}\par
+		}}
 
 \newcommand{\theTUMPhDSubmissionBlock}{{
-    \usekomafont{TUM.thesispage}\raggedright\noindent
-    Die Dissertation wurde am \theDateSubmitted{} bei der
-    \theUniversityNameDativ{} eingereicht und durch die \theDepartmentName{}
-    am \theDateAccepted{} angenommen.\par
-  }}
+			\usekomafont{TUM.thesispage}\raggedright\noindent
+			Die Dissertation wurde am \theDateSubmitted{} bei der
+			\theUniversityNameDativ{} eingereicht und durch die \theDepartmentName{}
+			am \theDateAccepted{} angenommen.\par
+		}}
 
 
 % .:: Font setup
@@ -197,9 +197,9 @@
 % ----------------------------------------------------------------------------
 
 \author{%
-  \ifdefempty{\theAuthorTitlePrefix}{}{\theAuthorTitlePrefix\ }%
-  \theAuthorName%
-  \ifdefempty{\theAuthorTitleSuffix}{}{\ \theAuthorTitleSuffix}%
+	\ifdefempty{\theAuthorTitlePrefix}{}{\theAuthorTitlePrefix\ }%
+	\theAuthorName%
+	\ifdefempty{\theAuthorTitleSuffix}{}{\ \theAuthorTitleSuffix}%
 }
 
 
@@ -207,12 +207,12 @@
 % ----------------------------------------------------------------------------
 
 \AtBeginDocument{
-  \def\@tum@pdftitle@{\@title\ifdefempty{\@subtitle}{}{~-~\@subtitle}}
-  \hypersetup{
-    pdftitle = {\@tum@pdftitle@},
-    pdfauthor = {\@author},
-    pdfsubject = {\@subject},
-    % pdfkeywords = {},
-    pdfcreator = {\theUniversityName}
-  }
+	\def\@tum@pdftitle@{\@title\ifdefempty{\@subtitle}{}{~-~\@subtitle}}
+	\hypersetup{
+		pdftitle = {\@tum@pdftitle@},
+		pdfauthor = {\@author},
+		pdfsubject = {\@subject},
+		% pdfkeywords = {},
+		pdfcreator = {\theUniversityName}
+	}
 }

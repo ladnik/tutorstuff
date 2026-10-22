@@ -9,89 +9,89 @@
 \maketitle
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE  Durchzählen!
-  \end{center}
+	\begin{center}
+		\LARGE  Durchzählen!
+	\end{center}
 \end{frame}
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
-    haben VL/ZÜ-Folien Recht!
-  \end{center}
+	\begin{center}
+		\LARGE  Keine Garantie für die Richtigkeit der Tutorfolien: Bei Unklarheiten/Unstimmigkeiten
+		haben VL/ZÜ-Folien Recht!
+	\end{center}
 \end{frame}
 
 \begin{frame}[fragile, c]{Endliche Automaten}{}
-  \begin{itemize}
-    \item Repräsentiert Funktion einer sequentiellen Schaltung (sequentiell: von Zuständen abhängig)
-    \item Mathematische Beschreibung als 6-Tupel $(I, O, S, s_0, \delta, \lambda)$
-    \item Als Diagramm: Zustände $\rightarrow$ Kreise, Übergänge $\rightarrow$ Verbindungen, Bedingungen $\rightarrow$ Kantenbeschriftungen
-    \item One-Hot-Kodierung: Genau 1 FF ist auf 1 $\rightarrow$ aktueller Zustand, einfach aber verschwenderisch
-    \item Binärkodierung: FFs zusammen bilden Binärzahl des aktuellen Zustands, spart FFs aber komplexer
-  \end{itemize}
-  \begin{table}[]
-    \begin{tabular}{c|c|c}
-    Zustand & One-Hot-Enkodierung & Binärenkodierung \\ \hline
-    $S_0$    & $0001$                & $00$               \\
-    $S_1$    & $0010$                & $01$               \\
-    $S_2$    & $0100$                & $10$               \\
-    $S_3$    & $1000$                & $11$              
-    \end{tabular}
-    \end{table}
+	\begin{itemize}
+		\item Repräsentiert Funktion einer sequentiellen Schaltung (sequentiell: von Zuständen abhängig)
+		\item Mathematische Beschreibung als 6-Tupel $(I, O, S, s_0, \delta, \lambda)$
+		\item Als Diagramm: Zustände $\rightarrow$ Kreise, Übergänge $\rightarrow$ Verbindungen, Bedingungen $\rightarrow$ Kantenbeschriftungen
+		\item One-Hot-Kodierung: Genau 1 FF ist auf 1 $\rightarrow$ aktueller Zustand, einfach aber verschwenderisch
+		\item Binärkodierung: FFs zusammen bilden Binärzahl des aktuellen Zustands, spart FFs aber komplexer
+	\end{itemize}
+	\begin{table}[]
+		\begin{tabular}{c|c|c}
+			Zustand & One-Hot-Enkodierung & Binärenkodierung \\ \hline
+			$S_0$   & $0001$              & $00$             \\
+			$S_1$   & $0010$              & $01$             \\
+			$S_2$   & $0100$              & $10$             \\
+			$S_3$   & $1000$              & $11$
+		\end{tabular}
+	\end{table}
 \end{frame}
 
 \begin{frame}[fragile, c]{Endliche Automaten}{}
-  \begin{center}
-    \includegraphics[width=0.6\textwidth]{w08_finite_state_machine.png}
-  \end{center}
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{w08_finite_state_machine.png}
+	\end{center}
 \end{frame}
 
 
 \begin{frame}[c, fragile]{RISC-V Multi-Cycle-Prozessor}{}
-  \begin{itemize}
-    \item Aufteilung einer Instruktion in mehrere Schritte
-    \item kürzere kritische Pfade in den einzelnen Teilschritten $\rightarrow$ höhere Taktfrequenz möglich
-    \item allerdings benötigt eine Instruktion jetzt auch mehrere Taktzyklen!
-    \item komplexeres Steuerwerk, da Zustandsautomat umgesetzt werden muss
-    \item (in der Praxis haben sich MC-Prozessoren nicht durchgesetzt)
-  \end{itemize}
+	\begin{itemize}
+		\item Aufteilung einer Instruktion in mehrere Schritte
+		\item kürzere kritische Pfade in den einzelnen Teilschritten $\rightarrow$ höhere Taktfrequenz möglich
+		\item allerdings benötigt eine Instruktion jetzt auch mehrere Taktzyklen!
+		\item komplexeres Steuerwerk, da Zustandsautomat umgesetzt werden muss
+		\item (in der Praxis haben sich MC-Prozessoren nicht durchgesetzt)
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[c]{RISC-V Multi-Cycle-Prozessor}{}
-  \begin{center}
-    \includegraphics[width=0.75\textwidth]{w08_multi_cycle.png}
-  \end{center}
-  \centering
-  \tiny (Quelle: Vorlesungsmaterialien ERA)
+	\begin{center}
+		\includegraphics[width=0.75\textwidth]{w08_multi_cycle.png}
+	\end{center}
+	\centering
+	\tiny (Quelle: Vorlesungsmaterialien ERA)
 \end{frame}
 
 \begin{frame}[c]{RISC-V Multi-Cycle-Prozessor: Zustandsautomat}{}
-  \begin{center}
-    \includegraphics[width=0.6\textwidth]{w08_multi_cycle_states.png}
-  \end{center}
-  \centering
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{w08_multi_cycle_states.png}
+	\end{center}
+	\centering
 \end{frame}
 
 \begin{frame}[c]{}{}
-  \begin{center}
-    \LARGE Fragen?
-  \end{center}
+	\begin{center}
+		\LARGE Fragen?
+	\end{center}
 \end{frame}
 
 \begin{frame}[c, fragile]{Artemis-Hausaufgaben}{}
-  \begin{itemize}
-    \item H08 - RISCV Multi bis 17.12.2023 23:59 Uhr
-    \item ziemlich aufwendig, aber größtenteils nur Übertragen von Daten aus den Referenztabellen
-  \end{itemize}
+	\begin{itemize}
+		\item H08 - RISCV Multi bis 17.12.2023 23:59 Uhr
+		\item ziemlich aufwendig, aber größtenteils nur Übertragen von Daten aus den Referenztabellen
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile, c]{Links}{}
-  \begin{itemize}
-    \item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\enquote{ERA Tutorium - Mi-1600-MI4}}
-    bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\enquote{ERA Tutorium - Fr-1100-MW2}}
-    \item \href{https://github.com/logisim-evolution/logisim-evolution/releases}{Logisim Evolution}
-    \item \href{https://courses.edx.org/assets/courseware/v1/f06a2dc0c856f60ec0711e9f5e1c98cf/asset-v1:HarveyMuddX+ENGR85B+1T2023+type@asset+block/FinalReferences.pdf}{Referenztabellen (offizielle Tabellen sind auf den Übungblättern)}
-  \end{itemize}
+	\begin{itemize}
+		\item Zulip: \href{https://zulip.in.tum.de/#narrow/stream/1917-ERA-Tutorium---Mi-1600-MI4}{\enquote{ERA Tutorium - Mi-1600-MI4}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/stream/1940-ERA-Tutorium---Fr-1100-MW2}{\enquote{ERA Tutorium - Fr-1100-MW2}}
+		\item \href{https://github.com/logisim-evolution/logisim-evolution/releases}{Logisim Evolution}
+		\item \href{https://courses.edx.org/assets/courseware/v1/f06a2dc0c856f60ec0711e9f5e1c98cf/asset-v1:HarveyMuddX+ENGR85B+1T2023+type@asset+block/FinalReferences.pdf}{Referenztabellen (offizielle Tabellen sind auf den Übungblättern)}
+	\end{itemize}
 \end{frame}
 
 \maketitle

@@ -12,6 +12,6 @@ repos:
     hooks:
       - id: latexindent
         name: latexindent
-        entry: latexindent -w -y "onlyOneBackUp: 1" -g /dev/null
+        entry: 'latexindent -w -s -y "onlyOneBackUp: 1" -g /dev/null'
         language: system
         types: [tex]

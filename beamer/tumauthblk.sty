@@ -50,31 +50,31 @@
 \newcounter{AffilCount}
 
 \newcommand{\affil}[2][]{
-  \stepcounter{AffilCount}
+	\stepcounter{AffilCount}
 
-  % get current automatic affilation number
-  \edef\@tmp@mark@{\theAffilCount}
+	% get current automatic affilation number
+	\edef\@tmp@mark@{\theAffilCount}
 
-  % store affiliation information
-  \pgfqkeys{/TUM/affiliations/\theAffilCount}{
-    name/.initial = {#2},
-    mark/.initial,
-    mark/.expand once=\@tmp@mark@,
-    #1
-  }
+	% store affiliation information
+	\pgfqkeys{/TUM/affiliations/\theAffilCount}{
+		name/.initial = {#2},
+		mark/.initial,
+		mark/.expand once=\@tmp@mark@,
+		#1
+	}
 }
 
 % print affiliation mark (only when there is more than one affiliation)
 \newcommand{\@affilmark}[1]{%
-  \ifnumgreater{\theAffilCount}{1}{\textsuperscript{\mdseries{#1}}}{}%
+	\ifnumgreater{\theAffilCount}{1}{\textsuperscript{\mdseries{#1}}}{}%
 }
 
 % print affiliation block
 \newcommand{\theAffil}{%
-  \foreach \x in {1,...,\theAffilCount}{%
-    \@affilmark{\pgfkeysvalueof{/TUM/affiliations/\x/mark}}%
-    \pgfkeysvalueof{/TUM/affiliations/\x/name}\par%
-  }%
+	\foreach \x in {1,...,\theAffilCount}{%
+			\@affilmark{\pgfkeysvalueof{/TUM/affiliations/\x/mark}}%
+			\pgfkeysvalueof{/TUM/affiliations/\x/name}\par%
+		}%
 }
 
 
@@ -84,23 +84,23 @@
 \newcounter{AuthorCount}
 
 \renewcommand{\author}[2][]{
-  \stepcounter{AuthorCount}
+	\stepcounter{AuthorCount}
 
-  % get current automatic affilation number
-  \edef\@tmp@affil@{\number\numexpr\theAffilCount+1\relax}
+	% get current automatic affilation number
+	\edef\@tmp@affil@{\number\numexpr\theAffilCount+1\relax}
 
-  % store author information
-  \pgfqkeys{/TUM/authors/\theAuthorCount}{
-    name/.initial = {#2},
-    email/.initial,
-    orcid/.initial,
-    affil/.initial,
-    affil/.expand once=\@tmp@affil@,
-    #1
-  }
+	% store author information
+	\pgfqkeys{/TUM/authors/\theAuthorCount}{
+		name/.initial = {#2},
+		email/.initial,
+		orcid/.initial,
+		affil/.initial,
+		affil/.expand once=\@tmp@affil@,
+		#1
+	}
 
-  % store author names in a comma separated list
-  %\begin{noindent}
+	% store author names in a comma separated list
+	%\begin{noindent}
   \ifnumequal{\theAuthorCount}{1}{
     \pgfkeys{/TUM/author list/.initial = {#2}}
   }{
@@ -117,21 +117,21 @@
 
 % print author list
 \renewcommand{\@author}{%
-  \foreach \x in {1,...,\theAuthorCount}{%
-    \mbox{\pgfkeysvalueof{/TUM/authors/\x/name}}%
-    \edef\@tmp@orcid@{\pgfkeysvalueof{/TUM/authors/\x/orcid}}%
-    \ifdefempty{\@tmp@orcid@}{}{\,\theORCIDSymbol{\@tmp@orcid@}}%
-    \@affilmark{\pgfkeysvalueof{/TUM/authors/\x/affil}}%
-    \edef\@tmp@email@{\pgfkeysvalueof{/TUM/authors/\x/email}}%
-    \ifdefempty{\@tmp@email@}{}{\textsuperscript{\,%
-        \href{mailto:\@tmp@email@}{\theEmailSymbol}}}%
-    \ifnumless{\x}{\theAuthorCount}{%
-      \ifnumequal{\x}{\theAuthorCount-1}{%
-        \ifnumgreater{\theAuthorCount}{2}{%
-          \@auth@sep@{}}{} \@auth@fsep@{} %
-      }{\@auth@sep@{} }%
-    }{}%
-  }%
+	\foreach \x in {1,...,\theAuthorCount}{%
+			\mbox{\pgfkeysvalueof{/TUM/authors/\x/name}}%
+			\edef\@tmp@orcid@{\pgfkeysvalueof{/TUM/authors/\x/orcid}}%
+			\ifdefempty{\@tmp@orcid@}{}{\,\theORCIDSymbol{\@tmp@orcid@}}%
+			\@affilmark{\pgfkeysvalueof{/TUM/authors/\x/affil}}%
+			\edef\@tmp@email@{\pgfkeysvalueof{/TUM/authors/\x/email}}%
+			\ifdefempty{\@tmp@email@}{}{\textsuperscript{\,%
+					\href{mailto:\@tmp@email@}{\theEmailSymbol}}}%
+			\ifnumless{\x}{\theAuthorCount}{%
+				\ifnumequal{\x}{\theAuthorCount-1}{%
+					\ifnumgreater{\theAuthorCount}{2}{%
+						\@auth@sep@{}}{} \@auth@fsep@{} %
+				}{\@auth@sep@{} }%
+			}{}%
+		}%
 }
 
 
@@ -143,19 +143,19 @@
 
 % e-mail symbol
 \newcommand{\theEmailSymbol}{%
-  \resizebox{!}{1ex}{\color{TUMBlue}\mdseries\Letter}}
+	\resizebox{!}{1ex}{\color{TUMBlue}\mdseries\Letter}}
 
 % separator between email addresses (default \par)
 \newcommand{\@email@sep@}{\par}
 
 % print e-mail addresses
 \newcommand{\theEmail}{%
-  \foreach \x in {1,...,\theAuthorCount}{%
-    \edef\@tmp@email@{\pgfkeysvalueof{/TUM/authors/\x/email}}%
-    \ifdefempty{\@tmp@email@}{}{%
-      \theEmailSymbol{}~\href{mailto:\@tmp@email@}{\@tmp@email@}\@email@sep@%
-    }%
-  }%
+	\foreach \x in {1,...,\theAuthorCount}{%
+			\edef\@tmp@email@{\pgfkeysvalueof{/TUM/authors/\x/email}}%
+			\ifdefempty{\@tmp@email@}{}{%
+				\theEmailSymbol{}~\href{mailto:\@tmp@email@}{\@tmp@email@}\@email@sep@%
+			}%
+		}%
 }
 
 
@@ -167,9 +167,9 @@
 
 % ORCID symbol with web-link
 \newrobustcmd{\theORCIDSymbol}[1]{%
-  \href{http://orcid.org/#1}{%
-    \includegraphics[height=\fontcharht\font`\O]{resources/orcid.pdf}%
-  }%
+	\href{http://orcid.org/#1}{%
+		\includegraphics[height=\fontcharht\font`\O]{resources/orcid.pdf}%
+	}%
 }
 
 
@@ -177,9 +177,9 @@
 % ----------------------------------------------------------------------------
 
 \pgfqkeys{/TUM/authblk}{
-  printmail/.is choice,
-  printmail/multiline/.code = {\renewcommand{\@email@sep@}{\par}},
-  printmail/oneline/.code = {\renewcommand{\@email@sep@}{\hspace{1em}}},
+	printmail/.is choice,
+	printmail/multiline/.code = {\renewcommand{\@email@sep@}{\par}},
+	printmail/oneline/.code = {\renewcommand{\@email@sep@}{\hspace{1em}}},
 }
 
 % process package options

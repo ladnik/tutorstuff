@@ -112,10 +112,10 @@
 			\begin{table}[]
 				\begin{tabular}{c|c|c}
 					Zustand & One-Hot & Binär \\ \hline
-					$S_0$   & $0001$              & $00$             \\
-					$S_1$   & $0010$              & $01$             \\
-					$S_2$   & $0100$              & $10$             \\
-					$S_3$   & $1000$              & $11$
+					$S_0$   & $0001$  & $00$  \\
+					$S_1$   & $0010$  & $01$  \\
+					$S_2$   & $0100$  & $10$  \\
+					$S_3$   & $1000$  & $11$
 				\end{tabular}
 			\end{table}
 		\end{column}
@@ -128,30 +128,30 @@
 		\begin{column}{0.6\textwidth}
 			\begin{itemize}
 				\item Grundidee: Aufteilung einer Instruktion in mehrere Schritte (d.h. mehrere Taktzyklen)
-				\begin{itemize}
-					\item Wiederverwendung von Hardware (bspw. ALU)
-					\item kürzere kritische Pfade $\rightarrow$ höhere Taktfrequenz möglich\footnote[frame]{allerdings benötigt eine Instruktion auch mehrere Taktzyklen}
-					\item komplexeres Steuerwerk (Zustandsautomat)
-				\end{itemize}
+				      \begin{itemize}
+					      \item Wiederverwendung von Hardware (bspw. ALU)
+					      \item kürzere kritische Pfade $\rightarrow$ höhere Taktfrequenz möglich\footnote[frame]{allerdings benötigt eine Instruktion auch mehrere Taktzyklen}
+					      \item komplexeres Steuerwerk (Zustandsautomat)
+				      \end{itemize}
 				\item MC-Prozessoren heute nicht mehr relevant, aber Grundidee wird im pipelined Prozessor angewandt
 			\end{itemize}
 		\end{column}%
-	\end{columns}	
+	\end{columns}
 \end{frame}
 
 \begin{frame}[c]{Multi-Cycle-Prozessor: Schaltbild}{}
 	\begin{center}
-\resizebox{0.75\textwidth}{!}{
-	\input{riscv_mc.tikz}
-}
+		\resizebox{0.75\textwidth}{!}{
+			\input{riscv_mc.tikz}
+		}
 	\end{center}
 \end{frame}
 
 \begin{frame}[c]{Multi-Cycle-Prozessor: Automat}{}
 	\begin{center}
-\resizebox{0.6\textwidth}{!}{
-	\input{riscv_mc_automaton.tikz}
-}
+		\resizebox{0.6\textwidth}{!}{
+			\input{riscv_mc_automaton.tikz}
+		}
 	\end{center}
 \end{frame}
 
@@ -163,10 +163,10 @@
 
 \begin{frame}[c, fragile]{Links}{}
 	\begin{itemize}
-	\item Zulip: \href{https://zulip.in.tum.de/#narrow/channel/3255-ERA-Tutorium-.E2.80.93-Mi-1600-3}{\enquote{ERA Tutorium -- Mi-1600-3}}
-	bzw. \href{https://zulip.in.tum.de/#narrow/channel/3264-ERA-Tutorium-.E2.80.93-Fr-1500-1}{\enquote{ERA Tutorium -- Fr-1500-1}}
-	\item \href{https://www.moodle.tum.de/course/view.php?id=111440}{ERA-Moodle-Kurs}
-	\item \href{https://artemis.tum.de/courses/516}{ERA-Artemis-Kurs}
+		\item Zulip: \href{https://zulip.in.tum.de/#narrow/channel/3255-ERA-Tutorium-.E2.80.93-Mi-1600-3}{\enquote{ERA Tutorium -- Mi-1600-3}}
+		      bzw. \href{https://zulip.in.tum.de/#narrow/channel/3264-ERA-Tutorium-.E2.80.93-Fr-1500-1}{\enquote{ERA Tutorium -- Fr-1500-1}}
+		\item \href{https://www.moodle.tum.de/course/view.php?id=111440}{ERA-Moodle-Kurs}
+		\item \href{https://artemis.tum.de/courses/516}{ERA-Artemis-Kurs}
 		\item \href{https://courses.edx.org/assets/courseware/v1/f06a2dc0c856f60ec0711e9f5e1c98cf/asset-v1:HarveyMuddX+ENGR85B+1T2023+type@asset+block/FinalReferences.pdf}{Prozessor-Assets (kein offizielles Material!)}
 		\item \href{https://github.com/ladnik/riscv-circuitikz}{Meine \Circuitikz{}-library für schöne Prozessoren :)}
 	\end{itemize}

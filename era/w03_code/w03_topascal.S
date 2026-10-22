@@ -24,7 +24,7 @@ loop:
     # Andernfalls inkrementieren wir alle unsere Zähler
     addi t0, t0, 1
     addi t1, t1, 1
-    # Wir speichern das gerade gelesene Zeichen in t2, 
+    # Wir speichern das gerade gelesene Zeichen in t2,
     # d.h. dieses wird im nächsten Durchlauf um eine
     # Stelle nach hinten gespeichert
     addi t2, t3, 0
@@ -32,8 +32,8 @@ loop:
     lb t3, 0(t0)
      # j entspricht jal zero, label und überschreibt somit
      # ra nicht!
-    j loop         
-    
+    j loop
+
 end:
     # Wir speichern die Länge des Strings ins erste Byte
     sb t1, 0(a0)

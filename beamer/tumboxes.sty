@@ -45,8 +45,8 @@
 \newlength{\@tum@rulewidth@}
 
 \pgfqkeys{/TUM/boxes}{
-  rulewidth/.code = {\setlength{\@tum@rulewidth@}{#1}},
-  rulewidth/.default = 1mm,
+	rulewidth/.code = {\setlength{\@tum@rulewidth@}{#1}},
+	rulewidth/.default = 1mm,
 }
 
 % set default option
@@ -65,116 +65,116 @@
 % ----------------------------------------------------------------------------
 
 \pgfqkeys{/tcb}{
-  TUMBox/.style = {
-      sharp corners,
-      boxrule = \@tum@rulewidth@,
-      boxsep = 1mm,
-      left = 2\@tum@rulewidth@,
-      right = 2\@tum@rulewidth@,
-      top = 2\@tum@rulewidth@,
-      middle = 2\@tum@rulewidth@,
-      bottom = 2\@tum@rulewidth@,
-      toptitle = 0mm,
-      bottomtitle = 0mm,
-      fonttitle = \sffamily\bfseries\large,
-      attach title,
-      colframe = #1,
-      colbacktitle = #1,
-      coltitle = TUMWhite,
-      colback = TUMWhite,
-      coltext = TUMBlack,
-      enhanced,
-      segmentation style = {
-          #1, line width = .25\@tum@rulewidth@,
-          dashed, dash pattern = on \@tum@rulewidth@ off \@tum@rulewidth@
-        },
-    },
-  TUMBox/.default = TUMBlue,
-  TUMBoxVariant/.style = {
-      sharp corners,
-      boxrule = \@tum@rulewidth@,
-      toprule = 3\@tum@rulewidth@,
-      titlerule = 0mm,
-      boxsep = 1mm,
-      left = 2\@tum@rulewidth@,
-      right = 2\@tum@rulewidth@,
-      top = 2\@tum@rulewidth@,
-      middle = 2\@tum@rulewidth@,
-      bottom = 2\@tum@rulewidth@,
-      toptitle = \@tum@rulewidth@,
-      bottomtitle = \@tum@rulewidth@,
-      fonttitle = \sffamily\bfseries\large,
-      attach title,
-      colframe = #1,
-      colbacktitle = #1!20,
-      coltitle = #1,
-      colback = TUMWhite,
-      coltext = TUMBlack,
-      enhanced,
-      segmentation style = {
-          #1, line width = .25\@tum@rulewidth@,
-          dashed, dash pattern = on \@tum@rulewidth@ off \@tum@rulewidth@
-        },
-    },
-  TUMBoxVariant/.default = TUMBlue,
-  TUMBoxFill/.style = {
-      sharp corners,
-      boxrule = 0mm,
-      boxsep = 1mm,
-      left = 2\@tum@rulewidth@,
-      right = 2\@tum@rulewidth@,
-      top = 2\@tum@rulewidth@,
-      middle = 2\@tum@rulewidth@,
-      bottom = 2\@tum@rulewidth@,
-      toptitle = 0mm,
-      bottomtitle = 0mm,
-      fonttitle = \sffamily\bfseries,
-      attach title to upper,
-      after title = {:\quad},
-      colframe = #1,
-      colbacktitle = #1!20,
-      coltitle = #1,
-      colback = #1!20,
-      coltext = TUMBlack,
-    },
-  TUMBoxFill/.default = TUMBlue,
-  TUMBoxInverse/.style = {
-      sharp corners,
-      boxrule = 0mm,
-      boxsep = 1mm,
-      left = 2\@tum@rulewidth@,
-      right = 2\@tum@rulewidth@,
-      top = 2\@tum@rulewidth@,
-      middle = 2\@tum@rulewidth@,
-      bottom = 2\@tum@rulewidth@,
-      toptitle = 2\@tum@rulewidth@,
-      bottomtitle = \@tum@rulewidth@,
-      fonttitle = \sffamily\bfseries\large,
-      attach title,
-      colframe = TUMWhite,
-      colbacktitle = TUMWhite,
-      coltitle = #1,
-      colback = TUMWhite,
-      coltext = TUMBlack,
-      enhanced,
-      segmentation style = {
-          #1, line width = .25\@tum@rulewidth@,
-          dashed, dash pattern = on \@tum@rulewidth@ off \@tum@rulewidth@
-        },
-    },
-  TUMBoxInverse/.default = TUMBlue,
-  TUMBoxBlank/.style = {
-      sharp corners,
-      size = minimal,
-      fonttitle = \bfseries,
-      attach title to upper,
-      after title = {\par},
-      colframe = TUMWhite,
-      colbacktitle = TUMWhite,
-      coltitle = TUMBlack,
-      colback = TUMWhite,
-      coltext = TUMBlack,
-    }
+	TUMBox/.style = {
+			sharp corners,
+			boxrule = \@tum@rulewidth@,
+			boxsep = 1mm,
+			left = 2\@tum@rulewidth@,
+			right = 2\@tum@rulewidth@,
+			top = 2\@tum@rulewidth@,
+			middle = 2\@tum@rulewidth@,
+			bottom = 2\@tum@rulewidth@,
+			toptitle = 0mm,
+			bottomtitle = 0mm,
+			fonttitle = \sffamily\bfseries\large,
+			attach title,
+			colframe = #1,
+			colbacktitle = #1,
+			coltitle = TUMWhite,
+			colback = TUMWhite,
+			coltext = TUMBlack,
+			enhanced,
+			segmentation style = {
+					#1, line width = .25\@tum@rulewidth@,
+					dashed, dash pattern = on \@tum@rulewidth@ off \@tum@rulewidth@
+				},
+		},
+	TUMBox/.default = TUMBlue,
+	TUMBoxVariant/.style = {
+			sharp corners,
+			boxrule = \@tum@rulewidth@,
+			toprule = 3\@tum@rulewidth@,
+			titlerule = 0mm,
+			boxsep = 1mm,
+			left = 2\@tum@rulewidth@,
+			right = 2\@tum@rulewidth@,
+			top = 2\@tum@rulewidth@,
+			middle = 2\@tum@rulewidth@,
+			bottom = 2\@tum@rulewidth@,
+			toptitle = \@tum@rulewidth@,
+			bottomtitle = \@tum@rulewidth@,
+			fonttitle = \sffamily\bfseries\large,
+			attach title,
+			colframe = #1,
+			colbacktitle = #1!20,
+			coltitle = #1,
+			colback = TUMWhite,
+			coltext = TUMBlack,
+			enhanced,
+			segmentation style = {
+					#1, line width = .25\@tum@rulewidth@,
+					dashed, dash pattern = on \@tum@rulewidth@ off \@tum@rulewidth@
+				},
+		},
+	TUMBoxVariant/.default = TUMBlue,
+	TUMBoxFill/.style = {
+			sharp corners,
+			boxrule = 0mm,
+			boxsep = 1mm,
+			left = 2\@tum@rulewidth@,
+			right = 2\@tum@rulewidth@,
+			top = 2\@tum@rulewidth@,
+			middle = 2\@tum@rulewidth@,
+			bottom = 2\@tum@rulewidth@,
+			toptitle = 0mm,
+			bottomtitle = 0mm,
+			fonttitle = \sffamily\bfseries,
+			attach title to upper,
+			after title = {:\quad},
+			colframe = #1,
+			colbacktitle = #1!20,
+			coltitle = #1,
+			colback = #1!20,
+			coltext = TUMBlack,
+		},
+	TUMBoxFill/.default = TUMBlue,
+	TUMBoxInverse/.style = {
+			sharp corners,
+			boxrule = 0mm,
+			boxsep = 1mm,
+			left = 2\@tum@rulewidth@,
+			right = 2\@tum@rulewidth@,
+			top = 2\@tum@rulewidth@,
+			middle = 2\@tum@rulewidth@,
+			bottom = 2\@tum@rulewidth@,
+			toptitle = 2\@tum@rulewidth@,
+			bottomtitle = \@tum@rulewidth@,
+			fonttitle = \sffamily\bfseries\large,
+			attach title,
+			colframe = TUMWhite,
+			colbacktitle = TUMWhite,
+			coltitle = #1,
+			colback = TUMWhite,
+			coltext = TUMBlack,
+			enhanced,
+			segmentation style = {
+					#1, line width = .25\@tum@rulewidth@,
+					dashed, dash pattern = on \@tum@rulewidth@ off \@tum@rulewidth@
+				},
+		},
+	TUMBoxInverse/.default = TUMBlue,
+	TUMBoxBlank/.style = {
+			sharp corners,
+			size = minimal,
+			fonttitle = \bfseries,
+			attach title to upper,
+			after title = {\par},
+			colframe = TUMWhite,
+			colbacktitle = TUMWhite,
+			coltitle = TUMBlack,
+			colback = TUMWhite,
+			coltext = TUMBlack,
+		}
 }
 
 
@@ -182,19 +182,19 @@
 % ----------------------------------------------------------------------------
 
 \newtcolorbox{TUMBox}[2][TUMBlue]{
-  TUMBox = #1, title = #2
+	TUMBox = #1, title = #2
 }
 
 \newtcolorbox{TUMBoxVariant}[2][TUMBlue]{
-  TUMBoxVariant = #1, title = #2
+	TUMBoxVariant = #1, title = #2
 }
 
 \newtcolorbox{TUMBoxFill}[2][TUMBlue]{
-  TUMBoxFill = #1, title = #2
+	TUMBoxFill = #1, title = #2
 }
 
 \newtcolorbox{TUMBoxInverse}[2][TUMBlue]{
-  TUMBoxInverse = #1, title = #2
+	TUMBoxInverse = #1, title = #2
 }
 
 
@@ -204,12 +204,12 @@
 \newcommand{\@tum@hlsize@}{.09\dimexpr\f@size pt\relax}
 
 \newtcbox{\highlight}[1][TUMOrange]{
-  sharp corners, on line,
-  boxrule = 0pt, boxsep = 0pt,
-  left = \@tum@hlsize@, right = \@tum@hlsize@,
-  top = \@tum@hlsize@, bottom = \@tum@hlsize@,
-  toprule = \@tum@hlsize@, bottomrule = \@tum@hlsize@,
-  colframe = #1, colback = #1!20,
+	sharp corners, on line,
+	boxrule = 0pt, boxsep = 0pt,
+	left = \@tum@hlsize@, right = \@tum@hlsize@,
+	top = \@tum@hlsize@, bottom = \@tum@hlsize@,
+	toprule = \@tum@hlsize@, bottomrule = \@tum@hlsize@,
+	colframe = #1, colback = #1!20,
 }
 
 

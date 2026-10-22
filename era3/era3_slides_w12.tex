@@ -224,49 +224,49 @@
 						\foreach \r/\c in {5/1}
 						\node[cell,E] at (\cellspc*\c,5-\r) {\texttt{i5}};
 					}
-				
-				% stalling
-				\only<2>{
-					% nop
-					\foreach \r/\c in {2/1,3/2,4/3,5/4}
-					\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
-					
-					% nop
-					\foreach \r/\c in {3/1,4/2,5/3}
-					\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
-					
-					% nop
-					\foreach \r/\c in {4/1,5/2}
-					\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
-					
-					% i2
-					\foreach \r/\c in {5/1}
-					\node[cell,B] at (\cellspc*\c,5-\r) {\texttt{i2}};
-				}
-			
-			% reordering
-			\only<3>{	
-				% i3
-				\foreach \r/\c in {2/1,3/2,4/3,5/4}
-				\node[cell,C] at (\cellspc*\c,5-\r) {\texttt{i3}};
-				
-				% i4
-				\foreach \r/\c in {3/1,4/2,5/3}
-				\node[cell,D] at (\cellspc*\c,5-\r) {\texttt{i4}};
-				
-				% i5
-				\foreach \r/\c in {4/1,5/2}
-				\node[cell,E] at (\cellspc*\c,5-\r) {\texttt{i5}};
-				
-				% i2
-				\foreach \r/\c in {5/1}
-				\node[cell,B] at (\cellspc*\c,5-\r) {\texttt{i2}};
-			}
-		
-			\visible<4>{
-				\draw[very thick, ->] (\cellspc*4,\cellht - 2pt) -- ++(0, -0.3*\cellht) -| (\cellspc*3,\cellht - 2pt);
-			}
-		
+
+					% stalling
+					\only<2>{
+						% nop
+						\foreach \r/\c in {2/1,3/2,4/3,5/4}
+						\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
+
+						% nop
+						\foreach \r/\c in {3/1,4/2,5/3}
+						\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
+
+						% nop
+						\foreach \r/\c in {4/1,5/2}
+						\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
+
+						% i2
+						\foreach \r/\c in {5/1}
+						\node[cell,B] at (\cellspc*\c,5-\r) {\texttt{i2}};
+					}
+
+					% reordering
+					\only<3>{
+						% i3
+						\foreach \r/\c in {2/1,3/2,4/3,5/4}
+						\node[cell,C] at (\cellspc*\c,5-\r) {\texttt{i3}};
+
+						% i4
+						\foreach \r/\c in {3/1,4/2,5/3}
+						\node[cell,D] at (\cellspc*\c,5-\r) {\texttt{i4}};
+
+						% i5
+						\foreach \r/\c in {4/1,5/2}
+						\node[cell,E] at (\cellspc*\c,5-\r) {\texttt{i5}};
+
+						% i2
+						\foreach \r/\c in {5/1}
+						\node[cell,B] at (\cellspc*\c,5-\r) {\texttt{i2}};
+					}
+
+					\visible<4>{
+						\draw[very thick, ->] (\cellspc*4,\cellht - 2pt) -- ++(0, -0.3*\cellht) -| (\cellspc*3,\cellht - 2pt);
+					}
+
 				\end{tikzpicture}
 			}
 
@@ -291,100 +291,100 @@
 				\item<3-> Flushing: Falls Vorhersage der branch prediction falsch war, müssen geladene Instruktionen aus Pipeline entfernt werden
 			\end{itemize}
 		\end{column}
-	\begin{column}[c]{0.5\textwidth}
-		\centering
-		
-		\resizebox{\textwidth}{!}{
-			\begin{tikzpicture}
-				% row labels
-				\node[rotate=90] at (0,2) {Zeitschritt};
-				\foreach \r in {1,...,5}
-				\node[label] at (0.4,5-\r) {\r};
-				
-				% column labels
-				\foreach \c/\name in {1/Fetch,2/Decode,3/Execute,4/Memory,5/Writeb.}
-				\node[label] at (\cellspc*\c,4.75) {\name};
-				
-				% grid
-				\foreach \r in {1,...,5}
-				\foreach \c in {1,...,5}
-				\node[cell,empty] at (\cellspc*\c,5-\r) {};
-				
-				% i1
-				\foreach \r/\c in {1/1,2/2,3/3,4/4,5/5}
-				\node[cell,A] at (\cellspc*\c,5-\r) {\texttt{i1}};
-				
-				% conflict
-				\only<1>{
-					% i2
-					\foreach \r/\c in {2/1,3/2,4/3,5/4}
-					\node[cell,B] at (\cellspc*\c,5-\r) {\texttt{i2}};
-					
-					% i3
-					\foreach \r/\c in {3/1,4/2,5/3}
-					\node[cell,C] at (\cellspc*\c,5-\r) {\texttt{i3}};
-					
-					% i4
-					\foreach \r/\c in {4/1,5/2}
-					\node[cell,D] at (\cellspc*\c,5-\r) {\texttt{i4}};
-					
-					% i5
-					\foreach \r/\c in {5/1}
-					\node[cell,E] at (\cellspc*\c,5-\r) {\texttt{i5}};
-				}
-				
-				% stalling
-				\only<2>{
-					% nop
-					\foreach \r/\c in {2/1,3/2,4/3,5/4}
-					\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
-					
-					% nop
-					\foreach \r/\c in {3/1,4/2,5/3}
-					\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
-					
-					% i22
-					\foreach \r/\c in {4/1,5/2}
-					\node[cell,F] at (\cellspc*\c,5-\r) {\texttt{i22}};
-					
-					% i23
-					\foreach \r/\c in {5/1}
-					\node[cell,G] at (\cellspc*\c,5-\r) {\texttt{i23}};
-				}
-				
-				% flushing
-				\only<3>{
-					% nop
-					\foreach \r/\c in {4/3,5/4}
-					\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
-					
-					% nop
-					\foreach \r/\c in {4/2,5/3}
-					\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
-					
-					% i2
-					\foreach \r/\c in {2/1,3/2}
-					\node[cell,B] at (\cellspc*\c,5-\r) {\texttt{i2}};
-					
-					% i3
-					\foreach \r/\c in {3/1}
-					\node[cell,C] at (\cellspc*\c,5-\r) {\texttt{i3}};
-					
-					% i22
-					\foreach \r/\c in {4/1,5/2}
-					\node[cell,F] at (\cellspc*\c,5-\r) {\texttt{i22}};
-					
-					% i23
-					\foreach \r/\c in {5/1}
-					\node[cell,G] at (\cellspc*\c,5-\r) {\texttt{i23}};
-				}
-			\end{tikzpicture}
-		}
-		
-		\begin{center}
-			Branch durch \texttt{i1}
-		\end{center}
-	\end{column}
+		\begin{column}[c]{0.5\textwidth}
+			\centering
+
+			\resizebox{\textwidth}{!}{
+				\begin{tikzpicture}
+					% row labels
+					\node[rotate=90] at (0,2) {Zeitschritt};
+					\foreach \r in {1,...,5}
+					\node[label] at (0.4,5-\r) {\r};
+
+					% column labels
+					\foreach \c/\name in {1/Fetch,2/Decode,3/Execute,4/Memory,5/Writeb.}
+					\node[label] at (\cellspc*\c,4.75) {\name};
+
+					% grid
+					\foreach \r in {1,...,5}
+					\foreach \c in {1,...,5}
+					\node[cell,empty] at (\cellspc*\c,5-\r) {};
+
+					% i1
+					\foreach \r/\c in {1/1,2/2,3/3,4/4,5/5}
+					\node[cell,A] at (\cellspc*\c,5-\r) {\texttt{i1}};
+
+					% conflict
+					\only<1>{
+						% i2
+						\foreach \r/\c in {2/1,3/2,4/3,5/4}
+						\node[cell,B] at (\cellspc*\c,5-\r) {\texttt{i2}};
+
+						% i3
+						\foreach \r/\c in {3/1,4/2,5/3}
+						\node[cell,C] at (\cellspc*\c,5-\r) {\texttt{i3}};
+
+						% i4
+						\foreach \r/\c in {4/1,5/2}
+						\node[cell,D] at (\cellspc*\c,5-\r) {\texttt{i4}};
+
+						% i5
+						\foreach \r/\c in {5/1}
+						\node[cell,E] at (\cellspc*\c,5-\r) {\texttt{i5}};
+					}
+
+					% stalling
+					\only<2>{
+						% nop
+						\foreach \r/\c in {2/1,3/2,4/3,5/4}
+						\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
+
+						% nop
+						\foreach \r/\c in {3/1,4/2,5/3}
+						\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
+
+						% i22
+						\foreach \r/\c in {4/1,5/2}
+						\node[cell,F] at (\cellspc*\c,5-\r) {\texttt{i22}};
+
+						% i23
+						\foreach \r/\c in {5/1}
+						\node[cell,G] at (\cellspc*\c,5-\r) {\texttt{i23}};
+					}
+
+					% flushing
+					\only<3>{
+						% nop
+						\foreach \r/\c in {4/3,5/4}
+						\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
+
+						% nop
+						\foreach \r/\c in {4/2,5/3}
+						\node[cell,empty] at (\cellspc*\c,5-\r) {\texttt{NOP}};
+
+						% i2
+						\foreach \r/\c in {2/1,3/2}
+						\node[cell,B] at (\cellspc*\c,5-\r) {\texttt{i2}};
+
+						% i3
+						\foreach \r/\c in {3/1}
+						\node[cell,C] at (\cellspc*\c,5-\r) {\texttt{i3}};
+
+						% i22
+						\foreach \r/\c in {4/1,5/2}
+						\node[cell,F] at (\cellspc*\c,5-\r) {\texttt{i22}};
+
+						% i23
+						\foreach \r/\c in {5/1}
+						\node[cell,G] at (\cellspc*\c,5-\r) {\texttt{i23}};
+					}
+				\end{tikzpicture}
+			}
+
+			\begin{center}
+				Branch durch \texttt{i1}
+			\end{center}
+		\end{column}
 	\end{columns}
 \end{frame}
 
