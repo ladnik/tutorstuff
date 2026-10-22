@@ -1,4 +1,4 @@
-TEXS := $(wildcard *.tex)
+TEXS := $(filter-out preamble.tex,$(wildcard *.tex))
 
 LATEXMKFLAGS+=-pdf -halt-on-error -interaction=nonstopmode -shell-escape
 
