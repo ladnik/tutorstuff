@@ -139,53 +139,95 @@
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{center}
-				%				\includegraphics[width=0.75\textwidth]{asm_signext.pdf}
 				\begin{figure}
+					\centering
 					\begin{tikzpicture}
-						\def\sz{1.75em}
-						\def\brpad{3.25ex}
-
-						\tikzset{
-							lbl/.style={draw=none, minimum width=\sz, minimum height=\sz, text depth=1pt},
-							attr/.style={draw, minimum width=\sz, minimum height=\sz, inner sep=0pt, text width=\sz, anchor=center, align=center},
-							mat/.style={matrix of nodes, ampersand replacement=\&, nodes={attr}, row sep=1.5em, column sep=-\pgflinewidth},
-							br/.style={decorate,decoration={brace, amplitude=1ex, raise=0.5ex}},
-							brinv/.style={br,decoration={mirror}},
-							arrow/.style={latex-},
-						}
-
-
-
-						\matrix[mat] (m1) {
+						\matrix[matrix of nodes, ampersand replacement=\&,
+							nodes={draw, minimum width=1.5em, minimum height=1.5em, text height=1em, text depth=0.25em, align=center, anchor=south, inner sep=0pt},
+							row sep=1.5em, column sep=-\pgflinewidth] (m1) {
 							\textcolor{TUMBlue}{0}\&\textcolor{TUMBlue}{0}\&\textcolor{TUMBlue}{\textellipsis}\&\textcolor{TUMBlue}{0}\&\textcolor{TUMBlue}{0}\&\textcolor{TUMBlue}{0}\&1\&\textellipsis\&1\&1\&0%
 							\\
 						};
 
-						%		\node[attr, thick] at (m1-1-6) {};
-
-
-						\matrix[mat, below=1.75cm of m1] (m2) {
+						\matrix[matrix of nodes, ampersand replacement=\&,
+							nodes={draw, minimum width=1.5em, minimum height=1.5em, text height=1em, text depth=0.25em, align=center, anchor=south, inner sep=0pt},
+							row sep=1.5em, column sep=-\pgflinewidth, below=2cm of m1] (m2) {
 							\textcolor{TUMBlue}{1}\&\textcolor{TUMBlue}{1}\&\textcolor{TUMBlue}{\textellipsis}\&\textcolor{TUMBlue}{1}\&\textcolor{TUMBlue}{1}\&\textcolor{TUMBlue}{1}\&1\&\textellipsis\&1\&1\&0%
 							\\
 						};
 
-						%	\node[attr, thick] at (m2-1-6) {};
+						\tikzset{
+							br/.style={decorate,decoration={brace, amplitude=1ex, raise=0.5ex}},
+							brinv/.style={br,decoration={mirror}}
+						}
 
 						\foreach \x in {1, 2}
 							{
-								\draw [br] (m\x-1-6.north west) -- (m\x-1-11.north east) node[midway, yshift=\brpad]{12 bit};
-
-								\draw [brinv] (m\x-1-1.south west) -- (m\x-1-11.south east) node[midway, yshift=-\brpad]{32 bit};
+								\draw [br] (m\x-1-6.north west) -- (m\x-1-11.north east) node[midway, yshift=3.25ex]{12 bit};
+								\draw [brinv] (m\x-1-1.south west) -- (m\x-1-11.south east) node[midway, yshift=-3.25ex]{32 bit};
 							}
-
-						%		\foreach \x in {1, 2, 3, 4, 5}
-						%		{
-						%			\draw[arrow] ($(m1-1-\x.north) + (0.05,0)$) to [out=90,in=90,looseness=2] ($(m1-1-\fpeval{\x+1}.north) + (-0.05,0)$);
-						%		}
 					\end{tikzpicture}
 					\caption{Sign Extension}
 				\end{figure}
 			\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c, fragile]{Instruktionsformat}{}
+	\begin{columns}[c]
+		\begin{column}{\textwidth}
+			\begin{itemize}
+				\item Drei-Operanden-Form \texttt{op rd, rs1, rs2}\\(Operation, Zielregister, Quellregister 1, Quellregister 2)
+				\item Register-Immediate-Operationen mit Suffix \texttt{i} (\texttt{addi}, \texttt{xori}, \textellipsis)\\$\rightarrow$ Konstante statt Quellregister 2
+				\item Was ist mit \verb|subi|?\visible<2->{\\$\rightarrow$ existiert nicht, \texttt{addi} mit negativem Immediate}
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c, fragile]{Schiebebefehle}{}
+	\begin{columns}[c]
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Logisch: Auffüllen mit \texttt{0}
+				\item Arithmetisch: Auffüllen mit Sign-Bit
+				\item Shifts sind sehr hilfreich zum Dividieren bzw. Multiplizieren mit Zweierpotenzen
+				\item Was ist mit \verb|sla|?\uncover<2->{\\$\rightarrow$ existiert nicht, selber Effekt wie \texttt{sll}}
+			\end{itemize}
+		\end{column}%
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\begin{tikzpicture}
+					\matrix[matrix of nodes, ampersand replacement=\&, nodes={draw, minimum width=1.5em, minimum height=1.5em, text height=1em, text depth=0.25em, align=center, anchor=south, inner sep=0pt}, row sep=1.5em, column sep=-\pgflinewidth] (mat) {
+						1\&1\&0\&1\&0\&1\&1\&0%
+						\\\textcolor{TUMBlue}{0}\&1\&1\&0\&1\&0\&1\&1%
+						\\
+					};
+
+					\foreach \x in {1, 2, 3, 4, 5, 6, 7}
+						{
+							\draw[->] ($(mat-1-\x.south) + (0, -0.05)$) -- ($(mat-2-\fpeval{\x+1}.north) + (0, 0.05)$);
+						}
+				\end{tikzpicture}
+				\caption{logischer Rechtsshift}
+			\end{figure}
+			\begin{figure}
+				\begin{tikzpicture}
+					\matrix[matrix of nodes, ampersand replacement=\&, nodes={draw, minimum width=1.5em, minimum height=1.5em, text height=1em, text depth=0.25em, align=center, anchor=south, inner sep=0pt}, row sep=1.5em, column sep=-\pgflinewidth] (mat) {
+						1\&1\&0\&1\&0\&1\&1\&0%
+						\\\textcolor{TUMBlue}{1}\&1\&1\&0\&1\&0\&1\&1%
+						\\
+					};
+
+					\foreach \x in {1, 2, 3, 4, 5, 6, 7}
+						{
+							\draw[->] ($(mat-1-\x.south) + (0, -0.05)$) -- ($(mat-2-\fpeval{\x+1}.north) + (0, 0.05)$);
+						}
+					\draw[->, TUMBlue] ($(mat-1-1.south) + (0, -0.05)$) -- ($(mat-2-1.north) + (0, 0.05)$);
+				\end{tikzpicture}
+				\caption{arithmetischer Rechtsshift}
+			\end{figure}
 		\end{column}
 	\end{columns}
 \end{frame}
@@ -205,6 +247,7 @@
 		\item \href{https://artemis.tum.de/courses/596/exercises/21744}{ERA-Artemis-Kurs}
 		\item \href{https://vanhunteradams.com/FixedPoint/FixedPoint.html}{Einführung Fixpunktarithmetik}, \href{https://specbranch.com/posts/fixed-point/}{Alternative}
 		\item \href{https://msyksphinz-self.github.io/riscv-isadoc/html/index.html}{Übersicht an RISC-V-Instruktionen}
+		\item \href{https://github.com/riscv-non-isa/riscv-asm-manual/blob/main/src/asm-manual.adoc#a-listing-of-standard-risc-v-pseudoinstructions}{Übersicht an Pseudoinstruktionen}
 	\end{itemize}
 \end{frame}
 
