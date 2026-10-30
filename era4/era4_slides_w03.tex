@@ -31,7 +31,7 @@
 	\vspace{-0.5cm}
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
-			\begin{center}\textbf{Branch-Befehle}\end{center}
+			\begin{center}\textbf{Branch-Instruktionen}\end{center}
 			Rücksprungadresse wird nicht gesichert, \emph{Sprungbedingung}
 			muss erfüllt sein
 			\vspace{0.5\baselineskip}
@@ -39,14 +39,14 @@
 				\item \verb|beq|: $\texttt{rs1} = \texttt{rs2}$
 				\item \verb|bne|: $\texttt{rs1} \ne \texttt{rs2}$
 				\item \verb|blt(u)|: $\texttt{rs1} < \texttt{rs2}$
-				\item \verb|bgt(u)|: $\texttt{rs1} > \texttt{rs2}$
+				\item \verb|bge(u)|: $\texttt{rs1} > \texttt{rs2}$
 			\end{itemize}
 			\begin{center}
-				\underline{für Schleifen und Bedingungen (ifs)}
+				\underline{für Schleifen und Bedingungen (if's)}
 			\end{center}
 		\end{column}
 		\begin{column}{0.5\textwidth}
-			\begin{center}\textbf{Jump-Befehle}\end{center}
+			\begin{center}\textbf{Jump-Instruktionen}\end{center}
 			Schreiben Rücksprungadresse in \texttt{ra} oder angegebenes Register,
 			springen immer
 			springen immer
@@ -323,6 +323,8 @@
 							{
 								\node[label, left=0.125cm of mat-\x-1.north west, anchor=east] (addr) {0x\fpeval{400+\x-1}};
 							}
+
+						\phantom{\draw[arrow, TUMBlue] (mat-1-1.north east) -| node[biglabel, pos=0.75, right] {\texttt{-4}} ($(mat-5-1.north east) +(0.5cm, 0)$);}
 
 						\only<1-3>{
 								\node[biglabel, below=0.5cm of mat] {a0 = 0x00000401};
