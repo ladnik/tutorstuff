@@ -1,0 +1,108 @@
+%% Usage (preamble):
+%%   \usepackage{minted}
+%%   \usepackage{minted-tumblue}
+%%   \setminted{style=tumblue}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{minted-tumblue}[TUM highlighting style for minted]
+\RequirePackage{xcolor}
+
+\providecolor{TUMBlue}{RGB}{0,101,189}
+\definecolor{tumblueLiteral}{RGB}{0,119,138}
+\definecolor{tumblueComment}{RGB}{94,110,126}
+\definecolor{tumblueError}{RGB}{196,7,27}
+\definecolor{tumblueInserted}{RGB}{0,124,48}
+
+\def\tumblue@base{%
+\def\PYG@reset{\let\PYG@it=\relax \let\PYG@bf=\relax
+	\let\PYG@ul=\relax \let\PYG@tc=\relax
+	\let\PYG@bc=\relax \let\PYG@ff=\relax}%
+\def\PYG@tok##1{\csname PYG@tok@##1\endcsname}%
+\def\PYG@toks##1+{\ifx\relax##1\empty\else
+		\PYG@tok{##1}\expandafter\PYG@toks\fi}%
+\def\PYG@do##1{\PYG@bc{\PYG@tc{\PYG@ul{%
+				\PYG@it{\PYG@bf{\PYG@ff{##1}}}}}}}%
+\def\PYG##1##2{\PYG@reset\PYG@toks##1+\relax+\PYG@do{##2}}%
+\def\PYGZbs{\char`\\}%
+\def\PYGZus{\char`\_}%
+\def\PYGZob{\char`\{}%
+\def\PYGZcb{\char`\}}%
+\def\PYGZca{\char`\^}%
+\def\PYGZam{\char`\&}%
+\def\PYGZlt{\char`\<}%
+\def\PYGZgt{\char`\>}%
+\def\PYGZsh{\char`\#}%
+\def\PYGZpc{\char`\%}%
+\def\PYGZdl{\char`\$}%
+\def\PYGZhy{\char`\-}%
+\def\PYGZsq{\char`\'}%
+\def\PYGZdq{\char`\"}%
+\def\PYGZti{\char`\~}%
+\def\PYGZat{@}%
+\def\PYGZlb{[}%
+\def\PYGZrb{]}%
+}
+
+
+\def\tumblue@tok#1#2#3{%
+	\expandafter\def\csname PYG@tok@#1\endcsname{#2\def\PYG@tc####1{\textcolor{#3}{####1}}}}
+\def\tumblue@font#1#2{%
+	\expandafter\def\csname PYG@tok@#1\endcsname{#2}}
+\def\tumblue@bf{\let\PYG@bf=\textbf}
+\def\tumblue@nobf{\let\PYG@bf=\relax}
+
+\def\tumblue@tokens{%
+	\tumblue@tok{c}  {}{tumblueComment}%
+	\tumblue@tok{cp} {}{TUMBlue!80!black}%
+	\tumblue@tok{cpf}{}{tumblueLiteral}%
+	\tumblue@tok{cs} {\tumblue@bf}{tumblueComment}%
+	\tumblue@tok{k}  {\tumblue@bf}{TUMBlue}%
+	\tumblue@tok{kp} {\tumblue@nobf}{TUMBlue}%
+	\tumblue@tok{kt} {\tumblue@nobf}{TUMBlue!80!black}%
+	\tumblue@tok{ow} {\tumblue@bf}{TUMBlue}%
+	\tumblue@tok{nf} {}{TUMBlue}%
+	\tumblue@tok{fm} {}{TUMBlue!80!black}%
+	\tumblue@tok{nl} {\tumblue@bf}{TUMBlue!80!black}%
+	\tumblue@tok{nc} {\tumblue@bf}{TUMBlue!50!black}%
+	\tumblue@tok{nn} {\tumblue@bf}{TUMBlue!50!black}%
+	\tumblue@tok{ne} {\tumblue@bf}{TUMBlue!50!black}%
+	\tumblue@tok{no} {}{TUMBlue!50!black}%
+	\tumblue@tok{nv} {}{TUMBlue!50!black}%
+	\tumblue@tok{py} {}{TUMBlue!50!black}%
+	\tumblue@tok{nb} {}{TUMBlue!80!black}%
+	\tumblue@tok{na} {}{TUMBlue!80!black}%
+	\tumblue@tok{nd} {}{TUMBlue!80!black}%
+	\tumblue@tok{ni} {}{TUMBlue!80!black}%
+	\tumblue@tok{nt} {\tumblue@bf}{TUMBlue}%
+	\tumblue@tok{m}  {}{tumblueLiteral}%
+	\tumblue@tok{s}  {}{tumblueLiteral}%
+	\tumblue@tok{sd} {}{tumblueComment}%
+	\tumblue@tok{se} {\tumblue@bf}{tumblueLiteral}%
+	\tumblue@tok{si} {}{TUMBlue!80!black}%
+	\tumblue@tok{sa} {}{TUMBlue!80!black}%
+	\tumblue@tok{gh} {\tumblue@bf}{TUMBlue!50!black}%
+	\tumblue@tok{gu} {\tumblue@bf}{TUMBlue!80!black}%
+	\tumblue@tok{gd} {}{tumblueError}%
+	\tumblue@tok{gi} {}{tumblueInserted}%
+	\tumblue@tok{gr} {}{tumblueError}%
+	\tumblue@tok{gt} {}{tumblueError}%
+	\tumblue@tok{gp} {\tumblue@bf}{TUMBlue!80!black}%
+	\tumblue@tok{go} {}{tumblueComment}%
+	\tumblue@font{ge} {\let\PYG@it=\textit}%
+	\tumblue@font{gs} {\tumblue@bf}%
+	\tumblue@font{ges}{\tumblue@bf\let\PYG@it=\textit}%
+	\tumblue@tok{err}{}{tumblueError}%
+}
+
+\def\tumblue@styledef{%
+	\ifcsname minted@defstyle@load\endcsname
+		\ifcsname minted@styledef@default\endcsname\else
+			\begingroup\minted@defstyle@load{default}\endgroup
+		\fi
+	\fi
+	\tumblue@base\tumblue@tokens}
+
+\expandafter\let\csname minted@PYGdef@tumblue\endcsname\tumblue@styledef
+\expandafter\let\csname minted@styledef@tumblue\endcsname\tumblue@styledef
+
+\endinput

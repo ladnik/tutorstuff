@@ -1,23 +1,5 @@
 \input{preamble}
 
-% minted
-\setminted{
-	fontsize=\small,
-	frame=none,
-	breaklines=true,
-	style=pastie,
-	tabsize=4,
-	autogobble,
-}
-
-% listings
-\lstset{        basicstyle=\ttfamily,
-	showstringspaces=false,
-	tabsize=4,
-	breaklines=true,
-	breakatwhitespace=false,
-	frame=single}
-
 \title{Übung 04: Rekursion und \\Calling Convention}
 \subtitle{Einführung in die Rechnerarchitektur}
 \date{\DTMdisplaydate{2026}{11}{6}{-1}}
@@ -34,6 +16,121 @@
 	\end{center}
 \end{frame}
 
+
+\begin{frame}[c, fragile]{Caller und Callee}{}
+	\begin{center}
+		\begin{tikzpicture}
+			\def\arc{0.9cm}
+			\def\spc{3.75*\arc}
+			\def\lblspc{3cm}
+
+			\tikzset{
+				codebox/.style = {draw=none, inner sep=0pt},
+				label/.style = {text width=4cm, align=center},
+				arrow/.style={-Latex, thick},
+			}
+
+			\node[codebox, anchor=north, visible on=<1->] (caller) {\begin{minipage}{0.25\textwidth}
+					\begin{minted}{gas}
+					main:
+						li a0, 3
+						li a1, 5
+						jal multiply
+						addi a0, a0, 1
+						ret
+				\end{minted}
+				\end{minipage}};
+
+			\node[codebox, right=\spc of caller.north east, anchor=north, visible on=<1->] (callee) {\begin{minipage}{0.3\textwidth}
+					\begin{minted}{gas}
+					multiply:
+						mul a0, a0, a1
+						ret
+				\end{minted}
+				\end{minipage}};
+
+			\node[label, below=of caller, visible on=<1->] (lbl1) {\textbf{Caller}\\(aufrufende Funktion)};
+			\node[label, right=\spc of lbl1.north east, anchor=north, visible on=<1->] {\textbf{Callee}\\(aufgerufene Funktion)};
+
+
+			\coordinate (jexit) at ($(caller.north east) +(-0.8cm, -1.1cm)$) {};
+			\coordinate (jentry) at ($(jexit) +(2*\arc, \arc)$) {};
+			\draw[arrow, visible on=<2->] (jexit) to[bend left] (jentry);
+
+			\node[draw=none, visible on=<2->] (ra)  at ($(caller.north west) +(-0.3cm, -1.83cm)$) {\texttt{ra}};
+			\draw[arrow, visible on=<2->](ra) -- ++ (1cm, 0);
+
+			\coordinate (rexit) at ($(callee.north west) +(0.75cm, -1.05cm)$) {};
+			\coordinate (rentry) at ($(rexit) +(-2*\arc, -\arc)$) {};
+			\draw[arrow, visible on=<3->] (rexit) to[bend left] (rentry);
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
+
+\begin{frame}[c]{Register}{}
+	\begin{center}
+		{\rmfamily
+			\begin{tabular}{|l|l|l|c|}
+				\hline
+				Register        & ABI Name       & Description                      & Saver\footnote{Erst in zwei Wochen relevant} \\ \hline
+				\texttt{x0}     & \texttt{zero}  & Hard-wired zero                  & ---                                          \\
+				\texttt{x1}     & \texttt{ra}    & Return address                   & Caller                                       \\
+				\texttt{x2}     & \texttt{sp}    & Stack pointer                    & Callee                                       \\
+				\texttt{x3}     & \texttt{gp}    & Global pointer                   & ---                                          \\
+				\texttt{x4}     & \texttt{tp}    & Thread pointer                   & ---                                          \\
+				\texttt{x5-x7}  & \texttt{t0-t2} & Temporaries                      & Caller                                       \\
+				\texttt{x8}     & \texttt{s0/fp} & Saved register/frame pointer     & Callee                                       \\
+				\texttt{x9}     & \texttt{s1}    & Saved register                   & Callee                                       \\
+				\texttt{x10-11} & \texttt{a0-1}  & Function arguments/return values & Caller                                       \\
+				\texttt{x12-17} & \texttt{a2-7}  & Function arguments               & Caller                                       \\
+				\texttt{x18-27} & \texttt{s2-11} & Saved registers                  & Callee                                       \\
+				\texttt{x28-31} & \texttt{t3-6}  & Temporaries                      & Caller                                       \\ \hline
+			\end{tabular}
+		}
+	\end{center}
+\end{frame}
+
+\begin{frame}[t, fragile]{Calling Convention}{}
+	\vspace{\baselineskip}
+
+	\begin{onlyenv}<1>
+		\vspace{\baselineskip}
+		\begin{itemize}
+			\item \enquote{Aufrufkonvention} $\rightarrow$ lediglich eine Vereinbarung
+			\item definiert Parameterübergabe, Rückgabe, Registersicherung, Stack etc.
+			      \begin{enumerate}
+				      \item Datentypen $\le$ 4 Byte in \texttt{a}-Register, sign-extension falls vorzeichenbehafteter Datentyp
+				      \item Datentypen $=$ 8 Byte in zwei \texttt{a}-Registern, niedrigwertige Hälfte zuerst
+				      \item Datentypen $>$ 8 Byte als Pointer auf Speicher (meist Caller-Stack)
+				      \item Falls zu wenige Register: Übergabe über Stack
+			      \end{enumerate}
+			\item Stackpointer muss immer ein Vielfaches von 16 Byte sein!
+		\end{itemize}
+	\end{onlyenv}
+
+	\begin{onlyenv}<2-3>
+		\begin{minted}[escapeinside=||,beameroverlays=true, frame=single]{c}
+			uint64_t foo(int32_t a, uint8_t b, uint64_t c);
+		\end{minted}
+	\end{onlyenv}
+
+	\vspace{\baselineskip}
+
+	\begin{center}
+		\begin{onlyenv}<2-3>
+			\begin{tabular}{ccc}
+				Parameter & Übergabe untere 32 Bit                     & Übergabe obere 32 Bit     \\
+				a         & \uncover<3->{\texttt{a0}}                  & \uncover<3->{---}         \\
+				b         & \uncover<3->{\texttt{a1}  (zero-extended)} & \uncover<3->{---}         \\
+				c         & \uncover<3->{\texttt{a2}}                  & \uncover<3->{\texttt{a3}} \\
+				Rückgabe  & \uncover<3->{\texttt{a0}}                  & \uncover<3->{\texttt{a1}} \\
+			\end{tabular}
+		\end{onlyenv}
+	\end{center}
+
+
+\end{frame}
+
 \begin{frame}[c]{Stack}{}
 	\vspace*{-1cm}
 	\begin{columns}[c]
@@ -41,7 +138,8 @@
 			\begin{itemize}
 				\item Speicherbereich für lokale Variablen
 				\item wächst von hohen Adressen zu niedrigen Adressen
-				\item Anpassen des Stackpointers durch Beschreiben des \texttt{sp}-Registers
+				\item Platz auf dem Stack reservieren: \texttt{sp - x}
+				\item Platz auf dem Stack freigeben: \texttt{sp + x}
 				\item alles an Adressen \textless{} \texttt{sp} ungeschützt
 				\item besonders wichtig für Rekursion (Stackframes)
 			\end{itemize}
@@ -88,152 +186,6 @@
 	\end{columns}
 \end{frame}
 
-\begin{frame}[c, fragile]{Caller und Callee (1)}{}
-	\begin{center}
-		\begin{tikzpicture}
-			\def\arc{0.9cm}
-			\def\spc{3.75*\arc}
-			\def\lblspc{3cm}
-
-			\tikzset{
-				codebox/.style = {draw=none, inner sep=0pt},
-				label/.style = {text width=4cm, align=center},
-				arrow/.style={-Latex, thick},
-			}
-
-			\node[codebox, anchor=north, visible on=<1->] (caller) {\begin{minipage}{0.25\textwidth}
-					\begin{minted}{gas}
-					main:
-						li a0, 3
-						li a1, 5
-						jal multiply
-						addi a0, a0, 1
-						ret
-				\end{minted}
-				\end{minipage}};
-
-			\node[codebox, right=\spc of caller.north east, anchor=north, visible on=<1->] (callee) {\begin{minipage}{0.3\textwidth}
-					\begin{minted}{gas}
-					multiply:
-						mul a0, a0, a1
-						ret
-				\end{minted}
-				\end{minipage}};
-
-			\node[label, below=of caller, visible on=<1->] (lbl1) {\textbf{Caller}\\(aufrufende Funktion)};
-			\node[label, right=\spc of lbl1.north east, anchor=north, visible on=<1->] {\textbf{Callee}\\(aufgerufene Funktion)};
-
-
-			\coordinate (jexit) at ($(caller.north east) +(-0.8cm, -1.1cm)$) {};
-			\coordinate (jentry) at ($(jexit) +(2*\arc, \arc)$) {};
-			\draw[arrow, visible on=<2->] (jexit) to[bend left] (jentry);
-
-			\node[draw=none, visible on=<2->] (ra)  at ($(caller.north west) +(-0.3cm, -1.89cm)$) {\texttt{ra}};
-			\draw[arrow, visible on=<2->](ra) -- ++ (1cm, 0);
-
-			\coordinate (rexit) at ($(callee.north west) +(0.75cm, -1.05cm)$) {};
-			\coordinate (rentry) at ($(rexit) +(-2*\arc, -\arc)$) {};
-			\draw[arrow, visible on=<3->] (rexit) to[bend left] (rentry);
-		\end{tikzpicture}
-	\end{center}
-\end{frame}
-
-\begin{frame}[c, fragile]{Caller und Callee (2)}{}
-	\begin{columns}[c]
-		\hspace*{0.25cm}
-		\begin{column}{0.5\textwidth}
-			\begin{minted}[fontsize=\scriptsize]{gas}
-caller:
-# aufrufende Funktion (Caller)
-
-# wir speichern die Rücksprungadresse auf
-# den Stack -> ra ist Caller-saved!
-addi sp, sp, -16
-sw ra, 0(sp)
-
-# ... irgendwas, was t0 verwendet
-
-# da t0 caller-saved ist, müssen wir uns
-# t0 absichern, falls wir den Inhalt später
-# noch brauchen
-sw t0, 4(sp)
-# ...
-jal ra, callee  # Sprung zur Unterfunktion
-# ...
-lw t0, 4(sp)
-# ... wieder irgendwas mit t0
-lw ra, 0(sp)
-        \end{minted}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{minted}[fontsize=\scriptsize]{gas}
-addi sp, sp, 16
-jalr zero, 0(ra)
-
-callee:
-# aufgerufene Funktion (Callee)
-
-# hier dürfen wir t0-t6 bspw. verändern
-# falls wir s0-s6 verändern wollen,
-# müssen sie gesichert werden:
-addi sp, sp, -16
-sw s2, 0(sp)
-sw s3, 4(sp)
-
-# s2, s3 können jetzt verwendet werden!
-
-lw s2, 0(sp)
-lw s3, 4(sp)
-addi sp, sp, 16
-jalr zero, 0(ra)
-      \end{minted}
-		\end{column}
-	\end{columns}
-	\begin{center}
-		\small{fürs Selbststudium :)}
-	\end{center}
-\end{frame}
-
-\begin{frame}[c, fragile]{Calling Convention}{}
-	\begin{itemize}
-		\item \enquote{Aufrufkonvention} $\rightarrow$ lediglich eine Vereinbarung
-		\item definiert Parameterübergabe, Rückgabe, Registersicherung, Stack etc.
-		      \begin{enumerate}
-			      \item Datentypen $\le$ 4 Byte in \texttt{a}-Register, sign-extension falls vorzeichenbehafteter Datentyp
-			      \item Datentypen $=$ 8 Byte in zwei \texttt{a}-Registern, niedrigwertige Hälfte zuerst
-			      \item Datentypen $>$ 8 Byte als Pointer auf Speicher (meist Caller-Stack)
-			      \item Falls zu wenige Register: Übergabe über Stack
-		      \end{enumerate}
-		\item Stackpointer muss immer ein Vielfaches von 16 Byte sein!
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[c]{Register}{}
-	\begin{center}
-		{\rmfamily
-			\begin{tabular}{|l|l|l|c|}
-				\hline
-				Register        & ABI Name       & Description                      & Saver  \\ \hline
-				\texttt{x0}     & \texttt{zero}  & Hard-wired zero                  & ---    \\
-				\rowcolor{altblue}
-				\texttt{x1}     & \texttt{ra}    & Return address                   & Caller \\
-				\texttt{x2}     & \texttt{sp}    & Stack pointer                    & Callee \\
-				\texttt{x3}     & \texttt{gp}    & Global pointer                   & ---    \\
-				\texttt{x4}     & \texttt{tp}    & Thread pointer                   & ---    \\
-				\texttt{x5-x7}  & \texttt{t0-t2} & Temporaries                      & Caller \\
-				\texttt{x8}     & \texttt{s0/fp} & Saved register/frame pointer     & Callee \\
-				\texttt{x9}     & \texttt{s1}    & Saved register                   & Callee \\
-				\rowcolor{altyellow}
-				\texttt{x10-11} & \texttt{a0-1}  & Function arguments/return values & Caller \\
-				\texttt{x12-17} & \texttt{a2-7}  & Function arguments               & Caller \\
-				\rowcolor{altmagenta}
-				\texttt{x18-27} & \texttt{s2-11} & Saved registers                  & Callee \\
-				\rowcolor{altgreen}
-				\texttt{x28-31} & \texttt{t3-6}  & Temporaries                      & Caller \\ \hline
-			\end{tabular}
-		}
-	\end{center}
-\end{frame}
 
 \begin{frame}[c, fragile]{Rekursion (1)}{}
 	\begin{columns}
@@ -264,30 +216,30 @@ jalr zero, 0(ra)
 					}
 
 					\matrix[matstyle, visible on=<2-13>] (top) {
-					|[c]|$f_4$ \\
+						|[c]|$f_4$ \\
 					};
 
 					\matrix[matstyle, below=\smallspace of top, visible on=<3-12>] (f4) {
-					|[c]|$f_3$\&$+$\&|[c]|$f_2$ \\
+						|[c]|$f_3$\&$+$\&|[c]|$f_2$ \\
 					};
 					\draw[arrow, visible on=<3-13>](top.south) -- (f4.north);
 
 					\matrix[matstyle, below=\smallspace of f4-1-1, xshift=-\spread*\smallspace, visible on=<4-8>] (f3) {
-					|[c]|$f_2$\&$+$\&|[c]|$f_1$ \\
+						|[c]|$f_2$\&$+$\&|[c]|$f_1$ \\
 					};
 					\draw[arrow, visible on=<4-12>](f4-1-1.south) -- (f3.north);
 
 					\matrix[matstyle, below=\smallspace of f3-1-1, xshift=-\spread*\smallspace, visible on=<5-6>] (f22) {
-					|[c]|$f_1$\&$+$\&|[c]|$f_0$ \\
+						|[c]|$f_1$\&$+$\&|[c]|$f_0$ \\
 					};
 					\draw[arrow, visible on=<5-8>](f3-1-1.south) -- (f22.north);
 
 					\visible<6>{
-						\node[r, below=\smallspace of f22-1-1] (f221) {$1$};
-						\node[r, below=\smallspace of f22-1-3] (f220) {$0$};
-						\draw[arrow](f22-1-1.south) -- (f221.north);
-						\draw[arrow](f22-1-3.south) -- (f220.north);
-					}
+							\node[r, below=\smallspace of f22-1-1] (f221) {$1$};
+							\node[r, below=\smallspace of f22-1-3] (f220) {$0$};
+							\draw[arrow](f22-1-1.south) -- (f221.north);
+							\draw[arrow](f22-1-3.south) -- (f220.north);
+						}
 
 					\node[r, below=\smallspace of f3-1-1, xshift=-\spread*\smallspace, visible on=<7-8>] (f22) {$1$};
 
@@ -299,7 +251,7 @@ jalr zero, 0(ra)
 
 
 					\matrix[matstyle, below=\smallspace of f4-1-3, xshift=\spread*\smallspace, visible on=<10-11>] (f2) {
-					|[c]|$f_1$\&$+$\&|[c]|$f_0$ \\
+						|[c]|$f_1$\&$+$\&|[c]|$f_0$ \\
 					};
 					\draw[arrow, visible on=<10-12>](f4-1-3.south) -- (f2.north);
 
@@ -324,103 +276,89 @@ jalr zero, 0(ra)
 \end{frame}
 
 \begin{frame}[c, fragile]{Rekursion (2)}{}
-	\begin{columns}[c]
-		\begin{column}{0.4\linewidth}
-			\begin{lstlisting}
+	\begin{columns}[T]
+		\begin{column}{0.3\textwidth}
+			\begin{minted}{gas}
 fun:
   addi sp, sp, -8
   sw ra, 0(sp)
   sw a0, 4(sp)
-  beq a0, zero, end
+  li t0, 1
+  beq a0, t0, end
   addi a0, a0, -1
   jal fun
+  lw t0, 4(sp)
+  mul a0, a0, t0
 end:
   lw ra, 0(sp)
   addi sp, sp, 8
-  jalr zero, 0(ra)
-      \end{lstlisting}
-			\small \textbf{Achtung}: 8 Byte nicht CC-konform, nur zur besseren Darstellung
+  ret
+			\end{minted}
 		\end{column}%
-		\begin{column}{0.5\linewidth}
-
-			\begin{enumerate}
-				\item Abbruchbedingung(en)
-				\item Sicherung von \verb|ra| und evtl. Parametern
-				\item Vorbereitung der Parameter für den rekursiven Aufruf
-				\item Rekursiver Aufruf
-				\item Ergebnis des Aufrufs verwerten
-				\item Wiederherstellung von \verb|ra|, \verb|sp|
-				\item Rücksprung
-			\end{enumerate}
-			\vspace*{\baselineskip}
-			Schritte 3--5 können mehrmals vorkommen!
-
-			\vspace{0.85cm}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-
-\begin{frame}[c, fragile]{Rekursion (2)}{}
-	\begin{columns}[c]
-		\begin{column}{0.4\textwidth}
-			\begin{lstlisting}
-fun:
-  addi sp, sp, -8
-  sw ra, 0(sp)
-  sw a0, 4(sp)
-  beq a0, zero, end
-  addi a0, a0, -1
-  jal fun
-end:
-  lw ra, 0(sp)
-  addi sp, sp, 8
-  jalr zero, 0(ra)
-			\end{lstlisting}
-			\small \textbf{Achtung}: 8 Byte nicht CC-konform, nur zur besseren Darstellung
-		\end{column}
 		\begin{column}{0.5\textwidth}
-			Aufruf mit {\ttfamily a0 = 3}:
-			\begin{center}
-				\begin{figure}
-					\begin{tikzpicture}
-						\tikzset{
-							label/.style = {font={\ttfamily\scriptsize}, anchor=east},
-							element/.style = {font={\ttfamily\normalsize}, midway},
-							delbox/.style={pattern=north east lines, pattern color=TUMExtRed},
-							arrow/.style={Latex-, thick},
-							matstyle/.style={ matrix of nodes, ampersand replacement=\&, nodes={draw, minimum width=6em, minimum height=2em, text height=1em, text depth=0.25em, align=center, anchor=south}, column sep=-\pgflinewidth},
-						}
+			\begin{onlyenv}<1>
+				\begin{enumerate}
+					\item Sicherung von \verb|ra| und evtl. Parametern
+					\item Abbruchbedingung(en)
+					\item Vorbereitung der Parameter für den rekursiven Aufruf
+					\item Rekursiver Aufruf
+					\item Ergebnis des Aufrufs verwerten
+					\item Wiederherstellung von \verb|ra|, \verb|sp|
+					\item Rücksprung
+				\end{enumerate}
+				\vspace*{\baselineskip}
+				Schritte 3--5 können mehrmals vorkommen!
 
-						\def\cellheight{1.75em}
-						\def\cellwidth{6em}
-
-						\foreach \slide/\vala/\valb in {1/0x3/ra, 2/0x2/ra, 3/0x1/ra, 4/0x0/ra} {
-								\uncover<\slide->{
-									\draw (0,-\slide*2*\cellheight+\cellheight) rectangle ++(\cellwidth, -\cellheight) node[element] {\vala};
-									\draw (0,-\slide*2*\cellheight) rectangle ++(\cellwidth, -\cellheight) node[element] {\valb};
-								}
-								\uncover<\slide>{
-									\draw[arrow] (\cellwidth+1, -\slide*2*\cellheight-\cellheight) -- ++(1,0) node [right] {\ttfamily{sp}};
-								}
+				\vspace*{\baselineskip}
+				\small\textbf{Achtung}: 8 Byte nicht CC-konform, nur zur besseren Darstellung
+			\end{onlyenv}
+			\begin{onlyenv}<2->
+				\begin{center}
+					\begin{figure}
+						\begin{tikzpicture}
+							\tikzset{
+								label/.style = {font={\ttfamily\scriptsize}, anchor=east},
+								element/.style = {font={\ttfamily\normalsize}, midway},
+								delbox/.style={pattern=north east lines, pattern color=TUMExtRed},
+								arrow/.style={Latex-, thick},
+								matstyle/.style={ matrix of nodes, ampersand replacement=\&, nodes={draw, minimum width=6em, minimum height=2em, text height=1em, text depth=0.25em, align=center, anchor=south}, column sep=-\pgflinewidth},
 							}
 
-						\foreach \slide/\vala/\valb in {1/fff0/ffec, 2/ffe8/ffe4, 3/ffe0/ffdc, 4/ffd8/ffd4} {
-								\uncover<\slide->{
-									\node[label] at (-0.2, -\slide*2*\cellheight+\cellheight) {0x\vala};
-									\node[label] at (-0.2, -\slide*2*\cellheight) {0x\valb};
-								}
-							}
+							\def\cellheight{1.75em}
+							\def\cellwidth{6em}
 
-						\foreach \slide/\y in {5/2, 6/4, 7/6, 8/8}{
-								\only<\slide>{
-									\draw[delbox] (0,-9*\cellheight) rectangle ++(\cellwidth, \y*\cellheight);
-									\draw[arrow] (\cellwidth+0.2, \y*\cellheight-9*\cellheight) -- ++(1,0) node [right] {\ttfamily{sp}};
+							\foreach \slide/\vala/\valb in {2/0x3/ra, 3/0x2/ra, 4/0x1/ra} {
+									\visible<\slide->{
+											\draw (0,-\slide*2*\cellheight+\cellheight) rectangle ++(\cellwidth, -\cellheight) node[element] {\vala};
+											\draw (0,-\slide*2*\cellheight) rectangle ++(\cellwidth, -\cellheight) node[element] {\valb};
+										}
+									\visible<\slide>{
+										\draw[arrow] (\cellwidth+1, -\slide*2*\cellheight-\cellheight) -- ++(1,0) node [right] {\ttfamily{sp}};
+									}
 								}
-							}
-					\end{tikzpicture}
-				\end{figure}
-			\end{center}
+
+							\foreach \slide/\vala/\valb in {2/fff0/ffec, 3/ffe8/ffe4, 4/ffe0/ffdc} {
+									\visible<\slide->{
+											\node[label] at (-0.2, -\slide*2*\cellheight+\cellheight) {0x\vala};
+											\node[label] at (-0.2, -\slide*2*\cellheight) {0x\valb};
+										}
+								}
+
+							\foreach \slide/\y in {5/2, 6/4, 7/6}{
+									\visible<\slide>{
+										\draw[delbox] (0,-9*\cellheight) rectangle ++(\cellwidth, \y*\cellheight);
+										\draw[arrow] (\cellwidth+0.2, \y*\cellheight-9*\cellheight) -- ++(1,0) node [right] {\ttfamily{sp}};
+									}
+								}
+
+							\node[minimum width=2cm, align=center, text height=1.5ex, text depth=.25ex] (lbl1)
+							at (0.5*\cellwidth,-2*\cellheight)
+							{\texttt{a0 = \only<1-2>{3}\only<3>{2}\only<4,5>{1}\only<6>{2}\only<7->{6}}};
+
+						\end{tikzpicture}
+					\end{figure}
+				\end{center}
+			\end{onlyenv}
 		\end{column}
 	\end{columns}
 \end{frame}
