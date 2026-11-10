@@ -72,19 +72,19 @@
 		{\rmfamily
 			\begin{tabular}{|l|l|l|c|}
 				\hline
-				Register        & ABI Name       & Description                      & Saver\footnote{Erst in zwei Wochen relevant} \\ \hline
-				\texttt{x0}     & \texttt{zero}  & Hard-wired zero                  & ---                                          \\
-				\texttt{x1}     & \texttt{ra}    & Return address                   & Caller                                       \\
-				\texttt{x2}     & \texttt{sp}    & Stack pointer                    & Callee                                       \\
-				\texttt{x3}     & \texttt{gp}    & Global pointer                   & ---                                          \\
-				\texttt{x4}     & \texttt{tp}    & Thread pointer                   & ---                                          \\
-				\texttt{x5-x7}  & \texttt{t0-t2} & Temporaries                      & Caller                                       \\
-				\texttt{x8}     & \texttt{s0/fp} & Saved register/frame pointer     & Callee                                       \\
-				\texttt{x9}     & \texttt{s1}    & Saved register                   & Callee                                       \\
-				\texttt{x10-11} & \texttt{a0-1}  & Function arguments/return values & Caller                                       \\
-				\texttt{x12-17} & \texttt{a2-7}  & Function arguments               & Caller                                       \\
-				\texttt{x18-27} & \texttt{s2-11} & Saved registers                  & Callee                                       \\
-				\texttt{x28-31} & \texttt{t3-6}  & Temporaries                      & Caller                                       \\ \hline
+				Register        & ABI Name       & Description                      & Saver  \\ \hline
+				\texttt{x0}     & \texttt{zero}  & Hard-wired zero                  & ---    \\
+				\texttt{x1}     & \texttt{ra}    & Return address                   & Caller \\
+				\texttt{x2}     & \texttt{sp}    & Stack pointer                    & Callee \\
+				\texttt{x3}     & \texttt{gp}    & Global pointer                   & ---    \\
+				\texttt{x4}     & \texttt{tp}    & Thread pointer                   & ---    \\
+				\texttt{x5-x7}  & \texttt{t0-t2} & Temporaries                      & Caller \\
+				\texttt{x8}     & \texttt{s0/fp} & Saved register/frame pointer     & Callee \\
+				\texttt{x9}     & \texttt{s1}    & Saved register                   & Callee \\
+				\texttt{x10-11} & \texttt{a0-1}  & Function arguments/return values & Caller \\
+				\texttt{x12-17} & \texttt{a2-7}  & Function arguments               & Caller \\
+				\texttt{x18-27} & \texttt{s2-11} & Saved registers                  & Callee \\
+				\texttt{x28-31} & \texttt{t3-6}  & Temporaries                      & Caller \\ \hline
 			\end{tabular}
 		}
 	\end{center}
