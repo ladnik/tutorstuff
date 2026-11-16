@@ -23,7 +23,7 @@
 		\item \enquote{Zwischenstation} zwischen Registern (sehr schnell, sehr klein) und Hauptspeicher (sehr langsam, sehr groß)
 		\item Idee: Häufig genutzte Daten im Cache zwischenspeichern, der Rest wird bei Bedarf aus dem Hauptspeicher geholt
 		\item Die Position eines Datums im Cache wird durch die Adresse des Zugriffs bestimmt
-		\item Heutzutage meist L1/L2/L3-Caches: Caches aufsteigender Größe, aber absteigender Zugriffszeit
+		\item Heutzutage meist L1/L2/L3-Caches: Caches aufsteigender Größe, aber absteigender Zugriffsgeschwindigkeit
 	\end{itemize}
 \end{frame}
 
@@ -38,7 +38,7 @@
 	\vfill{}
 	\pause
 	\begin{itemize}
-		\item \textbf{zeitliche} Lokalität\only<2>{\footnote{Definition der Lokalitätsprinzipien ist eine beliebte Klausuraufgabe!}}: Zugriff auf $x$ $\rightarrow$ Zugriff auf $x$ in Zukunft wahrscheinlicher
+		\item \textbf{zeitliche} Lokalität: Zugriff auf $x$ $\rightarrow$ Zugriff auf $x$ in Zukunft wahrscheinlicher
 		\item \textbf{räumliche} Lokalität: Zugriff auf $x$ $\rightarrow$ Zugriff auf Daten in der Nähe wahrscheinlicher\\$\rightarrow$ Konsequenz: Cachen von ganzer Cachezeile
 	\end{itemize}
 \end{frame}
@@ -222,6 +222,7 @@
 								bbox2/.style={red, pattern=north east lines, inner sep=-1pt},
 							}
 
+
 							\matrix[matstyle] (mat) at (0, 0) {
 								{}\&{}\&{}\&{}%
 								\\{}\&{}\&{}\&{}%
@@ -233,7 +234,7 @@
 								\\{}\&{}\&{}\&{} \\
 							};
 
-							\node[label, anchor=south west] (ilabel) at (mat-1-4.north east) {\phantom{Index}};
+							\node[label, anchor=south west] (ilabel) at (mat-1-4.north east) {Index};
 
 							\foreach[count=\i from 0] \y in {1,...,8}{
 									\draw (mat-\y-1.south west) -- ($(mat-\y-4.south east) + (0, \pgflinewidth)$);
@@ -248,6 +249,11 @@
 
 							\node[bbox2, visible on=<5>, fit=(mat-2-1.north west) (mat-2-4.south east)] {};
 							\node[bbox, fill=red!80, draw=red,visible on=<5->, fit=(mat-2-4.north west) (mat-2-4.south east)] {};
+
+
+							\draw [bbrace] ($(mat-1-4.north east) + (-1pt, 0)$) -- ($(mat-8-4.south east) + (1pt, 0)$);
+							\node[label] at (mat-4-4.south east -|  ilabel) {0};
+
 						\end{tikzpicture}
 					\end{center}
 				}
